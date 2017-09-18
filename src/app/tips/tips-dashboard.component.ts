@@ -1,29 +1,28 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
-//import { IntroAreaComponent } from './intro-area.component';
-//import { ListAreaComponent } from './list-area.component';
-//import { DetailAreaComponent } from './detail-area.component';
-//import { SidebarComponent} from './sidebar.component';
-//import { LeftPaneComponent} from './left-pane.component';
-//import { RightPaneComponent} from './right-pane.component';
+import { Component, ViewChild   } from '@angular/core';
+import { TipsSidebarComponent   } from './tips-sidebar.component';
+import { TipsLeftPaneComponent  } from './tips-left-pane.component';
+import { TipsRightPaneComponent } from './tips-right-pane.component';
 import {DataService} from '../data.service';
 
 
 @Component({
   selector: 'tips-dashboard',
   templateUrl: './templates/tips-dashboard.component.html',
-  //styleUrls: ['./styles/dashboard.component.css']
+  styleUrls: ['../dashboard/styles/dashboard.component.css']
 })
-export class DashboardComponent implements AfterViewInit {
+export class TipsDashboardComponent{
 
-  //@ViewChild(SidebarComponent) sidebar;
-  //@ViewChild(LeftPaneComponent) leftPane;
-  //@ViewChild(RightPaneComponent) rightPane;
+  @ViewChild(TipsSidebarComponent) sidebar;
+  @ViewChild(TipsLeftPaneComponent) leftPane;
+  @ViewChild(TipsRightPaneComponent) rightPane;
 
   constructor() {
 
   }
 
   ngAfterViewInit() {
+    console.log(this.rightPane.collectionArea);
+    console.log(this.leftPane.detailArea);
   }
 
 }

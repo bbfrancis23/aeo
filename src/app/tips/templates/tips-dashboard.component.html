@@ -14,8 +14,11 @@
         <button class="btn btn-outline-primary" (click)="leftPane.listArea.toggleShowArea();" [ngClass]="{'active': leftPane.listArea.showArea}">
           List
         </button>
-        <button class="btn btn-outline-primary" (click)="rightPane.detailArea.toggleShowArea();" [ngClass]="{'active': rightPane.detailArea.showArea}">
+        <button class="btn btn-outline-primary" (click)="leftPane.detailArea.toggleShowArea();" [ngClass]="{'active': leftPane.detailArea.showArea}">
           Detail
+        </button>
+        <button class="btn btn-outline-primary" (click)="rightPane.collectionArea.toggleShowArea();" [ngClass]="{'active': rightPane.collectionArea.showArea}">
+          Collection
         </button>
       </div>
     </div>
@@ -24,15 +27,15 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-2">
-      <sidebar></sidebar>
+      <tips-sidebar></tips-sidebar>
     </div>
     <div [ngClass]="{'col-md-10': sidebar.showArea, 'col-md-12': !sidebar.showArea}">
       <div class="row">
         <div [ngClass]="{'col-md-6': rightPane.showArea, 'col-md-12': !rightPane.showArea}">
-          <left-pane ></left-pane>
+          <tips-left-pane ></tips-left-pane>
         </div>
         <div [ngClass]="{'col-md-6': leftPane.showArea, 'col-md-12': !leftPane.showArea}">
-          <right-pane></right-pane>
+          <tips-right-pane></tips-right-pane>
         </div>
       </div>
     </div>
