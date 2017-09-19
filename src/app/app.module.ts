@@ -39,6 +39,8 @@ import {HttpModule} from '@angular/http';
 import {DataService} from './data.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
+import { CollectionService } from './collection.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +58,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     BrowserModule,
     HttpModule,
   ],
-  providers: [DataService],
+  providers: [DataService, CollectionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

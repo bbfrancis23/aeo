@@ -42,4 +42,17 @@ router.get('/users', (req, res) => {
     });
 });
 
+
+// get collection
+router.get('/collection/:id', (req, res) => {
+    let name = req.params.id.charAt(0).toUpperCase() + req.params.id.slice(1);
+
+    connection((db) => {
+        db.collection('collection').findOne({name: name},function(err,document){
+          response.data = document;
+          res.json(response);
+        });
+    });
+});
+
 module.exports = router;
