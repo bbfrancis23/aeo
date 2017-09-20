@@ -3,6 +3,7 @@ import { DashBoardComponent} from '../../../dash-board/components/ts/dash-board'
 import { Jem } from '../../../jem';
 import { JemService} from '../../../jem.service';
 import { JemIntroTileComponent} from './jem-intro-tile';
+import { JemFilterTileComponent} from './jem-filter-tile';
 import { JemListTileComponent} from './jem-list-tile';
 
 @Component({
@@ -21,15 +22,25 @@ export class JemDashBoardComponent implements AfterViewInit{
 
   jems: Jem[];
   @ViewChild(JemIntroTileComponent) introTile;
+  @ViewChild(JemFilterTileComponent) filterTile;
   @ViewChild(JemListTileComponent) listTile;
 
   constructor(private jemService: JemService){
-    this.jemService.getJems().then((jems) => {this.jems = jems; console.log(jems[0].title)});
+    this.jemService.getJems().then((jems) => {
+      this.jems = jems;
+      this.filterTile.jemsFiltered = jems;
+      //console.log(this.filterTile.jems,this.jems);
+      /*this.jems = this.jems.filter(function(jem){
+        return (jem.type === 'Mistakes' || jem.type === 'Best Practices');
+      })
 
-    //this.jemService.getJems().subscribe(res => this.users =res);
+      console.log(this.jems);*/
+    });
   }
 
 
   ngAfterViewInit() {
+
+    //console.log(this.filterTile.jems, this.jems);
   }
 }

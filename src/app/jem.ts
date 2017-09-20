@@ -3,4 +3,6 @@ export class Jem {
   title: string;
   description: string;
   code: string;
+  tech: string;
+  type: string;
 }

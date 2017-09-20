@@ -16,6 +16,7 @@ import { JemDashBoardComponent } from './jems/components/ts/jem-dash-board';
 import { DashBoardTileComponent } from './dash-board/components/ts/dash-board-tile';
 import { JemIntroTileComponent } from './jems/components/ts/jem-intro-tile';
 import { JemListTileComponent } from './jems/components/ts/jem-list-tile';
+import { JemFilterTileComponent } from './jems/components/ts/jem-filter-tile';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { JemListTileComponent } from './jems/components/ts/jem-list-tile';
     JemDashBoardComponent,
     DashBoardTileComponent,
     JemIntroTileComponent,
-    JemListTileComponent
+    JemListTileComponent,
+    JemFilterTileComponent
   ],
   imports: [
     NgbModule.forRoot(),

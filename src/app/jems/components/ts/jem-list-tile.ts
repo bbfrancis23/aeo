@@ -16,5 +16,5 @@ export class JemListTileComponent extends DashBoardTileComponent{
 
   showBig = true;
 
-  constructor() { super(); console.log(this.jems);}
+  constructor() { super();}
 }
