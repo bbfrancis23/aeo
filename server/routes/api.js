@@ -42,6 +42,21 @@ router.get('/users', (req, res) => {
     });
 });
 
+// Get jems
+router.get('/jems', (req, res) => {
+    connection((db) => {
+        db.collection('jems')
+            .find()
+            .toArray()
+            .then((jems) => {
+                response.data = jems;
+                res.json(response);
+            })
+            .catch((err) => {
+                sendError(err, res);
+            });
+    });
+});
 
 // get collection
 router.get('/collection/:id', (req, res) => {

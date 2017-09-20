@@ -5,13 +5,13 @@
     </div>
     <div class="col-md-6">
       <div class="btn-group float-md-right" >
-        <!-- <button class="btn btn-outline-primary" (click)="sidebar.introArea.toggleShowArea();" [ngClass]="{'active': sidebar.introArea.showArea}">
+        <button class="btn btn-outline-primary" (click)="introTile.toggle();" [ngClass]="{'active': introTile.show}">
           Intro
         </button>
-        <button class="btn btn-outline-primary" (click)="sidebar.filterArea.toggleShowArea();" [ngClass]="{'active': sidebar.filterArea.showArea}">
-          Filter
+        <button class="btn btn-outline-primary" (click)="listTile.toggle();" [ngClass]="{'active': listTile.show}">
+          List
         </button>
-        <button class="btn btn-outline-primary" (click)="leftPane.listArea.toggleShowArea();" [ngClass]="{'active': leftPane.listArea.showArea}">
+        <!--<button class="btn btn-outline-primary" (click)="leftPane.listArea.toggleShowArea();" [ngClass]="{'active': leftPane.listArea.showArea}">
           List
         </button>
         <button class="btn btn-outline-primary" (click)="rightPane.detailArea.toggleShowArea();" [ngClass]="{'active': rightPane.detailArea.showArea}">
@@ -26,10 +26,10 @@
     <div class="col-md-2">
       <jem-intro-tile></jem-intro-tile>
     </div>
-    <div class="col-md-10">
+    <div [ngClass]="{'col-md-10': introTile.show, 'col-md-12': !introTile.show}">
       <div class="row">
         <div class="col-md-6">
-          <dash-board-tile></dash-board-tile>
+          <jem-list-tile [jems]="jems"></jem-list-tile>
         </div>
         <div class="col-md-6">
           <dash-board-tile></dash-board-tile>

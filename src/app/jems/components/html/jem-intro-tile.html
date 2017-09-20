@@ -1,6 +1,6 @@
-<div class="card card-outline-primary" >
+<div class="card border-primary" *ngIf="show" >
   <img class="card-img-top" src="assets/img/code-jems.jpg" alt="Card image cap">
-  <div class="topright"><a href="#"><img src="assets/img/bolt.png" width="25px"></a></div>
+  <div class="topright"><a href="#" (click)="toggle()"><img src="assets/img/bolt.png" width="25px"></a></div>
   <div class="card-block" style="padding: 10px">
     <h4 class="card-title">Code Jems</h4>
     <p class="card-text">Short cut key combos, Best Practices, Pro Tips. It's all here</p>

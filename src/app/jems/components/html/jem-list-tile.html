@@ -1,0 +1,28 @@
+<div *ngIf="show">
+  <h4>Jems List</h4>
+  <div class="topright">
+    <a href="#" (click)="showBig = true"><img src="assets/img/big.jpg" width="25px" *ngIf="!showBig"></a>
+    <a href="#" (click)="showBig = false"><img src="assets/img/small.jpg" width="25px" *ngIf="showBig"></a>
+    <a href="#" (click)="toggle()"><img src="assets/img/bolt.png" width="25px"></a>
+  </div>
+
+  <div *ngIf="showBig">
+    <div class="card" *ngFor="let jem of jems" [ngClass]="{'border-success': jem.type === 'Best Practices', 'border-danger': jem.type === 'Mistakes'}" style="margin-bottom: 5px">
+      <div class="card-body">
+        <h4 class="card-title">{{jem.title}}</h4>
+        <h5>{{jem.tech}}</h5>
+        <h5><span class="badge" [ngClass]="{'badge-success':jem.type === 'Best Practices', 'badge-danger': jem.type === 'Mistakes'}" >{{jem.type}}</span></h5>
+        <p class="card-text">{{jem.description}}</p>
+        <pre style="background-color: black; color:white; padding: 10px;">{{jem.code}}<br></pre>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf=!showBig>
+    <div class="card p-1 text-white" *ngFor="let jem of jems" [ngClass]="{'bg-success': jem.type === 'Best Practices', 'bg-danger': jem.type === 'Mistakes'}" style="margin-bottom: 5px">
+        <p><b>{{jem.title}}: </b> {{jem.description}}</p>
+        <pre>{{jem.code}}</pre>
+    </div>
+  </div>
+
+</div>
