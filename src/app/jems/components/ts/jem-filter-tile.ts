@@ -14,63 +14,55 @@ import { Jem } from '../../../jem';
 export class JemFilterTileComponent extends DashBoardTileComponent{
   @Input() jems: Jem[];
   jemsFiltered: Jem[];
-  uniqueJemTypes = ['Mistakes', 'Best Practices'];
-  filterJemTypeList = [];
+  uniqueJemTypes = ['Mistakes', 'Best Practices', 'How to'];
+  uniqueJemTechs = ['JavaScript', 'Git'];
+
+
+  filters = { type: { list: [] }, tech: { list: [] }};
 
   constructor() {
     super();
-    //console.log(this.jems);
   }
 
-  filterByType(item) :boolean{
-    console.log(this);
-    //this.filterJemTypeList.forEach(function(type){
-    //    if(item.type === type){
-    //      return true;
-    //    }
-    //});
-    return false;
-  }
 
-  filterJems(){
 
-    let jemsFilteredList: Jem[] =[];
+  filter(key:string,value:string, list: any): any{
 
-    //if(this.filterJemTypeList.length > 0){
-      if(this.jems){
-        if(this.filterJemTypeList.length <= 0){
-          for(let i =0, length = this.jems.length;i<length;i++){
-            jemsFilteredList.push(this.jems[i]);
-          }
-        }else{
-          for(let i =0, length = this.jems.length;i<length;i++){
-            for(let c = 0, l = this.filterJemTypeList.length;c<l;c++){
+    let i = this.filters[key].list.indexOf(value);
+    if(i >= 0){
+      this.filters[key].list.splice(i,1);
+    }else{
+      this.filters[key].list.push(value);
+    }
 
-              if(this.jems[i].type === this.filterJemTypeList[c]){
-                  jemsFilteredList.push(this.jems[i]);
-              }
+
+    let filtered = [];
+    for( let filter in this.filters){
+
+      filtered = [];
+
+      if(this.filters[filter].list.length <= 0){
+        for(let i =0, length = list.length;i<length;i++){
+          filtered.push(list[i]);
+        }
+      }else{
+        for(let i =0, length = list.length;i<length;i++){
+          for(let c = 0, l = this.filters[filter].list.length;c<l;c++){
+            if(list[i][filter] === this.filters[filter].list[c]){
+                filtered.push(list[i]);
             }
           }
         }
-        this.jemsFiltered = jemsFilteredList;
       }
-    //}
-
-
-
-
+      list = filtered;
+    }
+    return list;
   }
 
-  filterType(type:string):void{
 
-    let i = this.filterJemTypeList.indexOf(type);
-    if(i >= 0){
-      this.filterJemTypeList.splice(i,1);
-    }else{
-      this.filterJemTypeList.push(type);
-    }
-
-    //console.log(this.filter)
+  filterJems(key:string, value: string):void{
+    this.jemsFiltered = this.jems;
+    this.jemsFiltered = this.filter(key,value, this.jemsFiltered);
   }
 
 }

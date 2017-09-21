@@ -6,7 +6,13 @@
   <div class="card-block" style="padding: 10px">
     <b>Type:</b><br>
     <div type="checkbox" *ngFor="let type of uniqueJemTypes" >
-      <input type="checkbox" (click)="filterType(type);filterJems()"> {{type}}
+      <input type="checkbox" (click)="filterJems('type',type)"> {{type}}
     </div>
+    <hr>
+    <b>Tech:</b><br>
+    <div type="checkbox" *ngFor="let tech of uniqueJemTechs" >
+      <input type="checkbox" (click)="filterJems('tech',tech)"> {{tech}}
+    </div>
+
   </div>
 </div>
