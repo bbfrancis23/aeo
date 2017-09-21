@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule} from '@angular/router';
 
 import { AppComponent } from './app.component';
 import {AeoHeaderComponent} from './aeo-header.component';
@@ -18,6 +19,8 @@ import { JemIntroTileComponent } from './jems/components/ts/jem-intro-tile';
 import { JemListTileComponent } from './jems/components/ts/jem-list-tile';
 import { JemFilterTileComponent } from './jems/components/ts/jem-filter-tile';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +34,18 @@ import { JemFilterTileComponent } from './jems/components/ts/jem-filter-tile';
   imports: [
     NgbModule.forRoot(),
     BrowserModule,
+    RouterModule.forRoot([
+      {
+        path: 'code-jems',
+        component: JemDashBoardComponent
+      },{
+        path: 'code-jems/:techId',
+        component: JemDashBoardComponent
+      },{
+        path: 'code-jems/:techId/:typeId',        
+        component: JemDashBoardComponent
+      }
+    ]),
     HttpModule,
   ],
   providers: [DataService, CollectionService, JemService],

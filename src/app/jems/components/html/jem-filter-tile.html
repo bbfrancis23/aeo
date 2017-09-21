@@ -1,7 +1,7 @@
 <div class="card border-info" *ngIf="show" style="margin-top: 10px">
   <div class="card-header bg-info"><h4>Filters</h4></div>
   <div class="topright">
-    <a href="#" (click)="toggle()"><img src="assets/img/bolt.png" width="25px"></a>
+    <a (click)="toggle()"><img src="assets/img/bolt.png" width="25px"></a>
   </div>
   <div class="card-block" style="padding: 10px">
     <b>Type:</b><br>
@@ -11,7 +11,7 @@
     <hr>
     <b>Tech:</b><br>
     <div type="checkbox" *ngFor="let tech of uniqueJemTechs" >
-      <input type="checkbox" (click)="filterJems('tech',tech)"> {{tech}}
+      <input type="checkbox" checked (click)="filterJems('tech',tech)"> {{tech}}
     </div>
 
   </div>
