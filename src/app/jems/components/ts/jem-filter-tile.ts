@@ -23,10 +23,18 @@ export class JemFilterTileComponent extends FilterTileComponent{
   constructor() {
     super();
   }
-  
+
   filterJems(key:string, value: string):void{
     this.jemsFiltered = this.jems;
     this.jemsFiltered = this.filter(key,value, this.jemsFiltered);
+    /*this.jemsFiltered = this.jemsFiltered.sort((a, b) => {
+      var textA = a.title.toUpperCase();
+      var textB = b.title.toUpperCase();
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    });*/
+
+
+
   }
 
 }

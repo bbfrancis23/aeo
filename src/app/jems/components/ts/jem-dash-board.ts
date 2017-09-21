@@ -43,4 +43,13 @@ export class JemDashBoardComponent implements AfterViewInit{
 
     //console.log(this.filterTile.jems, this.jems);
   }
+
+  toggleFilterTile():void{
+    if(this.filterTile.show === true){
+      this.filterTile.show = false
+    }else{
+      this.filterTile.show = true;
+      this.listTile.show = true;
+    }
+  }
 }

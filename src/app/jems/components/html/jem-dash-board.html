@@ -8,7 +8,7 @@
         <button class="btn btn-outline-primary" (click)="introTile.toggle();" [ngClass]="{'active': introTile.show}">
           Intro
         </button>
-        <button class="btn btn-outline-primary" (click)="filterTile.toggle();" [ngClass]="{'active':filterTile.show}">
+        <button class="btn btn-outline-primary" (click)="toggleFilterTile();" [ngClass]="{'active':filterTile.show}">
           Filter
         </button>
         <button class="btn btn-outline-primary" (click)="listTile.toggle();" [ngClass]="{'active': listTile.show}">
@@ -34,7 +34,7 @@
           <jem-list-tile [(jems)]="filterTile.jemsFiltered"></jem-list-tile>
         </div>
         <div class="col-md-6">
-          <dash-board-tile></dash-board-tile>
+          <jem-add-tile></jem-add-tile>
         </div>
       </div>
     </div>

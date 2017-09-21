@@ -46,7 +46,7 @@ router.get('/users', (req, res) => {
 router.get('/jems', (req, res) => {
     connection((db) => {
         db.collection('jems')
-            .find()
+            .find().sort({title:1})
             .toArray()
             .then((jems) => {
                 response.data = jems;

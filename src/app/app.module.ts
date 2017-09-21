@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule} from '@angular/router';
+import { FormsModule }   from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import {AeoHeaderComponent} from './aeo-header.component';
@@ -18,6 +19,7 @@ import { DashBoardTileComponent } from './dash-board/components/ts/dash-board-ti
 import { JemIntroTileComponent } from './jems/components/ts/jem-intro-tile';
 import { JemListTileComponent } from './jems/components/ts/jem-list-tile';
 import { JemFilterTileComponent } from './jems/components/ts/jem-filter-tile';
+import { JemAddTileComponent} from './jems/components/ts/jem-add-tile';
 
 
 
@@ -29,10 +31,12 @@ import { JemFilterTileComponent } from './jems/components/ts/jem-filter-tile';
     DashBoardTileComponent,
     JemIntroTileComponent,
     JemListTileComponent,
-    JemFilterTileComponent
+    JemFilterTileComponent,
+    JemAddTileComponent
   ],
   imports: [
     NgbModule.forRoot(),
+    FormsModule,
     BrowserModule,
     RouterModule.forRoot([
       {
@@ -42,7 +46,7 @@ import { JemFilterTileComponent } from './jems/components/ts/jem-filter-tile';
         path: 'code-jems/:techId',
         component: JemDashBoardComponent
       },{
-        path: 'code-jems/:techId/:typeId',        
+        path: 'code-jems/:techId/:typeId',
         component: JemDashBoardComponent
       }
     ]),
