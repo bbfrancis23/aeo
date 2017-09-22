@@ -12,5 +12,5 @@ import { DashBoardTileComponent} from '../../../dash-board/components/ts/dash-bo
 }`]
 })
 export class JemAddTileComponent extends DashBoardTileComponent{
-
+  function = "Add";
 }

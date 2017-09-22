@@ -14,10 +14,9 @@
         <button class="btn btn-outline-primary" (click)="listTile.toggle();" [ngClass]="{'active': listTile.show}">
           List
         </button>
-
-        <!--<button class="btn btn-outline-primary" (click)="rightPane.detailArea.toggleShowArea();" [ngClass]="{'active': rightPane.detailArea.showArea}">
-          Detail
-        </button>-->
+        <button class="btn btn-outline-primary" (click)="addTile.toggle();" [ngClass]="{'active': addTile.show}">
+          Add
+        </button>
       </div>
     </div>
   </div>
@@ -30,7 +29,7 @@
     </div>
     <div [ngClass]="{'col-md-10': (introTile.show || filterTile.show), 'col-md-12': (!introTile.show && !filterTile.show)}">
       <div class="row">
-        <div class="col-md-6">
+        <div [ngClass]="{'col-md-6': addTile.show, 'col-md-12': !addTile.show}">
           <jem-list-tile [(jems)]="filterTile.jemsFiltered"></jem-list-tile>
         </div>
         <div class="col-md-6">

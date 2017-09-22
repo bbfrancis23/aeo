@@ -5,6 +5,7 @@ import { JemService} from '../../../jem.service';
 import { JemIntroTileComponent} from './jem-intro-tile';
 import { JemFilterTileComponent} from './jem-filter-tile';
 import { JemListTileComponent} from './jem-list-tile';
+import { JemAddTileComponent} from './jem-add-tile';
 
 @Component({
   selector: 'jem-dash-board',
@@ -24,6 +25,7 @@ export class JemDashBoardComponent implements AfterViewInit{
   @ViewChild(JemIntroTileComponent) introTile;
   @ViewChild(JemFilterTileComponent) filterTile;
   @ViewChild(JemListTileComponent) listTile;
+  @ViewChild(JemAddTileComponent) addTile;
 
   constructor(private jemService: JemService){
     this.jemService.getJems().then((jems) => {

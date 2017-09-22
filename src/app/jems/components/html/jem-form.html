@@ -1,1 +1,52 @@
-Your mom
+<div class="card border-info" *ngIf="show" style="margin-top: 10px">
+  <div class="card-header bg-info"><h4>{{function}} a Jem</h4></div>
+  <div class="topright">
+    <a  (click)="toggle()"><img src="assets/img/bolt.png" width="25px"></a>
+  </div>
+  <div class="card-block" style="padding: 10px">
+    <form>
+      <div class="form-group">
+        <label for="title" class="sr-only">Title</label>
+        <input type="text" class="form-control" id="title" placeholder="Title" required>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <div class="form-group">
+            <label for="tech" class="sr-only">Tech</label>
+            <select class="form-control" id="tech">
+              <option>Git</option>
+              <option>JavaScript</option>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="Type" class="sr-only">Type</label>
+            <select class="form-control" id="type">
+              <option>Best Practices</option>
+              <option>How to</option>
+              <option>Short-cut Keys</option>
+              <option>Mistakes</option>
+              option
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="for-group">
+        <label for="description" class="sr-only">Description</label>
+        <textarea class="form-control" id="description" placeholder="description" required></textarea>
+      </div>
+      <br>
+      <div class="form-group">
+        <label for="short-cut-keys" class="sr-only">Short Cut Keys</label>
+        <input type="text" class="form-control" id="short-cut-keys" placeholder="Short Cut Keys">
+      </div>
+      <div class="for-group">
+        <label for="description" class="sr-only">Description</label>
+        <pre><textarea class="form-control" id="code" placeholder="code" style="background-color: black; color: white"></textarea></pre>
+      </div>
+      <button type="submit" class="btn btn-primary float-right">Submit</button>
+    </form>
+  </div>
+</div>
