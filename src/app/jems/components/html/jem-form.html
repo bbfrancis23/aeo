@@ -4,49 +4,61 @@
     <a  (click)="toggle()"><img src="assets/img/bolt.png" width="25px"></a>
   </div>
   <div class="card-block" style="padding: 10px">
-    <form>
-      <div class="form-group">
-        <label for="title" class="sr-only">Title</label>
-        <input type="text" class="form-control" id="title" placeholder="Title" required>
-      </div>
-      <div class="form-row">
-        <div class="col">
-          <div class="form-group">
-            <label for="tech" class="sr-only">Tech</label>
-            <select class="form-control" id="tech">
-              <option>Git</option>
-              <option>JavaScript</option>
-            </select>
+    <div [hidden]="submitted">
+      <form (ngSubmit)="onSubmit()" #jemForm="ngForm">
+        {{diagnostic}}
+        <div class="form-group">
+          <label for="title" class="sr-only">Title</label>
+          <input type="text" class="form-control " id="title" [(ngModel)]="model.title" name="Title" placeholder="Title" required #title="ngModel" #spy >
+          {{spy.className}}
+        </div>
+        <div class="form-row">
+          <div class="col">
+            <div class="form-group">
+              <label for="tech" class="sr-only">Tech</label>
+              <select class="form-control" id="tech" [(ngModel)]="model.tech" name="tech">
+                <option [selected]="true">Git</option>
+                <option value="JavaScript">JavaScript</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="Type" class="sr-only">Type</label>
+              <select class="form-control" id="type" [(ngModel)]="model.type" name="type">
+                <option>Best Practices</option>
+                <option>How to</option>
+                <option>Short-cut Keys</option>
+                <option>Mistakes</option>
+                option
+              </select>
+            </div>
           </div>
         </div>
-        <div class="col">
-          <div class="form-group">
-            <label for="Type" class="sr-only">Type</label>
-            <select class="form-control" id="type">
-              <option>Best Practices</option>
-              <option>How to</option>
-              <option>Short-cut Keys</option>
-              <option>Mistakes</option>
-              option
-            </select>
-          </div>
-        </div>
-      </div>
 
-      <div class="for-group">
-        <label for="description" class="sr-only">Description</label>
-        <textarea class="form-control" id="description" placeholder="description" required></textarea>
+        <div class="for-group">
+          <label for="description" class="sr-only">Description</label>
+          <textarea class="form-control" id="description" placeholder="description" name="Description" [(ngModel)]="model.description" required></textarea>
+        </div>
+        <br>
+        <div class="for-group">
+          <label for="description" class="sr-only">Description</label>
+          <pre><textarea class="form-control" id="code" placeholder="code" style="background-color: black; color: white" [(ngModel)]="model.code" name="Code"></textarea></pre>
+        </div>
+        <button type="submit" class="btn btn-outline-info float-right" [disabled]="!jemForm.form.valid"  >Submit</button>
+      </form>
+    </div>
+    <div [hidden]="!submitted">
+      <div class="alert alert-success">Success!!! This Jem has ben Entered into the database.</div>
+      <div class="card" [ngClass]="{'border-success': model.type === 'Best Practices', 'border-danger': model.type === 'Mistakes', 'border-info': model.type === 'How to'}" style="margin-bottom: 5px">
+        <div class="card-body">
+          <h4 class="card-title">{{model.title}}</h4>
+          <h5>{{model.tech}}</h5>
+          <h5><span class="badge" [ngClass]="{'badge-success':model.type === 'Best Practices', 'badge-danger': model.type === 'Mistakes', 'badge-info': model.type === 'How to'}" >{{model.type}}</span></h5>
+          <p class="card-text">{{model.description}}</p>
+          <pre style="background-color: black; color:white; padding: 10px;">{{model.code}}<br></pre>
+        </div>
       </div>
-      <br>
-      <div class="form-group">
-        <label for="short-cut-keys" class="sr-only">Short Cut Keys</label>
-        <input type="text" class="form-control" id="short-cut-keys" placeholder="Short Cut Keys">
-      </div>
-      <div class="for-group">
-        <label for="description" class="sr-only">Description</label>
-        <pre><textarea class="form-control" id="code" placeholder="code" style="background-color: black; color: white"></textarea></pre>
-      </div>
-      <button type="submit" class="btn btn-primary float-right">Submit</button>
-    </form>
+    </div>
   </div>
 </div>

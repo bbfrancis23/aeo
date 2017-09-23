@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
+let bodyParser = require("body-parser");
 
 // Connect
 const connection = (closure) => {

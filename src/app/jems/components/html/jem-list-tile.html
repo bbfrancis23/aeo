@@ -1,4 +1,4 @@
-<div *ngIf="show">
+<div [hidden]="!show">
   <h4>Jems List</h4>
   <div class="topright">
     <a  (click)="showBig = true"><img src="assets/img/big.jpg" width="25px" *ngIf="!showBig"></a>
