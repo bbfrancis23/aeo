@@ -4,20 +4,36 @@
       <h1>Dashboard Title</h1>
     </div>
     <div class="col-md-6">
-      <div class="btn-group float-md-right" >
-        <button class="btn btn-outline-primary" (click)="introTile.toggle();" [ngClass]="{'active': introTile.show}">
-          Intro
-        </button>
-        <button class="btn btn-outline-primary" (click)="toggleFilterTile();" [ngClass]="{'active':filterTile.show}">
-          Filter
-        </button>
-        <button class="btn btn-outline-primary" (click)="listTile.toggle();" [ngClass]="{'active': listTile.show}">
-          List
-        </button>
-        <button class="btn btn-outline-primary" (click)="addTile.toggle();" [ngClass]="{'active': addTile.show}">
-          Add
+
+      <div class="btn-group ml-2 float-md-right" >
+        <button class="btn btn-outline-primary material-icons" data-toggle="tooltip" title="Dashboard">
+          dashboard
         </button>
       </div>
+
+      <div class="btn-group float-md-right" >
+        <button class="btn btn-outline-primary material-icons" (click)="introTile.toggle();" [ngClass]="{'active': introTile.show}" data-toggle="tooltip" title="Jem Info Tile">
+          info_outline
+        </button>
+        <button class="btn btn-outline-primary material-icons" (click)="toggleFilterTile();" [ngClass]="{'active':filterTile.show}" data-toggle="tooltip" title="Jem Filter Tile">
+          filter_list
+        </button>
+        <button class="btn btn-outline-primary material-icons" (click)="listTile.toggle();" [ngClass]="{'active': listTile.show}" data-toggle="tooltip" title="Jem List Tile">
+          list
+        </button>
+        <button class="btn btn-outline-primary material-icons" (click)="addTile.toggle();" [ngClass]="{'active': addTile.show}" data-toggle="tooltip" title="Add Jem Tile">
+          add
+        </button>
+        <button class="btn btn-outline-primary material-icons" (click)="addTile.toggle();" [ngClass]="{'active': addTile.show}" data-toggle="tooltip" title="Edit Jem Tile">
+          create
+        </button>
+        <button class="btn btn-outline-primary material-icons" (click)="addTile.toggle();" [ngClass]="{'active': addTile.show}" data-toggle="tooltip" title="Jem Collection Tile">
+          playlist_add
+        </button>
+      </div>
+
+
+
     </div>
   </div>
 </div>
@@ -33,7 +49,7 @@
           <jem-list-tile [(jems)]="filterTile.jemsFiltered"></jem-list-tile>
         </div>
         <div class="col-md-6">
-          <jem-add-tile></jem-add-tile>
+          <jem-add-tile (jemAddedEvent)="addNewJem($event)"></jem-add-tile>
         </div>
       </div>
     </div>

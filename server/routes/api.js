@@ -59,6 +59,31 @@ router.get('/jems', (req, res) => {
     });
 });
 
+router.delete('/jems/:id',(req,res)=>{
+  connection((db)=>{
+
+    db.collection('jems').deleteOne({_id: ObjectId(req.params.id)},(err, result)=>{
+      res.sendStatus(201);
+    });
+  });
+});
+
+router.post('/jems',(req,res)=>{
+  connection((db)=>{
+
+    let newJem = req.body.jem || {};
+
+    db.collection('jems').insertOne(newJem,(err,result)=>{
+      //console.log(result.insertedId);
+      res.status(201).json(result.insertedId);
+    });
+
+
+    //res.sendStatus(201);
+
+  });
+});
+//
 // get collection
 router.get('/collection/:id', (req, res) => {
     let name = req.params.id.charAt(0).toUpperCase() + req.params.id.slice(1);
@@ -70,5 +95,8 @@ router.get('/collection/:id', (req, res) => {
         });
     });
 });
+
+
+
 
 module.exports = router;

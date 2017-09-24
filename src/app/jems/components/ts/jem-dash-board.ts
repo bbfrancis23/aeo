@@ -54,4 +54,17 @@ export class JemDashBoardComponent implements AfterViewInit{
       this.listTile.show = true;
     }
   }
+
+addNewJem($event){
+    let jem: Jem = $event;
+    this.jems.push(jem);
+
+
+    this.jems = this.jems.sort((a, b) => {
+      var textA = a.title.toUpperCase();
+      var textB = b.title.toUpperCase();
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    });
+
+  }
 }

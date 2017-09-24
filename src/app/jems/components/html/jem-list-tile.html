@@ -1,13 +1,21 @@
-<div [hidden]="!show">
+<div class="tile" [hidden]="!show">
   <h4>Jems List</h4>
-  <div class="topright">
+  <div class="tile-controls-dk">
+    <a class="material-icons mi-sm" (click)="toggle()" data-toggle="tooltip" title="Hide Tile">visibility</a>
+    <a class="material-icons mi-sm" data-toggle="tooltip" title="Turn Tile into a Modal">star_border</a>
+  </div>
+  <!-- <div class="topright">
     <a  (click)="showBig = true"><img src="assets/img/big.jpg" width="25px" *ngIf="!showBig"></a>
     <a  (click)="showBig = false"><img src="assets/img/small.jpg" width="25px" *ngIf="showBig"></a>
     <a  (click)="toggle()"><img src="assets/img/bolt.png" width="25px"></a>
-  </div>
+  </div> -->
 
   <div *ngIf="showBig">
     <div class="card" *ngFor="let jem of jems" [ngClass]="{'border-success': jem.type === 'Best Practices', 'border-danger': jem.type === 'Mistakes', 'border-info': jem.type === 'How to'}" style="margin-bottom: 5px">
+      <div class="topright">
+        <a class="material-icons" data-toggle="tooltip" data-placement="bottom" title="Delete Jem">delete</a>
+        <a class="material-icons" data-toggle="tooltip" data-placement="bottom" title="Add Jem to Collection">favorite</a>
+      </div>
       <div class="card-body">
         <h4 class="card-title">{{jem.title}}</h4>
         <h5>{{jem.tech}}</h5>
@@ -20,6 +28,10 @@
 
   <div *ngIf=!showBig>
     <div class="card p-1 text-white" *ngFor="let jem of jems" [ngClass]="{'bg-success': jem.type === 'Best Practices', 'bg-danger': jem.type === 'Mistakes', 'bg-info': jem.type === 'How to'}" style="margin-bottom: 5px">
+      <div class="topright">
+        <a class="material-icons md-18" data-toggle="tooltip" data-placement="bottom" title="Delete Jem">delete</a>
+        <a class="material-icons">favorite</a>
+      </div>
         <p><b>{{jem.title}}: </b> {{jem.description}}</p>
         <pre>{{jem.code}}</pre>
     </div>

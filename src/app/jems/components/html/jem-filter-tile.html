@@ -1,9 +1,10 @@
-<div class="card border-info" *ngIf="show" style="margin-top: 10px">
+<div class="card border-info tile" *ngIf="show" style="margin-top: 10px">
   <div class="card-header bg-info"><h4>Filters</h4></div>
-  <div class="topright">
-    <a  (click)="toggle()"><img src="assets/img/bolt.png" width="25px"></a>
+  <div class="tile-controls">
+    <a class="material-icons mi-sm" (click)="toggle()" data-toggle="tooltip" title="Hide Tile">visibility</a>
+    <a class="material-icons mi-sm" data-toggle="tooltip" title="Turn Tile into a Modal">star_border</a>
   </div>
-  <div class="card-block" style="padding: 10px">    
+  <div class="card-block" style="padding: 10px">
     <b>Tech:</b><br>
     <div type="checkbox" *ngFor="let tech of uniqueJemTechs" >
       <input type="checkbox" (click)="filterJems('tech',tech)"> {{tech}}
