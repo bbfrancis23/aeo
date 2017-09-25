@@ -4,28 +4,31 @@ a{
 }
 
 .tile-controls {
-  display: none;
   position: absolute;
   color: white;
-  top: 5px;
-  right: 5px;
+  top: 0px;
+  right: 10px;
+
+
 }
+
+.tile-controls:hover{
+  color: grey
+}
+
 .tile-controls-dk {
-  display: none;
   position: absolute;
   color: grey;
-  top: 5px;
+  top: 0px;
   right: 5px;
 }
 
-.tile:hover .tile-controls{
-display: inline-block;
-}
-
-.tile:hover .tile-controls-dk{
-display: inline-block;
+.drawer{
+  display: inline-flex;
+    vertical-align: middle;
 }
 
 .mi-sm{
+
   font-size: 1.25em;
 }

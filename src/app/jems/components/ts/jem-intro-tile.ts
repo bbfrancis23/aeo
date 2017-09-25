@@ -9,5 +9,5 @@ import { DashBoardTileComponent} from '../../../dash-board/components/ts/dash-bo
 `]
 })
 export class JemIntroTileComponent extends DashBoardTileComponent{
-
+  title: string = 'Code Jems Intro Tile'
 }

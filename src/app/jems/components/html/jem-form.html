@@ -1,9 +1,6 @@
 <div class="card border-info tile" *ngIf="show" style="margin-top: 10px">
   <div class="card-header bg-info"><h4>{{function}} a Jem</h4></div>
-  <div class="tile-controls">
-    <a class="material-icons mi-sm" (click)="toggle()" data-toggle="tooltip" title="Hide Tile">visibility</a>
-    <a class="material-icons mi-sm" data-toggle="tooltip" title="Turn Tile into a Modal">star_border</a>
-  </div>
+  <tile-controls [title]="function+' a Jem'" (hideTileEvent)="show=false"></tile-controls>
   <div class="card-block" style="padding: 10px">
     <div [hidden]="submitted">
       <form (ngSubmit)="onSubmit()" #jemForm="ngForm">

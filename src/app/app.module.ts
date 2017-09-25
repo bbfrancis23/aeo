@@ -15,11 +15,11 @@ import { CollectionService } from './collection.service';
 import { JemService } from './jem.service';
 
 import { JemDashBoardComponent } from './jems/components/ts/jem-dash-board';
-import { DashBoardTileComponent } from './dash-board/components/ts/dash-board-tile';
 import { JemIntroTileComponent } from './jems/components/ts/jem-intro-tile';
 import { JemListTileComponent } from './jems/components/ts/jem-list-tile';
 import { JemFilterTileComponent } from './jems/components/ts/jem-filter-tile';
 import { JemAddTileComponent} from './jems/components/ts/jem-add-tile';
+import { TileControlsComponent} from './dash-board/components/ts/tile-controls';
 
 
 
@@ -28,11 +28,11 @@ import { JemAddTileComponent} from './jems/components/ts/jem-add-tile';
     AppComponent,
     AeoHeaderComponent,
     JemDashBoardComponent,
-    DashBoardTileComponent,
     JemIntroTileComponent,
     JemListTileComponent,
     JemFilterTileComponent,
-    JemAddTileComponent
+    JemAddTileComponent,
+    TileControlsComponent
   ],
   imports: [
     NgbModule.forRoot(),

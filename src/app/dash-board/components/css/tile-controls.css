@@ -1,0 +1,15 @@
+.tile-controls {
+  position: absolute;
+  color: white;
+  top: 0px;
+  right: 10px;
+}
+
+.tile-controls:hover{
+  color: #d3d3d3;
+}
+
+a.dropdown-item:hover{
+  background-color: #007bff;
+  color: white;
+}

@@ -50,4 +50,8 @@ export class JemAddTileComponent extends DashBoardTileComponent{
     this.model.tech = 'Git';
     this.model.type = 'Best Practices'
   }
+
+  hideTile(){
+    this.show = false;
+  }
 }
