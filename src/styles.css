@@ -7,13 +7,17 @@ a{
   position: absolute;
   color: white;
   top: 0px;
-  right: 10px;
-
+  right: 3px;
+  font-size: small;
 
 }
 
+.tile-item{
+  font-size: small;
+  
+}
 .tile-controls:hover{
-  color: grey
+  color: #d3d3d3;
 }
 
 .tile-controls-dk {
