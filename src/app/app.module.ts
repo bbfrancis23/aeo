@@ -19,6 +19,8 @@ import { JemIntroTileComponent } from './jems/components/ts/jem-intro-tile';
 import { JemListTileComponent } from './jems/components/ts/jem-list-tile';
 import { JemFilterTileComponent } from './jems/components/ts/jem-filter-tile';
 import { JemAddTileComponent} from './jems/components/ts/jem-add-tile';
+import { JemUpdateTileComponent} from './jems/components/ts/jem-update-tile';
+import { JemCollectionTileComponent} from './jems/components/ts/jem-collection-tile';
 import { TileControlsComponent} from './dash-board/components/ts/tile-controls';
 
 
@@ -32,6 +34,8 @@ import { TileControlsComponent} from './dash-board/components/ts/tile-controls';
     JemListTileComponent,
     JemFilterTileComponent,
     JemAddTileComponent,
+    JemUpdateTileComponent,
+    JemCollectionTileComponent,
     TileControlsComponent
   ],
   imports: [
