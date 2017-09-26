@@ -3,6 +3,14 @@ a{
   cursor: pointer; cursor: hand;
 }
 
+p:first-letter {
+    text-transform:capitalize;
+}
+
+.tile{
+  margin-top: 1em;
+}
+
 .tile-controls {
   position: absolute;
   color: white;
@@ -14,7 +22,7 @@ a{
 
 .tile-item{
   font-size: small;
-  
+
 }
 .tile-controls:hover{
   color: #d3d3d3;

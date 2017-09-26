@@ -4,27 +4,26 @@ import { Jem } from '../../../jem';
 
 @Component({
   selector: 'jem-filter-tile',
-  templateUrl: '../html/jem-filter-tile.html',
-  styles: [`.topright {
-                position: absolute;
-                top: 5px;
-                right: 5px;
-            }`]
+  template:
+    ` <div class="card border-info tile" *ngIf="show" >
+        <div class="card-header bg-info text-white"><h4>Filters</h4></div>
+        <div class="tile-controls"><a class="material-icons tile-item" (click)="show=false;" >clear</a></div>
+        <div class="card-block p-3" >
+          <div *ngFor="let filter of filters">
+            <b><p>{{filter.name}}:</p></b>
+            <div type="checkbox" *ngFor="let field of filter.uniqueFields" ><input type="checkbox" (click)="filterJems(filter.name,field)"> {{field}}</div><hr>
+          </div>
+        </div>
+      </div>`,
 })
 export class JemFilterTileComponent extends FilterTileComponent{
   @Input() jems: Jem[];
   jemsFiltered: Jem[];
-  uniqueJemTypes = ['Mistakes', 'Best Practices', 'How to'];
-  uniqueJemTechs = ['JavaScript', 'Git'];
 
-
-  filters = { type: { list: [] }, tech: { list: [] }};
-
-  constructor() {
-    super();
-  }
+  filters = [{name:'tech',list:[],uniqueFields:[]},{name:'type',list:[],uniqueFields:[]}];
 
   filterJems(key:string, value: string):void{
+
     this.jemsFiltered = this.jems;
     this.jemsFiltered = this.filter(key,value, this.jemsFiltered);
     this.jemsFiltered = this.jemsFiltered.sort((a, b) => {
@@ -32,9 +31,6 @@ export class JemFilterTileComponent extends FilterTileComponent{
       var textB = b.title.toUpperCase();
       return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
     });
-
-
-
   }
 
 }
