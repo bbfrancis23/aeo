@@ -10,28 +10,18 @@ import { JemService} from '../../../jem.service';
 })
 export class JemUpdateTileComponent extends DashBoardTileComponent{
   function = "Update";
-
-  submitted = false
-  onSubmit():void{
-
-    //this.jemService.createJem(this.model).then((jem)=>{ this.jemAddedEvent.emit(jem) });
-
-    this.submitted = true;
-
-    //console.log(this.model);
-  }
-  get diagnostic() {return JSON.stringify(this.model);}
-
   model: Jem = new Jem();
+  submitted = false
 
   @Output() jemUpdatedEvent = new EventEmitter<Jem>();
 
-  constructor(private jemService: JemService){super();
-    this.model.tech = 'Git';
-    this.model.type = 'Best Practices'
+
+  onSubmit():void{
+    this.jemService.createJem(this.model).then((jem)=>{});
+    this.submitted = true;
   }
 
-  hideTile(){
-    this.show = false;
-  }
+  constructor(private jemService: JemService){super(); }
+
+
 }

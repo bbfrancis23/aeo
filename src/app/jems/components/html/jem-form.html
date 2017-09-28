@@ -41,7 +41,7 @@
           <label for="description" class="sr-only">Description</label>
           <pre><textarea class="form-control" id="code" placeholder="code" style="background-color: black; color: white" [(ngModel)]="model.code" name="Code"></textarea></pre>
         </div>
-        <button type="submit" class="btn btn-outline-info float-right" [disabled]="!jemForm.form.valid"  >Submit</button>
+        <button type="submit" class="btn btn-outline-info float-right" [disabled]="!jemForm.form.valid"  >{{function}}</button>
       </form>
     </div>
     <div [hidden]="!submitted">
@@ -55,7 +55,8 @@
           <pre style="background-color: black; color:white; padding: 10px;">{{model.code}}<br></pre>
         </div>
       </div>
-      <button class="btn brn-outline-info float-right" (click)="jemForm.reset();submitted=false">Add Another Jem</button>
+      <button class="btn brn-outline-info float-right" (click)="jemForm.reset();submitted=false" *ngIf="function === 'Add'" >Add Another Jem</button>
+      <button class="btn brn-outline-info float-right" (click)="submitted=false" *ngIf="function === 'Update'">Okay</button>
     </div>
   </div>
 </div>

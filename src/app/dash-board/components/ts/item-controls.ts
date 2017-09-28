@@ -7,7 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
                     <a class="dropdown-toggle" data-toggle="dropdown"></a>
                     <div class="dropdown-menu dropdown-menu-right" >
                      <a class="dropdown-item" (click)="deleteItemEvent.emit()" >Delete</a>
-                     <a class="dropdown-item" >Update</a>
+                     <a class="dropdown-item" (click)="updateItemEvent.emit();">Update</a>
                      <a class="dropdown-item" >Favorite</a>
                    </div>
                  </div>
@@ -17,5 +17,6 @@ export class ItemControlsComponent {
 
   //@Output() hideTileEvent = new EventEmitter();
   @Output() deleteItemEvent = new EventEmitter();
+  @Output() updateItemEvent = new EventEmitter();
 
 }

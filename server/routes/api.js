@@ -59,6 +59,8 @@ router.get('/jems', (req, res) => {
     });
 });
 
+
+
 router.delete('/jems/:id',(req,res)=>{
   console.log('You have called to delete a Jem');
   connection((db)=>{
@@ -74,15 +76,38 @@ router.delete('/jems/:id',(req,res)=>{
 router.post('/jems',(req,res)=>{
   connection((db)=>{
 
-    let newJem = req.body.jem || {};
+    let jem = req.body.jem || {};
 
-    db.collection('jems').insertOne(newJem,(err,result)=>{
-      //console.log(result.insertedId);
-      res.status(201).json(result.insertedId);
-    });
+    if(jem._id){
+
+      //console.log(jem,)
+      let id = jem._id;
+      delete jem._id;
+
+      db.collection('jems').updateOne({_id: ObjectId(id)},jem,(err,res)=>{
 
 
-    //res.sendStatus(201);
+
+        if(err){
+          console.log(err);
+        }else{
+            //  res.sendStatus(201);
+            //console.log(res);
+        }
+        // */
+
+      });
+    }else{
+      db.collection('jems').insertOne(jem,(err,result)=>{
+        //console.log(result.insertedId);
+        res.status(201).json(result.insertedId);
+      });
+    }
+
+
+
+
+
 
   });
 });

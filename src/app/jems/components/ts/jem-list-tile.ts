@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter  } from '@angular/core';
 import { DashBoardTileComponent} from '../../../dash-board/components/ts/dash-board-tile';
 import { Jem } from '../../../jem';
 import { JemService} from '../../../jem.service';
@@ -12,6 +12,7 @@ import { JemService} from '../../../jem.service';
 export class JemListTileComponent extends DashBoardTileComponent{
 
   @Input() jems: Jem[];
+  @Output() selectItemEvent = new EventEmitter();
   showBig = true;
 
   toggleItemSize(){
@@ -19,6 +20,11 @@ export class JemListTileComponent extends DashBoardTileComponent{
   }
 
   constructor(private jemService: JemService){super();}
+
+  updateJem(id:string):void{
+    this.selectItemEvent.emit(id);
+    //console.log('update Jem called');
+  }
 
   deleteJem(id:string):void{
 

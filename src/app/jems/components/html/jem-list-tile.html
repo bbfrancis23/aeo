@@ -3,11 +3,11 @@
   <sized-items-tile-controls [title]="'Jems List'" (hideTileEvent)="show=false" (toggleItemSizeEvent)="toggleItemSize()" ></sized-items-tile-controls>
 
   <div class="tile" *ngIf="showBig">
-    <div  class="card mb-3" *ngFor="let jem of jems" 
+    <div  class="card mb-3" *ngFor="let jem of jems"
           [ngClass]="{  'border-success': jem.type === 'Best Practices',
                         'border-danger': jem.type === 'Mistakes',
                         'border-info': jem.type === 'How to'}">
-      <item-controls (deleteItemEvent)="deleteJem(jem._id)"></item-controls>
+      <item-controls (deleteItemEvent)="deleteJem(jem._id)" (updateItemEvent)="updateJem(jem._id)"></item-controls>
       <div class="card-body">
         <h4 class="card-title">{{jem.title}}</h4>
         <h5>{{jem.tech}}</h5>
@@ -20,7 +20,7 @@
 
   <div class="tile" *ngIf=!showBig>
     <div class="card p-1 text-white" *ngFor="let jem of jems" [ngClass]="{'bg-success': jem.type === 'Best Practices', 'bg-danger': jem.type === 'Mistakes', 'bg-info': jem.type === 'How to'}" style="margin-bottom: 5px">
-      <item-controls (deleteItemEvent)="deleteJem(jem._id)"></item-controls>
+      <item-controls (deleteItemEvent)="deleteJem(jem._id)"  (updateItemEvent)="updateJem(jem._id)"></item-controls>
         <p><b>{{jem.title}}: </b> {{jem.description}}</p>
         <pre>{{jem.code}}</pre>
     </div>

@@ -45,7 +45,8 @@ export class JemService{
     return this.http
      .post(this.jemUrl, JSON.stringify({'jem':jem}), {headers: this.headers})
      .toPromise()
-     .then((res) => {jem._id = res.json(); console.log(jem._id, res.json());return jem;})
+     .then((res) => {jem._id = res.json(); //console.log(jem._id, res.json());
+       return jem;})
      .catch(this.handleError);
   }
 

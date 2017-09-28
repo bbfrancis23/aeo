@@ -31,6 +31,8 @@ export class JemDashBoardComponent implements AfterViewInit{
       this.selectedJem = this.jems[0];
       this.filterTile.jemsFiltered = jems;
 
+      this.updateTile.model = this.selectedJem;
+
       this.filterTile.filters.forEach((filter)=>{
         this.jems.forEach((jem)=>{
           if(filter.uniqueFields.find(e => e === jem[filter.name] )){
@@ -69,6 +71,15 @@ export class JemDashBoardComponent implements AfterViewInit{
     });
   }
 
+  selectJem(id){
+
+    //this.jems.findIndex
+    let i = this.jems.findIndex( (jem) => {return jem._id === id});
+    this.selectedJem = this.jems[i];
+    this.updateTile.model = this.selectedJem;
+    //console.log(this.selectedJem);
+    //selectedJem
+  }
 
   ngAfterViewInit() {
 
