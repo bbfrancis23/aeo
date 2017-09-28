@@ -23,6 +23,20 @@ export class JemFilterTileComponent extends FilterTileComponent{
 
   filters = [{name:'tech',list:[],uniqueFields:[]},{name:'type',list:[],uniqueFields:[]}];
 
+  checkJemsFilter():void{
+    let jemsFiltered = this.jemsFiltered;
+
+    jemsFiltered = this.jems;
+    jemsFiltered = this.checkFilters( jemsFiltered);
+    jemsFiltered = jemsFiltered.sort((a, b) => {
+      var textA = a.title.toUpperCase();
+      var textB = b.title.toUpperCase();
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    });
+
+    this.jemsFiltered = jemsFiltered;
+  }
+
   filterJems(key:string, value: string):void{
     let jemsFiltered = this.jemsFiltered;
 

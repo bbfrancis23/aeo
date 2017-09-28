@@ -19,18 +19,8 @@ export class FilterTileComponent extends DashBoardTileComponent{
 
   // key = tech - value = Git
   // gFilters [{name:tech},list:[]]
-  filter(key:string,value:string, list: any):any{
 
-    let k = this.filters.findIndex( (i) => {console.log();return i.name === key});
-    let i = this.filters[k].list.indexOf(value);
-
-    if(i >= 0){
-      this.filters[k].list.splice(i,1);
-    }else{
-      this.filters[k].list.push(value);
-    }
-
-
+  checkFilters(list:any):any{
     let filtered = [];
 
     for (let filterIndex = 0, filterLength = this.filters.length; filterIndex < filterLength; filterIndex++){
@@ -53,6 +43,24 @@ export class FilterTileComponent extends DashBoardTileComponent{
       list = filtered;
     }
 
+
+    return list;
+  }
+
+  filter(key:string,value:string, list: any):any{
+
+    let k = this.filters.findIndex( (i) => {console.log();return i.name === key});
+    let i = this.filters[k].list.indexOf(value);
+
+    if(i >= 0){
+      this.filters[k].list.splice(i,1);
+    }else{
+      this.filters[k].list.push(value);
+    }
+
+
+
+    list = this.checkFilters(list);
 
     return list;
   }

@@ -56,7 +56,7 @@ export class JemDashBoardComponent implements AfterViewInit{
 
 
 
-      console.log();
+      //console.log();
       //this.jems.forEach((jem)=>[
       //  console.log(jem);
       //]);
@@ -87,26 +87,25 @@ export class JemDashBoardComponent implements AfterViewInit{
   addNewJem($event){
     let jem: Jem = $event;
     this.jems.push(jem);
+    this.sortJems();
 
+    this.filterTile.checkJemsFilter();
 
+  }
+
+  sortJems(){
     this.jems = this.jems.sort((a, b) => {
       var textA = a.title.toUpperCase();
       var textB = b.title.toUpperCase();
       return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
     });
-
   }
 
   updateJem($event){
     let jem: Jem = $event;
     this.jems.push(jem);
+    this.sortJems();
 
-
-    this.jems = this.jems.sort((a, b) => {
-      var textA = a.title.toUpperCase();
-      var textB = b.title.toUpperCase();
-      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-    });
-
+    //this.filterTile.checkFilters();
   }
 }

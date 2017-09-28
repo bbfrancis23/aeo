@@ -14,7 +14,7 @@ export class JemUpdateTileComponent extends DashBoardTileComponent{
   submitted = false
   onSubmit():void{
 
-  //  this.jemService.createJem(this.model).then((jem)=>{ this.jemAddedEvent.emit(jem) });
+    //this.jemService.createJem(this.model).then((jem)=>{ this.jemAddedEvent.emit(jem) });
 
     this.submitted = true;
 
