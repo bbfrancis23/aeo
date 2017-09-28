@@ -1,20 +1,13 @@
 <div class="tile" [hidden]="!show">
   <h4>Jems List</h4>
-  <div class="tile-controls-dk">
-    <a class="material-icons mi-sm" (click)="showBig = false" data-toggle="tooltip" title="Show Small Jems" *ngIf="showBig">remove_circle</a>
-    <a class="material-icons mi-sm" (click)="showBig = true" data-toggle="tooltip" title="Show Large Jems" *ngIf="!showBig">add_circle</a>
-    <a class="material-icons mi-sm" (click)="toggle()" data-toggle="tooltip" title="Hide Tile">visibility</a>
-    <a class="material-icons mi-sm" data-toggle="tooltip" title="Turn Tile into a Modal">star_border</a>
-  </div>
-
-  
+  <sized-items-tile-controls [title]="'Jems List'" (hideTileEvent)="show=false" (toggleItemSizeEvent)="toggleItemSize()" ></sized-items-tile-controls>
 
   <div class="tile" *ngIf="showBig">
-    <div class="card" *ngFor="let jem of jems" [ngClass]="{'border-success': jem.type === 'Best Practices', 'border-danger': jem.type === 'Mistakes', 'border-info': jem.type === 'How to'}" style="margin-bottom: 5px">
-      <div class="tile-controls-dk">
-        <a class="material-icons" data-toggle="tooltip" data-placement="bottom" title="Delete Jem">delete</a>
-        <a class="material-icons" data-toggle="tooltip" data-placement="bottom" title="Add Jem to Collection">favorite</a>
-      </div>
+    <div  class="card mb-3" *ngFor="let jem of jems" 
+          [ngClass]="{  'border-success': jem.type === 'Best Practices',
+                        'border-danger': jem.type === 'Mistakes',
+                        'border-info': jem.type === 'How to'}">
+      <item-controls (deleteItemEvent)="deleteJem(jem._id)"></item-controls>
       <div class="card-body">
         <h4 class="card-title">{{jem.title}}</h4>
         <h5>{{jem.tech}}</h5>
@@ -27,10 +20,7 @@
 
   <div class="tile" *ngIf=!showBig>
     <div class="card p-1 text-white" *ngFor="let jem of jems" [ngClass]="{'bg-success': jem.type === 'Best Practices', 'bg-danger': jem.type === 'Mistakes', 'bg-info': jem.type === 'How to'}" style="margin-bottom: 5px">
-      <div class="tile-controls">
-        <a class="material-icons md-18" data-toggle="tooltip" data-placement="bottom" title="Delete Jem">delete</a>
-        <a class="material-icons">favorite</a>
-      </div>
+      <item-controls (deleteItemEvent)="deleteJem(jem._id)"></item-controls>
         <p><b>{{jem.title}}: </b> {{jem.description}}</p>
         <pre>{{jem.code}}</pre>
     </div>

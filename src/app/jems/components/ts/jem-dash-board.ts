@@ -17,6 +17,7 @@ import { JemCollectionTileComponent} from './jem-collection-tile';
 export class JemDashBoardComponent implements AfterViewInit{
 
   jems: Jem[];
+  selectedJem: Jem;
   @ViewChild(JemIntroTileComponent) introTile;
   @ViewChild(JemFilterTileComponent) filterTile;
   @ViewChild(JemListTileComponent) listTile;
@@ -27,6 +28,7 @@ export class JemDashBoardComponent implements AfterViewInit{
   constructor(private jemService: JemService){
     this.jemService.getJems().then((jems) => {
       this.jems = jems;
+      this.selectedJem = this.jems[0];
       this.filterTile.jemsFiltered = jems;
 
       this.filterTile.filters.forEach((filter)=>{

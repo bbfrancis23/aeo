@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
-const ObjectID = require('mongodb').ObjectID;
+const ObjectId = require('mongodb').ObjectID;
 let bodyParser = require("body-parser");
 
 // Connect
@@ -60,7 +60,10 @@ router.get('/jems', (req, res) => {
 });
 
 router.delete('/jems/:id',(req,res)=>{
+  console.log('You have called to delete a Jem');
   connection((db)=>{
+
+
 
     db.collection('jems').deleteOne({_id: ObjectId(req.params.id)},(err, result)=>{
       res.sendStatus(201);

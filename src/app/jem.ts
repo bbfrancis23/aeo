@@ -1,5 +1,5 @@
 export class Jem {
-  id: string;
+  _id: string;
   title: string;
   description: string;
   code: string;

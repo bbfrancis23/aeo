@@ -15,7 +15,7 @@ p:first-letter {
   position: absolute;
   color: white;
   top: 0px;
-  right: 3px;
+  right: 5px;
   font-size: small;
 
 }
@@ -28,11 +28,20 @@ p:first-letter {
   color: #d3d3d3;
 }
 
-.tile-controls-dk {
+.tile-controls-dk, .item-controls{
   position: absolute;
   color: grey;
   top: 0px;
   right: 5px;
+}
+
+.tile-controls-dk:hover, .item-controls:hover{
+  color: black;
+}
+
+a.dropdown-item:hover:not([href]){
+  background-color: #007bff;
+  color: white;
 }
 
 .drawer{
