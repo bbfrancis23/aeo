@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter  } from '@angular/core';
 import { DashBoardTileComponent} from '../../../dash-board/components/ts/dash-board-tile';
-import { Jem } from '../../../jem';
-import { JemService} from '../../../jem.service';
+import { Jem } from '../../jem';
+import { JemService} from '../../jem.service';
 
 "use strict";
 

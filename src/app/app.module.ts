@@ -12,7 +12,7 @@ import {DataService} from './data.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { CollectionService } from './collection.service';
-import { JemService } from './jem.service';
+import { JemService } from './jems/jem.service';
 
 import { JemDashBoardComponent } from './jems/components/ts/jem-dash-board';
 import { JemIntroTileComponent } from './jems/components/ts/jem-intro-tile';

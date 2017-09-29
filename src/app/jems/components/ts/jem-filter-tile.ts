@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FilterTileComponent} from '../../../dash-board/components/ts/filter-tile';
-import { Jem } from '../../../jem';
+import { Jem } from '../../jem';
 import {Location} from '@angular/common';
 
 @Component({
