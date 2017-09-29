@@ -50,17 +50,14 @@ import { ItemControlsComponent } from './dash-board/components/ts/item-controls'
       {
         path: 'code-jems',
         component: JemDashBoardComponent
-      },{
-        path: 'code-jems/:techId',
-        component: JemDashBoardComponent
-      },{
-        path: 'code-jems/:techId/:typeId',
-        component: JemDashBoardComponent
       }
+
     ]),
     HttpModule,
   ],
-  providers: [DataService, CollectionService, JemService],
+  providers: [
+    DataService, CollectionService, JemService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

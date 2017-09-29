@@ -44,46 +44,26 @@ export class JemDashBoardComponent implements AfterViewInit{
         });
       });
 
-      /*for(var key in this.filterTile.filters){
-        //console.log(this.filterTile.filters[key].unique);
-        this.jems.forEach((jem)=>{
-          if(this.filterTile.filters[key].unique.find(e => e === jem[key] )){
-
-          }else{
-            this.filterTile.filters[key].unique.push(jem[key]);
-          }
-
-        });
-      }*/
 
 
 
-      //console.log();
-      //this.jems.forEach((jem)=>[
-      //  console.log(jem);
-      //]);
-      //console.log(this.filterTile.jems,this.jems);
-      /*this.jems = this.jems.filter(function(jem){
-        return (jem.type === 'Mistakes' || jem.type === 'Best Practices');
-      })
 
-      console.log(this.jems);*/
+
     });
   }
 
   selectJem(id){
 
-    //this.jems.findIndex
+
     let i = this.jems.findIndex( (jem) => {return jem._id === id});
     this.selectedJem = this.jems[i];
     this.updateTile.model = this.selectedJem;
-    //console.log(this.selectedJem);
-    //selectedJem
+
   }
 
   ngAfterViewInit() {
 
-    //console.log(this.filterTile.jems, this.jems);
+
   }
 
   toggleFilterTile():void{
@@ -117,6 +97,6 @@ export class JemDashBoardComponent implements AfterViewInit{
     this.jems.push(jem);
     this.sortJems();
 
-    //this.filterTile.checkFilters();
+
   }
 }
