@@ -45,10 +45,10 @@
     </div>
     <div [ngClass]="{'col-md-10': (introTile.show || filterTile.show), 'col-md-12': (!introTile.show && !filterTile.show)}">
       <div class="row">
-        <div [ngClass]="{'col-md-6': addTile.show, 'col-md-12': !addTile.show}">
+        <div [ngClass]="{'col-md-6': (addTile.show || updateTile.show || collectionTile.show), 'col-md-12': (!addTile.show && !updateTile.show && ! collectionTile.show)}">
           <jem-list-tile [(jems)]="filterTile.jemsFiltered" (selectItemEvent)="selectJem($event)"></jem-list-tile>
         </div>
-        <div class="col-md-6">
+        <div [ngClass]="{'col-md-6': (listTile.show), 'col-md-12': (!listTile.show)}">
           <jem-add-tile (jemAddedEvent)="addNewJem($event)"></jem-add-tile>
           <jem-update-tile ></jem-update-tile>
           <jem-collection-tile></jem-collection-tile>

@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FilterTileComponent} from '../../../dash-board/components/ts/filter-tile';
 import { Jem } from '../../../jem';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'jem-filter-tile',
@@ -23,6 +24,9 @@ export class JemFilterTileComponent extends FilterTileComponent{
 
   filters = [{name:'tech',list:[],uniqueFields:[]},{name:'type',list:[],uniqueFields:[]}];
 
+  constructor( private location: Location )
+  {super();}
+
   checkJemsFilter():void{
     let jemsFiltered = this.jemsFiltered;
 
@@ -38,6 +42,10 @@ export class JemFilterTileComponent extends FilterTileComponent{
   }
 
   filterJems(key:string, value: string):void{
+
+    //console.log(this.location.path());
+    this.location.replaceState(`/code-jems/${key}/${value}`);
+
     let jemsFiltered = this.jemsFiltered;
 
     jemsFiltered = this.jems;
