@@ -22,16 +22,20 @@ export class JemListTileComponent extends DashBoardTileComponent{
   constructor(private jemService: JemService){super();}
 
   updateJem(id:string):void{
-    this.selectItemEvent.emit(id);
-    //console.log('update Jem called');
+    if(id){
+      this.selectItemEvent.emit(id);
+    }
+
   }
 
   deleteJem(id:string):void{
 
     // todo: add model that asks if you are sure.
 
-    let i = this.jems.findIndex(jem => jem._id === id);
-    this.jemService.deleteJem(id);
-    this.jems.splice(i,1)  ;
+    if(id){
+      let i = this.jems.findIndex(jem => jem._id === id);
+      this.jemService.deleteJem(id);
+      this.jems.splice(i,1)  ;
+    }
   }
 }

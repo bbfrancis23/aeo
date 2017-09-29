@@ -9,12 +9,14 @@ import { JemAddTileComponent} from './jem-add-tile';
 import { JemUpdateTileComponent} from './jem-update-tile';
 import { JemCollectionTileComponent} from './jem-collection-tile';
 
+'use strict';
+
 @Component({
   selector: 'jem-dash-board',
   templateUrl: '../html/jem-dash-board.html',
   styles: []
 })
-export class JemDashBoardComponent implements AfterViewInit{
+export class JemDashBoardComponent extends DashBoardComponent implements AfterViewInit{
 
   jems: Jem[];
   selectedJem: Jem;
@@ -26,45 +28,38 @@ export class JemDashBoardComponent implements AfterViewInit{
   @ViewChild(JemCollectionTileComponent) collectionTile;
 
   constructor(private jemService: JemService){
+    super();
+
     this.jemService.getJems().then((jems) => {
       this.jems = jems;
       this.selectedJem = this.jems[0];
       this.filterTile.jemsFiltered = jems;
-
       this.updateTile.model = this.selectedJem;
 
       this.filterTile.filters.forEach((filter)=>{
         this.jems.forEach((jem)=>{
-          if(filter.uniqueFields.find(e => e === jem[filter.name] )){
-
-          }else{
+          if( ! filter.uniqueFields.find(e => e === jem[filter.name] )){
             filter.uniqueFields.push(jem[filter.name]);
           }
-
         });
       });
-
-
-
-
-
-
     });
   }
 
-  selectJem(id){
+  selectJem(id:string):void{
 
+    let i  = 0;
+    if(id){
+      let i = this.jems.findIndex( (jem) => {return jem._id === id});
+    }
 
-    let i = this.jems.findIndex( (jem) => {return jem._id === id});
     this.selectedJem = this.jems[i];
     this.updateTile.model = this.selectedJem;
-
+    this.addTile.show = false;
+    this.updateTile.show = true;
   }
 
-  ngAfterViewInit() {
-
-
-  }
+  ngAfterViewInit() {}
 
   toggleFilterTile():void{
     if(this.filterTile.show === true){
@@ -75,28 +70,33 @@ export class JemDashBoardComponent implements AfterViewInit{
     }
   }
 
-  addNewJem($event){
-    let jem: Jem = $event;
-    this.jems.push(jem);
-    this.sortJems();
+  toggleListTile():void{
+    if(this.listTile.show){
+      this.filterTile.show = false;
+      this.listTile.show = false;
+    }else{
+      this.listTile.show = true;
+    }
+  }
 
-    this.filterTile.checkJemsFilter();
+  addNewJem($event):void{
+
+    if($event){
+      let jem: Jem = $event;
+      this.jems.push(jem);
+      this.filterTile.sortJems();
+      this.filterTile.filterJems();
+    }
 
   }
 
-  sortJems(){
-    this.jems = this.jems.sort((a, b) => {
-      var textA = a.title.toUpperCase();
-      var textB = b.title.toUpperCase();
-      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-    });
-  }
-
-  updateJem($event){
-    let jem: Jem = $event;
-    this.jems.push(jem);
-    this.sortJems();
 
 
+  updateJem($event):void{
+    if($event){
+      let jem: Jem = $event;
+      this.jems.push(jem);
+      this.filterTile.sortJems();
+    }
   }
 }

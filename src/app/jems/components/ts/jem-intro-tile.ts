@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { DashBoardTileComponent} from '../../../dash-board/components/ts/dash-board-tile';
 
+'use strict';
+
 @Component({
   selector: 'jem-intro-tile',
   template:

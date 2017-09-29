@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { DashBoardTileComponent} from '../../../dash-board/components/ts/dash-board-tile';
-import { Filter } from './filter';
+import { Filter } from '../../filter';
 
 'use strict';
 

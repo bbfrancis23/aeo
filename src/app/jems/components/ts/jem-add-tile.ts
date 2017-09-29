@@ -3,6 +3,8 @@ import { DashBoardTileComponent} from '../../../dash-board/components/ts/dash-bo
 import { Jem } from '../../jem';
 import { JemService} from '../../jem.service';
 
+'use strict';
+
 @Component({
   selector: 'jem-add-tile',
   templateUrl: '../html/jem-form.html'
@@ -19,7 +21,7 @@ export class JemAddTileComponent extends DashBoardTileComponent{
     this.model.type = 'Best Practices'
   }
 
-  onSubmit(jemForm):void{
+  onSubmit():void{
     this.jemService.createJem(this.model).then((jem)=>{ this.jemAddedEvent.emit(jem) });
     this.submitted = true;
   }

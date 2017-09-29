@@ -2,6 +2,9 @@ import { Component, Input } from '@angular/core';
 import { FilterTileComponent} from '../../../dash-board/components/ts/filter-tile';
 import { Jem } from '../../jem';
 import {Location} from '@angular/common';
+import { Filter } from '../../../dash-board/filter';
+
+'use strict';
 
 @Component({
   selector: 'jem-filter-tile',
@@ -12,7 +15,7 @@ import {Location} from '@angular/common';
         <div class="card-block p-3" >
           <div *ngFor="let filter of filters">
             <b><p>{{filter.name}}:</p></b>
-            <div type="checkbox" *ngFor="let field of filter.uniqueFields" ><input type="checkbox" (click)="filterJems(filter.name,field)"> {{field}}</div><hr>
+            <div type="checkbox" *ngFor="let field of filter.uniqueFields" ><input type="checkbox" (click)="addJemsFilter(filter.name,field)"> {{field}}</div><hr>
           </div>
         </div>
       </div>`,
@@ -22,41 +25,38 @@ export class JemFilterTileComponent extends FilterTileComponent{
   @Input() jems: Jem[];
   jemsFiltered: Jem[];
 
-  filters = [{name:'tech',list:[],uniqueFields:[]},{name:'type',list:[],uniqueFields:[]}];
+  filters: Filter[] = [{name:'tech',list:[],uniqueFields:[]},{name:'type',list:[],uniqueFields:[]}];
 
   constructor( private location: Location )
   {super();}
 
-  checkJemsFilter():void{
+  filterJems():void{
     let jemsFiltered = this.jemsFiltered;
 
     jemsFiltered = this.jems;
     jemsFiltered = this.filter( jemsFiltered);
-    jemsFiltered = jemsFiltered.sort((a, b) => {
+    this.jemsFiltered = jemsFiltered;
+  }
+
+  addJemsFilter(key:string, value: string):void{
+
+    if(key && value){
+      let jemsFiltered = this.jemsFiltered;
+      this.sortJems();
+      jemsFiltered = this.jems;
+      jemsFiltered = this.addFilter(key,value, jemsFiltered);
+
+      this.jemsFiltered = jemsFiltered;
+    }
+
+  }
+
+
+  sortJems():void {
+    this.jems = this.jems.sort((a, b) => {
       var textA = a.title.toUpperCase();
       var textB = b.title.toUpperCase();
       return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
     });
-
-    this.jemsFiltered = jemsFiltered;
   }
-
-  filterJems(key:string, value: string):void{
-
-    //console.log(this.location.path());
-    this.location.replaceState(`/code-jems/${key}/${value}`);
-
-    let jemsFiltered = this.jemsFiltered;
-
-    jemsFiltered = this.jems;
-    jemsFiltered = this.addFilter(key,value, jemsFiltered);
-    jemsFiltered = jemsFiltered.sort((a, b) => {
-      var textA = a.title.toUpperCase();
-      var textB = b.title.toUpperCase();
-      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-    });
-
-    this.jemsFiltered = jemsFiltered;
-  }
-
 }

@@ -3,10 +3,11 @@ import { DashBoardTileComponent} from '../../../dash-board/components/ts/dash-bo
 import { Jem } from '../../jem';
 import { JemService} from '../../jem.service';
 
+'use strict';
+
 @Component({
   selector: 'jem-update-tile',
-  templateUrl: '../html/jem-form.html',
-  styles: []
+  templateUrl: '../html/jem-form.html'
 })
 export class JemUpdateTileComponent extends DashBoardTileComponent{
   function = "Update";
