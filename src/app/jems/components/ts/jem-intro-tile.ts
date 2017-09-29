@@ -9,7 +9,7 @@ import { DashBoardTileComponent} from '../../../dash-board/components/ts/dash-bo
         <div class="tile-controls"><a class="material-icons tile-item" (click)="show=false;" >clear</a></div>
         <div class="card-block p-3">
           <h4 class="card-title">Code Jems</h4>
-          <p class="card-text">Short-cut key, Best Practices, How to and Mistakes. Short Code Jems,  it's all here</p>
+          <p class="card-text">Short-cut keys, Best Practices, How to and Mistakes. Code Jems,  it's all here</p>
         </div>
       </div>`
 })

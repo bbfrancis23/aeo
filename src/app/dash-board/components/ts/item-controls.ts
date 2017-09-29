@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
+'use strict';
+
 @Component({
   selector: 'item-controls',
   template: `<div class="item-controls">
@@ -14,7 +16,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
               </div>`
 })
 export class ItemControlsComponent {
-  
+
   @Output() deleteItemEvent = new EventEmitter();
   @Output() updateItemEvent = new EventEmitter();
 

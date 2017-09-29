@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
+'use strict';
+
 @Component({
   selector: 'tile-controls',
   template: `<div class="tile-controls">

@@ -31,7 +31,7 @@ export class JemFilterTileComponent extends FilterTileComponent{
     let jemsFiltered = this.jemsFiltered;
 
     jemsFiltered = this.jems;
-    jemsFiltered = this.checkFilters( jemsFiltered);
+    jemsFiltered = this.filter( jemsFiltered);
     jemsFiltered = jemsFiltered.sort((a, b) => {
       var textA = a.title.toUpperCase();
       var textB = b.title.toUpperCase();
@@ -49,7 +49,7 @@ export class JemFilterTileComponent extends FilterTileComponent{
     let jemsFiltered = this.jemsFiltered;
 
     jemsFiltered = this.jems;
-    jemsFiltered = this.filter(key,value, jemsFiltered);
+    jemsFiltered = this.addFilter(key,value, jemsFiltered);
     jemsFiltered = jemsFiltered.sort((a, b) => {
       var textA = a.title.toUpperCase();
       var textB = b.title.toUpperCase();

@@ -1,6 +1,8 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { TileControlsComponent } from './tile-controls';
 
+'use strict';
+
 @Component({
   selector: 'sized-items-tile-controls',
   template: `<div class="tile-controls-dk">
