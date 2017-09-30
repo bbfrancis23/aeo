@@ -40,7 +40,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-2">
-      <jem-intro-tile></jem-intro-tile>
+      <intro-tile></intro-tile>
       <jem-filter-tile [(jems)]="jems"></jem-filter-tile>
     </div>
     <div [ngClass]="{'col-md-10': (introTile.show || filterTile.show), 'col-md-12': (!introTile.show && !filterTile.show)}">

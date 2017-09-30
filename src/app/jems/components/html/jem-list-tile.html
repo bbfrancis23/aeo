@@ -1,8 +1,8 @@
-<div class="tile" [hidden]="!show">
+<div class="tile" [hidden]="!show"  >
   <h4>Jems List</h4>
   <sized-items-tile-controls [title]="'Jems List'" (hideTileEvent)="show=false" (toggleItemSizeEvent)="toggleItemSize()" ></sized-items-tile-controls>
 
-  <div class="tile" *ngIf="showBig">
+  <div class="tile" *ngIf="showBig" >
     <div  class="card mb-3" *ngFor="let jem of jems"
           [ngClass]="{  'border-success': jem.type === 'Best Practices',
                         'border-danger': jem.type === 'Mistakes',

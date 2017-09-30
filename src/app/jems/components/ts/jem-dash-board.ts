@@ -1,8 +1,8 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterContentInit } from '@angular/core';
 import { DashBoardComponent} from '../../../dash-board/components/ts/dash-board';
 import { Jem } from '../../jem';
 import { JemService} from '../../jem.service';
-import { JemIntroTileComponent} from './jem-intro-tile';
+import { IntroTileComponent} from '../../../dash-board/components/ts/intro-tile';
 import { JemFilterTileComponent} from './jem-filter-tile';
 import { JemListTileComponent} from './jem-list-tile';
 import { JemAddTileComponent} from './jem-add-tile';
@@ -16,11 +16,17 @@ import { JemCollectionTileComponent} from './jem-collection-tile';
   templateUrl: '../html/jem-dash-board.html',
   styles: []
 })
-export class JemDashBoardComponent extends DashBoardComponent implements AfterViewInit{
+export class JemDashBoardComponent extends DashBoardComponent implements AfterContentInit{
+
+  config: any = {
+    title: 'Code Jems',
+    intro: "Short-cut keys, Best Practices, How to and Mistakes. Code Jems,  it's all here",
+    img: "assets/img/code-jems.jpg"
+  }
 
   jems: Jem[];
   selectedJem: Jem;
-  @ViewChild(JemIntroTileComponent) introTile;
+  @ViewChild(IntroTileComponent) introTile;
   @ViewChild(JemFilterTileComponent) filterTile;
   @ViewChild(JemListTileComponent) listTile;
   @ViewChild(JemAddTileComponent) addTile;
@@ -59,7 +65,11 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterVi
     this.updateTile.show = true;
   }
 
-  ngAfterViewInit() {}
+  ngAfterContentInit() {
+    this.introTile.title = this.config.title;
+    this.introTile.intro = this.config.intro;
+    this.introTile.img = this.config.img;
+  }
 
   toggleFilterTile():void{
     if(this.filterTile.show === true){

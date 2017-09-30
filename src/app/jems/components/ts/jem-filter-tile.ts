@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FilterTileComponent} from '../../../dash-board/components/ts/filter-tile';
 import { Jem } from '../../jem';
-import {Location} from '@angular/common';
 import { Filter } from '../../../dash-board/filter';
 
 'use strict';
@@ -27,9 +26,6 @@ export class JemFilterTileComponent extends FilterTileComponent{
 
   filters: Filter[] = [{name:'tech',list:[],uniqueFields:[]},{name:'type',list:[],uniqueFields:[]}];
 
-  constructor( private location: Location )
-  {super();}
-
   filterJems():void{
     let jemsFiltered = this.jemsFiltered;
 
@@ -40,6 +36,7 @@ export class JemFilterTileComponent extends FilterTileComponent{
 
   addJemsFilter(key:string, value: string):void{
 
+
     if(key && value){
       let jemsFiltered = this.jemsFiltered;
       this.sortJems();
@@ -48,7 +45,6 @@ export class JemFilterTileComponent extends FilterTileComponent{
 
       this.jemsFiltered = jemsFiltered;
     }
-
   }
 
 

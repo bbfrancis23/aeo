@@ -15,7 +15,7 @@ import { CollectionService } from './collection.service';
 import { JemService } from './jems/jem.service';
 
 import { JemDashBoardComponent } from './jems/components/ts/jem-dash-board';
-import { JemIntroTileComponent } from './jems/components/ts/jem-intro-tile';
+import { IntroTileComponent } from './dash-board/components/ts/intro-tile';
 import { JemListTileComponent } from './jems/components/ts/jem-list-tile';
 import { JemFilterTileComponent } from './jems/components/ts/jem-filter-tile';
 import { JemAddTileComponent } from './jems/components/ts/jem-add-tile';
@@ -32,7 +32,7 @@ import { ItemControlsComponent } from './dash-board/components/ts/item-controls'
     AppComponent,
     AeoHeaderComponent,
     JemDashBoardComponent,
-    JemIntroTileComponent,
+    IntroTileComponent,
     JemListTileComponent,
     JemFilterTileComponent,
     JemAddTileComponent,
