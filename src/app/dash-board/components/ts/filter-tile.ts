@@ -1,65 +1,67 @@
 import { Component, Input } from '@angular/core';
 import { DashBoardTileComponent} from '../../../dash-board/components/ts/dash-board-tile';
-import { Filter } from '../../filter';
-
-import {Location} from '@angular/common';
+//import { Jem } from '../../jem';
+//import { Filter } from '../../../dash-board/filter';
+import { Field } from '../../../dash-board/field';
 
 'use strict';
 
 @Component({
   selector: 'filter-tile',
-  template: ''
+  template:
+    `<div class="card border-info tile" *ngIf="show" >
+        <div class="card-header bg-info text-white"><h4>Filters</h4></div>
+        <div class="tile-controls"><a class="material-icons tile-item" (click)="show=false;" >clear</a></div>
+        <div class="card-block p-3" >
+          <div *ngFor="let field of fields">
+            <b><p>{{field.name}}:</p></b>
+            <div type="checkbox" *ngFor="let value of field.values" ><input type="checkbox" (click)="addGrotFilter(field.name,value)"> {{value}}</div><hr>
+          </div>
+        </div>
+      </div>`,
 })
 export class FilterTileComponent extends DashBoardTileComponent{
 
-  protected filters: Filter[]  = [];
-  constructor(location: Location) {super();}
+  /////////////////////////////// New Filter ////////////////////////////////////////////////////////
+  @Input() items: any = [];
+  itemsFiltered: any = [];
 
-  protected addFilter(key:string, value:string, list: any):any{
+  fields: Field[] = [];
 
-    if(key && value && list){
+  addGrotFilter(field:string, value:string):void{
+    if(field && value){
+      let itemsFiltered = this.itemsFiltered;
+      this.sort();
+      itemsFiltered = this.items;
+      let i = this.fields.findIndex( f => f.name === field),
+          fi = this.fields[i].filters.indexOf(value);
 
-      this.addFilterToUrl(key,value);
+      fi >= 0 ? this.fields[i].filters.splice(fi,1) : this.fields[i].filters.push(value);
 
-      let index = this.filters.findIndex( filter => filter.name === key),
-          listIndex = this.filters[index].list.indexOf(value);
+      console.log(this.fields[i].name,this.fields[i].filters);
+      itemsFiltered = this.filterGrot(itemsFiltered);
 
-      listIndex >= 0 ? this.filters[index].list.splice(listIndex,1) : this.filters[index].list.push(value);
-
-      list = this.filter(list);
-      return list;
+      this.itemsFiltered = itemsFiltered;
     }
-
-    return "Missing params";
   }
 
-  private addFilterToUrl(key:string,value:string):void{
-    // value = '  Your moma told me not to cum so fast  !!!! ';
-    // get rid of spaces at start and end of string
-    // get rid of any character except letters and dashes
-    // value = value.replace(/[^A-Za-z0-9\s\-]/g,'');
-    // value = value.replace(/\s+/g,"-");
-    // value = value.toLowerCase();
-    // console.log('-'+value+'-');
-  }
-
-  protected filter(list:any):any{
+  protected filterGrot(list:any):any{
 
     if(list){
       let filtered = [];
 
-      for (let filterIndex = 0, filterLength = this.filters.length; filterIndex < filterLength; filterIndex++){
+      for (let filterIndex = 0, filterLength = this.fields.length; filterIndex < filterLength; filterIndex++){
         filtered =[];
 
-        if(this.filters[filterIndex].list.length <= 0){
+        if(this.fields[filterIndex].filters.length <= 0){
           for(let i =0, length = list.length;i<length;i++){
               filtered.push(list[i]);
           }
         }else{
             for(let i =0, length = list.length;i<length;i++){
-              for(let c = 0, l = this.filters[filterIndex].list.length;c<l;c++){
+              for(let c = 0, l = this.fields[filterIndex].filters.length;c<l;c++){
 
-                if(list[i][ this.filters[filterIndex].name ] === this.filters[filterIndex].list[c]){
+                if(list[i][ this.fields[filterIndex].name ] === this.fields[filterIndex].filters[c]){
                     filtered.push(list[i]);
                 }
               }
@@ -71,5 +73,45 @@ export class FilterTileComponent extends DashBoardTileComponent{
     }
     return "Missing params";
   }
+
+  sort():void {
+    this.items = this.items.sort((a, b) => {
+      var textA = a.title.toUpperCase();
+      var textB = b.title.toUpperCase();
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    });
+  }
+
+  ///////////////////////////// OLD JEMS ////////////////////////////////////////////////////////////
+  //@Input() jems: Jem[];
+  //jemsFiltered: Jem[];
+
+  //filters: Filter[] = [{name:'tech',list:[],uniqueFields:[]},{name:'type',list:[],uniqueFields:[]}];
+
+  /*
+  filterJems():void{
+    let jemsFiltered = this.jemsFiltered;
+
+    jemsFiltered = this.jems;
+    jemsFiltered = this.filter( jemsFiltered);
+    this.jemsFiltered = jemsFiltered;
+  }
+
+  addJemsFilter(key:string, value: string):void{
+
+
+    if(key && value){
+      let jemsFiltered = this.jemsFiltered;
+      this.sortJems();
+      jemsFiltered = this.jems;
+      jemsFiltered = this.addFilter(key,value, jemsFiltered);
+
+      this.jemsFiltered = jemsFiltered;
+    }
+  }
+  //*/
+
+
+
 
 }

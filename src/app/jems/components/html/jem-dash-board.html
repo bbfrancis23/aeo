@@ -41,12 +41,12 @@
   <div class="row">
     <div class="col-md-2">
       <intro-tile></intro-tile>
-      <jem-filter-tile [(jems)]="jems"></jem-filter-tile>
+      <filter-tile [(items)]="jems" ></filter-tile>
     </div>
     <div [ngClass]="{'col-md-10': (introTile.show || filterTile.show), 'col-md-12': (!introTile.show && !filterTile.show)}">
       <div class="row">
         <div [ngClass]="{'col-md-6': (addTile.show || updateTile.show || collectionTile.show), 'col-md-12': (!addTile.show && !updateTile.show && ! collectionTile.show)}">
-          <jem-list-tile [(jems)]="filterTile.jemsFiltered" (selectItemEvent)="selectJem($event)"></jem-list-tile>
+          <jem-list-tile [(jems)]="filterTile.itemsFiltered" (selectItemEvent)="selectJem($event)"></jem-list-tile>
         </div>
         <div [ngClass]="{'col-md-6': (listTile.show), 'col-md-12': (!listTile.show)}">
           <jem-add-tile (jemAddedEvent)="addNewJem($event)"></jem-add-tile>

@@ -3,11 +3,12 @@ import { DashBoardComponent} from '../../../dash-board/components/ts/dash-board'
 import { Jem } from '../../jem';
 import { JemService} from '../../jem.service';
 import { IntroTileComponent} from '../../../dash-board/components/ts/intro-tile';
-import { JemFilterTileComponent} from './jem-filter-tile';
+import { FilterTileComponent} from '../../../dash-board/components/ts/filter-tile';
 import { JemListTileComponent} from './jem-list-tile';
 import { JemAddTileComponent} from './jem-add-tile';
 import { JemUpdateTileComponent} from './jem-update-tile';
 import { JemCollectionTileComponent} from './jem-collection-tile';
+import { Field } from '../../../dash-board/field';
 
 'use strict';
 
@@ -21,13 +22,17 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
   config: any = {
     title: 'Code Jems',
     intro: "Short-cut keys, Best Practices, How to and Mistakes. Code Jems,  it's all here",
-    img: "assets/img/code-jems.jpg"
+    img: "assets/img/code-jems.jpg",
+    fields: [
+      {name:'tech', filters:[], values:['Angular 4', 'CSS', 'Express', 'Git', 'HTML', 'JavaScript', 'LESS','Mean Stack', 'MongoDB', 'NodeJS', 'TypeScript']},
+      {name:'type', filters:[], values:['Best Practices', 'How to', 'Mistakes', 'Short-Cut Keys' , 'Style Guide']}
+    ]
   }
 
   jems: Jem[];
   selectedJem: Jem;
   @ViewChild(IntroTileComponent) introTile;
-  @ViewChild(JemFilterTileComponent) filterTile;
+  @ViewChild(FilterTileComponent) filterTile;
   @ViewChild(JemListTileComponent) listTile;
   @ViewChild(JemAddTileComponent) addTile;
   @ViewChild(JemUpdateTileComponent) updateTile;
@@ -39,16 +44,11 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
     this.jemService.getJems().then((jems) => {
       this.jems = jems;
       this.selectedJem = this.jems[0];
-      this.filterTile.jemsFiltered = jems;
+      //this.filterTile.jemsFiltered = jems;
+      this.filterTile.itemsFiltered = jems;
       this.updateTile.model = this.selectedJem;
 
-      this.filterTile.filters.forEach((filter)=>{
-        this.jems.forEach((jem)=>{
-          if( ! filter.uniqueFields.find(e => e === jem[filter.name] )){
-            filter.uniqueFields.push(jem[filter.name]);
-          }
-        });
-      });
+
     });
   }
 
@@ -69,6 +69,7 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
     this.introTile.title = this.config.title;
     this.introTile.intro = this.config.intro;
     this.introTile.img = this.config.img;
+    this.filterTile.fields = this.config.fields;
   }
 
   toggleFilterTile():void{
