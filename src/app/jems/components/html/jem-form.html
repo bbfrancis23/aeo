@@ -48,15 +48,7 @@
     </div>
     <div [hidden]="!submitted">
       <div class="alert alert-success">Success!!! This Jem has ben Entered into the database.</div>
-      <div class="card" [ngClass]="{'border-success': model.type === 'Best Practices', 'border-danger': model.type === 'Mistakes', 'border-info': model.type === 'How to'}" style="margin-bottom: 5px">
-        <div class="card-body">
-          <h4 class="card-title">{{model.title}}</h4>
-          <h5>{{model.tech}}</h5>
-          <h5><span class="badge" [ngClass]="{'badge-success':model.type === 'Best Practices', 'badge-danger': model.type === 'Mistakes', 'badge-info': model.type === 'How to'}" >{{model.type}}</span></h5>
-          <p class="card-text">{{model.description}}</p>
-          <pre style="background-color: black; color:white; padding: 10px;">{{model.code}}<br></pre>
-        </div>
-      </div>
+      
       <button class="btn brn-outline-info float-right" (click)="jemForm.reset();submitted=false" *ngIf="function === 'Add'" >Add Another Jem</button>
       <button class="btn brn-outline-info float-right" (click)="submitted=false" *ngIf="function === 'Update'">Okay</button>
     </div>

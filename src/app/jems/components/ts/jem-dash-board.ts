@@ -44,7 +44,6 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
     this.jemService.getJems().then((jems) => {
       this.jems = jems;
       this.selectedJem = this.jems[0];
-      //this.filterTile.jemsFiltered = jems;
       this.filterTile.itemsFiltered = jems;
       this.updateTile.model = this.selectedJem;
 
@@ -54,10 +53,15 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
 
   selectJem(id:string):void{
 
+
+
     let i  = 0;
     if(id){
-      let i = this.jems.findIndex( (jem) => {return jem._id === id});
+      i = this.jems.findIndex( jem => jem._id === id);
+
     }
+
+
 
     this.selectedJem = this.jems[i];
     this.updateTile.model = this.selectedJem;
@@ -95,8 +99,8 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
     if($event){
       let jem: Jem = $event;
       this.jems.push(jem);
-      this.filterTile.sortJems();
-      this.filterTile.filterJems();
+      this.filterTile.sort();
+      this.filterTile.filter();
     }
 
   }
@@ -107,7 +111,7 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
     if($event){
       let jem: Jem = $event;
       this.jems.push(jem);
-      this.filterTile.sortJems();
+      this.filterTile.sort();
     }
   }
 }

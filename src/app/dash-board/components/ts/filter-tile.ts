@@ -15,7 +15,7 @@ import { Field } from '../../../dash-board/field';
         <div class="card-block p-3" >
           <div *ngFor="let field of fields">
             <b><p>{{field.name}}:</p></b>
-            <div type="checkbox" *ngFor="let value of field.values" ><input type="checkbox" (click)="addGrotFilter(field.name,value)"> {{value}}</div><hr>
+            <div type="checkbox" *ngFor="let value of field.values" ><input type="checkbox" (click)="addFilter(field.name,value)"> {{value}}</div><hr>
           </div>
         </div>
       </div>`,
@@ -28,7 +28,7 @@ export class FilterTileComponent extends DashBoardTileComponent{
 
   fields: Field[] = [];
 
-  addGrotFilter(field:string, value:string):void{
+  addFilter(field:string, value:string):void{
     if(field && value){
       let itemsFiltered = this.itemsFiltered;
       this.sort();
@@ -38,14 +38,14 @@ export class FilterTileComponent extends DashBoardTileComponent{
 
       fi >= 0 ? this.fields[i].filters.splice(fi,1) : this.fields[i].filters.push(value);
 
-      console.log(this.fields[i].name,this.fields[i].filters);
-      itemsFiltered = this.filterGrot(itemsFiltered);
+      //console.log(this.fields[i].name,this.fields[i].filters);
+      itemsFiltered = this.filter(itemsFiltered);
 
       this.itemsFiltered = itemsFiltered;
     }
   }
 
-  protected filterGrot(list:any):any{
+  protected filter(list:any):any{
 
     if(list){
       let filtered = [];
