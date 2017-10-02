@@ -1,8 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { DashBoardTileComponent} from '../../../dash-board/components/ts/dash-board-tile';
-//import { Jem } from '../../jem';
-//import { Filter } from '../../../dash-board/filter';
 import { Field } from '../../../dash-board/field';
+import {Location} from '@angular/common';
 
 'use strict';
 
@@ -15,7 +14,8 @@ import { Field } from '../../../dash-board/field';
         <div class="card-block p-3" >
           <div *ngFor="let field of fields">
             <b><p>{{field.name}}:</p></b>
-            <div type="checkbox" *ngFor="let value of field.values" ><input type="checkbox" (click)="addFilter(field.name,value)"> {{value}}</div><hr>
+
+            <div type="checkbox" *ngFor="let value of field.values" ><input type="checkbox" [(ngModel)]="value.filtered"  (change)="filter()"> {{value.name}}</div><hr>
           </div>
         </div>
       </div>`,
@@ -28,51 +28,68 @@ export class FilterTileComponent extends DashBoardTileComponent{
 
   fields: Field[] = [];
 
-  addFilter(field:string, value:string):void{
-    if(field && value){
-      let itemsFiltered = this.itemsFiltered;
-      this.sort();
-      itemsFiltered = this.items;
-      let i = this.fields.findIndex( f => f.name === field),
-          fi = this.fields[i].filters.indexOf(value);
+  constructor(private location: Location) {super();}
 
-      fi >= 0 ? this.fields[i].filters.splice(fi,1) : this.fields[i].filters.push(value);
 
-      //console.log(this.fields[i].name,this.fields[i].filters);
-      itemsFiltered = this.filter(itemsFiltered);
+  filter():void{
+    this.itemsFiltered = this.items;
 
-      this.itemsFiltered = itemsFiltered;
-    }
-  }
+    this.fields.forEach(field=>{
+      let filtered = [], filters: String[] = [];
 
-  protected filter(list:any):any{
-
-    if(list){
-      let filtered = [];
-
-      for (let filterIndex = 0, filterLength = this.fields.length; filterIndex < filterLength; filterIndex++){
-        filtered =[];
-
-        if(this.fields[filterIndex].filters.length <= 0){
-          for(let i =0, length = list.length;i<length;i++){
-              filtered.push(list[i]);
-          }
-        }else{
-            for(let i =0, length = list.length;i<length;i++){
-              for(let c = 0, l = this.fields[filterIndex].filters.length;c<l;c++){
-
-                if(list[i][ this.fields[filterIndex].name ] === this.fields[filterIndex].filters[c]){
-                    filtered.push(list[i]);
-                }
-              }
-            }
-        }
-        list = filtered;
+      field.values.forEach(value=> {if(value.filtered) filters.push(value.name)} );
+      if( filters.length > 0){
+        filters.forEach(filter =>{
+          this.itemsFiltered.forEach(item =>{
+            if(item[field.name] === filter) filtered.push(item);
+          });
+        });
+        this.itemsFiltered = filtered;
       }
-      return list;
-    }
-    return "Missing params";
+    });
+
+    this.updateUrl();
   }
+
+  private updateUrl():void{
+
+    let url:string = 'code-jems'; // todo put this in as a config var
+    let qs:string = '';
+    let fieldPaths: String[] = [];
+    let queryStrings = [];
+
+
+    this.fields.forEach(field=>{
+      let filters = [];
+      field.values.forEach(value=> {if(value.filtered) filters.push(value.name)} );
+
+      if(filters.length === 1){
+        fieldPaths.push(`${this.urlify(field.name)}/${this.urlify(filters[0])}`);
+      }else if(filters.length > 1){
+
+        queryStrings.push(`${this.urlify(field.name)}=${this.urlify(filters.join(','))}`);
+      }
+
+    });
+
+
+    //console.log(queryStrings);
+    url = `${url}/${fieldPaths.join('/')}`;
+    this.location.replaceState(url,`${queryStrings.join('&')}`);
+
+  }
+
+  public urlify(string:string):string{
+    string  = string || '';
+
+    string = string.replace(/[^A-Za-z0-9\s\,\-]/g,'');
+    string.trim();
+    string = string.replace(/\s+/g,"-");
+    string = string.toLowerCase();
+
+    return string;
+  }
+  /*
 
   sort():void {
     this.items = this.items.sort((a, b) => {
@@ -82,33 +99,9 @@ export class FilterTileComponent extends DashBoardTileComponent{
     });
   }
 
-  ///////////////////////////// OLD JEMS ////////////////////////////////////////////////////////////
-  //@Input() jems: Jem[];
-  //jemsFiltered: Jem[];
-
-  //filters: Filter[] = [{name:'tech',list:[],uniqueFields:[]},{name:'type',list:[],uniqueFields:[]}];
-
-  /*
-  filterJems():void{
-    let jemsFiltered = this.jemsFiltered;
-
-    jemsFiltered = this.jems;
-    jemsFiltered = this.filter( jemsFiltered);
-    this.jemsFiltered = jemsFiltered;
-  }
-
-  addJemsFilter(key:string, value: string):void{
 
 
-    if(key && value){
-      let jemsFiltered = this.jemsFiltered;
-      this.sortJems();
-      jemsFiltered = this.jems;
-      jemsFiltered = this.addFilter(key,value, jemsFiltered);
 
-      this.jemsFiltered = jemsFiltered;
-    }
-  }
   //*/
 
 

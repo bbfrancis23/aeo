@@ -50,6 +50,18 @@ import { ItemControlsComponent } from './dash-board/components/ts/item-controls'
       {
         path: 'code-jems',
         component: JemDashBoardComponent
+      },
+      {
+        path: 'code-jems/tech/:tech',
+        component: JemDashBoardComponent
+      },
+      {
+        path: 'code-jems/type/:type',
+        component: JemDashBoardComponent
+      },
+      {
+        path: 'code-jems/tech/:tech/type/:type',
+        component: JemDashBoardComponent
       }
 
     ]),

@@ -1,5 +1,4 @@
 export class Field {
   name: string;
-  filters: Array<string>;
-  values: Array<string>;
+  values: Array <{name: string, filtered: string}> ;
 }
