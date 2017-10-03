@@ -12,7 +12,7 @@
       </div>
 
       <div class="btn-group float-md-right" >
-        <button class="btn btn-primary material-icons" (click)="introTile.toggle();" [ngClass]="{'active': introTile.show}"  title="Jem Info Tile">
+        <button class="btn btn-primary material-icons" (click)="introTile.show = !introTile.show" [ngClass]="{'active': introTile.show}"  title="Jem Info Tile">
           info_outline
         </button>
         <button class="btn btn-primary material-icons" (click)="toggleFilterTile();" [ngClass]="{'active':filterTile.show}"  title="Jem Filter Tile">
@@ -21,13 +21,13 @@
         <button class="btn btn-primary material-icons" (click)="toggleListTile();" [ngClass]="{'active': listTile.show}"  title="Jem List Tile">
           list
         </button>
-        <button class="btn btn-primary material-icons" (click)="addTile.toggle();" [ngClass]="{'active': addTile.show}"  title="Add Jem Tile">
+        <button class="btn btn-primary material-icons" (click)="addTile.show = !addTile.show" [ngClass]="{'active': addTile.show}"  title="Add Jem Tile">
           add
         </button>
-        <button class="btn btn-primary material-icons" (click)="updateTile.toggle();" [ngClass]="{'active': updateTile.show}"  title="Edit Jem Tile">
+        <button class="btn btn-primary material-icons" (click)="updateTile.show = !updateTile.show" [ngClass]="{'active': updateTile.show}"  title="Edit Jem Tile">
           create
         </button>
-        <button class="btn btn-primary material-icons" (click)="collectionTile.toggle();" [ngClass]="{'active': collectionTile.show}"  title="Jem Collection Tile">
+        <button class="btn btn-primary material-icons" (click)="collectionTile.show = !collectionTile.show" [ngClass]="{'active': collectionTile.show}"  title="Jem Collection Tile">
           playlist_add
         </button>
       </div>
@@ -40,7 +40,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-2">
-      <intro-tile></intro-tile>
+      <intro-tile ></intro-tile>
       <filter-tile [(items)]="jems" ></filter-tile>
     </div>
     <div [ngClass]="{'col-md-10': (introTile.show || filterTile.show), 'col-md-12': (!introTile.show && !filterTile.show)}">

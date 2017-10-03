@@ -66,17 +66,11 @@ export class FilterTileComponent extends DashBoardTileComponent{
       if(filters.length === 1){
         fieldPaths.push(`${this.urlify(field.name)}/${this.urlify(filters[0])}`);
       }else if(filters.length > 1){
-
         queryStrings.push(`${this.urlify(field.name)}=${this.urlify(filters.join(','))}`);
       }
-
     });
 
-
-    //console.log(queryStrings);
-    url = `${url}/${fieldPaths.join('/')}`;
-    this.location.replaceState(url,`${queryStrings.join('&')}`);
-
+    this.location.replaceState(`${url}/${fieldPaths.join('/')}`,`${queryStrings.join('&')}`);
   }
 
   public urlify(string:string):string{
