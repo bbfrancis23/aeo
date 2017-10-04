@@ -14,13 +14,13 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CollectionService } from './collection.service';
 import { JemService } from './jems/jem.service';
 
-import { JemDashBoardComponent } from './jems/components/ts/jem-dash-board';
+import { JemDashBoardComponent } from './jems/jem-dash-board.component';
 import { IntroTileComponent } from './dash-board/intro-tile.component';
-import { JemListTileComponent } from './jems/components/ts/jem-list-tile';
+import { JemListTileComponent } from './jems/jem-list-tile.component';
 import { FilterTileComponent } from './dash-board/filter-tile.component';
-import { JemAddTileComponent } from './jems/components/ts/jem-add-tile';
-import { JemUpdateTileComponent } from './jems/components/ts/jem-update-tile';
-import { JemCollectionTileComponent} from './jems/components/ts/jem-collection-tile';
+import { JemAddTileComponent } from './jems/jem-add-tile.component';
+import { JemUpdateTileComponent } from './jems/jem-update-tile.component';
+import { JemCollectionTileComponent} from './jems/jem-collection-tile.component';
 import { TileControlsComponent } from './dash-board/tile-controls.component';
 import { SizedItemsTileControlsComponent } from './dash-board/sized-items-tile-controls.component';
 import { ItemControlsComponent } from './dash-board/item-controls.component';

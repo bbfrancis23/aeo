@@ -1,20 +1,20 @@
 import { Component, ViewChild, AfterContentInit } from '@angular/core';
-import { DashBoardComponent } from '../../../dash-board/dash-board.component';
-import { Jem } from '../../jem';
-import { JemService } from '../../jem.service';
-import { JemListTileComponent } from './jem-list-tile';
-import { JemAddTileComponent } from './jem-add-tile';
-import { JemUpdateTileComponent } from './jem-update-tile';
-import { JemCollectionTileComponent } from './jem-collection-tile';
-import { Field } from '../../../dash-board/field';
+import { DashBoardComponent } from '../dash-board/dash-board.component';
+import { Jem } from './jem';
+import { JemService } from './jem.service';
+import { JemListTileComponent } from './jem-list-tile.component';
+import { JemAddTileComponent } from './jem-add-tile.component';
+import { JemUpdateTileComponent } from './jem-update-tile.component';
+import { JemCollectionTileComponent } from './jem-collection-tile.component';
+import { Field } from '../dash-board/field';
 import { ActivatedRoute } from "@angular/router";
-import { Utilities } from '../../../utilities';
+import { Utilities } from '../utilities';
 
 'use strict';
 
 @Component({
   selector: 'jem-dash-board',
-  templateUrl: '../html/jem-dash-board.html',
+  templateUrl: './jem-dash-board.component.html',
   providers: [Utilities]
 })
 export class JemDashBoardComponent extends DashBoardComponent implements AfterContentInit{

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter  } from '@angular/core';
-import { ListTileComponent} from '../../../dash-board/list-tile.component';
+import { ListTileComponent} from '../dash-board/list-tile.component';
 //import { Jem } from '../../jem';
 //import { JemService} from '../../jem.service';
 

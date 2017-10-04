@@ -1,13 +1,13 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { DashBoardTileComponent} from '../../../dash-board/dash-board-tile.component';
-import { Jem } from '../../jem';
-import { JemService} from '../../jem.service';
+import { DashBoardTileComponent} from '../dash-board/dash-board-tile.component';
+import { Jem } from './jem';
+import { JemService} from './jem.service';
 
 'use strict';
 
 @Component({
   selector: 'jem-add-tile',
-  templateUrl: '../html/jem-form.html'
+  templateUrl: './jem-form.component.html'
 })
 export class JemAddTileComponent extends DashBoardTileComponent{
   function = "Add";

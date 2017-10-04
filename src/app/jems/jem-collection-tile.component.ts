@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { DashBoardTileComponent} from '../../../dash-board/dash-board-tile.component';
-import { Jem } from '../../jem';
-import { JemService} from '../../jem.service';
+import { DashBoardTileComponent} from '../dash-board/dash-board-tile.component';
+import { Jem } from './jem';
+import { JemService} from './jem.service';
 
 @Component({
   selector: 'jem-collection-tile',
