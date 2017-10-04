@@ -1,5 +1,5 @@
 import { Component, ViewChild, AfterContentInit } from '@angular/core';
-import { DashBoardComponent } from '../../../dash-board/components/ts/dash-board';
+import { DashBoardComponent } from '../../../dash-board/dash-board.component';
 import { Jem } from '../../jem';
 import { JemService } from '../../jem.service';
 import { JemListTileComponent } from './jem-list-tile';

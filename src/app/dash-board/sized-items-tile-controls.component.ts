@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { TileControlsComponent } from './tile-controls';
+import { TileControlsComponent } from './tile-controls.component';
 
 'use strict';
 

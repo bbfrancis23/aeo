@@ -15,15 +15,15 @@ import { CollectionService } from './collection.service';
 import { JemService } from './jems/jem.service';
 
 import { JemDashBoardComponent } from './jems/components/ts/jem-dash-board';
-import { IntroTileComponent } from './dash-board/components/ts/intro-tile';
+import { IntroTileComponent } from './dash-board/intro-tile.component';
 import { JemListTileComponent } from './jems/components/ts/jem-list-tile';
-import { FilterTileComponent } from './dash-board/components/ts/filter-tile';
+import { FilterTileComponent } from './dash-board/filter-tile.component';
 import { JemAddTileComponent } from './jems/components/ts/jem-add-tile';
 import { JemUpdateTileComponent } from './jems/components/ts/jem-update-tile';
 import { JemCollectionTileComponent} from './jems/components/ts/jem-collection-tile';
-import { TileControlsComponent } from './dash-board/components/ts/tile-controls';
-import { SizedItemsTileControlsComponent } from './dash-board/components/ts/sized-items-tile-controls';
-import { ItemControlsComponent } from './dash-board/components/ts/item-controls';
+import { TileControlsComponent } from './dash-board/tile-controls.component';
+import { SizedItemsTileControlsComponent } from './dash-board/sized-items-tile-controls.component';
+import { ItemControlsComponent } from './dash-board/item-controls.component';
 
 
 

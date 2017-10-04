@@ -1,12 +1,11 @@
 import { Component, ViewChild, AfterContentInit } from '@angular/core';
-import { IntroTileComponent } from '../../../dash-board/components/ts/intro-tile';
-import { FilterTileComponent } from '../../../dash-board/components/ts/filter-tile';
-
+import { IntroTileComponent } from  './intro-tile.component';
+import { FilterTileComponent } from './filter-tile.component';
 import { ActivatedRoute } from "@angular/router";
+import { Field } from './field';
+import { Utilities } from '../utilities';
 
-import { Field } from '../../../dash-board/field';
-
-import { Utilities } from '../../../utilities';
+'use strict';
 
 @Component({
   selector: 'dash-board',
@@ -15,31 +14,19 @@ import { Utilities } from '../../../utilities';
 })
 export class DashBoardComponent implements AfterContentInit{
 
-  config: any= {
+  config: any= {}
 
-  }
-
-  constructor(private route: ActivatedRoute,private utils: Utilities){
-
-  }
+  constructor(private route: ActivatedRoute,private utils: Utilities){}
 
   @ViewChild(IntroTileComponent) introTile;
   @ViewChild(FilterTileComponent) filterTile;
 
-  ngAfterContentInit() {
-
-  }
+  ngAfterContentInit() {}
 
   initConfig(){
     this.introTile.title = this.config.title;
     this.introTile.intro = this.config.intro;
     this.introTile.img = this.config.img;
-
-    this.config.fields.forEach(field=>{
-      let newField: Field = {name: field.name, values: []};
-      field.values.forEach(value=> newField.values.push({name:value, filtered:''}));
-      this.filterTile.fields.push(newField);
-    });
 
     this.config.fields.forEach(field=>{
       let newField: Field = {name: field.name, values: []};
@@ -69,5 +56,5 @@ export class DashBoardComponent implements AfterContentInit{
     });
   }
 
-  
+
 }

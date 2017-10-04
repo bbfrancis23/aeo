@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DashBoardTileComponent} from './dash-board-tile';
+import { DashBoardTileComponent} from './dash-board-tile.component';
 
 'use strict';
 
@@ -16,6 +16,4 @@ import { DashBoardTileComponent} from './dash-board-tile';
       </div>`
 })
 export class IntroTileComponent extends DashBoardTileComponent{
-  title:string = '';
-  intro:string = '';
 }

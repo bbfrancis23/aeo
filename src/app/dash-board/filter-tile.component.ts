@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { DashBoardTileComponent} from '../../../dash-board/components/ts/dash-board-tile';
-import { Field } from '../../../dash-board/field';
+import { DashBoardTileComponent} from './dash-board-tile.component';
+import { Field } from './field';
 import {Location} from '@angular/common';
 
 'use strict';
