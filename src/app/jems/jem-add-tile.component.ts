@@ -1,9 +1,11 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { DashBoardTileComponent} from '../dash-board/dash-board-tile.component';
 import { Jem } from './jem';
-import { JemService} from './jem.service';
+import { DataService} from '../data.service'
 
 'use strict';
+
+// some comments
 
 @Component({
   selector: 'jem-add-tile',
@@ -16,13 +18,13 @@ export class JemAddTileComponent extends DashBoardTileComponent{
   @Output() jemAddedEvent = new EventEmitter<Jem>();
 
 
-  constructor(private jemService: JemService){super();
+  constructor(private dataService: DataService){super();
     this.model.tech = 'Git';
     this.model.type = 'Best Practices'
   }
 
   onSubmit():void{
-    this.jemService.createJem(this.model).then((jem)=>{ this.jemAddedEvent.emit(jem) });
+    this.dataService.create(this.model,'jems','jem').then((jem)=>{ this.jemAddedEvent.emit(jem) });
     this.submitted = true;
   }
 }

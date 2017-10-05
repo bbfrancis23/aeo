@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterContentInit } from '@angular/core';
+import { Component, ViewChild, AfterContentInit, OnInit } from '@angular/core';
 import { DashBoardComponent } from '../dash-board/dash-board.component';
 import { Jem } from './jem';
 import { JemService } from './jem.service';
@@ -17,7 +17,7 @@ import { Utilities } from '../utilities';
   templateUrl: './jem-dash-board.component.html',
   providers: [Utilities]
 })
-export class JemDashBoardComponent extends DashBoardComponent implements AfterContentInit{
+export class JemDashBoardComponent extends DashBoardComponent implements AfterContentInit, OnInit{
 
   config: any= {
     title: 'Code Jems',
@@ -40,6 +40,13 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
   constructor(private jemService: JemService, private r: ActivatedRoute, private u: Utilities){
     super(r,u);
 
+  }
+
+  ngOnInit():void{
+    this.getJems();
+  }
+
+  getJems(){
     this.jemService.getJems().then((jems) => {
       this.jems = jems;
       this.selectedJem = this.jems[0];
@@ -97,23 +104,8 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
   }
 
   addNewJem($event):void{
-
     if($event){
-      let jem: Jem = $event;
-      this.jems.push(jem);
-      this.filterTile.sort();
-      this.filterTile.filter();
-    }
-
-  }
-
-
-
-  updateJem($event):void{
-    if($event){
-      let jem: Jem = $event;
-      this.jems.push(jem);
-      this.filterTile.sort();
+      this.getJems();
     }
   }
 }

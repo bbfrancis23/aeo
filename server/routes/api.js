@@ -78,6 +78,8 @@ router.post('/jems',(req,res)=>{
 
     let jem = req.body.jem || {};
 
+    console.log(jem);
+
     if(jem._id){
 
       //console.log(jem,)

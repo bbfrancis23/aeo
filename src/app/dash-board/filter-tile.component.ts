@@ -83,7 +83,7 @@ export class FilterTileComponent extends DashBoardTileComponent{
 
     return string;
   }
-  /*
+
 
   sort():void {
     this.items = this.items.sort((a, b) => {

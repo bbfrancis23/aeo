@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { DashBoardTileComponent} from '../dash-board/dash-board-tile.component';
 import { Jem } from './jem';
-import { JemService} from './jem.service';
+import { DataService} from '../data.service'
 
 'use strict';
 
@@ -18,11 +18,11 @@ export class JemUpdateTileComponent extends DashBoardTileComponent{
 
 
   onSubmit():void{
-    this.jemService.createJem(this.model).then((jem)=>{});
+    this.dataService.create(this.model,'jems','jem').then((jem)=>{});
     this.submitted = true;
   }
 
-  constructor(private jemService: JemService){super(); }
+  constructor(private dataService: DataService){super(); }
 
 
 }
