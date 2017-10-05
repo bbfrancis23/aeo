@@ -1,4 +1,4 @@
-<div class="container-fluid dashboard-controls ">
+<div class="fixed-top container-fluid dashboard-controls" style="padding-top: 56px">
   <div class="row bg-secondary py-2">
     <div class="col-md-6">
       <h1 class="h2 text-white">Jems Dashboard</h1>
@@ -37,7 +37,7 @@
     </div>
   </div>
 </div>
-<div class="container-fluid">
+<div class="container-fluid" style="padding-top: 112px">
   <div class="row">
     <div class="col-md-2">
       <intro-tile ></intro-tile>
@@ -45,11 +45,11 @@
     </div>
     <div [ngClass]="{'col-md-10': (introTile.show || filterTile.show), 'col-md-12': (!introTile.show && !filterTile.show)}">
       <div class="row">
-        <div [ngClass]="{'col-md-6': (addTile.show || updateTile.show || collectionTile.show), 'col-md-12': (!addTile.show && !updateTile.show && ! collectionTile.show)}">
+        <div  [ngClass]="{'col-md-6': (addTile.show || updateTile.show || collectionTile.show), 'col-md-12': (!addTile.show && !updateTile.show && ! collectionTile.show)}">
           <jem-list-tile [(items)]="filterTile.itemsFiltered" (selectItemEvent)="selectJem($event)"></jem-list-tile>
         </div>
         <div [ngClass]="{'col-md-6': (listTile.show), 'col-md-12': (!listTile.show)}">
-          <jem-add-tile (jemAddedEvent)="addNewJem($event)"></jem-add-tile>
+          <jem-add-tile (jemAddedEvent)="addNewJem($event)"  ></jem-add-tile>
           <jem-update-tile ></jem-update-tile>
           <jem-collection-tile></jem-collection-tile>
         </div>
