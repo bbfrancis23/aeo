@@ -1,31 +1,26 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { RouterModule} from '@angular/router';
-import { FormsModule }   from '@angular/forms';
+import { BrowserModule }  from '@angular/platform-browser';
+import { FormsModule }    from '@angular/forms';
+import { HttpModule}      from '@angular/http';
+import { NgbModule }      from '@ng-bootstrap/ng-bootstrap';
+import { NgModule }       from '@angular/core';
+import { RouterModule}    from '@angular/router';
 
-import { AppComponent } from './app.component';
-import {AeoHeaderComponent} from './aeo-header.component';
+import { AeoHeaderComponent }               from './aeo-header.component';
+import { AppComponent }                     from './app.component';
+import { FilterTileComponent }              from './dash-board/filter-tile.component';
+import { IntroTileComponent }               from './dash-board/intro-tile.component';
+import { ItemControlsComponent }            from './dash-board/item-controls.component';
+import { JemAddTileComponent }              from './jems/jem-add-tile.component';
+import { JemDashBoardComponent }            from './jems/jem-dash-board.component';
+import { JemListTileComponent }             from './jems/jem-list-tile.component';
+import { JemUpdateTileComponent }           from './jems/jem-update-tile.component';
+import { JemCollectionTileComponent }       from './jems/jem-collection-tile.component';
+import { SizedItemsTileControlsComponent }  from './dash-board/sized-items-tile-controls.component';
+import { TileControlsComponent }            from './dash-board/tile-controls.component';
 
-
-import {HttpModule} from '@angular/http';
-import {DataService} from './data.service';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
-import { CollectionService } from './collection.service';
-import { JemService } from './jems/jem.service';
-
-import { JemDashBoardComponent } from './jems/jem-dash-board.component';
-import { IntroTileComponent } from './dash-board/intro-tile.component';
-import { JemListTileComponent } from './jems/jem-list-tile.component';
-import { FilterTileComponent } from './dash-board/filter-tile.component';
-import { JemAddTileComponent } from './jems/jem-add-tile.component';
-import { JemUpdateTileComponent } from './jems/jem-update-tile.component';
-import { JemCollectionTileComponent} from './jems/jem-collection-tile.component';
-import { TileControlsComponent } from './dash-board/tile-controls.component';
-import { SizedItemsTileControlsComponent } from './dash-board/sized-items-tile-controls.component';
-import { ItemControlsComponent } from './dash-board/item-controls.component';
-
-
+import { CollectionService }  from './collection.service';
+import { DataService }        from './data.service';
+import { JemService }         from './jems/jem.service';
 
 @NgModule({
   declarations: [
@@ -43,9 +38,10 @@ import { ItemControlsComponent } from './dash-board/item-controls.component';
     ItemControlsComponent
   ],
   imports: [
-    NgbModule.forRoot(),
-    FormsModule,
     BrowserModule,
+    FormsModule,
+    HttpModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot([
       {
         path: 'code-jems',
@@ -63,12 +59,10 @@ import { ItemControlsComponent } from './dash-board/item-controls.component';
         path: 'code-jems/tech/:tech/type/:type',
         component: JemDashBoardComponent
       }
-
     ]),
-    HttpModule,
   ],
   providers: [
-    DataService, CollectionService, JemService
+     CollectionService, DataService, JemService
   ],
   bootstrap: [AppComponent]
 })
