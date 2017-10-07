@@ -9,14 +9,14 @@ import { Utilities } from '../utilities';
 
 @Component({
   selector: 'dash-board',
-  template: '',
-  providers: [Utilities]
+  template: ''
 })
 export class DashBoardComponent implements AfterContentInit{
 
   config: any= {}
 
-  constructor(private route: ActivatedRoute,private utils: Utilities){}
+  constructor(private route: ActivatedRoute,private utils: Utilities){
+  }
 
   @ViewChild(IntroTileComponent) introTile;
   @ViewChild(FilterTileComponent) filterTile;

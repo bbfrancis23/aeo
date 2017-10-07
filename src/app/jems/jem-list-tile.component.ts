@@ -11,20 +11,8 @@ import { DataService} from '../data.service';
     <h4>Jems List</h4>
     <sized-items-tile-controls [title]="'Jems List'" (hideTileEvent)="show=false" (toggleItemSizeEvent)="showBig = !showBig" ></sized-items-tile-controls>
 
-    <div class="tile" *ngIf="showBig" >
-      <div  class="card mb-3" *ngFor="let jem of items"
-            [ngClass]="{  'border-success': jem.type === 'Best Practices',
-                          'border-danger': jem.type === 'Mistakes',
-                          'border-info': jem.type === 'How to'}">
-        <item-controls (deleteItemEvent)="deleteItem(jem._id)" (updateItemEvent)="selectItem(jem._id)"></item-controls>
-        <div class="card-body">
-          <h4 class="card-title">{{jem.title}}</h4>
-          <h5>{{jem.tech}}</h5>
-          <h5><span class="badge" [ngClass]="{'badge-success':jem.type === 'Best Practices', 'badge-danger': jem.type === 'Mistakes', 'badge-info': jem.type === 'How to'}" >{{jem.type}}</span></h5>
-          <p class="card-text">{{jem.description}}</p>
-          <pre style="background-color: black; color:white; padding: 10px;">{{jem.code}}<br></pre>
-        </div>
-      </div>
+    <div class="tile"  *ngIf="showBig" >
+      <jem *ngFor="let jem of items" [jem]="jem"></jem>
     </div>
 
     <div class="tile" *ngIf=!showBig>
@@ -41,7 +29,9 @@ export class JemListTileComponent extends ListTileComponent{
 
   collection =  'jems';
 
-  constructor( private ds: DataService){super(ds);}
+  constructor( private ds: DataService){
+    super(ds);
+  }
 
 
 }

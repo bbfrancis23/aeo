@@ -6,8 +6,9 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class DataService {
 
+  grot = 'your...';
   result:any;
-  private url = 'api/';
+  public url = 'api/';
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private _http: Http) { }

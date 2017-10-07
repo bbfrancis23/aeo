@@ -18,10 +18,12 @@ import { JemUpdateTileComponent } from './jems/jem-update-tile.component';
 import { JemCollectionTileComponent } from './jems/jem-collection-tile.component';
 import { SizedItemsTileControlsComponent } from './dash-board/sized-items-tile-controls.component';
 import { TileControlsComponent } from './dash-board/tile-controls.component';
+import { JemComponent} from './jems/jem.component';
 
 import { CollectionService } from './collection.service';
 import { DataService } from './data.service';
 import { JemService } from './jems/jem.service';
+import { Utilities } from './utilities';
 
 @NgModule({
   imports: [
@@ -34,6 +36,7 @@ import { JemService } from './jems/jem.service';
   declarations: [
     AppComponent,
     AeoHeaderComponent,
+    JemComponent,
     JemDashBoardComponent,
     IntroTileComponent,
     JemListTileComponent,
@@ -47,7 +50,7 @@ import { JemService } from './jems/jem.service';
   ],
 
   providers: [
-    CollectionService, DataService, JemService
+    CollectionService, DataService, JemService, Utilities
   ],
   bootstrap: [AppComponent]
 })

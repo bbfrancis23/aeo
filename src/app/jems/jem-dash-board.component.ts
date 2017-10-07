@@ -9,13 +9,13 @@ import { JemCollectionTileComponent } from './jem-collection-tile.component';
 import { Field } from '../dash-board/field';
 import { ActivatedRoute } from "@angular/router";
 import { Utilities } from '../utilities';
+import { DataService } from '../data.service';
 
 'use strict';
 
 @Component({
   selector: 'jem-dash-board',
-  templateUrl: './jem-dash-board.component.html',
-  providers: [Utilities]
+  templateUrl: './jem-dash-board.component.html'
 })
 export class JemDashBoardComponent extends DashBoardComponent implements AfterContentInit, OnInit{
 
@@ -37,9 +37,8 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
   @ViewChild(JemUpdateTileComponent) updateTile;
   @ViewChild(JemCollectionTileComponent) collectionTile;
 
-  constructor(private jemService: JemService, private r: ActivatedRoute, private u: Utilities){
+  constructor(private jemService: JemService, private r: ActivatedRoute, private u: Utilities, private dataService: DataService){
     super(r,u);
-
   }
 
   ngOnInit():void{
