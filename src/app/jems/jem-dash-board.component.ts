@@ -10,6 +10,7 @@ import { Field } from '../dash-board/field';
 import { ActivatedRoute } from "@angular/router";
 import { Utilities } from '../utilities';
 import { DataService } from '../data.service';
+import {Observable} from 'rxjs/Observable';
 
 'use strict';
 
@@ -30,12 +31,16 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
     ]
   }
 
-  jems: Jem[];
+  jems: any[];
   selectedJem: Jem;
   @ViewChild(JemListTileComponent) listTile;
   @ViewChild(JemAddTileComponent) addTile;
   @ViewChild(JemUpdateTileComponent) updateTile;
   @ViewChild(JemCollectionTileComponent) collectionTile;
+
+  message:string = "";
+  oJems: Jem[] = [];
+
 
   constructor(private jemService: JemService, private r: ActivatedRoute, private u: Utilities, private dataService: DataService){
     super(r,u);
@@ -43,6 +48,8 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
 
   ngOnInit():void{
     this.getJems();
+
+
   }
 
   getJems(){
@@ -80,6 +87,9 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
 
   ngAfterContentInit() {
     this.initConfig();
+
+    this.jemService.currentMessage.subscribe(message => this.message = message);
+    this.jemService.currentJems.subscribe(jems => this.oJems = jems);
   }
 
 

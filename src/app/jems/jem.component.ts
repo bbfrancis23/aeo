@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
         [ngClass]="{  'border-success': jem.type === 'Best Practices',
                       'border-danger': jem.type === 'Mistakes',
                       'border-info': jem.type === 'How to'}">
-    <item-controls (deleteItemEvent)="deleteItem(jem._id)" (updateItemEvent)="selectItem(jem._id)"></item-controls>
+    <item-controls (deleteItemEvent)="deleteItem(jem._id)" ></item-controls>
     <div class="card-body">
       <h4 class="card-title">{{jem.title}}</h4>
       <h5>{{jem.tech}}</h5>

@@ -20,6 +20,9 @@ export class ListTileComponent extends DashBoardTileComponent{
   constructor( private dataService: DataService){super();}
 
   selectItem(id:string):void{
+
+    console.log("You selected an item");
+
     if(id){
       this.selectItemEvent.emit(id);
     }

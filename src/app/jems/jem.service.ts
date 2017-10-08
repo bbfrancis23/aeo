@@ -2,24 +2,50 @@ import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
+import { DashBoardService } from '../dash-board/dash-board.service';
 
 import { Jem } from './jem';
 
 @Injectable()
-export class JemService{
+export class JemService extends DashBoardService{
 
-  private headers = new Headers({'Content-Type': 'application/json'});
-  private jemUrl = 'api/jems';
+  
+  ////////////////////////////////////////////
 
-  constructor(private http: Http){}
+  private messageSource = new BehaviorSubject<string>("default message");
+  currentMessage = this.messageSource.asObservable();
 
-  /*getCollectionByName(name: string): Promise<Collection>{
-    const url = `${this.collectionUrl}/${name}`;
-    let result = this.http.get(url).toPromise().then((response) =>{ let r = response.json().data as Collection; return r;}).catch(this.handleError);
-    return result;
-  }*/
+  changeMessage(message: string) {
+     this.messageSource.next(message)
+   }
+   /////////////////////////////////////////////
+
+   private readonly headers = new Headers({'Content-Type': 'application/json'});
+   private readonly jemUrl = 'api/jems'; // todo this should be configed
+
+   private jemsSource = new BehaviorSubject<Jem[]>([]);
+   currentJems = this.jemsSource.asObservable();
+
+   changeJems( jems: Jem[] ){ this.jemsSource.next( jems ); }
+
+
+
+
+
+
+  constructor(private http: Http){super()}
+
+
+  refesh(){
+    let jems = this.http.get(this.jemUrl).toPromise().then(response => response.json().data as Jem[]);
+    jems.then(jems=> this.changeJems(jems));
+
+  }
 
   getJems(): Promise<Jem[]>{
+
     return this.http.get(this.jemUrl).toPromise().then(response => response.json().data as Jem[]);
   }
 
