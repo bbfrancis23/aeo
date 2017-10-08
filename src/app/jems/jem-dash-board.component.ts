@@ -88,8 +88,10 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
   ngAfterContentInit() {
     this.initConfig();
 
-    this.jemService.currentMessage.subscribe(message => this.message = message);
-    this.jemService.currentJems.subscribe(jems => this.oJems = jems);
+    this.jemService.refresh();
+    this.jemService.currentItems.subscribe(items => this.oJems = items);
+
+    console.log(this.oJems);
   }
 
 

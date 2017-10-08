@@ -13,7 +13,7 @@ import { Jem } from './jem';
     <div class="tile" [hidden]="!show"  >
     <h4>Jems List</h4>
     <sized-items-tile-controls [title]="'Jems List'" (hideTileEvent)="show=false" (toggleItemSizeEvent)="showBig = !showBig" ></sized-items-tile-controls>
-    
+
     <div class="tile"  *ngIf="showBig" >
       <jem *ngFor="let jem of items" [jem]="jem" (updateItemEvent)="selectItem(jem._id)"></jem>
     </div>
@@ -39,17 +39,10 @@ export class JemListTileComponent extends ListTileComponent implements OnInit{
     super(ds);
   }
 
-  clickme(){
 
-  }
 
   ngOnInit() {
-    this.jemService.currentMessage.subscribe(message => this.message = message)
-  }
 
-  newMessage() {
-    this.jemService.changeMessage("Hello from Sibling");
-    this.jemService.refesh();
   }
 
 }

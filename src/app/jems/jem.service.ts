@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Config } from '../dash-board/config';
 import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
@@ -11,7 +12,19 @@ import { Jem } from './jem';
 @Injectable()
 export class JemService extends DashBoardService{
 
-  
+  private readonly headers = new Headers({'Content-Type': 'application/json'});
+  protected config: Config = {
+    title: 'Code Jems',
+    name: 'jems',
+    intro: "Short-cut keys, Best Practices, How to and Mistakes. Code Jems,  it's all here",
+    img: "assets/img/code-jems.jpg",
+
+    fieldsRaw: [
+      {name: 'tech', values: [ 'Angular 4', 'CSS', 'Express', 'Git', 'HTML', 'JavaScript', 'Less', 'MongoDB', 'Mean Stack', 'NodeJS', 'TypeScript' ]},
+      {name: 'type', values: [ 'Best Practices', 'How to',  'Mistakes', 'Short-Cut Keys', 'Style Guide']}
+    ],
+    fields: []
+  }
   ////////////////////////////////////////////
 
   private messageSource = new BehaviorSubject<string>("default message");
@@ -22,27 +35,19 @@ export class JemService extends DashBoardService{
    }
    /////////////////////////////////////////////
 
-   private readonly headers = new Headers({'Content-Type': 'application/json'});
-   private readonly jemUrl = 'api/jems'; // todo this should be configed
+
+   private readonly jemUrl = `api/${this.config.name}`; // todo this should be configed
 
    private jemsSource = new BehaviorSubject<Jem[]>([]);
    currentJems = this.jemsSource.asObservable();
 
    changeJems( jems: Jem[] ){ this.jemsSource.next( jems ); }
 
+   constructor(private http: Http){super(http)}
 
 
 
-
-
-  constructor(private http: Http){super()}
-
-
-  refesh(){
-    let jems = this.http.get(this.jemUrl).toPromise().then(response => response.json().data as Jem[]);
-    jems.then(jems=> this.changeJems(jems));
-
-  }
+  
 
   getJems(): Promise<Jem[]>{
 
