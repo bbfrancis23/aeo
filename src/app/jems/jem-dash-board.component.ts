@@ -53,15 +53,15 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
   ngOnInit(): void {
     //this.getJems();
 
-    this.jemService.init();
-    this.jemService.currentItems.subscribe(items => {
-      this.jems = items;
-      this.selectedJem = this.jems[0];
-      //this.filterTile.items = this.jems;
-      this.filterTile.itemsFiltered = this.jems;
-      //this.updateTile.model = this.selectedJem;
-      this.filterTile.filter();
-    });
+    //this.jemService.init();
+    //this.jemService.currentItems.subscribe(items => {
+    //  this.jems = items;
+    //  this.selectedJem = this.jems[0];
+    //this.filterTile.items = this.jems;
+    //  this.filterTile.itemsFiltered = this.jems;
+    //this.updateTile.model = this.selectedJem;
+    //  this.filterTile.filter();
+    //});
 
 
 
@@ -111,7 +111,7 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
   }
 
 
-
+  /*
   toggleFilterTile(): void {
     if (this.filterTile.show === true) {
       this.filterTile.show = false
@@ -129,7 +129,7 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
       this.listTile.show = true;
     }
   }
-
+  //*/
   addNewJem($event): void {
     if ($event) {
       //this.getJems();
