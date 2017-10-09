@@ -56,6 +56,23 @@ export class DashBoardService {
 
   }
 
+  delete(id: string): string {
+
+    let url = `api/${this.config.name}/${id}`
+
+    //console.log(url);
+
+    this.httpG.delete(url).toPromise().then((response) => {
+      //console.log(response);
+    });
+
+    this.refresh();
+
+    //console.log(response);
+
+    return 'success';
+  }
+
   filter(): void {
 
     //this.itemsFiltered = this.items;
