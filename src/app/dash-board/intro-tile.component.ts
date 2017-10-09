@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { DashBoardTileComponent} from './dash-board-tile.component';
+import { DashBoardTileComponent } from './dash-board-tile.component';
 
 'use strict';
 
 @Component({
   selector: 'intro-tile',
   template:
-    ` <div class="card border-primary tile" *ngIf="show" >
+  ` <div class="card border-primary tile" *ngIf="show" >
         <img class="card-img-top" [src]="img" alt="{{title}}">
         <div class="tile-controls"><a class="material-icons tile-item" (click)="show=false;" >clear</a></div>
         <div class="card-block p-3">
@@ -15,5 +15,5 @@ import { DashBoardTileComponent} from './dash-board-tile.component';
         </div>
       </div>`
 })
-export class IntroTileComponent extends DashBoardTileComponent{
+export class IntroTileComponent extends DashBoardTileComponent {
 }

@@ -10,7 +10,7 @@ import { Field } from '../dash-board/field';
 import { ActivatedRoute } from "@angular/router";
 import { Utilities } from '../utilities';
 import { DataService } from '../data.service';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 
 'use strict';
 
@@ -18,16 +18,16 @@ import {Observable} from 'rxjs/Observable';
   selector: 'jem-dash-board',
   templateUrl: './jem-dash-board.component.html'
 })
-export class JemDashBoardComponent extends DashBoardComponent implements AfterContentInit, OnInit{
+export class JemDashBoardComponent extends DashBoardComponent implements AfterContentInit, OnInit {
 
-  config: any= {
+  config: any = {
     title: 'Code Jems',
     intro: "Short-cut keys, Best Practices, How to and Mistakes. Code Jems,  it's all here",
     img: "assets/img/code-jems.jpg",
 
     fields: [
-      {name: 'tech', values: [ 'Angular 4', 'CSS', 'Express', 'Git', 'HTML', 'JavaScript', 'Less', 'MongoDB', 'Mean Stack', 'NodeJS', 'TypeScript' ]},
-      {name: 'type', values: [ 'Best Practices', 'How to',  'Mistakes', 'Short-Cut Keys', 'Style Guide']}
+      { name: 'tech', values: ['Angular 4', 'CSS', 'Express', 'Git', 'HTML', 'JavaScript', 'Less', 'MongoDB', 'Mean Stack', 'NodeJS', 'TypeScript'] },
+      { name: 'type', values: ['Best Practices', 'How to', 'Mistakes', 'Short-Cut Keys', 'Style Guide'] }
     ]
   }
 
@@ -38,14 +38,14 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
   @ViewChild(JemUpdateTileComponent) updateTile;
   @ViewChild(JemCollectionTileComponent) collectionTile;
 
-  message:string = "";
+  message: string = "";
 
 
-  constructor(private jemService: JemService, private r: ActivatedRoute, private u: Utilities, private dataService: DataService){
-    super(r,u);
+  constructor(private jemService: JemService, private r: ActivatedRoute, private u: Utilities, private dataService: DataService) {
+    super(r, u, jemService);
   }
 
-  ngOnInit():void{
+  ngOnInit(): void {
     //this.getJems();
 
     this.jemService.refresh();
@@ -62,27 +62,27 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
 
   }
 
-/*
-  getJems(){
-    this.jemService.getJems().then((jems) => {
-      this.jems = jems;
-      this.selectedJem = this.jems[0];
-      this.filterTile.items = jems;
-      this.filterTile.itemsFiltered = jems;
-      this.updateTile.model = this.selectedJem;
-      this.filterTile.filter();
+  /*
+    getJems(){
+      this.jemService.getJems().then((jems) => {
+        this.jems = jems;
+        this.selectedJem = this.jems[0];
+        this.filterTile.items = jems;
+        this.filterTile.itemsFiltered = jems;
+        this.updateTile.model = this.selectedJem;
+        this.filterTile.filter();
 
-    });
-  }
-// */
+      });
+    }
+  // */
 
-  selectJem(id:string):void{
+  selectJem(id: string): void {
 
 
 
-    let i  = 0;
-    if(id){
-      i = this.jems.findIndex( jem => jem._id === id);
+    let i = 0;
+    if (id) {
+      i = this.jems.findIndex(jem => jem._id === id);
 
     }
 
@@ -107,26 +107,26 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
 
 
 
-  toggleFilterTile():void{
-    if(this.filterTile.show === true){
+  toggleFilterTile(): void {
+    if (this.filterTile.show === true) {
       this.filterTile.show = false
-    }else{
+    } else {
       this.filterTile.show = true;
       this.listTile.show = true;
     }
   }
 
-  toggleListTile():void{
-    if(this.listTile.show){
+  toggleListTile(): void {
+    if (this.listTile.show) {
       this.filterTile.show = false;
       this.listTile.show = false;
-    }else{
+    } else {
       this.listTile.show = true;
     }
   }
 
-  addNewJem($event):void{
-    if($event){
+  addNewJem($event): void {
+    if ($event) {
       //this.getJems();
     }
   }
