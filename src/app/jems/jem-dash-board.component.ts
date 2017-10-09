@@ -11,6 +11,9 @@ import { ActivatedRoute } from "@angular/router";
 import { Utilities } from '../utilities';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs/Observable';
+import { JEM_CONFIG } from './jem-config';
+import { DashBoardService } from '../dash-board/dash-board.service';
+
 
 'use strict';
 
@@ -41,8 +44,11 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
   message: string = "";
 
 
-  constructor(private jemService: JemService, private r: ActivatedRoute, private u: Utilities, private dataService: DataService) {
+  constructor(private jemService: JemService, private r: ActivatedRoute, private u: Utilities, private dataService: DataService, private data: DashBoardService) {
     super(r, u, jemService);
+    data.config = JEM_CONFIG;
+
+    console.log(data.config);
   }
 
   ngOnInit(): void {
