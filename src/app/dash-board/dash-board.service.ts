@@ -1,24 +1,29 @@
-import { Config } from './config';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Injectable } from '@angular/core' ;
+
 import { Headers, Http } from '@angular/http';
-import { OnInit } from '@angular/core'
 
-export class DashBoardService implements OnInit{
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-    protected config: Config;
-    private itemsSource = new BehaviorSubject<any[]>([]);
+import { Config } from './config';
+
+@Injectable()
+export class DashBoardService {
+
+    config: Config;
+
+    private itemsSource = new BehaviorSubject<Object[]>([]);
+    private filteredItemsSource = new BehaviorSubject<Object[]>([]);
+    private selectedItemSource = new BehaviorSubject<Object>({})
+
     currentItems = this.itemsSource.asObservable();
 
-    changeItems( items: any[] ){ this.itemsSource.next( items ); }
+    constructor(private httpG: Http){} // todo see if we can get rid of the httpG
 
-    constructor(private httpG: Http){}
-
+    // todo see if there is a way of getting rid of observable => Promise => observable;
     refresh(){
       let items = this.httpG.get(`api/${this.config.name}`).toPromise().then(response => response.json().data);
       items.then(items=> this.changeItems(items));
     }
 
-    ngOnInit(){
-      this.refresh();
-    }
+    changeItems( items: any[] ){ this.itemsSource.next( items ); }
 }

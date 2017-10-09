@@ -21,6 +21,7 @@ import { TileControlsComponent } from './dash-board/tile-controls.component';
 import { JemComponent} from './jems/jem.component';
 
 import { CollectionService } from './collection.service';
+import { DashBoardService } from './dash-board/dash-board.service';
 import { DataService } from './data.service';
 import { JemService } from './jems/jem.service';
 import { Utilities } from './utilities';
@@ -50,7 +51,7 @@ import { Utilities } from './utilities';
   ],
 
   providers: [
-    CollectionService, DataService, JemService, Utilities
+    CollectionService, DashBoardService, DataService, JemService, Utilities
   ],
   bootstrap: [AppComponent]
 })

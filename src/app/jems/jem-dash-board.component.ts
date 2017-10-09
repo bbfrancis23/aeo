@@ -39,7 +39,6 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
   @ViewChild(JemCollectionTileComponent) collectionTile;
 
   message:string = "";
-  oJems: Jem[] = [];
 
 
   constructor(private jemService: JemService, private r: ActivatedRoute, private u: Utilities, private dataService: DataService){
@@ -47,11 +46,23 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
   }
 
   ngOnInit():void{
-    this.getJems();
+    //this.getJems();
+
+    this.jemService.refresh();
+    this.jemService.currentItems.subscribe(items => {
+      this.jems = items;
+      this.selectedJem = this.jems[0];
+      this.filterTile.items = this.jems;
+      this.filterTile.itemsFiltered = this.jems;
+      //this.updateTile.model = this.selectedJem;
+      this.filterTile.filter();
+    });
+
 
 
   }
 
+/*
   getJems(){
     this.jemService.getJems().then((jems) => {
       this.jems = jems;
@@ -63,6 +74,7 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
 
     });
   }
+// */
 
   selectJem(id:string):void{
 
@@ -88,10 +100,9 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
   ngAfterContentInit() {
     this.initConfig();
 
-    this.jemService.refresh();
-    this.jemService.currentItems.subscribe(items => this.oJems = items);
 
-    console.log(this.oJems);
+
+
   }
 
 
@@ -116,7 +127,9 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
 
   addNewJem($event):void{
     if($event){
-      this.getJems();
+      //this.getJems();
     }
   }
+
+
 }

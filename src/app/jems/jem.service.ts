@@ -9,11 +9,13 @@ import { DashBoardService } from '../dash-board/dash-board.service';
 
 import { Jem } from './jem';
 
+import { OnInit, AfterContentInit } from '@angular/core'
+
 @Injectable()
-export class JemService extends DashBoardService{
+export class JemService extends DashBoardService {
 
   private readonly headers = new Headers({'Content-Type': 'application/json'});
-  protected config: Config = {
+  config: Config = {
     title: 'Code Jems',
     name: 'jems',
     intro: "Short-cut keys, Best Practices, How to and Mistakes. Code Jems,  it's all here",
@@ -47,7 +49,7 @@ export class JemService extends DashBoardService{
 
 
 
-  
+
 
   getJems(): Promise<Jem[]>{
 
@@ -85,4 +87,6 @@ export class JemService extends DashBoardService{
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
+
+
 }
