@@ -14,7 +14,7 @@ import { OnInit, AfterContentInit } from '@angular/core'
 @Injectable()
 export class JemService extends DashBoardService {
 
-  private readonly headers = new Headers({'Content-Type': 'application/json'});
+  private readonly headers = new Headers({ 'Content-Type': 'application/json' });
   config: Config = {
     title: 'Code Jems',
     name: 'jems',
@@ -22,8 +22,8 @@ export class JemService extends DashBoardService {
     img: "assets/img/code-jems.jpg",
 
     fieldsRaw: [
-      {name: 'tech', values: [ 'Angular 4', 'CSS', 'Express', 'Git', 'HTML', 'JavaScript', 'Less', 'MongoDB', 'Mean Stack', 'NodeJS', 'TypeScript' ]},
-      {name: 'type', values: [ 'Best Practices', 'How to',  'Mistakes', 'Short-Cut Keys', 'Style Guide']}
+      { name: 'tech', values: ['Angular 4', 'CSS', 'Express', 'Git', 'HTML', 'JavaScript', 'Less', 'MongoDB', 'Mean Stack', 'NodeJS', 'TypeScript'] },
+      { name: 'type', values: ['Best Practices', 'How to', 'Mistakes', 'Short-Cut Keys', 'Style Guide'] }
     ],
     fields: []
   }
@@ -33,36 +33,32 @@ export class JemService extends DashBoardService {
   currentMessage = this.messageSource.asObservable();
 
   changeMessage(message: string) {
-     this.messageSource.next(message)
-   }
-   /////////////////////////////////////////////
+    this.messageSource.next(message)
+  }
+  /////////////////////////////////////////////
 
 
-   private readonly jemUrl = `api/${this.config.name}`; // todo this should be configed
+  private readonly jemUrl = `api/${this.config.name}`; // todo this should be configed
 
-   private jemsSource = new BehaviorSubject<Jem[]>([]);
-   currentJems = this.jemsSource.asObservable();
+  private jemsSource = new BehaviorSubject<Jem[]>([]);
+  currentJems = this.jemsSource.asObservable();
 
-   changeJems( jems: Jem[] ){ this.jemsSource.next( jems ); }
+  changeJems(jems: Jem[]) { this.jemsSource.next(jems); }
 
-   constructor(private http: Http){super(http)}
+  constructor(private http: Http) { super(http) }
 
-
-
-
-
-  getJems(): Promise<Jem[]>{
+  getJems(): Promise<Jem[]> {
 
     return this.http.get(this.jemUrl).toPromise().then(response => response.json().data as Jem[]);
   }
 
-  deleteJem(id:string): string{
+  deleteJem(id: string): string {
 
     let url = `${this.jemUrl}/${id}`
 
     //console.log(url);
 
-    this.http.delete(url).toPromise().then((response)=>{
+    this.http.delete(url).toPromise().then((response) => {
       //console.log(response);
     });
 
@@ -73,14 +69,16 @@ export class JemService extends DashBoardService {
     return 'success';
   }
 
-  createJem(jem: Jem): Promise<Jem>{
+  createJem(jem: Jem): Promise<Jem> {
     //const url = `{$this.jemUrl}`
     return this.http
-     .post(this.jemUrl, JSON.stringify({'jem':jem}), {headers: this.headers})
-     .toPromise()
-     .then((res) => {jem._id = res.json(); //console.log(jem._id, res.json());
-       return jem;})
-     .catch(this.handleError);
+      .post(this.jemUrl, JSON.stringify({ 'jem': jem }), { headers: this.headers })
+      .toPromise()
+      .then((res) => {
+        jem._id = res.json(); //console.log(jem._id, res.json());
+        return jem;
+      })
+      .catch(this.handleError);
   }
 
   private handleError(error: any): Promise<any> {

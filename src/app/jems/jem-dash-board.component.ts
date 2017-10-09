@@ -48,7 +48,7 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
   ngOnInit(): void {
     //this.getJems();
 
-    this.jemService.refresh();
+    this.jemService.init();
     this.jemService.currentItems.subscribe(items => {
       this.jems = items;
       this.selectedJem = this.jems[0];

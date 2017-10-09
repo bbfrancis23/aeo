@@ -5,6 +5,7 @@ import { Headers, Http } from '@angular/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { Config } from './config';
+import { Field } from './field';
 
 @Injectable()
 export class DashBoardService {
@@ -37,4 +38,15 @@ export class DashBoardService {
   changeItems(items: Object[]) { this.itemsSource.next(items) }
   changeFilteredItems(filteredItems: Object[]) { this.filteredItemsSource.next(filteredItems) }
   changeSelectedItem(selectedItem: Object) { this.selectedItemSource.next(selectedItem) }
+
+  init() {
+    this.refresh();
+    this.config.fieldsRaw.forEach(fieldRaw => {
+      let newField: Field = { name: fieldRaw.name, values: [] };
+      fieldRaw.values.forEach(value => newField.values.push({ name: value, filtered: '' }));
+      this.config.fields.push(newField);
+      //this.filterTile.fields.push(newField);
+    });
+
+  }
 }
