@@ -24,9 +24,9 @@ export class DashBoardComponent implements AfterContentInit {
   ngAfterContentInit() { }
 
   initConfig() {
-    this.introTile.title = this.dashBoardService.config.title;
-    this.introTile.intro = this.dashBoardService.config.intro;
-    this.introTile.img = this.dashBoardService.config.img;
+    //this.introTile.title = this.dashBoardService.config.title;
+    //this.introTile.intro = this.dashBoardService.config.intro;
+    //this.introTile.img = this.dashBoardService.config.img;
 
     this.filterTile.fields = this.dashBoardService.config.fields;
 

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DashBoardTileComponent } from './dash-board-tile.component';
+import { DashBoardService } from '../dash-board/dash-board.service';
 
 'use strict';
 
@@ -16,4 +17,12 @@ import { DashBoardTileComponent } from './dash-board-tile.component';
       </div>`
 })
 export class IntroTileComponent extends DashBoardTileComponent {
+
+  title = this.data.config.title;
+  intro = this.data.config.intro;
+  img = this.data.config.img;
+
+  constructor(private data: DashBoardService) {
+    super();
+  }
 }

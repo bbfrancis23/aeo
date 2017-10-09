@@ -7,6 +7,8 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Config } from './config';
 import { Field } from './field';
 
+'use strict';
+
 @Injectable()
 export class DashBoardService {
 
@@ -14,7 +16,7 @@ export class DashBoardService {
 
   private itemsSource = new BehaviorSubject<Object[]>([]);
   private filteredItemsSource = new BehaviorSubject<Object[]>([]);
-  private selectedItemSource = new BehaviorSubject<Object>({})
+  private selectedItemSource = new BehaviorSubject<Object>({});
 
   currentItems = this.itemsSource.asObservable();
   currentFilteredItems = this.filteredItemsSource.asObservable();
