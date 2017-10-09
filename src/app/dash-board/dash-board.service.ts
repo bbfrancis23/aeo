@@ -17,6 +17,7 @@ export class DashBoardService {
   private itemsSource = new BehaviorSubject<Object[]>([]);
   private filteredItemsSource = new BehaviorSubject<Object[]>([]);
   private selectedItemSource = new BehaviorSubject<Object>({});
+  private readonly headers = new Headers({ 'Content-Type': 'application/json' });
 
   currentItems = this.itemsSource.asObservable();
   currentFilteredItems = this.filteredItemsSource.asObservable();
@@ -54,6 +55,21 @@ export class DashBoardService {
       //this.filterTile.fields.push(newField);
     });
 
+  }
+
+  create(item: any): Promise<any> {
+    const url = `api/${this.config.name}`;
+    //let json = {'jem': item};
+    let something = JSON.stringify({ 'jem': item });
+    //return item;
+    return this.httpG
+      .post(url, something, { headers: this.headers })
+      .toPromise()
+      .then((res) => {
+      item._id = res.json(); //console.log(jem._id, res.json());
+        return item;
+      })
+      .catch(this.handleError);
   }
 
   delete(id: string): string {
@@ -101,5 +117,10 @@ export class DashBoardService {
     this.changeFilteredItems(itemsFiltered);
 
     //this.updateUrl();
+  }
+
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
   }
 }

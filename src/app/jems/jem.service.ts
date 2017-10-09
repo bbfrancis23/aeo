@@ -14,7 +14,7 @@ import { OnInit, AfterContentInit } from '@angular/core'
 @Injectable()
 export class JemService extends DashBoardService {
 
-  private readonly headers = new Headers({ 'Content-Type': 'application/json' });
+  //private readonly headers = new Headers({ 'Content-Type': 'application/json' });
   config: Config = {
     title: 'Code Jems',
     name: 'jems',
@@ -69,22 +69,22 @@ export class JemService extends DashBoardService {
     return 'success';
   }
 
-  createJem(jem: Jem): Promise<Jem> {
-    //const url = `{$this.jemUrl}`
-    return this.http
-      .post(this.jemUrl, JSON.stringify({ 'jem': jem }), { headers: this.headers })
-      .toPromise()
-      .then((res) => {
-        jem._id = res.json(); //console.log(jem._id, res.json());
-        return jem;
-      })
-      .catch(this.handleError);
-  }
+  //createJem(jem: Jem): Promise<Jem> {
+  //const url = `{$this.jemUrl}`
+  //  return this.http
+  //    .post(this.jemUrl, JSON.stringify({ 'jem': jem }), { headers: this.headers })
+  //    .toPromise()
+  //    .then((res) => {
+  //      jem._id = res.json(); //console.log(jem._id, res.json());
+  //      return jem;
+  //    })
+  //    .catch(this.handleError);
+  //}
 
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
-  }
+  //private handleError(error: any): Promise<any> {
+  //  console.error('An error occurred', error); // for demo purposes only
+  //  return Promise.reject(error.message || error);
+  //  }
 
 
 }

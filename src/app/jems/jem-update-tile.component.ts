@@ -1,7 +1,6 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { DashBoardTileComponent} from '../dash-board/dash-board-tile.component';
-import { Jem } from './jem';
-import { DataService} from '../data.service'
+import { Component } from '@angular/core';
+import { DashBoardTileComponent } from '../dash-board/dash-board-tile.component';
+import { DashBoardService } from '../dash-board/dash-board.service';
 
 'use strict';
 
@@ -9,20 +8,21 @@ import { DataService} from '../data.service'
   selector: 'jem-update-tile',
   templateUrl: './jem-form.component.html'
 })
-export class JemUpdateTileComponent extends DashBoardTileComponent{
+export class JemUpdateTileComponent extends DashBoardTileComponent {
   function = "Update";
-  model: Jem = new Jem();
-  submitted = false
+  model: Object = {};
+  submitted = false;
 
-  @Output() jemUpdatedEvent = new EventEmitter<Jem>();
-
-
-  onSubmit():void{
-    this.dataService.create(this.model,'jems','jem').then((jem)=>{});
+  onSubmit(): void {
+    this.data.create(this.model).then((jem) => { });
+    this.data.refresh();
     this.submitted = true;
   }
 
-  constructor(private dataService: DataService){super(); }
+  constructor(private data: DashBoardService) {
+    super();
+    data.currentSelectedItem.subscribe(selectedItem => this.model = selectedItem);
+  }
 
 
 }

@@ -7,9 +7,9 @@ import 'rxjs/add/operator/map';
 export class DataService {
 
   grot = 'your...';
-  result:any;
+  result: any;
   public url = 'api/';
-  private headers = new Headers({'Content-Type': 'application/json'});
+  public headers = new Headers({ 'Content-Type': 'application/json' });
 
   constructor(private _http: Http) { }
 
@@ -18,31 +18,33 @@ export class DataService {
       .map(result => this.result = result.json().data);
   }
 
-  create(item: any,collection: string,name:string): Promise<any>{
+  create(item: any, collection: string, name: string): Promise<any> {
     const url = `${this.url}${collection}`;
     //let json = {'jem': item};
-    let something = JSON.stringify({[name] :item});
+    let something = JSON.stringify({ [name]: item });
     //return item;
     return this._http
-     .post(url, something, {headers: this.headers})
-     .toPromise()
-     .then((res) => {item._id = res.json(); //console.log(jem._id, res.json());
-       return item;})
-     .catch(this.handleError);
+      .post(url, something, { headers: this.headers })
+      .toPromise()
+      .then((res) => {
+        item._id = res.json(); //console.log(jem._id, res.json());
+        return item;
+      })
+      .catch(this.handleError);
   }
 
-  private handleError(error: any): Promise<any> {
+  public handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
 
-  delete(id:string, collection:string): string{
+  delete(id: string, collection: string): string {
 
     let url = `${this.url}/${collection}/${id}`
 
     console.log(url);
 
-    this._http.delete(url).toPromise().then((response)=>{
+    this._http.delete(url).toPromise().then((response) => {
       console.log(response);
     });
 
