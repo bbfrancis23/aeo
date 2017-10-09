@@ -1,10 +1,9 @@
+import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AppRoutingModule } from './app-routing.module';
 
 import { AeoHeaderComponent } from './aeo-header.component';
 import { AppComponent } from './app.component';
@@ -18,7 +17,8 @@ import { JemUpdateTileComponent } from './jems/jem-update-tile.component';
 import { JemCollectionTileComponent } from './jems/jem-collection-tile.component';
 import { SizedItemsTileControlsComponent } from './dash-board/sized-items-tile-controls.component';
 import { TileControlsComponent } from './dash-board/tile-controls.component';
-import { JemComponent} from './jems/jem.component';
+import { JemComponent } from './jems/jem.component';
+import { JemSmallComponent } from './jems/jem-sm.component';
 
 import { CollectionService } from './collection.service';
 import { DashBoardService } from './dash-board/dash-board.service';
@@ -32,24 +32,23 @@ import { Utilities } from './utilities';
     BrowserModule,
     FormsModule,
     HttpModule,
-    NgbModule.forRoot()
   ],
   declarations: [
     AppComponent,
     AeoHeaderComponent,
+    FilterTileComponent,
+    IntroTileComponent,
+    ItemControlsComponent,
+    JemAddTileComponent,
+    JemCollectionTileComponent,
     JemComponent,
     JemDashBoardComponent,
-    IntroTileComponent,
     JemListTileComponent,
-    FilterTileComponent,
-    JemAddTileComponent,
+    JemSmallComponent,
     JemUpdateTileComponent,
-    JemCollectionTileComponent,
-    TileControlsComponent,
     SizedItemsTileControlsComponent,
-    ItemControlsComponent
+    TileControlsComponent
   ],
-
   providers: [
     CollectionService, DashBoardService, DataService, JemService, Utilities
   ],

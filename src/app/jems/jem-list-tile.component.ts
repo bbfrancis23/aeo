@@ -21,11 +21,7 @@ import { DashBoardService } from '../dash-board/dash-board.service';
     </div>
 
     <div class="tile" *ngIf=!showBig>
-      <div class="card p-1 text-white" *ngFor="let jem of items" [ngClass]="{'bg-success': jem.type === 'Best Practices', 'bg-danger': jem.type === 'Mistakes', 'bg-info': jem.type === 'How to'}" style="margin-bottom: 5px">
-        <item-controls (deleteItemEvent)="deleteItem(jem._id)"  (updateItemEvent)="selectItem(jem._id)"></item-controls>
-          <p><b>{{jem.title}}: </b> {{jem.description}}</p>
-          <pre>{{jem.code}}</pre>
-      </div>
+      <jem-sm *ngFor="let jem of items" [jem]="jem" (updateItemEvent)="selectItem(jem._id)"></jem-sm>
     </div>
 
   </div>`,
