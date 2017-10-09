@@ -5,6 +5,8 @@ import { DataService } from '../data.service';
 import { JemService } from './jem.service';
 import { Jem } from './jem';
 
+import { DashBoardService } from '../dash-board/dash-board.service';
+
 "use strict";
 
 @Component({
@@ -35,14 +37,14 @@ export class JemListTileComponent extends ListTileComponent implements OnInit {
 
   message: string;
 
-  constructor(private ds: DataService, private jemService: JemService) {
+  constructor(private ds: DataService, private jemService: JemService, private data: DashBoardService) {
     super(ds);
   }
 
 
 
   ngOnInit() {
-    this.jemService.currentFilteredItems.subscribe(filteredItems => {
+    this.data.currentFilteredItems.subscribe(filteredItems => {
       this.items = filteredItems;
     })
 

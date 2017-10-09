@@ -27,9 +27,13 @@ export class DashBoardService {
   // todo see if there is a way of getting rid of observable => Promise => observable;
   // todo add filtering in here
   refresh() {
+
     let items = this.httpG.get(`api/${this.config.name}`).toPromise().then(response => response.json().data);
     items.then(items => {
       this.changeItems(items);
+
+
+
       this.changeFilteredItems(items);
       this.currentItems.subscribe(items => {
         this.changeSelectedItem(items[0]);
@@ -50,5 +54,35 @@ export class DashBoardService {
       //this.filterTile.fields.push(newField);
     });
 
+  }
+
+  filter(): void {
+
+    //this.itemsFiltered = this.items;
+
+    let itemsFiltered: Object[];
+    this.currentItems.subscribe(items => {
+      itemsFiltered = items;
+
+      this.config.fields.forEach(field => {
+        let filtered = [], filters: String[] = [];
+
+        field.values.forEach(value => { if (value.filtered) filters.push(value.name) });
+
+        if (filters.length > 0) {
+          filters.forEach(filter => {
+            itemsFiltered.forEach(item => {
+              if (item[field.name] === filter) filtered.push(item);
+            });
+          });
+          itemsFiltered = filtered;
+        }
+      });
+
+    });
+
+    this.changeFilteredItems(itemsFiltered);
+
+    //this.updateUrl();
   }
 }

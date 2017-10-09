@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { DashBoardTileComponent } from './dash-board-tile.component';
 import { Field } from './field';
 import { Location } from '@angular/common';
+import { DashBoardService } from './dash-board.service';
 
 'use strict';
 
@@ -15,20 +16,23 @@ import { Location } from '@angular/common';
           <div *ngFor="let field of fields">
             <b><p>{{field.name}}:</p></b>
 
-            <div type="checkbox" *ngFor="let value of field.values" ><input type="checkbox" [(ngModel)]="value.filtered"  (change)="filter()"> {{value.name}}</div><hr>
+            <div type="checkbox" *ngFor="let value of field.values" ><input type="checkbox" [(ngModel)]="value.filtered"  (change)="data.filter()"> {{value.name}}</div><hr>
           </div>
         </div>
       </div>`,
 })
 export class FilterTileComponent extends DashBoardTileComponent {
 
-  /////////////////////////////// New Filter ////////////////////////////////////////////////////////
   @Input() items: Object[] = [];
   itemsFiltered: Object[] = [];
 
   fields: Field[] = [];
 
-  constructor(private location: Location) { super(); }
+  constructor(private location: Location, private data: DashBoardService) {
+    super();
+
+    this.fields = this.data.config.fields;
+  }
 
 
   filter(): void {
@@ -85,19 +89,7 @@ export class FilterTileComponent extends DashBoardTileComponent {
   }
 
 
-  /*
-  sort(): void {
-    this.items = this.items.sort((a, b) => {
-      var textA = a.title.toUpperCase();
-      var textB = b.title.toUpperCase();
-      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-    });
-  }
 
-
-
-
-  //*/
 
 
 

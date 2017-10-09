@@ -47,8 +47,7 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
   constructor(private jemService: JemService, private r: ActivatedRoute, private u: Utilities, private dataService: DataService, private data: DashBoardService) {
     super(r, u, jemService);
     data.config = JEM_CONFIG;
-
-    console.log(data.config);
+    data.init();
   }
 
   ngOnInit(): void {
@@ -58,7 +57,7 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
     this.jemService.currentItems.subscribe(items => {
       this.jems = items;
       this.selectedJem = this.jems[0];
-      this.filterTile.items = this.jems;
+      //this.filterTile.items = this.jems;
       this.filterTile.itemsFiltered = this.jems;
       //this.updateTile.model = this.selectedJem;
       this.filterTile.filter();

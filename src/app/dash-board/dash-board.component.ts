@@ -28,7 +28,7 @@ export class DashBoardComponent implements AfterContentInit {
     //this.introTile.intro = this.dashBoardService.config.intro;
     //this.introTile.img = this.dashBoardService.config.img;
 
-    this.filterTile.fields = this.dashBoardService.config.fields;
+    //this.filterTile.fields = this.dashBoardService.config.fields;
 
     this.route.params.subscribe((params) => {
       this.filterTile.fields.forEach(field => {
