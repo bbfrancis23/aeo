@@ -7,6 +7,12 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Config } from './config';
 import { Field } from './field';
 
+import { Utilities } from '../utilities';
+
+import { Location } from '@angular/common';
+
+import { ActivatedRoute } from "@angular/router";
+
 'use strict';
 
 @Injectable()
@@ -23,7 +29,7 @@ export class DashBoardService {
   currentFilteredItems = this.filteredItemsSource.asObservable();
   currentSelectedItem = this.selectedItemSource.asObservable();
 
-  constructor(private httpG: Http) { } // todo see if we can get rid of the httpG
+  constructor(private route: ActivatedRoute, private httpG: Http, private utils: Utilities, private location: Location) { } // todo see if we can get rid of the httpG
 
   // todo see if there is a way of getting rid of observable => Promise => observable;
   // todo add filtering in here
@@ -32,13 +38,11 @@ export class DashBoardService {
     let items = this.httpG.get(`api/${this.config.name}`).toPromise().then(response => response.json().data);
     items.then(items => {
       this.changeItems(items);
-
-
-
       this.changeFilteredItems(items);
       this.currentItems.subscribe(items => {
         this.changeSelectedItem(items[0]);
       });
+      this.filter();
     });
   }
 
@@ -50,10 +54,18 @@ export class DashBoardService {
     this.refresh();
     this.config.fieldsRaw.forEach(fieldRaw => {
       let newField: Field = { name: fieldRaw.name, values: [] };
-      fieldRaw.values.forEach(value => newField.values.push({ name: value, filtered: '' }));
+      fieldRaw.values.forEach(value => newField.values.push({ name: value, filtered: false }));
       this.config.fields.push(newField);
-      //this.filterTile.fields.push(newField);
     });
+    //this.filter();
+
+
+    this.route.params.subscribe((params) => {
+      console.log(params);
+    });
+
+    //this.config.fields[0].values[0].filtered = true;
+    //console.log(this.config.fields[0].values[0].filtered);
 
   }
 
@@ -66,7 +78,7 @@ export class DashBoardService {
       .post(url, something, { headers: this.headers })
       .toPromise()
       .then((res) => {
-      item._id = res.json(); //console.log(jem._id, res.json());
+        item._id = res.json(); //console.log(jem._id, res.json());
         return item;
       })
       .catch(this.handleError);
@@ -93,6 +105,8 @@ export class DashBoardService {
 
     //this.itemsFiltered = this.items;
 
+    //console.log('You called filter');
+
     let itemsFiltered: Object[];
     this.currentItems.subscribe(items => {
       itemsFiltered = items;
@@ -116,11 +130,39 @@ export class DashBoardService {
 
     this.changeFilteredItems(itemsFiltered);
 
-    //this.updateUrl();
+    this.updateUrl();
+  }
+
+  private updateUrl(): void {
+
+    let url: string = 'code-jems'; // todo put this in as a config var
+    let qs: string = '';
+    let fieldPaths: String[] = [];
+    let queryStrings = [];
+
+
+    this.config.fields.forEach(field => {
+      let filters = [];
+      field.values.forEach(value => { if (value.filtered) filters.push(value.name) });
+
+      if (filters.length === 1) {
+        fieldPaths.push(`${this.utils.urlify(field.name)}/${this.utils.urlify(filters[0])}`);
+      } else if (filters.length > 1) {
+        queryStrings.push(`${this.utils.urlify(field.name)}=${this.utils.urlify(filters.join(','))}`);
+      }
+    });
+
+    this.location.replaceState(`${url}/${fieldPaths.join('/')}`, `${queryStrings.join('&')}`);
   }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
+
+
+
+
 }
+
+/* Copyright AEO all rights reserved */

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
-@Component({
-  selector: 'dash-board-tile',
-  template: ''
-})
+'use strict';
+
 export class DashBoardTileComponent {
   show = true;
 }
+
+/* copyright AEO all right reserved */

@@ -34,7 +34,7 @@ export class FilterTileComponent extends DashBoardTileComponent {
     this.fields = this.data.config.fields;
   }
 
-
+  /*
   filter(): void {
     this.itemsFiltered = this.items;
 
@@ -54,7 +54,7 @@ export class FilterTileComponent extends DashBoardTileComponent {
 
     this.updateUrl();
   }
-
+  // */
   private updateUrl(): void {
 
     let url: string = 'code-jems'; // todo put this in as a config var

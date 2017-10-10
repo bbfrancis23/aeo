@@ -1,7 +1,7 @@
 import { Component, ViewChild, AfterContentInit, OnInit } from '@angular/core';
 import { DashBoardComponent } from '../dash-board/dash-board.component';
 import { Jem } from './jem';
-import { JemService } from './jem.service';
+//import { JemService } from './jem.service';
 import { JemListTileComponent } from './jem-list-tile.component';
 import { JemAddTileComponent } from './jem-add-tile.component';
 import { JemUpdateTileComponent } from './jem-update-tile.component';
@@ -14,6 +14,8 @@ import { Observable } from 'rxjs/Observable';
 import { JEM_CONFIG } from './jem-config';
 import { DashBoardService } from '../dash-board/dash-board.service';
 
+import { IntroTileComponent } from '../dash-board/intro-tile.component';
+import { FilterTileComponent } from '../dash-board/filter-tile.component';
 
 'use strict';
 
@@ -23,16 +25,7 @@ import { DashBoardService } from '../dash-board/dash-board.service';
 })
 export class JemDashBoardComponent extends DashBoardComponent implements AfterContentInit, OnInit {
 
-  config: any = {
-    title: 'Code Jems',
-    intro: "Short-cut keys, Best Practices, How to and Mistakes. Code Jems,  it's all here",
-    img: "assets/img/code-jems.jpg",
 
-    fields: [
-      { name: 'tech', values: ['Angular 4', 'CSS', 'Express', 'Git', 'HTML', 'JavaScript', 'Less', 'MongoDB', 'Mean Stack', 'NodeJS', 'TypeScript'] },
-      { name: 'type', values: ['Best Practices', 'How to', 'Mistakes', 'Short-Cut Keys', 'Style Guide'] }
-    ]
-  }
 
   jems: any[];
   selectedJem: Jem;
@@ -40,14 +33,16 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
   @ViewChild(JemAddTileComponent) addTile;
   @ViewChild(JemUpdateTileComponent) updateTile;
   @ViewChild(JemCollectionTileComponent) collectionTile;
+  @ViewChild(IntroTileComponent) introTile;
+  @ViewChild(FilterTileComponent) filterTile;
 
   message: string = "";
 
 
-  constructor(private jemService: JemService, private r: ActivatedRoute, private u: Utilities, private dataService: DataService, private data: DashBoardService) {
-    super(r, u, jemService);
+  constructor(private r: ActivatedRoute, private u: Utilities, private dataService: DataService, protected data: DashBoardService) {
+    super(r, u, data);
     data.config = JEM_CONFIG;
-    data.init();
+    this.initConfig();
   }
 
   ngOnInit(): void {
@@ -103,9 +98,6 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
 
 
   ngAfterContentInit() {
-    this.initConfig();
-
-
 
 
   }

@@ -2,5 +2,7 @@
 
 export class FieldRaw {
   name: string = '';
-  values: string [] = [] ;
+  values: string[] = [];
 }
+
+/* Copyright AEO all rights reserved */
