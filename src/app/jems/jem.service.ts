@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+/*import { Injectable } from '@angular/core';
 import { Config } from '../dash-board/config';
 import { Headers, Http } from '@angular/http';
 
@@ -95,3 +95,4 @@ export class JemService extends DashBoardService {
 
 
 }
+//*/

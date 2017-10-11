@@ -16,7 +16,6 @@ export class DashBoardComponent {
 
   configRouteFilters() {
     this.route.params.subscribe((params) => {
-      console.log(params);
       this.data.config.fields.forEach(field => {
         if (params[field.name]) {
           let param = this.utils.unUrlify(params[field.name]);

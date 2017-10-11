@@ -23,7 +23,6 @@ import { JemSmallComponent } from './jems/jem-sm.component';
 import { CollectionService } from './collection.service';
 import { DashBoardService } from './dash-board/dash-board.service';
 import { DataService } from './data.service';
-import { JemService } from './jems/jem.service';
 import { Utilities } from './utilities';
 
 @NgModule({
@@ -50,7 +49,7 @@ import { Utilities } from './utilities';
     TileControlsComponent
   ],
   providers: [
-    CollectionService, DashBoardService, DataService, JemService, Utilities
+    CollectionService, DashBoardService, DataService, Utilities
   ],
   bootstrap: [AppComponent]
 })

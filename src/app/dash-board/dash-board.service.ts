@@ -60,9 +60,7 @@ export class DashBoardService {
     //this.filter();
 
 
-    this.route.params.subscribe((params) => {
-      console.log(params);
-    });
+
 
     //this.config.fields[0].values[0].filtered = true;
     //console.log(this.config.fields[0].values[0].filtered);
