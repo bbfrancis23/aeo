@@ -4,10 +4,12 @@ import { FieldRaw } from './field-raw';
 'use strict'
 
 export class Config {
-  title: string = '';
-  name: string = '';
-  intro: string = '';
-  img: string = '';
+  title = '';
+  name = '';
+  dataLabel = '';
+  directory = '';
+  intro = '';
+  img = '';
 
   fieldsRaw: FieldRaw[] = [];
   fields: Field[] = [];

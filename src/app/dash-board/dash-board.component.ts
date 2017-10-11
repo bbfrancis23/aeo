@@ -7,7 +7,7 @@ import { Utilities } from '../utilities';
 'use strict';
 
 export class DashBoardComponent {
-  constructor(protected route: ActivatedRoute, protected utils: Utilities, protected data: DashBoardService) { }
+  constructor(protected readonly route: ActivatedRoute, protected readonly utils: Utilities, protected readonly data: DashBoardService) { }
 
   initConfig() {
     this.data.init();
@@ -15,7 +15,8 @@ export class DashBoardComponent {
   }
 
   configRouteFilters() {
-    this.route.params.subscribe((params) => {
+
+    this.route.params.subscribe(params => {
       this.data.config.fields.forEach(field => {
         if (params[field.name]) {
           let param = this.utils.unUrlify(params[field.name]);
@@ -24,17 +25,18 @@ export class DashBoardComponent {
       });
     });
 
-    this.route.queryParams.subscribe((params) => {
+    this.route.queryParams.subscribe(params => {
       this.data.config.fields.forEach(field => {
         if (params[field.name]) {
-          let values = params[field.name].split(',');
-          values.forEach((value) => {
+          let values: string[] = params[field.name].split(',');
+          values.forEach(value => {
             let param = this.utils.unUrlify(value);
             field.values[field.values.findIndex(value => value.name.toLowerCase() === param)].filtered = true;
           });
         }
       });
     });
+
   }
 
 }

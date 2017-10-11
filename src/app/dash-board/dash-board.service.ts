@@ -1,17 +1,11 @@
-import { Injectable } from '@angular/core';
-
-import { Headers, Http } from '@angular/http';
-
+import { ActivatedRoute } from "@angular/router";
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-
 import { Config } from './config';
 import { Field } from './field';
-
-import { Utilities } from '../utilities';
-
+import { Injectable } from '@angular/core';
+import { Headers, Http } from '@angular/http';
 import { Location } from '@angular/common';
-
-import { ActivatedRoute } from "@angular/router";
+import { Utilities } from '../utilities';
 
 'use strict';
 
@@ -20,22 +14,26 @@ export class DashBoardService {
 
   config: Config;
 
-  private itemsSource = new BehaviorSubject<Object[]>([]);
-  private filteredItemsSource = new BehaviorSubject<Object[]>([]);
-  private selectedItemSource = new BehaviorSubject<Object>({});
   private readonly headers = new Headers({ 'Content-Type': 'application/json' });
+  api = 'api';
 
-  currentItems = this.itemsSource.asObservable();
-  currentFilteredItems = this.filteredItemsSource.asObservable();
-  currentSelectedItem = this.selectedItemSource.asObservable();
+  private readonly itemsSource = new BehaviorSubject<{}[]>([]);
+  private readonly filteredItemsSource = new BehaviorSubject<{}[]>([]);
+  private readonly selectedItemSource = new BehaviorSubject<{}>({});
 
-  constructor(private route: ActivatedRoute, private httpG: Http, private utils: Utilities, private location: Location) { } // todo see if we can get rid of the httpG
+  readonly currentItems = this.itemsSource.asObservable();
+  readonly currentFilteredItems = this.filteredItemsSource.asObservable();
+  readonly currentSelectedItem = this.selectedItemSource.asObservable();
+
+  changeItems(items: {}[]) { this.itemsSource.next(items) }
+  changeFilteredItems(filteredItems: {}[]) { this.filteredItemsSource.next(filteredItems) }
+  changeSelectedItem(selectedItem: {}) { this.selectedItemSource.next(selectedItem) }
+
+  constructor(private readonly route: ActivatedRoute, private readonly http: Http, private readonly utils: Utilities, private readonly location: Location) { }
 
   // todo see if there is a way of getting rid of observable => Promise => observable;
-  // todo add filtering in here
   refresh() {
-
-    let items = this.httpG.get(`api/${this.config.name}`).toPromise().then(response => response.json().data);
+    let items = this.http.get(`api/${this.config.name}`).toPromise().then(response => response.json().data);
     items.then(items => {
       this.changeItems(items);
       this.changeFilteredItems(items);
@@ -46,33 +44,23 @@ export class DashBoardService {
     });
   }
 
-  changeItems(items: Object[]) { this.itemsSource.next(items) }
-  changeFilteredItems(filteredItems: Object[]) { this.filteredItemsSource.next(filteredItems) }
-  changeSelectedItem(selectedItem: Object) { this.selectedItemSource.next(selectedItem) }
-
   init() {
     this.refresh();
+    // takes fieldsRaw ['Git', 'JavaScript', 'HTML'] and converts them to [name: 'Git', filtered: false ]
+    // this saves typing / time on config file creation.
     this.config.fieldsRaw.forEach(fieldRaw => {
       let newField: Field = { name: fieldRaw.name, values: [] };
       fieldRaw.values.forEach(value => newField.values.push({ name: value, filtered: false }));
       this.config.fields.push(newField);
     });
-    //this.filter();
-
-
-
-
-    //this.config.fields[0].values[0].filtered = true;
-    //console.log(this.config.fields[0].values[0].filtered);
-
+    delete this.config.fieldsRaw;
   }
 
+  // todo: overhaul on this after doing the server side //
   create(item: any): Promise<any> {
-    const url = `api/${this.config.name}`;
-    //let json = {'jem': item};
-    let something = JSON.stringify({ 'jem': item });
-    //return item;
-    return this.httpG
+    const url = `${this.api}/${this.config.name}`;
+    let something = JSON.stringify({ 'jem': item }); // this need to change to dataLabel
+    return this.http
       .post(url, something, { headers: this.headers })
       .toPromise()
       .then((res) => {
@@ -82,13 +70,14 @@ export class DashBoardService {
       .catch(this.handleError);
   }
 
+  // todo over hault on this after doing the server side //
   delete(id: string): string {
 
     let url = `api/${this.config.name}/${id}`
 
     //console.log(url);
 
-    this.httpG.delete(url).toPromise().then((response) => {
+    this.http.delete(url).toPromise().then((response) => {
       //console.log(response);
     });
 
@@ -99,18 +88,14 @@ export class DashBoardService {
     return 'success';
   }
 
-  filter(): void {
+  filter() {
 
-    //this.itemsFiltered = this.items;
-
-    //console.log('You called filter');
-
-    let itemsFiltered: Object[];
+    let itemsFiltered: {}[];
     this.currentItems.subscribe(items => {
       itemsFiltered = items;
 
       this.config.fields.forEach(field => {
-        let filtered = [], filters: String[] = [];
+        let filtered = [], filters: string[] = [];
 
         field.values.forEach(value => { if (value.filtered) filters.push(value.name) });
 
@@ -131,16 +116,15 @@ export class DashBoardService {
     this.updateUrl();
   }
 
-  private updateUrl(): void {
+  private updateUrl() {
 
-    let url: string = 'code-jems'; // todo put this in as a config var
-    let qs: string = '';
-    let fieldPaths: String[] = [];
-    let queryStrings = [];
-
+    let
+      url = this.config.directory,
+      qs = '', fieldPaths = [''],
+      queryStrings = [''];
 
     this.config.fields.forEach(field => {
-      let filters = [];
+      let filters = [''];
       field.values.forEach(value => { if (value.filtered) filters.push(value.name) });
 
       if (filters.length === 1) {
@@ -153,6 +137,7 @@ export class DashBoardService {
     this.location.replaceState(`${url}/${fieldPaths.join('/')}`, `${queryStrings.join('&')}`);
   }
 
+  // over hault this after backend
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
