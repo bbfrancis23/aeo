@@ -22,3 +22,4 @@ export class ItemControlsComponent {
   @Input() item: Object = {};
   constructor(private data: DashBoardService) { };
 }
+/* Copyright AEO all rights reserved */

@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter  } from '@angular/core';
-import { DashBoardTileComponent} from './dash-board-tile.component';
-import { DataService} from '../data.service'
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { DashBoardTileComponent } from './dash-board-tile.component';
+import { DataService } from '../data.service'
 
 "use strict";
 
@@ -8,7 +8,7 @@ import { DataService} from '../data.service'
   selector: 'list-tile',
   template: ''
 })
-export class ListTileComponent extends DashBoardTileComponent{
+export class ListTileComponent extends DashBoardTileComponent {
 
   @Input() items: any[];
   @Output() selectItemEvent = new EventEmitter();
@@ -17,24 +17,25 @@ export class ListTileComponent extends DashBoardTileComponent{
 
   collection: string;
 
-  constructor( private dataService: DataService){super();}
+  constructor(private dataService: DataService) { super(); }
 
-  selectItem(id:string):void{
+  selectItem(id: string): void {
 
     console.log("You selected an item");
 
-    if(id){
+    if (id) {
       this.selectItemEvent.emit(id);
     }
   }
 
-  deleteItem(id:string):void{
-    if(id){
+  deleteItem(id: string): void {
+    if (id) {
       let i = this.items.findIndex(item => item._id === id);
       console.log(this.collection);
-      this.dataService.delete(id,this.collection);
-      this.items.splice(i,1)  ;
+      this.dataService.delete(id, this.collection);
+      this.items.splice(i, 1);
     }
   }
 
 }
+/* Copyright AEO all rights reserved */

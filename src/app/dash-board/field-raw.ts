@@ -1,8 +1,8 @@
 'use strict';
 
 export class FieldRaw {
-  name: string = '';
-  values: string[] = [];
+  name = '';
+  values = [''];
 }
 
 /* Copyright AEO all rights reserved */

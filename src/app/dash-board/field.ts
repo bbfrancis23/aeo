@@ -1,8 +1,8 @@
 'use strict';
 
 export class Field {
-  name: string = '';
-  values: Array<{ name: string, filtered: boolean }> = [];
+  name = '';
+  values = [{ name: '', filtered: false }];
 }
 
 /* Copyright AEO all rights reserved */

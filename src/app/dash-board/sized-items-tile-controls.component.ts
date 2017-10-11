@@ -19,3 +19,4 @@ import { TileControlsComponent } from './tile-controls.component';
 export class SizedItemsTileControlsComponent extends TileControlsComponent {
   @Output() toggleItemSizeEvent = new EventEmitter();
 }
+/* Copyright AEO all rights reserved */

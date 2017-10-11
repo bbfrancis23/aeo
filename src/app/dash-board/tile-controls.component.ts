@@ -18,3 +18,4 @@ export class TileControlsComponent {
   @Output() hideTileEvent = new EventEmitter();
 
 }
+/* Copyright AEO all rights reserved */

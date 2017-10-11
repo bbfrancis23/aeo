@@ -59,7 +59,7 @@ export class DashBoardService {
   // todo: overhaul on this after doing the server side //
   create(item: any): Promise<any> {
     const url = `${this.api}/${this.config.name}`;
-    let something = JSON.stringify({ 'jem': item }); // this need to change to dataLabel
+    let something = JSON.stringify({ 'jem': item }); // this need to change to data
     return this.http
       .post(url, something, { headers: this.headers })
       .toPromise()
@@ -116,15 +116,13 @@ export class DashBoardService {
     this.updateUrl();
   }
 
-  private updateUrl() {
+  private updateUrl(): void {
 
-    let
-      url = this.config.directory,
-      qs = '', fieldPaths = [''],
-      queryStrings = [''];
+
+    let url = this.config.directory, qs: string = '', fieldPaths: string[] = [], queryStrings: string[] = [];
 
     this.config.fields.forEach(field => {
-      let filters = [''];
+      let filters = [];
       field.values.forEach(value => { if (value.filtered) filters.push(value.name) });
 
       if (filters.length === 1) {
