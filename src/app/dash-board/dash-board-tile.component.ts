@@ -1,5 +1,3 @@
-import { Component } from '@angular/core';
-
 'use strict';
 
 export class DashBoardTileComponent {

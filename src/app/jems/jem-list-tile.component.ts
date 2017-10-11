@@ -17,11 +17,11 @@ import { DashBoardService } from '../dash-board/dash-board.service';
     <sized-items-tile-controls [title]="'Jems List'" (hideTileEvent)="show=false" (toggleItemSizeEvent)="showBig = !showBig" ></sized-items-tile-controls>
 
     <div class="tile"  *ngIf="showBig" >
-      <jem *ngFor="let jem of items" [jem]="jem" (updateItemEvent)="selectItem(jem._id)"></jem>
+      <jem *ngFor="let jem of items" [jem]="jem" ></jem>
     </div>
 
     <div class="tile" *ngIf=!showBig>
-      <jem-sm *ngFor="let jem of items" [jem]="jem" (updateItemEvent)="selectItem(jem._id)"></jem-sm>
+      <jem-sm *ngFor="let jem of items" [jem]="jem" ></jem-sm>
     </div>
 
   </div>`,
@@ -34,7 +34,7 @@ export class JemListTileComponent extends ListTileComponent implements OnInit {
   message: string;
 
   constructor(private ds: DataService, private data: DashBoardService) {
-    super(ds);
+    super();
   }
 
 

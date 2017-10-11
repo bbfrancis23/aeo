@@ -1,6 +1,5 @@
 import { ActivatedRoute } from "@angular/router";
 import { DashBoardService } from '../dash-board/dash-board.service';
-import { Component } from '@angular/core';
 import { Field } from './field';
 import { Utilities } from '../utilities';
 
