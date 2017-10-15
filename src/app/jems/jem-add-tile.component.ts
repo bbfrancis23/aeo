@@ -16,8 +16,6 @@ export class JemAddTileComponent extends DashBoardTileComponent {
 
   constructor(private data: DashBoardService) {
     super();
-
-
     this.model.tech = data.config.fields[0].values[0].name;
     this.model.type = data.config.fields[1].values[0].name;
   }
@@ -28,3 +26,5 @@ export class JemAddTileComponent extends DashBoardTileComponent {
     this.submitted = true;
   }
 }
+
+/* Copyright AEO all rights reserved */

@@ -1,5 +1,7 @@
 import { Config } from '../dash-board/config';
 
+'use strict';
+
 export const JEM_CONFIG: Config = {
   title: 'Code Jems',
   name: 'jems',

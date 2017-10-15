@@ -1,10 +1,6 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ListTileComponent } from '../dash-board/list-tile.component';
 import { DataService } from '../data.service';
-
-//import { JemService } from './jem.service';
-import { Jem } from './jem';
-
 import { DashBoardService } from '../dash-board/dash-board.service';
 
 "use strict";
@@ -28,16 +24,7 @@ import { DashBoardService } from '../dash-board/dash-board.service';
 })
 export class JemListTileComponent extends ListTileComponent implements OnInit {
 
-  collection = 'jems';
-
-
-  message: string;
-
-  constructor(private ds: DataService, private data: DashBoardService) {
-    super();
-  }
-
-
+  constructor(private data: DashBoardService) { super(); }
 
   ngOnInit() {
     this.data.currentFilteredItems.subscribe(filteredItems => {

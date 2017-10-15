@@ -1,21 +1,17 @@
-import { Component, ViewChild, AfterContentInit, OnInit } from '@angular/core';
-import { DashBoardComponent } from '../dash-board/dash-board.component';
-import { Jem } from './jem';
-//import { JemService } from './jem.service';
-import { JemListTileComponent } from './jem-list-tile.component';
-import { JemAddTileComponent } from './jem-add-tile.component';
-import { JemUpdateTileComponent } from './jem-update-tile.component';
-import { JemCollectionTileComponent } from './jem-collection-tile.component';
-import { Field } from '../dash-board/field';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
+import { DashBoardComponent } from '../dash-board/dash-board.component';
+import { FilterTileComponent } from '../dash-board/filter-tile.component';
+import { IntroTileComponent } from '../dash-board/intro-tile.component';
+import { JemAddTileComponent } from './jem-add-tile.component';
+import { JemCollectionTileComponent } from './jem-collection-tile.component';
+import { JemListTileComponent } from './jem-list-tile.component';
+import { JemUpdateTileComponent } from './jem-update-tile.component';
 import { Utilities } from '../utilities';
-import { DataService } from '../data.service';
-import { Observable } from 'rxjs/Observable';
+
+import { Jem } from './jem';
 import { JEM_CONFIG } from './jem-config';
 import { DashBoardService } from '../dash-board/dash-board.service';
-
-import { IntroTileComponent } from '../dash-board/intro-tile.component';
-import { FilterTileComponent } from '../dash-board/filter-tile.component';
 
 'use strict';
 
@@ -23,12 +19,11 @@ import { FilterTileComponent } from '../dash-board/filter-tile.component';
   selector: 'jem-dash-board',
   templateUrl: './jem-dash-board.component.html'
 })
-export class JemDashBoardComponent extends DashBoardComponent implements AfterContentInit, OnInit {
+export class JemDashBoardComponent extends DashBoardComponent {
 
-
-
-  jems: any[];
+  jems: Jem[];
   selectedJem: Jem;
+
   @ViewChild(JemListTileComponent) listTile;
   @ViewChild(JemAddTileComponent) addTile;
   @ViewChild(JemUpdateTileComponent) updateTile;
@@ -36,74 +31,13 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
   @ViewChild(IntroTileComponent) introTile;
   @ViewChild(FilterTileComponent) filterTile;
 
-  message: string = "";
-
-
-  constructor(private r: ActivatedRoute, private u: Utilities, private dataService: DataService, protected data: DashBoardService) {
-    super(r, u, data);
+  constructor(protected route: ActivatedRoute, protected utils: Utilities, protected data: DashBoardService) {
+    super(route, utils, data);
     data.config = JEM_CONFIG;
     this.initConfig();
   }
 
-  ngOnInit(): void {
-    //this.getJems();
 
-    //this.jemService.init();
-    //this.jemService.currentItems.subscribe(items => {
-    //  this.jems = items;
-    //  this.selectedJem = this.jems[0];
-    //this.filterTile.items = this.jems;
-    //  this.filterTile.itemsFiltered = this.jems;
-    //this.updateTile.model = this.selectedJem;
-    //  this.filterTile.filter();
-    //});
-
-
-
-  }
-
-  /*
-    getJems(){
-      this.jemService.getJems().then((jems) => {
-        this.jems = jems;
-        this.selectedJem = this.jems[0];
-        this.filterTile.items = jems;
-        this.filterTile.itemsFiltered = jems;
-        this.updateTile.model = this.selectedJem;
-        this.filterTile.filter();
-
-      });
-    }
-  // */
-
-  selectJem(id: string): void {
-
-
-
-    let i = 0;
-    if (id) {
-      i = this.jems.findIndex(jem => jem._id === id);
-
-    }
-
-
-
-    this.selectedJem = this.jems[i];
-    this.updateTile.model = this.selectedJem;
-    this.addTile.show = false;
-    this.updateTile.show = true;
-  }
-
-  // todo put this in a typescript class
-
-
-  ngAfterContentInit() {
-
-
-  }
-
-
-  /*
   toggleFilterTile(): void {
     if (this.filterTile.show === true) {
       this.filterTile.show = false
@@ -121,12 +55,8 @@ export class JemDashBoardComponent extends DashBoardComponent implements AfterCo
       this.listTile.show = true;
     }
   }
-  //*/
-  addNewJem($event): void {
-    if ($event) {
-      //this.getJems();
-    }
-  }
+
 
 
 }
+/* Copyright AEO all rights reserved */

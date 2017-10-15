@@ -29,7 +29,7 @@ export class DashBoardService {
   changeFilteredItems(filteredItems: {}[]) { this.filteredItemsSource.next(filteredItems) }
   changeSelectedItem(selectedItem: {}) { this.selectedItemSource.next(selectedItem) }
 
-  constructor(private readonly route: ActivatedRoute, private readonly http: Http, private readonly utils: Utilities, private readonly location: Location) { }
+  constructor(protected route: ActivatedRoute, private readonly http: Http, private readonly utils: Utilities, private readonly location: Location) { }
 
   // todo see if there is a way of getting rid of observable => Promise => observable;
   refresh() {
