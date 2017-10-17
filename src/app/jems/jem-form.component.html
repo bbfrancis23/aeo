@@ -1,60 +1,57 @@
-<div [ngClass]="{'aeo-modal': modalMode}" id="formModal"  (click)="outSideClick($event)">
-  <div [ngClass]="{'aeo-modal-content': modalMode}">
-<div class="card border-info tile text-white" *ngIf="show" style="margin-top: 10px">
-  <div class="card-header bg-info"><h4>{{function}} a Jem</h4></div>
-  <tile-controls [title]="function+' a Jem'" (hideTileEvent)="show=false" (modalTileEvent)="modalMode=true;"></tile-controls>
-  <div class="card-block p-3" >
-    <div [hidden]="submitted">
-      <form (ngSubmit)="onSubmit();" #jemForm="ngForm" >
+<modal-tile >
+  <div class="card border-info tile text-white" *ngIf="show" style="margin-top: 10px">
+    <div class="card-header bg-info"><h4>{{function}} a Jem</h4></div>
+    <tile-controls (hideTileEvent)="show=false" (modalTileEvent)="modalChild.modalMode=true" *ngIf="!modalChild.modalMode " ></tile-controls>
+    <div class="card-block p-3" >
+      <div [hidden]="submitted">
+        <form (ngSubmit)="onSubmit();" #jemForm="ngForm" >
 
-        <div class="form-group">
-          <label for="title" class="sr-only">Title</label>
-          <input type="text" class="form-control " id="title" [(ngModel)]="model.title" name="Title" placeholder="Title" required>
-        </div>
-        <div class="form-row">
-          <div class="col">
-            <div class="form-group">
-              <label for="tech" class="sr-only">Tech</label>
-              <select class="form-control" id="tech" [(ngModel)]="model.tech" name="tech">
+          <div class="form-group">
+            <label for="title" class="sr-only">Title</label>
+            <input type="text" class="form-control " id="title" [(ngModel)]="model.title" name="Title" placeholder="Title" required>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label for="tech" class="sr-only">Tech</label>
+                <select class="form-control" id="tech" [(ngModel)]="model.tech" name="tech">
 
-                <option *ngFor="let value of data.config.fields[0].values">{{value.name}}
-              </select>
+                  <option *ngFor="let value of data.config.fields[0].values">{{value.name}}
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="Type" class="sr-only">Type</label>
+                <select class="form-control" id="type" [(ngModel)]="model.type" name="type">
+                  <option>Best Practices</option>
+                  <option>How to</option>
+                  <option>Short-cut Keys</option>
+                  <option>Mistakes</option>
+                  option
+                </select>
+              </div>
             </div>
           </div>
-          <div class="col">
-            <div class="form-group">
-              <label for="Type" class="sr-only">Type</label>
-              <select class="form-control" id="type" [(ngModel)]="model.type" name="type">
-                <option>Best Practices</option>
-                <option>How to</option>
-                <option>Short-cut Keys</option>
-                <option>Mistakes</option>
-                option
-              </select>
-            </div>
+
+          <div class="for-group">
+            <label for="description" class="sr-only">Description</label>
+            <textarea class="form-control" id="description" placeholder="description" name="Description" [(ngModel)]="model.description" required></textarea>
           </div>
-        </div>
+          <br>
+          <div class="for-group">
+            <label for="description" class="sr-only">Description</label>
+            <pre><textarea class="form-control" id="code" placeholder="code" style="background-color: black; color: white" [(ngModel)]="model.code" name="Code"></textarea></pre>
+          </div>
+          <button type="submit" class="btn btn-outline-info float-right" [disabled]="!jemForm.form.valid"  >{{function}}</button>
+        </form>
+      </div>
+      <div [hidden]="!submitted">
+        <div class="alert alert-success">Success!!! This Jem has ben Entered into the database.</div>
 
-        <div class="for-group">
-          <label for="description" class="sr-only">Description</label>
-          <textarea class="form-control" id="description" placeholder="description" name="Description" [(ngModel)]="model.description" required></textarea>
-        </div>
-        <br>
-        <div class="for-group">
-          <label for="description" class="sr-only">Description</label>
-          <pre><textarea class="form-control" id="code" placeholder="code" style="background-color: black; color: white" [(ngModel)]="model.code" name="Code"></textarea></pre>
-        </div>
-        <button type="submit" class="btn btn-outline-info float-right" [disabled]="!jemForm.form.valid"  >{{function}}</button>
-      </form>
-    </div>
-    <div [hidden]="!submitted">
-      <div class="alert alert-success">Success!!! This Jem has ben Entered into the database.</div>
-
-      <button class="btn brn-outline-info float-right" (click)="jemForm.reset();submitted=false" *ngIf="function === 'Add'" >Add Another Jem</button>
-      <button class="btn brn-outline-info float-right" (click)="submitted=false" *ngIf="function === 'Update'">Okay</button>
+        <button class="btn brn-outline-info float-right" (click)="jemForm.reset();submitted=false" *ngIf="function === 'Add'" >Add Another Jem</button>
+        <button class="btn brn-outline-info float-right" (click)="submitted=false" *ngIf="function === 'Update'">Okay</button>
+      </div>
     </div>
   </div>
-</div>
-
-</div>
-</div>
+</modal-tile>

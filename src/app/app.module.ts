@@ -15,6 +15,7 @@ import { JemDashBoardComponent } from './jems/jem-dash-board.component';
 import { JemListTileComponent } from './jems/jem-list-tile.component';
 import { JemUpdateTileComponent } from './jems/jem-update-tile.component';
 import { JemCollectionTileComponent } from './jems/jem-collection-tile.component';
+import { ModalDashBoardTileComponent } from './dash-board/modal-dash-board-tile.component';
 import { SizedItemsTileControlsComponent } from './dash-board/sized-items-tile-controls.component';
 import { TileControlsComponent } from './dash-board/tile-controls.component';
 import { JemComponent } from './jems/jem.component';
@@ -45,6 +46,7 @@ import { Utilities } from './utilities';
     JemListTileComponent,
     JemSmallComponent,
     JemUpdateTileComponent,
+    ModalDashBoardTileComponent,
     SizedItemsTileControlsComponent,
     TileControlsComponent
   ],

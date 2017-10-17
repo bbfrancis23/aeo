@@ -26,7 +26,7 @@ export class JemUpdateTileComponent extends DashBoardTileComponent implements On
   }
 
   ngOnInit() {
-    this.modal = document.getElementById('formModal');
+    //this.modal = document.getElementById('formModal');
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DashBoardTileComponent } from '../dash-board/dash-board-tile.component';
 import { DashBoardService } from '../dash-board/dash-board.service';
 import { Jem } from './jem';
@@ -9,7 +9,7 @@ import { Jem } from './jem';
   selector: 'jem-add-tile',
   templateUrl: './jem-form.component.html'
 })
-export class JemAddTileComponent extends DashBoardTileComponent implements OnInit {
+export class JemAddTileComponent extends DashBoardTileComponent {
   function = "Add";
   submitted = false
   model: Jem = new Jem();
@@ -26,9 +26,7 @@ export class JemAddTileComponent extends DashBoardTileComponent implements OnIni
     this.submitted = true;
   }
 
-  ngOnInit() {
-    this.modal = document.getElementById('formModal');
-  }
+
 }
 
 /* Copyright AEO all rights reserved */

@@ -9,4 +9,3 @@ export class ListTileComponent extends DashBoardTileComponent {
 
   constructor() { super() }
 }
-/* Copyright AEO all rights reserved */
