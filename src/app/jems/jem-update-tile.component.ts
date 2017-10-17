@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DashBoardTileComponent } from '../dash-board/dash-board-tile.component';
 import { DashBoardService } from '../dash-board/dash-board.service';
+
 
 'use strict';
 
@@ -8,7 +9,7 @@ import { DashBoardService } from '../dash-board/dash-board.service';
   selector: 'jem-update-tile',
   templateUrl: './jem-form.component.html'
 })
-export class JemUpdateTileComponent extends DashBoardTileComponent {
+export class JemUpdateTileComponent extends DashBoardTileComponent implements OnInit {
   function = "Update";
   model: Object = {};
   submitted = false;
@@ -24,5 +25,8 @@ export class JemUpdateTileComponent extends DashBoardTileComponent {
     data.currentSelectedItem.subscribe(selectedItem => this.model = selectedItem);
   }
 
+  ngOnInit() {
+    this.modal = document.getElementById('formModal');
+  }
 
 }

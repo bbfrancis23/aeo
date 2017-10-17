@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { DashBoardComponent } from '../dash-board/dash-board.component';
 import { FilterTileComponent } from '../dash-board/filter-tile.component';
@@ -28,7 +28,7 @@ export class JemDashBoardComponent extends DashBoardComponent {
   @ViewChild(JemAddTileComponent) addTile;
   @ViewChild(JemUpdateTileComponent) updateTile;
   @ViewChild(JemCollectionTileComponent) collectionTile;
-  @ViewChild(IntroTileComponent) introTile;
+  @ViewChild(IntroTileComponent) introTile: QueryList<IntroTileComponent>;
   @ViewChild(FilterTileComponent) filterTile;
 
   constructor(protected route: ActivatedRoute, protected utils: Utilities, protected data: DashBoardService) {
@@ -36,6 +36,8 @@ export class JemDashBoardComponent extends DashBoardComponent {
     data.config = JEM_CONFIG;
     this.initConfig();
   }
+
+
 
 
   toggleFilterTile(): void {
@@ -48,6 +50,9 @@ export class JemDashBoardComponent extends DashBoardComponent {
   }
 
   toggleListTile(): void {
+
+    console.log('123');
+
     if (this.listTile.show) {
       this.filterTile.show = false;
       this.listTile.show = false;

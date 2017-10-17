@@ -1,6 +1,8 @@
+<div [ngClass]="{'aeo-modal': modalMode}" id="formModal"  (click)="outSideClick($event)">
+  <div [ngClass]="{'aeo-modal-content': modalMode}">
 <div class="card border-info tile text-white" *ngIf="show" style="margin-top: 10px">
   <div class="card-header bg-info"><h4>{{function}} a Jem</h4></div>
-  <tile-controls [title]="function+' a Jem'" (hideTileEvent)="show=false"></tile-controls>
+  <tile-controls [title]="function+' a Jem'" (hideTileEvent)="show=false" (modalTileEvent)="modalMode=true;"></tile-controls>
   <div class="card-block p-3" >
     <div [hidden]="submitted">
       <form (ngSubmit)="onSubmit();" #jemForm="ngForm" >
@@ -52,4 +54,7 @@
       <button class="btn brn-outline-info float-right" (click)="submitted=false" *ngIf="function === 'Update'">Okay</button>
     </div>
   </div>
+</div>
+
+</div>
 </div>

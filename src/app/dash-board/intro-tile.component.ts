@@ -7,14 +7,16 @@ import { DashBoardService } from '../dash-board/dash-board.service';
 @Component({
   selector: 'intro-tile',
   template:
-  ` <div class="card border-primary tile" *ngIf="show" >
+  ` <div [ngClass]="{modal: modal}">
+      <div class="card border-primary tile" *ngIf="show" >
         <img class="card-img-top" [src]="data.config.img" alt="{{data.config.title}}">
         <div class="tile-controls"><a class="material-icons tile-item" (click)="show=false;" >clear</a></div>
         <div class="card-block p-3">
           <h4 class="card-title">{{data.config.title}}</h4>
           <p class="card-text">{{data.config.intro}}</p>
         </div>
-      </div>`
+      </div>
+    </div>`
 })
 export class IntroTileComponent extends DashBoardTileComponent {
 

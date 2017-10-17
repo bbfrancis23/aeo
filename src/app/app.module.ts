@@ -30,7 +30,7 @@ import { Utilities } from './utilities';
     AppRoutingModule,
     BrowserModule,
     FormsModule,
-    HttpModule,
+    HttpModule
   ],
   declarations: [
     AppComponent,
