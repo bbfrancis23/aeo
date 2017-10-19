@@ -11,7 +11,7 @@ import { DashBoardService } from './dash-board.service';
   template:
   `<div class="card border-info tile" *ngIf="show" >
         <div class="card-header bg-info text-white"><h4>Filters</h4></div>
-        <div class="tile-controls"><a class="material-icons tile-item" (click)="show=false;" >clear</a></div>
+        <div class="tile-controls" *ngIf="data.dashBoard" ><a class="material-icons tile-item" (click)="show=false;" >clear</a></div>
         <div class="card-block p-3" >
           <div *ngFor="let field of fields">
             <b><p>{{field.name}}:</p></b>
@@ -23,7 +23,7 @@ import { DashBoardService } from './dash-board.service';
 })
 export class FilterTileComponent extends DashBoardTileComponent {
   fields = this.data.config.fields;
-  constructor(private data: DashBoardService) { super(); }
+  constructor(protected data: DashBoardService) { super(data); }
 }
 
 /* Copyright AEO all rights reserved */

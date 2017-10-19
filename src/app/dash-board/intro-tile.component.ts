@@ -10,7 +10,7 @@ import { DashBoardService } from '../dash-board/dash-board.service';
   ` <div [ngClass]="{modal: modal}">
       <div class="card border-primary tile" *ngIf="show" >
         <img class="card-img-top" [src]="data.config.img" alt="{{data.config.title}}">
-        <div class="tile-controls"><a class="material-icons tile-item" (click)="show=false;" >clear</a></div>
+        <div class="tile-controls" *ngIf="data.dashBoard" ><a class="material-icons tile-item" (click)="show=false;" >clear</a></div>
         <div class="card-block p-3">
           <h4 class="card-title">{{data.config.title}}</h4>
           <p class="card-text">{{data.config.intro}}</p>
@@ -20,7 +20,7 @@ import { DashBoardService } from '../dash-board/dash-board.service';
 })
 export class IntroTileComponent extends DashBoardTileComponent {
 
-  constructor(private data: DashBoardService) { super(); }
+  constructor(protected data: DashBoardService) { super(data); }
 }
 
 /* Copyright AEO all rights reserved */

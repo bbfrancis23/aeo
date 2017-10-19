@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { DashBoardService } from '../dash-board/dash-board.service';
 
 'use strict';
 
@@ -17,5 +18,6 @@ import { Component, Output, EventEmitter } from '@angular/core';
 export class TileControlsComponent {
   @Output() hideTileEvent = new EventEmitter();
   @Output() modalTileEvent = new EventEmitter();
+  constructor(protected data: DashBoardService) { }
 }
 /* Copyright AEO all rights reserved */

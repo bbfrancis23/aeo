@@ -20,8 +20,8 @@ export class JemUpdateTileComponent extends DashBoardTileComponent implements On
     this.submitted = true;
   }
 
-  constructor(private data: DashBoardService) {
-    super();
+  constructor(protected data: DashBoardService) {
+    super(data);
     data.currentSelectedItem.subscribe(selectedItem => this.model = selectedItem);
   }
 

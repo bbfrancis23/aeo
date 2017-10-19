@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { DashBoardComponent } from '../dash-board/dash-board.component';
 import { FilterTileComponent } from '../dash-board/filter-tile.component';
@@ -19,7 +19,7 @@ import { DashBoardService } from '../dash-board/dash-board.service';
   selector: 'jem-dash-board',
   templateUrl: './jem-dash-board.component.html'
 })
-export class JemDashBoardComponent extends DashBoardComponent {
+export class JemDashBoardComponent extends DashBoardComponent implements OnInit {
 
   jems: Jem[];
   selectedJem: Jem;
@@ -28,7 +28,7 @@ export class JemDashBoardComponent extends DashBoardComponent {
   @ViewChild(JemAddTileComponent) addTile;
   @ViewChild(JemUpdateTileComponent) updateTile;
   @ViewChild(JemCollectionTileComponent) collectionTile;
-  @ViewChild(IntroTileComponent) introTile: QueryList<IntroTileComponent>;
+  @ViewChild(IntroTileComponent) introTile;
   @ViewChild(FilterTileComponent) filterTile;
 
   constructor(protected route: ActivatedRoute, protected utils: Utilities, protected data: DashBoardService) {
@@ -37,8 +37,28 @@ export class JemDashBoardComponent extends DashBoardComponent {
     this.initConfig();
   }
 
+  ngOnInit() {
+    if (!this.data.dashBoard) {
+      this.addTile.show = false;
+      this.updateTile.show = false;
+      this.collectionTile.show = false;
+    }
+  }
 
+  toggleDashBoard() {
+    this.data.dashBoard = !this.data.dashBoard;
 
+    if (this.data.dashBoard) {
+      this.updateTile.show = true;
+      this.addTile.show = true;
+      this.collectionTile.show = true;
+    } else {
+      this.updateTile.show = false;
+      this.addTile.show = false;
+      this.collectionTile.show = false;
+    }
+
+  }
 
   toggleFilterTile(): void {
     if (this.filterTile.show === true) {
@@ -50,8 +70,6 @@ export class JemDashBoardComponent extends DashBoardComponent {
   }
 
   toggleListTile(): void {
-
-    console.log('123');
 
     if (this.listTile.show) {
       this.filterTile.show = false;

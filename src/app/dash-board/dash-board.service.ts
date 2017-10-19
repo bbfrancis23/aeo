@@ -16,6 +16,7 @@ export class DashBoardService {
 
   private readonly headers = new Headers({ 'Content-Type': 'application/json' });
   api = 'api';
+  dashBoard = false;
 
   private readonly itemsSource = new BehaviorSubject<{}[]>([]);
   private readonly filteredItemsSource = new BehaviorSubject<{}[]>([]);

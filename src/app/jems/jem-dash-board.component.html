@@ -15,12 +15,12 @@
     <div class="col-md-6">
 
       <div class="btn-group ml-2 float-md-right" >
-        <button class="btn btn-outline-primary material-icons" data-toggle="tooltip" title="Dashboard">
+        <button class="btn btn-outline-primary material-icons" title="Dash Board" title="Dashboard"  [ngClass]="{'active': data.dashBoard}"  (click)="toggleDashBoard()">
           dashboard
         </button>
       </div>
 
-      <div class="btn-group float-md-right" >
+      <div class="btn-group float-md-right" *ngIf="data.dashBoard" >
         <button class="btn btn-primary material-icons" (click)="introTile.show = !introTile.show" [ngClass]="{'active': introTile.show}"  title="Jem Info Tile">
           info_outline
         </button>
@@ -46,13 +46,17 @@
     </div>
   </div>
 </div>
-<div class="container-fluid" style="padding-top: 112px">
+<div  [ngClass]="
+        { 'container-fluid':
+            ( (introTile.show || filterTile.show) && (listTile.show) && (addTile.show || updateTile.show || collectionTile.show) ),
+          container: ( (!(introTile.show || filterTile.show)) || (! listTile.show)  ||    (!(addTile.show || updateTile.show || collectionTile.show))  ) || !data.dashBoard}"
+style="padding-top: 112px">
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-3">
         <intro-tile></intro-tile>
       <filter-tile></filter-tile>
     </div>
-    <div [ngClass]="{'col-md-10': (introTile.show || filterTile.show), 'col-md-12': (!introTile.show && !filterTile.show)}">
+    <div [ngClass]="{'col-md-9': (introTile.show || filterTile.show), 'col-md-12': (!introTile.show && !filterTile.show)}">
       <div class="row">
         <div  [ngClass]="{'col-md-6': (addTile.show || updateTile.show || collectionTile.show), 'col-md-12': (!addTile.show && !updateTile.show && ! collectionTile.show)}">
           <jem-list-tile  (selectItemEvent)="selectJem($event)"></jem-list-tile>

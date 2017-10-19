@@ -14,8 +14,8 @@ export class JemAddTileComponent extends DashBoardTileComponent {
   submitted = false
   model: Jem = new Jem();
 
-  constructor(private data: DashBoardService) {
-    super();
+  constructor(protected data: DashBoardService) {
+    super(data);
     this.model.tech = data.config.fields[0].values[0].name;
     this.model.type = data.config.fields[1].values[0].name;
   }

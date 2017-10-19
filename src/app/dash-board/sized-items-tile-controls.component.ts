@@ -1,11 +1,12 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { TileControlsComponent } from './tile-controls.component';
+import { DashBoardService } from '../dash-board/dash-board.service';
 
 'use strict';
 
 @Component({
   selector: 'sized-items-tile-controls',
-  template: `<div class="tile-controls-dk">
+  template: `<div class="tile-controls-dk" >
               <div class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown"></a>
                 <div class="dropdown-menu dropdown-menu-right" >
@@ -17,6 +18,10 @@ import { TileControlsComponent } from './tile-controls.component';
             </div>`
 })
 export class SizedItemsTileControlsComponent extends TileControlsComponent {
+
+
+
   @Output() toggleItemSizeEvent = new EventEmitter();
+  constructor(protected data: DashBoardService) { super(data); }
 }
 /* Copyright AEO all rights reserved */
