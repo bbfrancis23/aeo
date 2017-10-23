@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DashBoardTileComponent } from '../dash-board/dash-board-tile.component';
-import { DashBoardService } from '../dash-board/dash-board.service';
+import { MillieuVueComponent } from '../millieu/millieu-vue.component';
+import { MillieuService } from '../millieu/millieu.service';
 
 
 'use strict';
@@ -9,7 +9,7 @@ import { DashBoardService } from '../dash-board/dash-board.service';
   selector: 'jem-update-tile',
   templateUrl: './jem-form.component.html'
 })
-export class JemUpdateTileComponent extends DashBoardTileComponent implements OnInit {
+export class JemUpdateTileComponent extends MillieuVueComponent implements OnInit {
   function = "Update";
   model: Object = {};
   submitted = false;
@@ -20,7 +20,7 @@ export class JemUpdateTileComponent extends DashBoardTileComponent implements On
     this.submitted = true;
   }
 
-  constructor(protected data: DashBoardService) {
+  constructor(protected data: MillieuService) {
     super(data);
     data.currentSelectedItem.subscribe(selectedItem => this.model = selectedItem);
   }

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { DashBoardService } from './dash-board.service';
+import { MillieuService } from './millieu.service';
 
 'use strict';
 
@@ -20,6 +20,6 @@ import { DashBoardService } from './dash-board.service';
 export class ItemControlsComponent {
 
   @Input() item: Object = {};
-  constructor(private data: DashBoardService) { };
+  constructor(private data: MillieuService) { };
 }
 /* Copyright AEO all rights reserved */

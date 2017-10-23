@@ -1,4 +1,4 @@
-import { Config } from '../dash-board/config';
+import { Config } from '../millieu/config';
 
 'use strict';
 

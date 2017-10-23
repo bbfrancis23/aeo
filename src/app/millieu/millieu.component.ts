@@ -1,12 +1,12 @@
 import { ActivatedRoute } from "@angular/router";
-import { DashBoardService } from '../dash-board/dash-board.service';
+import { MillieuService } from './millieu.service';
 import { Field } from './field';
 import { Utilities } from '../utilities';
 
 'use strict';
 
-export class DashBoardComponent {
-  constructor(protected readonly route: ActivatedRoute, protected readonly utils: Utilities, protected readonly data: DashBoardService) { }
+export class MillieuComponent {
+  constructor(protected readonly route: ActivatedRoute, protected readonly utils: Utilities, protected readonly data: MillieuService) { }
 
   initConfig() {
     this.data.init();

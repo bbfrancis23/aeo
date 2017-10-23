@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { DashBoardService } from '../dash-board/dash-board.service';
+import { MillieuService } from './millieu.service';
 
 'use strict';
 
@@ -15,9 +15,9 @@ import { DashBoardService } from '../dash-board/dash-board.service';
              </div>
             </div>`
 })
-export class TileControlsComponent {
+export class VueControlsComponent {
   @Output() hideTileEvent = new EventEmitter();
   @Output() modalTileEvent = new EventEmitter();
-  constructor(protected data: DashBoardService) { }
+  constructor(protected data: MillieuService) { }
 }
 /* Copyright AEO all rights reserved */

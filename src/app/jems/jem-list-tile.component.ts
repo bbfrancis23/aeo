@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ListTileComponent } from '../dash-board/list-tile.component';
-import { DashBoardService } from '../dash-board/dash-board.service';
+import { ListVueComponent } from '../millieu/list-vue.component';
+import { MillieuService } from '../millieu/millieu.service';
 
 
 //declare var jquery: any;
@@ -12,7 +12,7 @@ import { DashBoardService } from '../dash-board/dash-board.service';
   selector: 'jem-list-tile',
   template: `
 
-        <modal-tile>
+        <modal-vue>
         <div class="tile" [hidden]="!show"  >
           <h4 class="card p-3 bg-primary text-white">Jems List</h4>
           <sized-items-tile-controls
@@ -30,14 +30,14 @@ import { DashBoardService } from '../dash-board/dash-board.service';
             <jem-sm *ngFor="let jem of items" [jem]="jem" ></jem-sm>
           </div>
         </div>
-        </modal-tile>
+        </modal-vue>
       `,
 })
-export class JemListTileComponent extends ListTileComponent implements OnInit {
+export class JemListTileComponent extends ListVueComponent implements OnInit {
 
 
 
-  constructor(protected data: DashBoardService) { super(data); }
+  constructor(protected data: MillieuService) { super(data); }
 
   ngOnInit() {
     this.data.currentFilteredItems.subscribe(filteredItems => {

@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { TileControlsComponent } from './tile-controls.component';
-import { DashBoardService } from '../dash-board/dash-board.service';
+import { VueControlsComponent } from './vue-controls.component';
+import { MillieuService } from './millieu.service';
 
 'use strict';
 
@@ -17,11 +17,11 @@ import { DashBoardService } from '../dash-board/dash-board.service';
              </div>
             </div>`
 })
-export class SizedItemsTileControlsComponent extends TileControlsComponent {
+export class SizedItemsVueControlsComponent extends VueControlsComponent {
 
 
 
   @Output() toggleItemSizeEvent = new EventEmitter();
-  constructor(protected data: DashBoardService) { super(data); }
+  constructor(protected data: MillieuService) { super(data); }
 }
 /* Copyright AEO all rights reserved */

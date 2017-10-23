@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
-import { DashBoardTileComponent } from './dash-board-tile.component';
+import { MillieuVueComponent } from './millieu-vue.component';
 import { Field } from './field';
 import { Location } from '@angular/common';
-import { DashBoardService } from './dash-board.service';
+import { MillieuService } from './millieu.service';
 
 'use strict';
 
 @Component({
-  selector: 'filter-tile',
+  selector: 'filter-vue',
   template:
   `<div class="card border-info tile" *ngIf="show" >
         <div class="card-header bg-info text-white"><h4>Filters</h4></div>
@@ -21,9 +21,9 @@ import { DashBoardService } from './dash-board.service';
         </div>
       </div>`,
 })
-export class FilterTileComponent extends DashBoardTileComponent {
+export class FilterVueComponent extends MillieuVueComponent {
   fields = this.data.config.fields;
-  constructor(protected data: DashBoardService) { super(data); }
+  constructor(protected data: MillieuService) { super(data); }
 }
 
 /* Copyright AEO all rights reserved */

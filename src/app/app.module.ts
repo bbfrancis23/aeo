@@ -7,22 +7,22 @@ import { RouterModule } from '@angular/router';
 
 import { AeoHeaderComponent } from './aeo-header.component';
 import { AppComponent } from './app.component';
-import { FilterTileComponent } from './dash-board/filter-tile.component';
-import { IntroTileComponent } from './dash-board/intro-tile.component';
-import { ItemControlsComponent } from './dash-board/item-controls.component';
+import { FilterVueComponent } from './millieu/filter-vue.component';
+import { IntroVueComponent } from './millieu/intro-vue.component';
+import { ItemControlsComponent } from './millieu/item-controls.component';
 import { JemAddTileComponent } from './jems/jem-add-tile.component';
 import { JemDashBoardComponent } from './jems/jem-dash-board.component';
 import { JemListTileComponent } from './jems/jem-list-tile.component';
 import { JemUpdateTileComponent } from './jems/jem-update-tile.component';
 import { JemCollectionTileComponent } from './jems/jem-collection-tile.component';
-import { ModalDashBoardTileComponent } from './dash-board/modal-dash-board-tile.component';
-import { SizedItemsTileControlsComponent } from './dash-board/sized-items-tile-controls.component';
-import { TileControlsComponent } from './dash-board/tile-controls.component';
+import { ModalMillieuVueComponent } from './millieu/modal-millieu-vue.component';
+import { SizedItemsVueControlsComponent } from './millieu/sized-items-vue-controls.component';
+import { VueControlsComponent } from './millieu/vue-controls.component';
 import { JemComponent } from './jems/jem.component';
 import { JemSmallComponent } from './jems/jem-sm.component';
 
 import { CollectionService } from './collection.service';
-import { DashBoardService } from './dash-board/dash-board.service';
+import { MillieuService } from './millieu/millieu.service';
 import { DataService } from './data.service';
 import { Utilities } from './utilities';
 
@@ -36,8 +36,8 @@ import { Utilities } from './utilities';
   declarations: [
     AppComponent,
     AeoHeaderComponent,
-    FilterTileComponent,
-    IntroTileComponent,
+    FilterVueComponent,
+    IntroVueComponent,
     ItemControlsComponent,
     JemAddTileComponent,
     JemCollectionTileComponent,
@@ -46,12 +46,12 @@ import { Utilities } from './utilities';
     JemListTileComponent,
     JemSmallComponent,
     JemUpdateTileComponent,
-    ModalDashBoardTileComponent,
-    SizedItemsTileControlsComponent,
-    TileControlsComponent
+    ModalMillieuVueComponent,
+    SizedItemsVueControlsComponent,
+    VueControlsComponent
   ],
   providers: [
-    CollectionService, DashBoardService, DataService, Utilities
+    CollectionService, MillieuService, DataService, Utilities
   ],
   bootstrap: [AppComponent]
 })

@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-import { DashBoardComponent } from '../dash-board/dash-board.component';
-import { FilterTileComponent } from '../dash-board/filter-tile.component';
-import { IntroTileComponent } from '../dash-board/intro-tile.component';
+import { MillieuComponent } from '../millieu/millieu.component';
+import { FilterVueComponent } from '../millieu/filter-vue.component';
+import { IntroVueComponent } from '../millieu/intro-vue.component';
 import { JemAddTileComponent } from './jem-add-tile.component';
 import { JemCollectionTileComponent } from './jem-collection-tile.component';
 import { JemListTileComponent } from './jem-list-tile.component';
@@ -11,7 +11,7 @@ import { Utilities } from '../utilities';
 
 import { Jem } from './jem';
 import { JEM_CONFIG } from './jem-config';
-import { DashBoardService } from '../dash-board/dash-board.service';
+import { MillieuService } from '../millieu/millieu.service';
 
 'use strict';
 
@@ -19,7 +19,7 @@ import { DashBoardService } from '../dash-board/dash-board.service';
   selector: 'jem-dash-board',
   templateUrl: './jem-dash-board.component.html'
 })
-export class JemDashBoardComponent extends DashBoardComponent implements OnInit {
+export class JemDashBoardComponent extends MillieuComponent implements OnInit {
 
   jems: Jem[];
   selectedJem: Jem;
@@ -28,10 +28,10 @@ export class JemDashBoardComponent extends DashBoardComponent implements OnInit 
   @ViewChild(JemAddTileComponent) addTile;
   @ViewChild(JemUpdateTileComponent) updateTile;
   @ViewChild(JemCollectionTileComponent) collectionTile;
-  @ViewChild(IntroTileComponent) introTile;
-  @ViewChild(FilterTileComponent) filterTile;
+  @ViewChild(IntroVueComponent) introTile;
+  @ViewChild(FilterVueComponent) filterTile;
 
-  constructor(protected route: ActivatedRoute, protected utils: Utilities, protected data: DashBoardService) {
+  constructor(protected route: ActivatedRoute, protected utils: Utilities, protected data: MillieuService) {
     super(route, utils, data);
     data.config = JEM_CONFIG;
     this.initConfig();
@@ -79,7 +79,12 @@ export class JemDashBoardComponent extends DashBoardComponent implements OnInit 
     }
   }
 
+  isFirstColShown() {
+    return (this.introTile.show || this.filterTile.show) ? true : false;
+  }
 
-
+  isSecondColShown() {
+    return (this.listTile) ? true : false;
+  }
 }
 /* Copyright AEO all rights reserved */

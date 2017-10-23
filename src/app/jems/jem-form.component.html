@@ -1,4 +1,4 @@
-<modal-tile >
+<modal-vue >
   <div class="card border-info tile text-white" *ngIf="show" style="margin-top: 10px">
     <div class="card-header bg-info"><h4>{{function}} a Jem</h4></div>
     <tile-controls (hideTileEvent)="show=false" (modalTileEvent)="modalChild.modalMode=true" *ngIf="!modalChild.modalMode && data.dashBoard" ></tile-controls>
@@ -54,4 +54,4 @@
       </div>
     </div>
   </div>
-</modal-tile>
+</modal-vue>

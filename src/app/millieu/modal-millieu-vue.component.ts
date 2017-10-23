@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 'use strict'
 
 @Component({
-  selector: 'modal-tile',
+  selector: 'modal-vue',
   template: `
     <div [ngClass]="{'aeo-modal': modalMode}"  (click)="outSideClick($event)">
       <div [ngClass]="{'aeo-modal-content': modalMode}">
@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
     </div>`
 
 })
-export class ModalDashBoardTileComponent {
+export class ModalMillieuVueComponent {
   modalMode = false;
 
   outSideClick(e) {

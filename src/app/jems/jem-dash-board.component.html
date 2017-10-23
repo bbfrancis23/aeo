@@ -53,10 +53,11 @@
 style="padding-top: 112px">
   <div class="row">
     <div class="col-md-3">
-        <intro-tile></intro-tile>
-      <filter-tile></filter-tile>
+        <intro-vue></intro-vue>
+      <filter-vue></filter-vue>
     </div>
-    <div [ngClass]="{'col-md-9': (introTile.show || filterTile.show), 'col-md-12': (!introTile.show && !filterTile.show)}">
+
+    <div [ngClass]="isFirstColShown() ? 'col-md-9' : 'col-md-12'">
       <div class="row">
         <div  [ngClass]="{'col-md-6': (addTile.show || updateTile.show || collectionTile.show), 'col-md-12': (!addTile.show && !updateTile.show && ! collectionTile.show)}">
           <jem-list-tile  (selectItemEvent)="selectJem($event)"></jem-list-tile>

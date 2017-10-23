@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { DashBoardTileComponent } from './dash-board-tile.component';
-import { DashBoardService } from '../dash-board/dash-board.service';
+import { MillieuVueComponent } from './millieu-vue.component';
+import { MillieuService } from './millieu.service';
 
 'use strict';
 
 @Component({
-  selector: 'intro-tile',
+  selector: 'intro-vue',
   template:
   ` <div [ngClass]="{modal: modal}">
       <div class="card border-primary tile" *ngIf="show" >
@@ -18,9 +18,9 @@ import { DashBoardService } from '../dash-board/dash-board.service';
       </div>
     </div>`
 })
-export class IntroTileComponent extends DashBoardTileComponent {
+export class IntroVueComponent extends MillieuVueComponent {
 
-  constructor(protected data: DashBoardService) { super(data); }
+  constructor(protected data: MillieuService) { super(data); }
 }
 
 /* Copyright AEO all rights reserved */
