@@ -9,18 +9,18 @@ import { MillieuService } from '../millieu/millieu.service';
 "use strict";
 
 @Component({
-  selector: 'jem-list-tile',
+  selector: 'jem-list-vue',
   template: `
 
         <modal-vue>
         <div class="tile" [hidden]="!show"  >
           <h4 class="card p-3 bg-primary text-white">Jems List</h4>
-          <sized-items-tile-controls
+          <sized-items-vue-controls
             *ngIf="modalChild.modalMode === false && data.dashBoard"
             (hideTileEvent)="show=false"
             (modalTileEvent)="modalChild.modalMode=true;"
             (toggleItemSizeEvent)="showBig = !showBig" >
-          </sized-items-tile-controls>
+          </sized-items-vue-controls>
 
           <div class="tile"  *ngIf="showBig" >
             <jem *ngFor="let jem of items" [jem]="jem" ></jem>
@@ -33,7 +33,7 @@ import { MillieuService } from '../millieu/millieu.service';
         </modal-vue>
       `,
 })
-export class JemListTileComponent extends ListVueComponent implements OnInit {
+export class JemListVueComponent extends ListVueComponent implements OnInit {
 
 
 

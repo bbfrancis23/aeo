@@ -60,12 +60,12 @@ style="padding-top: 112px">
     <div [ngClass]="isFirstColShown() ? 'col-md-9' : 'col-md-12'">
       <div class="row">
         <div  [ngClass]="{'col-md-6': (addTile.show || updateTile.show || collectionTile.show), 'col-md-12': (!addTile.show && !updateTile.show && ! collectionTile.show)}">
-          <jem-list-tile  (selectItemEvent)="selectJem($event)"></jem-list-tile>
+          <jem-list-vue  (selectItemEvent)="selectJem($event)"></jem-list-vue>
         </div>
         <div [ngClass]="{'col-md-6': (listTile.show ), 'col-md-12': (!listTile.show)}">
-          <jem-add-tile (jemAddedEvent)="addNewJem($event)"  ></jem-add-tile>
-          <jem-update-tile ></jem-update-tile>
-          <jem-collection-tile></jem-collection-tile>
+          <jem-add-vue (jemAddedEvent)="addNewJem($event)"  ></jem-add-vue>
+          <jem-update-vue ></jem-update-vue>
+          <jem-collection-vue></jem-collection-vue>
         </div>
       </div>
     </div>

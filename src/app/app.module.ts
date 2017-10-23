@@ -10,11 +10,11 @@ import { AppComponent } from './app.component';
 import { FilterVueComponent } from './millieu/filter-vue.component';
 import { IntroVueComponent } from './millieu/intro-vue.component';
 import { ItemControlsComponent } from './millieu/item-controls.component';
-import { JemAddTileComponent } from './jems/jem-add-tile.component';
-import { JemDashBoardComponent } from './jems/jem-dash-board.component';
-import { JemListTileComponent } from './jems/jem-list-tile.component';
-import { JemUpdateTileComponent } from './jems/jem-update-tile.component';
-import { JemCollectionTileComponent } from './jems/jem-collection-tile.component';
+import { JemAddVueComponent } from './jems/jem-add-vue.component';
+import { JemMillieuComponent } from './jems/jem-millieu.component';
+import { JemListVueComponent } from './jems/jem-list-vue.component';
+import { JemUpdateVueComponent } from './jems/jem-update-vue.component';
+import { JemCollectionVueComponent } from './jems/jem-collection-vue.component';
 import { ModalMillieuVueComponent } from './millieu/modal-millieu-vue.component';
 import { SizedItemsVueControlsComponent } from './millieu/sized-items-vue-controls.component';
 import { VueControlsComponent } from './millieu/vue-controls.component';
@@ -39,13 +39,13 @@ import { Utilities } from './utilities';
     FilterVueComponent,
     IntroVueComponent,
     ItemControlsComponent,
-    JemAddTileComponent,
-    JemCollectionTileComponent,
+    JemAddVueComponent,
+    JemCollectionVueComponent,
     JemComponent,
-    JemDashBoardComponent,
-    JemListTileComponent,
+    JemMillieuComponent,
+    JemListVueComponent,
     JemSmallComponent,
-    JemUpdateTileComponent,
+    JemUpdateVueComponent,
     ModalMillieuVueComponent,
     SizedItemsVueControlsComponent,
     VueControlsComponent

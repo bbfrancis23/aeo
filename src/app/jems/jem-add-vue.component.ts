@@ -6,10 +6,10 @@ import { Jem } from './jem';
 'use strict';
 
 @Component({
-  selector: 'jem-add-tile',
+  selector: 'jem-add-vue',
   templateUrl: './jem-form.component.html'
 })
-export class JemAddTileComponent extends MillieuVueComponent {
+export class JemAddVueComponent extends MillieuVueComponent {
   function = "Add";
   submitted = false
   model: Jem = new Jem();

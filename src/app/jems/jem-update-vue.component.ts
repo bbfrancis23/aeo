@@ -6,10 +6,10 @@ import { MillieuService } from '../millieu/millieu.service';
 'use strict';
 
 @Component({
-  selector: 'jem-update-tile',
+  selector: 'jem-update-vue',
   templateUrl: './jem-form.component.html'
 })
-export class JemUpdateTileComponent extends MillieuVueComponent implements OnInit {
+export class JemUpdateVueComponent extends MillieuVueComponent implements OnInit {
   function = "Update";
   model: Object = {};
   submitted = false;
