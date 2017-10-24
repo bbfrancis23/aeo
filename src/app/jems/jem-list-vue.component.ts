@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ListVueComponent } from '../millieu/list-vue.component';
-import { MillieuService } from '../millieu/millieu.service';
+import { ListVueComponent } from '../milieu/list-vue.component';
+import { MilieuService } from '../milieu/milieu.service';
 
 
 //declare var jquery: any;
@@ -37,7 +37,7 @@ export class JemListVueComponent extends ListVueComponent implements OnInit {
 
 
 
-  constructor(protected data: MillieuService) { super(data); }
+  constructor(protected data: MilieuService) { super(data); }
 
   ngOnInit() {
     this.data.currentFilteredItems.subscribe(filteredItems => {

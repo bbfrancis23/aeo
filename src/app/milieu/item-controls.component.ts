@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { MillieuService } from './millieu.service';
+import { MilieuService } from './milieu.service';
 
 'use strict';
 
@@ -20,6 +20,6 @@ import { MillieuService } from './millieu.service';
 export class ItemControlsComponent {
 
   @Input() item: Object = {};
-  constructor(private data: MillieuService) { };
+  constructor(private data: MilieuService) { };
 }
 /* Copyright AEO all rights reserved */

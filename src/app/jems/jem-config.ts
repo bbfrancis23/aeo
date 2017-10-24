@@ -1,4 +1,4 @@
-import { Config } from '../millieu/config';
+import { Config } from '../milieu/config';
 
 'use strict';
 

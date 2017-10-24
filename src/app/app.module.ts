@@ -7,22 +7,22 @@ import { RouterModule } from '@angular/router';
 
 import { AeoHeaderComponent } from './aeo-header.component';
 import { AppComponent } from './app.component';
-import { FilterVueComponent } from './millieu/filter-vue.component';
-import { IntroVueComponent } from './millieu/intro-vue.component';
-import { ItemControlsComponent } from './millieu/item-controls.component';
+import { FilterVueComponent } from './milieu/filter-vue.component';
+import { IntroVueComponent } from './milieu/intro-vue.component';
+import { ItemControlsComponent } from './milieu/item-controls.component';
 import { JemAddVueComponent } from './jems/jem-add-vue.component';
-import { JemMillieuComponent } from './jems/jem-millieu.component';
+import { JemMilieuComponent } from './jems/jem-milieu.component';
 import { JemListVueComponent } from './jems/jem-list-vue.component';
 import { JemUpdateVueComponent } from './jems/jem-update-vue.component';
 import { JemCollectionVueComponent } from './jems/jem-collection-vue.component';
-import { ModalMillieuVueComponent } from './millieu/modal-millieu-vue.component';
-import { SizedItemsVueControlsComponent } from './millieu/sized-items-vue-controls.component';
-import { VueControlsComponent } from './millieu/vue-controls.component';
+import { ModalMilieuVueComponent } from './milieu/modal-milieu-vue.component';
+import { SizedItemsVueControlsComponent } from './milieu/sized-items-vue-controls.component';
+import { VueControlsComponent } from './milieu/vue-controls.component';
 import { JemComponent } from './jems/jem.component';
 import { JemSmallComponent } from './jems/jem-sm.component';
 
 import { CollectionService } from './collection.service';
-import { MillieuService } from './millieu/millieu.service';
+import { MilieuService } from './milieu/milieu.service';
 import { DataService } from './data.service';
 import { Utilities } from './utilities';
 
@@ -42,16 +42,16 @@ import { Utilities } from './utilities';
     JemAddVueComponent,
     JemCollectionVueComponent,
     JemComponent,
-    JemMillieuComponent,
+    JemMilieuComponent,
     JemListVueComponent,
     JemSmallComponent,
     JemUpdateVueComponent,
-    ModalMillieuVueComponent,
+    ModalMilieuVueComponent,
     SizedItemsVueControlsComponent,
     VueControlsComponent
   ],
   providers: [
-    CollectionService, MillieuService, DataService, Utilities
+    CollectionService, MilieuService, DataService, Utilities
   ],
   bootstrap: [AppComponent]
 })

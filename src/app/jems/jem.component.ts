@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Jem } from './jem';
-import { MillieuService } from '../millieu/millieu.service';
+import { MilieuService } from '../milieu/milieu.service';
 
 "use strict";
 
@@ -34,6 +34,6 @@ import { MillieuService } from '../millieu/millieu.service';
 export class JemComponent {
 
   @Input() jem: Jem;
-  constructor(protected data: MillieuService) { }
+  constructor(protected data: MilieuService) { }
 
 }

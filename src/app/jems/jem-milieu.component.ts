@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-import { MillieuComponent } from '../millieu/millieu.component';
-import { FilterVueComponent } from '../millieu/filter-vue.component';
-import { IntroVueComponent } from '../millieu/intro-vue.component';
+import { MilieuComponent } from '../milieu/milieu.component';
+import { FilterVueComponent } from '../milieu/filter-vue.component';
+import { IntroVueComponent } from '../milieu/intro-vue.component';
 import { JemAddVueComponent } from './jem-add-vue.component';
 import { JemCollectionVueComponent } from './jem-collection-vue.component';
 import { JemListVueComponent } from './jem-list-vue.component';
@@ -11,15 +11,27 @@ import { Utilities } from '../utilities';
 
 import { Jem } from './jem';
 import { JEM_CONFIG } from './jem-config';
-import { MillieuService } from '../millieu/millieu.service';
+import { MilieuService } from '../milieu/milieu.service';
 
 'use strict';
 
 @Component({
   selector: 'jem-vue',
-  templateUrl: './jem-millieu.component.html'
+  templateUrl: './jem-milieu.component.html',
+  styles: [`
+    .dash-board-controls{ padding-top: 56px; }
+    .container-classic{
+      margin-right: auto;
+      margin-left: auto;
+      padding-right: 15px;
+      padding-left: 15px;
+      width: 100%;
+      max-width: 1400px;
+    }
+
+  `]
 })
-export class JemMillieuComponent extends MillieuComponent implements OnInit {
+export class JemMilieuComponent extends MilieuComponent implements OnInit {
 
   jems: Jem[];
   selectedJem: Jem;
@@ -33,7 +45,7 @@ export class JemMillieuComponent extends MillieuComponent implements OnInit {
 
 
 
-  constructor(protected route: ActivatedRoute, protected utils: Utilities, protected data: MillieuService) {
+  constructor(protected route: ActivatedRoute, protected utils: Utilities, protected data: MilieuService) {
     super(route, utils, data);
     data.config = JEM_CONFIG;
     this.initConfig();
@@ -77,7 +89,6 @@ export class JemMillieuComponent extends MillieuComponent implements OnInit {
   }
 
   toggleListVue(): void {
-
     if (this.listVue.show) {
       this.filterVue.show = false;
       this.listVue.show = false;

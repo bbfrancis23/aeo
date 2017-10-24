@@ -1,22 +1,19 @@
-<div class="fixed-top container-fluid" style="padding-top: 56px">
-  <div class="row bg-secondary py-2">
-    <div class="col-md-6">
-      <h1 class="h2 text-white">Jems Dashboard</h1>
+<div class="sticky-top container-fluid dash-board-controls">
+  <div class="row bg-primary py-2">
 
-
-
-
-
+    <div class="col-lg-6">
+      <h1 class="h2 text-white">Code Jems</h1>
     </div>
-    <div class="col-md-6">
 
-      <div class="btn-group ml-2 float-md-right" >
-        <button class="btn btn-outline-primary material-icons" title="Dash Board" title="Dashboard"  [ngClass]="{'active': data.dashBoard}"  (click)="toggleDashBoard()">
+    <div class="col-lg-6">
+
+      <div class="btn-group ml-2 float-lg-right d-none d-lg-block" >
+        <button class="btn btn-outline-secondary material-icons" title="Dash Board" title="Dashboard"  [ngClass]="{'active': data.dashBoard}"  (click)="toggleDashBoard()">
           dashboard
         </button>
       </div>
 
-      <div class="btn-group float-md-right" *ngIf="data.dashBoard" >
+      <div class="btn-group float-lg-right d-none d-lg-block" *ngIf="data.dashBoard" >
         <button class="btn btn-primary material-icons" (click)="introVue.show = !introVue.show" [ngClass]="{'active': introVue.show}"  title="Jem Info View">
           info_outline
         </button>
@@ -37,30 +34,33 @@
         </button>
       </div>
 
-
-
     </div>
   </div>
 </div>
-<div  [ngClass]=" (isColumnVisible(0) && isColumnVisible(1) && isColumnVisible(2)) ? 'container-fluid' : 'container' "
-style="padding-top: 112px">
+
+
+<div class="milieu-content " [ngClass]=" (isColumnVisible(0) && isColumnVisible(1) && isColumnVisible(2)) ? 'container-fluid' : 'container-classic' " >
   <div class="row">
-    <div class="col-md-3">
+
+    <div class="col-lg-3">
         <intro-vue></intro-vue>
       <filter-vue></filter-vue>
     </div>
 
 
-    <div [ngClass]="isColumnVisible(0) ? 'col-md-9' : 'col-md-12'">
+    <div [ngClass]="isColumnVisible(0) ? 'col-lg-9' : 'col-lg-12'">
       <div class="row">
-        <div  [ngClass]=" isColumnVisible(2) ? 'col-md-6' : 'col-md-12'">
+
+        <div  [ngClass]=" isColumnVisible(2) ? 'col-lg-6' : 'col-lg-12'">
           <jem-list-vue  (selectItemEvent)="selectJem($event)"></jem-list-vue>
         </div>
-        <div  [ngClass]=" isColumnVisible(1) ? 'col-md-6' : 'col-md-12'">
+
+        <div  [ngClass]=" isColumnVisible(1) ? 'col-lg-6' : 'col-lg-12'">
           <jem-add-vue (jemAddedEvent)="addNewJem($event)"  ></jem-add-vue>
           <jem-update-vue ></jem-update-vue>
           <jem-collection-vue></jem-collection-vue>
         </div>
+
       </div>
     </div>
   </div>

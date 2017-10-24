@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { MillieuService } from './millieu.service';
+import { MilieuService } from './milieu.service';
 
 'use strict';
 
@@ -18,6 +18,6 @@ import { MillieuService } from './millieu.service';
 export class VueControlsComponent {
   @Output() hideVueEvent = new EventEmitter();
   @Output() modalVueEvent = new EventEmitter();
-  constructor(protected data: MillieuService) { }
+  constructor(protected data: MilieuService) { }
 }
 /* Copyright AEO all rights reserved */

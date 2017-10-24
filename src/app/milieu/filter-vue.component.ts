@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { MillieuVueComponent } from './millieu-vue.component';
+import { MilieuVueComponent } from './milieu-vue.component';
 import { Field } from './field';
 import { Location } from '@angular/common';
-import { MillieuService } from './millieu.service';
+import { MilieuService } from './milieu.service';
 
 'use strict';
 
@@ -21,9 +21,9 @@ import { MillieuService } from './millieu.service';
         </div>
       </div>`,
 })
-export class FilterVueComponent extends MillieuVueComponent {
+export class FilterVueComponent extends MilieuVueComponent {
   fields = this.data.config.fields;
-  constructor(protected data: MillieuService) { super(data); }
+  constructor(protected data: MilieuService) { super(data); }
 }
 
 /* Copyright AEO all rights reserved */

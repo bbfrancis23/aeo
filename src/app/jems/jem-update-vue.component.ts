@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MillieuVueComponent } from '../millieu/millieu-vue.component';
-import { MillieuService } from '../millieu/millieu.service';
+import { MilieuVueComponent } from '../milieu/milieu-vue.component';
+import { MilieuService } from '../milieu/milieu.service';
 
 
 'use strict';
@@ -9,7 +9,7 @@ import { MillieuService } from '../millieu/millieu.service';
   selector: 'jem-update-vue',
   templateUrl: './jem-form.component.html'
 })
-export class JemUpdateVueComponent extends MillieuVueComponent implements OnInit {
+export class JemUpdateVueComponent extends MilieuVueComponent implements OnInit {
   function = "Update";
   model: Object = {};
   submitted = false;
@@ -20,7 +20,7 @@ export class JemUpdateVueComponent extends MillieuVueComponent implements OnInit
     this.submitted = true;
   }
 
-  constructor(protected data: MillieuService) {
+  constructor(protected data: MilieuService) {
     super(data);
     data.currentSelectedItem.subscribe(selectedItem => this.model = selectedItem);
   }

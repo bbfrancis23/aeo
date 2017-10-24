@@ -1,0 +1,93 @@
+
+
+
+a{
+  cursor: pointer; cursor: hand;
+}
+
+p:first-letter {
+    text-transform:capitalize;
+}
+
+.tile{
+  margin-top: 1em;
+}
+
+.tile-controls {
+  position: absolute;
+  color: white;
+  top: 0px;
+  right: 5px;
+  font-size: small;
+
+}
+
+.tile-item{
+  font-size: small;
+
+}
+.tile-controls:hover{
+  color: #d3d3d3;
+}
+
+.tile-controls-dk, .item-controls{
+  position: absolute;
+  color: grey;
+  top: 0px;
+  right: 5px;
+}
+
+.tile-controls-dk:hover, .item-controls:hover{
+  color: black;
+}
+
+a.dropdown-item:hover:not([href]){
+  background-color: #007bff;
+  color: white;
+}
+
+.drawer{
+  display: inline-flex;
+    vertical-align: middle;
+}
+
+.mi-sm{
+
+  font-size: 1em;
+}
+
+
+.ng-valid[required], .ng-valid.required  {
+border: 2px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border: 2px solid #a94442; /* red */
+}
+
+.ng-untouched:not(form)  {
+  border: 1px solid gray; /* red */
+}
+
+.aeo-modal{
+  display: block;
+  position: fixed;
+  z-index: 9999999999999999;
+  left: 0;
+  top: 0;
+
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+
+  background-color: rgba(0,0,0,0.5);
+}
+
+.aeo-modal-content{
+  //background-color: #f4f4f4;
+  margin: 5% auto;
+  width: 70%;
+  /*padding: 20px;*/
+  z-index:1 ;
+  box-shadow: 10px 10px 1px 0 rgba(0,0,0,0.3)
+}

@@ -10,7 +10,7 @@ import { Utilities } from '../utilities';
 'use strict';
 
 @Injectable()
-export class MillieuService {
+export class MilieuService {
 
   config: Config;
 

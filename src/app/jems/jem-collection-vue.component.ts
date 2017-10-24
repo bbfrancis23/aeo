@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { MillieuVueComponent } from '../millieu/millieu-vue.component';
-import { MillieuService } from '../millieu/millieu.service';
+import { MilieuVueComponent } from '../milieu/milieu-vue.component';
+import { MilieuService } from '../milieu/milieu.service';
 import { Jem } from './jem';
 
 'use strict';
@@ -15,9 +15,9 @@ import { Jem } from './jem';
       </div>
     </div>`
 })
-export class JemCollectionVueComponent extends MillieuVueComponent {
+export class JemCollectionVueComponent extends MilieuVueComponent {
 
-  constructor(protected data: MillieuService) { super(data); }
+  constructor(protected data: MilieuService) { super(data); }
 
 }
 

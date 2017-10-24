@@ -1,15 +1,15 @@
 import { ActivatedRoute } from "@angular/router";
-import { MillieuService } from './millieu.service';
+import { MilieuService } from './milieu.service';
 import { Field } from './field';
 import { Utilities } from '../utilities';
 
 'use strict';
 
-export class MillieuComponent {
+export class MilieuComponent {
 
   columns: any[];
 
-  constructor(protected readonly route: ActivatedRoute, protected readonly utils: Utilities, protected readonly data: MillieuService) { }
+  constructor(protected readonly route: ActivatedRoute, protected readonly utils: Utilities, protected readonly data: MilieuService) { }
 
   initConfig() {
     this.data.init();
