@@ -16,7 +16,7 @@ export class MilieuService {
 
   private readonly headers = new Headers({ 'Content-Type': 'application/json' });
   api = 'api';
-  dashBoard = false;
+  _dashBoard = false;
 
   private readonly itemsSource = new BehaviorSubject<{}[]>([]);
   private readonly filteredItemsSource = new BehaviorSubject<{}[]>([]);
@@ -31,6 +31,9 @@ export class MilieuService {
   changeSelectedItem(selectedItem: {}) { this.selectedItemSource.next(selectedItem) }
 
   constructor(protected route: ActivatedRoute, private readonly http: Http, private readonly utils: Utilities, private readonly location: Location) { }
+
+  get dashBoard() { return this._dashBoard; }
+  set dashBoard(b: boolean) { this._dashBoard = b; this.updateUrl(); }
 
   // todo see if there is a way of getting rid of observable => Promise => observable;
   refresh() {
@@ -119,8 +122,14 @@ export class MilieuService {
 
   private updateUrl(): void {
 
+    //console.log(this.dashBoard);
 
     let url = this.config.directory, qs: string = '', fieldPaths: string[] = [], queryStrings: string[] = [];
+
+
+    if (this.dashBoard) {
+      queryStrings.push(`dash-board=true`);
+    }
 
     this.config.fields.forEach(field => {
       let filters = [];

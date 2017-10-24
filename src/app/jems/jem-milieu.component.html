@@ -8,7 +8,7 @@
     <div class="col-lg-6">
 
       <div class="btn-group ml-2 float-lg-right d-none d-lg-block" >
-        <button class="btn btn-outline-secondary material-icons" title="Dash Board" title="Dashboard"  [ngClass]="{'active': data.dashBoard}"  (click)="toggleDashBoard()">
+        <button class="btn btn-outline-secondary material-icons" title="Dash Board" [ngClass]="{'active': data.dashBoard}"  (click)="toggleDashBoard()">
           dashboard
         </button>
       </div>
@@ -41,14 +41,13 @@
 
 <div class="milieu-content " [ngClass]=" (isColumnVisible(0) && isColumnVisible(1) && isColumnVisible(2)) ? 'container-fluid' : 'container-classic' " >
   <div class="row">
-
-    <div class="col-lg-3">
-        <intro-vue></intro-vue>
+    <div [ngClass]=" (isColumnVisible(0) && isColumnVisible(1) && isColumnVisible(2)) ? 'col-lg-2' : 'col-lg-3' ">
+      <intro-vue></intro-vue>
       <filter-vue></filter-vue>
     </div>
 
 
-    <div [ngClass]="isColumnVisible(0) ? 'col-lg-9' : 'col-lg-12'">
+    <div [ngClass]="isColumnVisible(0) ? (   (isColumnVisible(0) && isColumnVisible(1) && isColumnVisible(2)) ? 'col-lg-10' : 'col-lg-9' ) : 'col-lg-12'">
       <div class="row">
 
         <div  [ngClass]=" isColumnVisible(2) ? 'col-lg-6' : 'col-lg-12'">
