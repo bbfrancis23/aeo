@@ -1,8 +1,4 @@
-
-
-
-
-<div class="fixed-top container-fluid dashboard-controls" style="padding-top: 56px">
+<div class="fixed-top container-fluid" style="padding-top: 56px">
   <div class="row bg-secondary py-2">
     <div class="col-md-6">
       <h1 class="h2 text-white">Jems Dashboard</h1>
@@ -21,22 +17,22 @@
       </div>
 
       <div class="btn-group float-md-right" *ngIf="data.dashBoard" >
-        <button class="btn btn-primary material-icons" (click)="introTile.show = !introTile.show" [ngClass]="{'active': introTile.show}"  title="Jem Info Tile">
+        <button class="btn btn-primary material-icons" (click)="introVue.show = !introVue.show" [ngClass]="{'active': introVue.show}"  title="Jem Info View">
           info_outline
         </button>
-        <button class="btn btn-primary material-icons" (click)="toggleFilterTile();" [ngClass]="{'active':filterTile.show}"  title="Jem Filter Tile">
+        <button class="btn btn-primary material-icons" (click)="toggleFilterVue();" [ngClass]="{'active':filterVue.show}"  title="Jem Filter View">
           filter_list
         </button>
-        <button class="btn btn-primary material-icons" (click)="toggleListTile();" [ngClass]="{'active': listTile.show}"  title="Jem List Tile">
+        <button class="btn btn-primary material-icons" (click)="toggleListVue();" [ngClass]="{'active': listVue.show}"  title="Jem List View">
           list
         </button>
-        <button class="btn btn-primary material-icons" (click)="addTile.show = !addTile.show" [ngClass]="{'active': addTile.show}"  title="Add Jem Tile">
+        <button class="btn btn-primary material-icons" (click)="addVue.show = !addVue.show" [ngClass]="{'active': addVue.show}"  title="Add Jem View">
           add
         </button>
-        <button class="btn btn-primary material-icons" (click)="updateTile.show = !updateTile.show" [ngClass]="{'active': updateTile.show}"  title="Edit Jem Tile">
+        <button class="btn btn-primary material-icons" (click)="updateVue.show = !updateVue.show" [ngClass]="{'active': updateVue.show}"  title="Edit Jem View">
           create
         </button>
-        <button class="btn btn-primary material-icons" (click)="collectionTile.show = !collectionTile.show" [ngClass]="{'active': collectionTile.show}"  title="Jem Collection Tile">
+        <button class="btn btn-primary material-icons" (click)="collectionVue.show = !collectionVue.show" [ngClass]="{'active': collectionVue.show}"  title="Jem Collection View">
           playlist_add
         </button>
       </div>
@@ -46,10 +42,7 @@
     </div>
   </div>
 </div>
-<div  [ngClass]="
-        { 'container-fluid':
-            ( (introTile.show || filterTile.show) && (listTile.show) && (addTile.show || updateTile.show || collectionTile.show) ),
-          container: ( (!(introTile.show || filterTile.show)) || (! listTile.show)  ||    (!(addTile.show || updateTile.show || collectionTile.show))  ) || !data.dashBoard}"
+<div  [ngClass]=" (isColumnVisible(0) && isColumnVisible(1) && isColumnVisible(2)) ? 'container-fluid' : 'container' "
 style="padding-top: 112px">
   <div class="row">
     <div class="col-md-3">
@@ -57,12 +50,13 @@ style="padding-top: 112px">
       <filter-vue></filter-vue>
     </div>
 
-    <div [ngClass]="isFirstColShown() ? 'col-md-9' : 'col-md-12'">
+
+    <div [ngClass]="isColumnVisible(0) ? 'col-md-9' : 'col-md-12'">
       <div class="row">
-        <div  [ngClass]="{'col-md-6': (addTile.show || updateTile.show || collectionTile.show), 'col-md-12': (!addTile.show && !updateTile.show && ! collectionTile.show)}">
+        <div  [ngClass]=" isColumnVisible(2) ? 'col-md-6' : 'col-md-12'">
           <jem-list-vue  (selectItemEvent)="selectJem($event)"></jem-list-vue>
         </div>
-        <div [ngClass]="{'col-md-6': (listTile.show ), 'col-md-12': (!listTile.show)}">
+        <div  [ngClass]=" isColumnVisible(1) ? 'col-md-6' : 'col-md-12'">
           <jem-add-vue (jemAddedEvent)="addNewJem($event)"  ></jem-add-vue>
           <jem-update-vue ></jem-update-vue>
           <jem-collection-vue></jem-collection-vue>

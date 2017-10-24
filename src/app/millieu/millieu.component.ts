@@ -6,6 +6,9 @@ import { Utilities } from '../utilities';
 'use strict';
 
 export class MillieuComponent {
+
+  columns: any[];
+
   constructor(protected readonly route: ActivatedRoute, protected readonly utils: Utilities, protected readonly data: MillieuService) { }
 
   initConfig() {
@@ -36,6 +39,11 @@ export class MillieuComponent {
       });
     });
 
+  }
+
+  isColumnVisible(index) {
+    let result = this.columns[index].find(vue => vue.show === true);
+    return result ? result : false;
   }
 
 }

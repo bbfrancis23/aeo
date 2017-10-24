@@ -24,12 +24,14 @@ export class JemMillieuComponent extends MillieuComponent implements OnInit {
   jems: Jem[];
   selectedJem: Jem;
 
-  @ViewChild(JemListVueComponent) listTile;
-  @ViewChild(JemAddVueComponent) addTile;
-  @ViewChild(JemUpdateVueComponent) updateTile;
-  @ViewChild(JemCollectionVueComponent) collectionTile;
-  @ViewChild(IntroVueComponent) introTile;
-  @ViewChild(FilterVueComponent) filterTile;
+  @ViewChild(JemListVueComponent) listVue;
+  @ViewChild(JemAddVueComponent) addVue;
+  @ViewChild(JemUpdateVueComponent) updateVue;
+  @ViewChild(JemCollectionVueComponent) collectionVue;
+  @ViewChild(IntroVueComponent) introVue;
+  @ViewChild(FilterVueComponent) filterVue;
+
+
 
   constructor(protected route: ActivatedRoute, protected utils: Utilities, protected data: MillieuService) {
     super(route, utils, data);
@@ -39,52 +41,51 @@ export class JemMillieuComponent extends MillieuComponent implements OnInit {
 
   ngOnInit() {
     if (!this.data.dashBoard) {
-      this.addTile.show = false;
-      this.updateTile.show = false;
-      this.collectionTile.show = false;
+      this.addVue.show = false;
+      this.updateVue.show = false;
+      this.collectionVue.show = false;
     }
+
+    this.columns = [
+      [this.introVue, this.filterVue],
+      [this.listVue],
+      [this.addVue, this.updateVue, this.collectionVue]];
   }
 
   toggleDashBoard() {
     this.data.dashBoard = !this.data.dashBoard;
 
     if (this.data.dashBoard) {
-      this.updateTile.show = true;
-      this.addTile.show = true;
-      this.collectionTile.show = true;
+      this.updateVue.show = true;
+      this.addVue.show = true;
+      this.collectionVue.show = true;
     } else {
-      this.updateTile.show = false;
-      this.addTile.show = false;
-      this.collectionTile.show = false;
+      this.updateVue.show = false;
+      this.addVue.show = false;
+      this.collectionVue.show = false;
     }
 
   }
 
-  toggleFilterTile(): void {
-    if (this.filterTile.show === true) {
-      this.filterTile.show = false
+  toggleFilterVue(): void {
+    if (this.filterVue.show === true) {
+      this.filterVue.show = false
     } else {
-      this.filterTile.show = true;
-      this.listTile.show = true;
+      this.filterVue.show = true;
+      this.listVue.show = true;
     }
   }
 
-  toggleListTile(): void {
+  toggleListVue(): void {
 
-    if (this.listTile.show) {
-      this.filterTile.show = false;
-      this.listTile.show = false;
+    if (this.listVue.show) {
+      this.filterVue.show = false;
+      this.listVue.show = false;
     } else {
-      this.listTile.show = true;
+      this.listVue.show = true;
     }
   }
 
-  isFirstColShown() {
-    return (this.introTile.show || this.filterTile.show) ? true : false;
-  }
 
-  isSecondColShown() {
-    return (this.listTile) ? true : false;
-  }
 }
 /* Copyright AEO all rights reserved */

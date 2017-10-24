@@ -17,8 +17,8 @@ import { MillieuService } from '../millieu/millieu.service';
           <h4 class="card p-3 bg-primary text-white">Jems List</h4>
           <sized-items-vue-controls
             *ngIf="modalChild.modalMode === false && data.dashBoard"
-            (hideTileEvent)="show=false"
-            (modalTileEvent)="modalChild.modalMode=true;"
+            (hideVueEvent)="show=false"
+            (modalVueEvent)="modalChild.modalMode=true;"
             (toggleItemSizeEvent)="showBig = !showBig" >
           </sized-items-vue-controls>
 
