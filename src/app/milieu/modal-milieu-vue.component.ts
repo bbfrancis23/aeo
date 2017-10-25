@@ -17,8 +17,14 @@ export class ModalMilieuVueComponent {
 
   outSideClick(e) {
 
-    if (e.target.className === 'aeo-modal') {
+    console.log(e.target.className);
+
+    if (e.target.className === 'aeo-modal' || e.target.className === 'close-modal') {
       this.modalMode = false;
     }
   }
+
+
 }
+
+/* copyright AEO all right reserved */

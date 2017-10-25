@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MilieuVueComponent } from './milieu-vue.component';
 import { Field } from './field';
 import { Location } from '@angular/common';

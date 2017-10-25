@@ -1,10 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ListVueComponent } from '../milieu/list-vue.component';
 import { MilieuService } from '../milieu/milieu.service';
-
-
-//declare var jquery: any;
-//declare var $: any;
 
 "use strict";
 
@@ -14,13 +10,17 @@ import { MilieuService } from '../milieu/milieu.service';
 
         <modal-vue>
         <div class="tile" [hidden]="!show"  >
-          <h4 class="card p-3 bg-primary text-white">Jems List</h4>
+          <h4 class="card p-3 bg-primary text-white">
+            Jems List
+            <modal-controls *ngIf="modalChild.modalMode === true"></modal-controls>
+          </h4>
           <sized-items-vue-controls
             *ngIf="modalChild.modalMode === false && data.dashBoard"
             (hideVueEvent)="show=false"
             (modalVueEvent)="modalChild.modalMode=true;"
             (toggleItemSizeEvent)="showBig = !showBig" >
           </sized-items-vue-controls>
+
 
           <div class="tile"  *ngIf="showBig" >
             <jem *ngFor="let jem of items" [jem]="jem" ></jem>
@@ -35,8 +35,6 @@ import { MilieuService } from '../milieu/milieu.service';
 })
 export class JemListVueComponent extends ListVueComponent implements OnInit {
 
-
-
   constructor(protected data: MilieuService) { super(data); }
 
   ngOnInit() {
@@ -50,4 +48,7 @@ export class JemListVueComponent extends ListVueComponent implements OnInit {
 
 
 
+
 }
+
+/* copyright AEO all right reserved */

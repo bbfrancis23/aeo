@@ -15,6 +15,7 @@ import { JemMilieuComponent } from './jems/jem-milieu.component';
 import { JemListVueComponent } from './jems/jem-list-vue.component';
 import { JemUpdateVueComponent } from './jems/jem-update-vue.component';
 import { JemCollectionVueComponent } from './jems/jem-collection-vue.component';
+import { ModalControlsComponent } from './milieu/modal-controls.component';
 import { ModalMilieuVueComponent } from './milieu/modal-milieu-vue.component';
 import { SizedItemsVueControlsComponent } from './milieu/sized-items-vue-controls.component';
 import { VueControlsComponent } from './milieu/vue-controls.component';
@@ -46,6 +47,7 @@ import { Utilities } from './utilities';
     JemListVueComponent,
     JemSmallComponent,
     JemUpdateVueComponent,
+    ModalControlsComponent,
     ModalMilieuVueComponent,
     SizedItemsVueControlsComponent,
     VueControlsComponent
