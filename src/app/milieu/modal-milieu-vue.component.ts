@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'modal-vue',
   template: `
-    <div [ngClass]="{'aeo-modal': modalMode}"  (click)="outSideClick($event)">
+    <div [ngClass]="{'aeo-modal': modalMode}"  (click)="modalClick($event)">
       <div [ngClass]="{'aeo-modal-content': modalMode}">
         <ng-content></ng-content>
       </div>
@@ -15,10 +15,7 @@ import { Component } from '@angular/core';
 export class ModalMilieuVueComponent {
   modalMode = false;
 
-  outSideClick(e) {
-
-    console.log(e.target.className);
-
+  modalClick(e) {
     if (e.target.className === 'aeo-modal' || e.target.className === 'close-modal') {
       this.modalMode = false;
     }

@@ -29,7 +29,8 @@ import { MilieuService } from '../milieu/milieu.service';
       max-width: 1400px;
     }
 
-  `]
+  `],
+  providers: [MilieuService]
 })
 export class JemMilieuComponent extends MilieuComponent implements OnInit {
 

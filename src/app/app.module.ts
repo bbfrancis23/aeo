@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { LogInVueComponent } from './milieu/log-in-vue.component';
+
 import { AeoHeaderComponent } from './aeo-header.component';
 import { AppComponent } from './app.component';
 import { FilterVueComponent } from './milieu/filter-vue.component';
@@ -21,10 +23,11 @@ import { SizedItemsVueControlsComponent } from './milieu/sized-items-vue-control
 import { VueControlsComponent } from './milieu/vue-controls.component';
 import { JemComponent } from './jems/jem.component';
 import { JemSmallComponent } from './jems/jem-sm.component';
+import { JemService } from './jems/jem.service';
+
+import { AccountMilieuComponent } from './account/account-milieu.component';
 
 import { CollectionService } from './collection.service';
-import { MilieuService } from './milieu/milieu.service';
-import { DataService } from './data.service';
 import { Utilities } from './utilities';
 
 @NgModule({
@@ -35,11 +38,21 @@ import { Utilities } from './utilities';
     HttpModule
   ],
   declarations: [
+    // global
     AppComponent,
     AeoHeaderComponent,
+
+    // Milieu
     FilterVueComponent,
     IntroVueComponent,
     ItemControlsComponent,
+    LogInVueComponent,
+    ModalControlsComponent,
+    ModalMilieuVueComponent,
+    SizedItemsVueControlsComponent,
+    VueControlsComponent,
+
+    // Jem Milieu
     JemAddVueComponent,
     JemCollectionVueComponent,
     JemComponent,
@@ -47,13 +60,12 @@ import { Utilities } from './utilities';
     JemListVueComponent,
     JemSmallComponent,
     JemUpdateVueComponent,
-    ModalControlsComponent,
-    ModalMilieuVueComponent,
-    SizedItemsVueControlsComponent,
-    VueControlsComponent
+
+    // Account Milieu
+    AccountMilieuComponent
   ],
   providers: [
-    CollectionService, MilieuService, DataService, Utilities
+    CollectionService, Utilities
   ],
   bootstrap: [AppComponent]
 })

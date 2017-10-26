@@ -10,7 +10,8 @@ import { MilieuService } from '../milieu/milieu.service';
     <div  class="card mb-3"
         [ngClass]="{  'border-success': jem.type === 'Best Practices',
                       'border-danger': jem.type === 'Mistakes',
-                      'border-info': jem.type === 'How to'}">
+                      'border-info': jem.type === 'How to',
+                      'border-dark': jem.type === 'Style Guide'}">
     <item-controls [item]="jem" *ngIf="data.dashBoard" ></item-controls>
     <div class="card-body">
       <h4 class="card-title">{{jem.title}}</h4>
@@ -20,7 +21,8 @@ import { MilieuService } from '../milieu/milieu.service';
           [ngClass]="{
             'badge-success':jem.type === 'Best Practices',
             'badge-danger': jem.type === 'Mistakes',
-            'badge-info': jem.type === 'How to'}" >
+            'badge-info': jem.type === 'How to',
+            'badge-dark': jem.type === 'Style Guide'}" >
               {{jem.type}}
         </span>
       </h5>

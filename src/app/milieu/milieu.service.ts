@@ -17,6 +17,9 @@ export class MilieuService {
   private readonly headers = new Headers({ 'Content-Type': 'application/json' });
   api = 'api';
   _dashBoard = false;
+  pageTitle = '';
+  itemsMode = true;
+
 
   private readonly itemsSource = new BehaviorSubject<{}[]>([]);
   private readonly filteredItemsSource = new BehaviorSubject<{}[]>([]);
@@ -37,18 +40,22 @@ export class MilieuService {
 
   // todo see if there is a way of getting rid of observable => Promise => observable;
   refresh() {
-    let items = this.http.get(`api/${this.config.name}`).toPromise().then(response => response.json().data);
-    items.then(items => {
-      this.changeItems(items);
-      this.changeFilteredItems(items);
-      this.currentItems.subscribe(items => {
-        this.changeSelectedItem(items[0]);
+    if (this.itemsMode === true) {
+      let items = this.http.get(`api/${this.config.name}`).toPromise().then(response => response.json().data);
+      items.then(items => {
+        this.changeItems(items);
+        this.changeFilteredItems(items);
+        this.currentItems.subscribe(items => {
+          this.changeSelectedItem(items[0]);
+        });
+        this.filter();
       });
-      this.filter();
-    });
+    }
+
   }
 
   init() {
+
     this.refresh();
     // takes fieldsRaw ['Git', 'JavaScript', 'HTML'] and converts them to [name: 'Git', filtered: false ]
     // this saves typing / time on config file creation.
@@ -58,6 +65,7 @@ export class MilieuService {
       this.config.fields.push(newField);
     });
     delete this.config.fieldsRaw;
+    this.pageTitle = this.config.title;
   }
 
   // todo: overhaul on this after doing the server side //
@@ -124,7 +132,7 @@ export class MilieuService {
 
     //console.log(this.dashBoard);
 
-    let url = this.config.directory, qs: string = '', fieldPaths: string[] = [], queryStrings: string[] = [];
+    let url = this.config.directory, qs: string = '', fieldPaths: string[] = [], queryStrings: string[] = [], selectedFilters: string[] = [];
 
 
     if (this.dashBoard) {
@@ -137,12 +145,15 @@ export class MilieuService {
 
       if (filters.length === 1) {
         fieldPaths.push(`${this.utils.urlify(field.name)}/${this.utils.urlify(filters[0])}`);
+        selectedFilters.push(filters[0]);
+
       } else if (filters.length > 1) {
         queryStrings.push(`${this.utils.urlify(field.name)}=${this.utils.urlify(filters.join(','))}`);
       }
     });
 
     this.location.replaceState(`${url}/${fieldPaths.join('/')}`, `${queryStrings.join('&')}`);
+    this.pageTitle = selectedFilters.length > 0 ? selectedFilters.join(' ') : this.config.title;
   }
 
   // over hault this after backend

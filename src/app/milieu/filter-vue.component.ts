@@ -23,7 +23,11 @@ import { MilieuService } from './milieu.service';
 })
 export class FilterVueComponent extends MilieuVueComponent {
   fields = this.data.config.fields;
-  constructor(protected data: MilieuService) { super(data); }
+
+  constructor(protected data: MilieuService) {
+    super(data);
+    console.log(data);
+  }
 }
 
 /* Copyright AEO all rights reserved */

@@ -11,10 +11,11 @@ import { MilieuService } from '../milieu/milieu.service';
       [ngClass]="{
         'bg-success': jem.type === 'Best Practices',
         'bg-danger': jem.type === 'Mistakes',
-        'bg-info': jem.type === 'How to'}" style="margin-bottom: 5px"><!-- to do get rid of this -->
+        'bg-info': jem.type === 'How to',
+        'bg-dark': jem.type === 'Style Guide'}" style="margin-bottom: 5px"><!-- to do get rid of this -->
       <item-controls [item]="jem" *ngIf="data.dashBoard" ></item-controls>
         <p><b>{{jem.title}}: </b> {{jem.description}}</p>
-        <pre>{{jem.code}}</pre>
+        <pre >{{jem.code}}</pre>
     </div>`,
 })
 export class JemSmallComponent {
