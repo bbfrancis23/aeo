@@ -38,6 +38,16 @@ export class MilieuService {
   get dashBoard() { return this._dashBoard; }
   set dashBoard(b: boolean) { this._dashBoard = b; this.updateUrl(); }
 
+  login(logInFields) {
+    //console.log(this.config.name);
+    //console.log(this.config.name);
+
+    console.log('service trying to submit');
+
+    //let something = JSON.stringify(logInFields); // this need to change to data
+    let items = this.http.post(`api/login`, logInFields, { headers: this.headers }).toPromise().then(response => console.log(response));
+  }
+
   // todo see if there is a way of getting rid of observable => Promise => observable;
   refresh() {
     if (this.itemsMode === true) {

@@ -1,6 +1,8 @@
 import { Field } from './field';
 import { FieldRaw } from './field-raw';
 
+// Opt
+
 'use strict'
 
 export class Config {

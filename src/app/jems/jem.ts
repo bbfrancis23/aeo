@@ -1,8 +1,9 @@
 export class Jem {
-  _id = '';
-  title = '';
+  _id?: '';
+  title: '';
   description = '';
-  code = '';
+  code?: '';
   tech = '';
   type = '';
+  keys?: '';
 }
