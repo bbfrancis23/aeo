@@ -67,7 +67,7 @@ app.get( '/jems', ( req, res ) => {
     });
   }
 });
-
+ 
 app.delete( '/jems/:id', ( req, res ) => {
   if(auth(req,res)){
     connection( ( db ) => {

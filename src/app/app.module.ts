@@ -20,6 +20,7 @@ import { JemSmallComponent } from './jems/jem-sm.component';
 import { JemService } from './jems/jem.service';
 
 import { AccountMilieuComponent } from './account/account-milieu.component';
+import { MagicHandsHealingComponent } from './jody/magic-hands-healing.component';
 
 import { CollectionService } from './collection.service';
 import { Utilities } from './utilities';
@@ -44,7 +45,9 @@ import { Utilities } from './utilities';
     JemSmallComponent,
     JemUpdateVueComponent,
 
-    AccountMilieuComponent
+    AccountMilieuComponent,
+
+    MagicHandsHealingComponent
   ],
   providers: [
     CollectionService, Utilities
