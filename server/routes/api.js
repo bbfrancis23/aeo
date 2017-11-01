@@ -67,7 +67,7 @@ app.get( '/jems', ( req, res ) => {
     });
   }
 });
- 
+
 app.delete( '/jems/:id', ( req, res ) => {
   if(auth(req,res)){
     connection( ( db ) => {
@@ -130,49 +130,50 @@ app.post( '/jems', ( req, res ) => {
 
 app.post( '/login', ( req, result ) => {
 
-  let loginInfo = req.body.jem || {};
-  //result.cookie( 'token', 'grot' ).send( 'cookie is set' );
-
   console.log( "Cookies :  ", req.cookies );
-  //let password = '$2a$10$GlJP6GznV7Lo1yEHt1INzeutPp.QrcjSoGXRwWppryB9A1w/P4qEe';
 
-  //bcrypt.compare( req.body.password, password, function( err, res ) {
-  //  console.log( res );
-  //} );
-  //console.log( req.body.email, req.body.password );
   connection( ( db ) => {
-
     db.collection( 'accounts' ).findOne( {
       email: req.body.email
     }, ( err, doc ) => {
 
-      if ( err ) {
-        console.log( err );
+      if ( err ) { sendError(err,res);
       } else {
-        bcrypt.compare( req.body.password, doc.password, ( err, res ) => {
 
-          if ( err ) {
-            console.log( err );
-          } else if ( res ) {
-            console.log( req.body.password, doc.password );
-            console.log( res );
+        if(doc){
+          bcrypt.compare( req.body.password, doc.password, ( err, res ) => {
+            if ( err ) {
+              sendError(err, res);
+            } else if ( res ) {
+              //console.log( req.body.password, doc.password );
 
-            var token = jwt.encode( req.body.email, JWT_SECRET );
+              var token = jwt.encode( req.body.email, JWT_SECRET );
 
-            console.log( 'token', token );
-            var date = new Date( Date.now() );
-            var newDate = new Date( date.setTime( date.getTime() + 30 * 86400000 ) );
-            console.log( newDate );
+              db.collection('accounts').updateOne({ email: req.body.email}, {$set: {token: token}}, (err, res) =>{
+                if(err){
+                  sendError(err, res);
+                }else{
+                  result.cookie( 'token', token, {} ).send( 'login success' );
+                }
+              });
 
-            result.cookie( 'token', token, {} ).send( 'cookie is set' );
 
-            console.log( 'setting a cookie' );
 
-          } else {
-            console.log( 'login failed' );
-          }
 
-        } );
+
+            } else {
+
+              response.message = 'login failed';
+              result.json(response);
+            }
+
+          } );
+        }else{
+          response.message = 'Invalid Email';
+          result.json(response);
+        }
+
+
 
       }
 
@@ -181,10 +182,6 @@ app.post( '/login', ( req, result ) => {
 
 
   } );
-
-
-
-  //result.sendStatus( 200 );
 } );
 
 
