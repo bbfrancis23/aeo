@@ -1,7 +1,7 @@
 import { ActivatedRoute } from "@angular/router";
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Config } from './config';
-import { Field } from './field';
+import { Config } from './data-classes';
+import { Field } from './data-classes';
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import { Location } from '@angular/common';
@@ -17,8 +17,11 @@ export class MilieuService {
   private readonly headers = new Headers({ 'Content-Type': 'application/json' });
   api = 'api';
   _dashBoard = false;
+  dashBoardPermission = 'admin';
   pageTitle = '';
   itemsMode = true;
+  authenticated = false;
+  admin = false;
 
 
   private readonly itemsSource = new BehaviorSubject<{}[]>([]);
@@ -36,13 +39,17 @@ export class MilieuService {
   constructor(protected route: ActivatedRoute, private readonly http: Http, private readonly utils: Utilities, private readonly location: Location) { }
 
   get dashBoard() { return this._dashBoard; }
-  set dashBoard(b: boolean) { this._dashBoard = b; this.updateUrl(); }
+  set dashBoard(b: boolean) {
+    if(this.dashBoardPermission === 'admin' && this.admin || !(this.dashBoardPermission === 'admin'))
+    this._dashBoard = b;
+    this.updateUrl();
+  }
 
   login(logInFields) {
     //console.log(this.config.name);
     //console.log(this.config.name);
 
-    console.log('service trying to submit');
+    //console.log('service trying to submit');
 
     //let something = JSON.stringify(logInFields); // this need to change to data
     let items = this.http.post(`api/login`, logInFields, { headers: this.headers }).toPromise().then(response => console.log(response));
@@ -50,6 +57,14 @@ export class MilieuService {
 
   // todo see if there is a way of getting rid of observable => Promise => observable;
   refresh() {
+    console.log('Freash');
+    this.http.get('api/session').toPromise().then(result => {
+      if(result.json().message === 'Admin'){
+        this.admin = true;
+      }
+    });
+
+
     if (this.itemsMode === true) {
       let items = this.http.get(`api/${this.config.name}`).toPromise().then(response => response.json().data);
       items.then(items => {
@@ -60,6 +75,8 @@ export class MilieuService {
         });
         this.filter();
       });
+
+
     }
 
   }

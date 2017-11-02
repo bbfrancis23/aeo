@@ -29,7 +29,7 @@ const connection = ( closure ) => {
   } );
 };
 
-// Response handling
+// Response handling // get rid of this.... it keeps artifact data around.
 let response = {
   status: 200,
   data: [],
@@ -126,11 +126,31 @@ app.post( '/jems', ( req, res ) => {
 
   } );
 } );
-//
+
+
+app.get('/session', (req, res) =>{
+  console.log('called session');
+  if(auth(req,res)){
+    connection( ( db ) => {
+
+      db.collection('accounts').findOne({ token: sanitize( req.cookies.token ) }, (err, result) => {
+        if(result){
+          response.message = result.type;
+          res.json(response);
+        }else{
+          response.message = 'null';
+          res.json(response);
+        }
+        db.close;
+      });
+
+    });
+  }
+});
 
 app.post( '/login', ( req, result ) => {
 
-  console.log( "Cookies :  ", req.cookies );
+  //console.log( "Cookies :  ", req.cookies );
 
   connection( ( db ) => {
     db.collection( 'accounts' ).findOne( {

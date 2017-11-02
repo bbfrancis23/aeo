@@ -9,3 +9,4 @@ export class ListVueComponent extends MilieuVueComponent {
 
   constructor(protected data: MilieuService) { super(data); }
 }
+/* Copyright AEO all rights reserved */

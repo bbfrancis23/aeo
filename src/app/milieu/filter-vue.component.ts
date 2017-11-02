@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MilieuVueComponent } from './milieu-vue.component';
-import { Field } from './field';
+import { Field } from './data-classes';
 import { Location } from '@angular/common';
 import { MilieuService } from './milieu.service';
 

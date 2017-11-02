@@ -7,7 +7,7 @@
 
     <div class="col-lg-6">
 
-      <div class="btn-group ml-2 float-lg-right d-none d-lg-block" >
+      <div class="btn-group ml-2 float-lg-right d-none d-lg-block" *ngIf="data.admin">
         <button class="btn btn-outline-secondary material-icons" title="Dash Board" [ngClass]="{'active': data.dashBoard}"  (click)="toggleDashBoard()">
           dashboard
         </button>

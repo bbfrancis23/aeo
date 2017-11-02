@@ -1,6 +1,6 @@
 import { ActivatedRoute } from "@angular/router";
 import { MilieuService } from './milieu.service';
-import { Field } from './field';
+import { Field } from './data-classes';
 import { Utilities } from '../utilities';
 
 'use strict';
@@ -29,7 +29,7 @@ export class MilieuComponent {
 
     this.route.queryParams.subscribe(params => {
 
-      if (params['dash-board']) {
+      if (params['dash-board'] ) {
         this.data.dashBoard = true;
       }
 

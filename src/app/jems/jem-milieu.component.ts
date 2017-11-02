@@ -66,6 +66,7 @@ export class JemMilieuComponent extends MilieuComponent implements OnInit {
   }
 
   toggleDashBoard() {
+
     this.data.dashBoard = !this.data.dashBoard;
 
     if (this.data.dashBoard) {

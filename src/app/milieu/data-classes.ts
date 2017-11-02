@@ -1,6 +1,3 @@
-import { Field } from './field';
-import { FieldRaw } from './field-raw';
-
 // Opt
 
 'use strict'
@@ -17,4 +14,13 @@ export class Config {
   fields: Field[] = [];
 }
 
+export class Field {
+  name = '';
+  values = [{ name: '', filtered: false }];
+}
+
+export class FieldRaw {
+  name = '';
+  values = [''];
+}
 /* copyright AEO all right reserved */
