@@ -10,7 +10,7 @@ import { FilterVueComponent } from './milieu/filter-vue.component';
 import { IntroVueComponent } from './milieu/intro-vue.component';
 import { ItemControlsComponent } from './milieu/item-controls.component';
 import { ModalControlsComponent } from './milieu/modal-controls.component';
-import { ModalMilieuVueComponent } from './milieu/modal-milieu-vue.component';
+import { ModalVueComponent } from './milieu/modal-vue.component';
 import { SizedItemsVueControlsComponent } from './milieu/sized-items-vue-controls.component';
 import { VueControlsComponent } from './milieu/vue-controls.component';
 
@@ -28,7 +28,7 @@ import { LogInVueComponent } from './milieu/log-in-vue.component';
     ItemControlsComponent,
     LogInVueComponent,
     ModalControlsComponent,
-    ModalMilieuVueComponent,
+    ModalVueComponent,
     SizedItemsVueControlsComponent,
     VueControlsComponent
   ],
@@ -38,7 +38,7 @@ import { LogInVueComponent } from './milieu/log-in-vue.component';
     ItemControlsComponent,
     LogInVueComponent,
     ModalControlsComponent,
-    ModalMilieuVueComponent,
+    ModalVueComponent,
     SizedItemsVueControlsComponent,
     VueControlsComponent
   ]

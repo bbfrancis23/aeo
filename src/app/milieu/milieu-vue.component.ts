@@ -1,13 +1,13 @@
 import { ViewChild } from '@angular/core';
 import { MilieuService } from './milieu.service';
-import { ModalMilieuVueComponent } from './modal-milieu-vue.component';
+import { ModalVueComponent } from './modal-vue.component';
 
 'use strict';
 
 export class MilieuVueComponent {
   private show = true;
 
-  @ViewChild(ModalMilieuVueComponent) modalChild;
+  @ViewChild(ModalVueComponent) modalChild;
 
   constructor(protected data: MilieuService) { };
 }

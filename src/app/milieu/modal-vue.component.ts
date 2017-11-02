@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
     </div>`
 
 })
-export class ModalMilieuVueComponent {
+export class ModalVueComponent {
   modalMode = false;
 
   modalClick(e) {
