@@ -4,6 +4,8 @@ import { MilieuService } from './milieu.service';
 
 'use strict';
 
+// js-opt //
+
 @Component({
   selector: 'intro-vue',
   template:
@@ -18,9 +20,6 @@ import { MilieuService } from './milieu.service';
       </div>
     </div>`
 })
-export class IntroVueComponent extends MilieuVueComponent {
-
-  constructor(protected data: MilieuService) { super(data); }
-}
+export class IntroVueComponent extends MilieuVueComponent { constructor(protected data: MilieuService) { super(data); } }
 
 /* Copyright AEO all rights reserved */

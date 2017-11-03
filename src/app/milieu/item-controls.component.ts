@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { MilieuService } from './milieu.service';
 
+// opt-js //
+
 'use strict';
 
 @Component({

@@ -9,6 +9,8 @@ import { Utilities } from '../utilities';
 
 'use strict';
 
+// opt-js //
+
 @Injectable()
 export class MilieuService {
 

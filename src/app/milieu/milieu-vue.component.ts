@@ -6,9 +6,7 @@ import { ModalVueComponent } from './modal-vue.component';
 
 export class MilieuVueComponent {
   private show = true;
-
   @ViewChild(ModalVueComponent) modalChild;
-
   constructor(protected data: MilieuService) { };
 }
 

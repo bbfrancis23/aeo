@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { MilieuVueComponent } from './milieu-vue.component';
-import { Field } from './data-classes';
-import { Location } from '@angular/common';
 import { MilieuService } from './milieu.service';
 
 'use strict';
@@ -23,11 +21,7 @@ import { MilieuService } from './milieu.service';
 })
 export class FilterVueComponent extends MilieuVueComponent {
   fields = this.data.config.fields;
-
-  constructor(protected data: MilieuService) {
-    super(data);
-    console.log(data);
-  }
+  constructor(protected data: MilieuService) { super(data); }
 }
 
 /* Copyright AEO all rights reserved */

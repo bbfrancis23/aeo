@@ -4,6 +4,8 @@ import { MilieuService } from './milieu.service';
 
 'use strict';
 
+// opt-js //
+
 @Component({
   selector: 'sized-items-vue-controls',
   template: `<div class="tile-controls-dk" >

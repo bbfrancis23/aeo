@@ -5,6 +5,8 @@ import { MilieuService } from '../milieu/milieu.service';
 
 'use strict';
 
+// opt-js //
+
 @Component({
   selector: 'log-in-vue',
   template: `
@@ -39,12 +41,9 @@ import { MilieuService } from '../milieu/milieu.service';
 })
 export class LogInVueComponent extends MilieuVueComponent implements OnInit {
   submitted = false;
-
   logInForm: FormGroup;
 
-  constructor(protected data: MilieuService) {
-    super(data);
-  }
+  constructor(protected data: MilieuService) { super(data); }
 
   ngOnInit() {
     this.logInForm = new FormGroup({

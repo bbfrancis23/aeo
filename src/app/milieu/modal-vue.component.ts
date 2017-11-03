@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 
 'use strict'
 
+// opt-js //
+
 @Component({
   selector: 'modal-vue',
   template: `

@@ -1,9 +1,10 @@
 import { ActivatedRoute } from "@angular/router";
 import { MilieuService } from './milieu.service';
-import { Field } from './data-classes';
 import { Utilities } from '../utilities';
 
 'use strict';
+
+// opt-js //
 
 export class MilieuComponent {
 

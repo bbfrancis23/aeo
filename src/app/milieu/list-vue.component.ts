@@ -1,6 +1,8 @@
 import { MilieuVueComponent } from './milieu-vue.component';
 import { MilieuService } from './milieu.service';
 
+// opt-js//
+
 "use strict";
 
 export class ListVueComponent extends MilieuVueComponent {

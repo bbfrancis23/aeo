@@ -2,6 +2,8 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { MilieuService } from './milieu.service';
 
 'use strict';
+// js-opt //
+
 
 @Component({
   selector: 'vue-controls',
