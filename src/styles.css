@@ -1,1 +1,198 @@
-a{cursor:pointer;cursor:hand}p:first-letter{text-transform:capitalize}.tile{margin-top:1em}.tile-controls{position:absolute;color:#fff;top:0;right:5px;font-size:small}.tile-item{font-size:small}.tile-controls:hover{color:#d3d3d3}.item-controls,.tile-controls-dk{position:absolute;color:grey;top:0;right:5px}.item-controls:hover,.tile-controls-dk:hover{color:#000}a.dropdown-item:hover:not([href]){background-color:#007bff;color:#fff}.drawer{display:inline-flex;vertical-align:middle}.mi-sm{font-size:1em}.ng-valid.required,.ng-valid[required]{border:2px solid #42A948}.ng-invalid:not(form){border:2px solid #a94442}.ng-untouched:not(form){border:1px solid gray}.aeo-modal{display:block;position:fixed;z-index:9999999999999999;left:0;top:0;height:100%;width:100%;overflow:auto;background-color:rgba(0,0,0,.5)}.aeo-modal-content{margin:5% auto;width:70%;z-index:1;box-shadow:10px 10px 1px 0 rgba(0,0,0,.3)}
+/*****************************************************************
+body, html{
+  height:100%;
+  margin: 0;
+  font-size: 16px;
+  font-family: "lato", sans-serif;
+  font-weight: 400;
+  line-height:1.8em;
+  color: #666;
+}
+
+.parallax-img1, .parallax-img2, .parallax-img3, .parallax-img4{
+  position: relative;
+  opacity: 0.70;
+  background-position: center;
+  background-size: cover;
+
+  background-repeat: no-repeat;
+
+  background-attachment: fixed;
+
+
+}
+
+.parallax-img1{
+  background-image:url('/assets/img/eyes-wide-bw.jpg');
+  min-height:100%;
+}
+
+.parallax-img2{
+  background-image:url('/assets/img/reiki-healing-lg.jpg');
+
+  min-height: 500px;
+}
+
+.parallax-img3{
+  background-image:url('/assets/img/foot-zone.jpg');
+
+  min-height: 500px;
+}
+
+.parallax-img4{
+  background-image:url('/assets/img/tarot-wide-fade.jpg');
+
+  min-height: 500px;
+}
+
+.parallax-text{
+  position:absolute;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  color:#000;
+  font-size: 27px;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+}
+
+.parallax-border{
+  background-color: #111;
+  color: white;
+  padding: 20px;
+}
+
+.parallax-border-trans{
+  background-color: transparent;
+  color: white;
+  padding: 20px;
+}
+
+.section{
+  text-align: center;
+  padding: 50px 80px;
+}
+
+.section-light{
+  background-color: #f4f4f4;
+  color: #666;
+}
+
+.section-dark{
+  background-color: #282E34 ;
+  color: #ddd
+
+}
+************************************************************/
+/************************ milieu styles */
+.vue {
+  margin-top: 1em;
+}
+.vue .card-header {
+  color: white;
+  font-size: 150%;
+  font-weight: 600;
+  font-family: Helvetica;
+}
+.vue .card-block {
+  padding: 1em;
+}
+.vue-controls-dk,
+.item-controls {
+  position: absolute;
+  color: grey;
+  top: 0px;
+  right: 0.5em;
+}
+.vue-controls-dk,
+.item-controls:hover {
+  color: black;
+}
+.item-controls .material-icons,
+.vue-controls .material-icons,
+.vue-controls-dk .material-icons {
+  font-size: 1em;
+}
+.vue-controls {
+  position: absolute;
+  color: white;
+  top: 0px;
+  right: 5px;
+}
+.vue-controls:hover {
+  color: black;
+}
+.material-icons {
+  display: inline-flex;
+  vertical-align: middle;
+}
+/******************************************/
+a {
+  cursor: pointer;
+  cursor: hand;
+}
+p:first-letter {
+  text-transform: capitalize;
+}
+.tile {
+  margin-top: 1em;
+}
+.tile-controls {
+  position: absolute;
+  color: white;
+  top: 0px;
+  right: 5px;
+}
+.tile-item {
+  font-size: small;
+}
+.tile-controls:hover {
+  color: #d3d3d3;
+}
+/*
+.tile-controls-dk, .item-controls{
+  position: absolute;
+  color: grey;
+  top: 0px;
+  right: 5px;
+}
+
+.tile-controls-dk:hover, .item-controls:hover{
+  color: black;
+}
+*/
+a.dropdown-item:hover:not([href]) {
+  background-color: #007bff;
+  color: white;
+}
+.ng-valid[required],
+.ng-valid.required {
+  border: 2px solid #42A948;
+  /* green */
+}
+.ng-invalid:not(form) {
+  border: 2px solid #a94442;
+  /* red */
+}
+.ng-untouched:not(form) {
+  border: 1px solid gray;
+  /* red */
+}
+.aeo-modal {
+  display: block;
+  position: fixed;
+  z-index: 9999999999999999;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.aeo-modal-content {
+  margin: 5% auto;
+  width: 70%;
+  /*padding: 20px;*/
+  z-index: 1 ;
+  box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
+}

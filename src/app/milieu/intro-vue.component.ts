@@ -4,21 +4,22 @@ import { MilieuService } from './milieu.service';
 
 'use strict';
 
-// js-opt //
+// opt-js-html-css //
 
 @Component({
   selector: 'intro-vue',
   template:
-  ` <div [ngClass]="{modal: modal}">
-      <div class="card border-primary tile" *ngIf="show" >
+  ` <modal-vue><div [ngClass]="{modal: modal}">
+      <div class="card border-primary vue" *ngIf="show" >
         <img class="card-img-top" [src]="data.config.img" alt="{{data.config.title}}">
-        <div class="tile-controls" *ngIf="data.dashBoard" ><a class="material-icons tile-item" (click)="show=false;" >clear</a></div>
-        <div class="card-block p-3">
+        <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modalChild.modalMode=true" *ngIf="!modalChild.modalMode && data.dashBoard"></vue-controls>
+        <modal-controls *ngIf="modalChild.modalMode === true"></modal-controls>
+        <div class="card-block">
           <h4 class="card-title">{{data.config.title}}</h4>
           <p class="card-text">{{data.config.intro}}</p>
         </div>
       </div>
-    </div>`
+    </div></modal-vue>`
 })
 export class IntroVueComponent extends MilieuVueComponent { constructor(protected data: MilieuService) { super(data); } }
 

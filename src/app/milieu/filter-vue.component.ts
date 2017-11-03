@@ -4,20 +4,23 @@ import { MilieuService } from './milieu.service';
 
 'use strict';
 
+// opt-js-html-css //
+
 @Component({
   selector: 'filter-vue',
-  template:
-  `<div class="card border-info tile" *ngIf="show" >
-        <div class="card-header bg-info text-white"><h4>Filters</h4></div>
-        <div class="tile-controls" *ngIf="data.dashBoard" ><a class="material-icons tile-item" (click)="show=false;" >clear</a></div>
-        <div class="card-block p-3" >
-          <div *ngFor="let field of fields">
-            <b><p>{{field.name}}:</p></b>
-
-            <div type="checkbox" *ngFor="let value of field.values" ><input type="checkbox" [(ngModel)]="value.filtered"  (change)="data.filter()"> {{value.name}}</div><hr>
-          </div>
+  template:`
+    <modal-vue><div class="card border-info vue" *ngIf="show" >
+      <div class="card-header bg-info">Filters</div>
+      <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modalChild.modalMode=true" *ngIf="!modalChild.modalMode && data.dashBoard"></vue-controls>
+      <modal-controls *ngIf="modalChild.modalMode"></modal-controls>
+      <div class="card-block" >
+        <div *ngFor="let field of fields">
+          <b><p>{{field.name}}:</p></b>
+          <div type="checkbox" *ngFor="let value of field.values" ><input type="checkbox" [(ngModel)]="value.filtered"  (change)="data.filter()"> {{value.name}}</div><hr>
         </div>
-      </div>`,
+      </div>
+    </div></modal-vue>`,
+
 })
 export class FilterVueComponent extends MilieuVueComponent {
   fields = this.data.config.fields;

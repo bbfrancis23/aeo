@@ -2,17 +2,14 @@ import { Component } from '@angular/core';
 
 'use strict'
 
-// opt-js //
+// opt-js-html //
 
 @Component({
   selector: 'modal-vue',
   template: `
     <div [ngClass]="{'aeo-modal': modalMode}"  (click)="modalClick($event)">
-      <div [ngClass]="{'aeo-modal-content': modalMode}">
-        <ng-content></ng-content>
-      </div>
+      <div [ngClass]="{'aeo-modal-content': modalMode}"><ng-content></ng-content></div>
     </div>`
-
 })
 export class ModalVueComponent {
   modalMode = false;
@@ -22,8 +19,6 @@ export class ModalVueComponent {
       this.modalMode = false;
     }
   }
-
-
 }
 
 /* copyright AEO all right reserved */

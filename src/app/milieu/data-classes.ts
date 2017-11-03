@@ -1,4 +1,4 @@
-// js-opt //
+// opt-js //
 
 'use strict'
 
