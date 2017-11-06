@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MilieuVueComponent } from '../milieu/milieu-vue.component';
+import { MilieuVue } from '../milieu/milieu-vue';
 import { MilieuService } from '../milieu/milieu.service';
 
 
@@ -9,7 +9,7 @@ import { MilieuService } from '../milieu/milieu.service';
   selector: 'jem-update-vue',
   templateUrl: './jem-form.component.html'
 })
-export class JemUpdateVueComponent extends MilieuVueComponent implements OnInit {
+export class JemUpdateVueComponent extends MilieuVue implements OnInit {
   function = "Update";
   model: Object = {};
   submitted = false;

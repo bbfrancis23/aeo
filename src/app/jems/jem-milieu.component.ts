@@ -63,6 +63,8 @@ export class JemMilieuComponent extends MilieuComponent implements OnInit {
       [this.introVue, this.filterVue],
       [this.listVue],
       [this.addVue, this.updateVue, this.collectionVue]];
+
+      //console.log(this.data);
   }
 
   toggleDashBoard() {

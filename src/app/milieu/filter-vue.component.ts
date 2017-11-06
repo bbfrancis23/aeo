@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MilieuVueComponent } from './milieu-vue.component';
+import { MilieuVue } from './milieu-vue';
 import { MilieuService } from './milieu.service';
 
 'use strict';
@@ -22,7 +22,7 @@ import { MilieuService } from './milieu.service';
     </div></modal-vue>`,
 
 })
-export class FilterVueComponent extends MilieuVueComponent {
+export class FilterVueComponent extends MilieuVue {
   fields = this.data.config.fields;
   constructor(protected data: MilieuService) { super(data); }
 }

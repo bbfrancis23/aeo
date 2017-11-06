@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MilieuVueComponent } from '../milieu/milieu-vue.component';
+import { MilieuVue } from '../milieu/milieu-vue';
 import { MilieuService } from '../milieu/milieu.service';
 
 'use strict';
@@ -39,7 +39,7 @@ import { MilieuService } from '../milieu/milieu.service';
       </div>
     </div>`
 })
-export class LogInVueComponent extends MilieuVueComponent implements OnInit {
+export class LogInVueComponent extends MilieuVue implements OnInit {
   submitted = false;
   logInForm: FormGroup;
 

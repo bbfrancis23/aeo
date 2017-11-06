@@ -48,6 +48,8 @@ export class AccountMilieuComponent extends MilieuComponent implements OnInit {
     }
 
     this.columns = [[this.logInVue]];
+
+    console.log(this.data);
   }
 
   toggleDashBoard() {

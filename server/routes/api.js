@@ -99,9 +99,9 @@ app.post( '/jems', ( req, res ) => {
 
 
         if ( err ) {
-          console.log( err );
+          //console.log( err );
         } else {
-          console.log( 'you updated a jem' );
+          //console.log( 'you updated a jem' );
 
           //console.log(res);
         }
@@ -121,7 +121,8 @@ app.post( '/jems', ( req, res ) => {
 
 
 
-
+    response.message = 'success';
+    res.json(response);
 
 
   } );

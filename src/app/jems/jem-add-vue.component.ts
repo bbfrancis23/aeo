@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MilieuVueComponent } from '../milieu/milieu-vue.component';
+import { MilieuVue } from '../milieu/milieu-vue';
 import { MilieuService } from '../milieu/milieu.service';
 import { Jem } from './jem';
 
@@ -9,7 +9,7 @@ import { Jem } from './jem';
   selector: 'jem-add-vue',
   templateUrl: './jem-form.component.html'
 })
-export class JemAddVueComponent extends MilieuVueComponent {
+export class JemAddVueComponent extends MilieuVue {
   function = "Add";
   submitted = false
   model: Jem = new Jem();
