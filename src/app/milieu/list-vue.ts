@@ -1,11 +1,9 @@
 import { MilieuVue } from './milieu-vue';
 import { MilieuService } from './milieu.service';
 
-// opt-js//
-
 "use strict";
 
-export abstract class ListVueComponent extends MilieuVue {
+export abstract class ListVue extends MilieuVue {
   showBig = true;
   items: {};
 

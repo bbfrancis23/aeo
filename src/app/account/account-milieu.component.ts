@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-import { MilieuComponent } from '../milieu/milieu.component';
+import { Milieu } from '../milieu/milieu';
 import { Utilities } from '../utilities';
 import { LogInVueComponent } from '../milieu/log-in-vue.component';
 
@@ -29,7 +29,7 @@ import { MilieuService } from '../milieu/milieu.service';
   `],
   providers: [MilieuService]
 })
-export class AccountMilieuComponent extends MilieuComponent implements OnInit {
+export class AccountMilieuComponent extends Milieu implements OnInit {
 
   account: Account;
 

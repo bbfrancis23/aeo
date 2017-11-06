@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ListVueComponent } from '../milieu/list-vue.component';
+import { ListVue } from '../milieu/list-vue';
 import { MilieuService } from '../milieu/milieu.service';
 
 "use strict";
@@ -33,7 +33,7 @@ import { MilieuService } from '../milieu/milieu.service';
         </modal-vue>
       `,
 })
-export class JemListVueComponent extends ListVueComponent implements OnInit {
+export class JemListVueComponent extends ListVue implements OnInit {
 
   constructor(protected data: MilieuService) { super(data); }
 

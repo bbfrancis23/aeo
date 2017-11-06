@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-import { MilieuComponent } from '../milieu/milieu.component';
+import { Milieu } from '../milieu/milieu';
 import { FilterVueComponent } from '../milieu/filter-vue.component';
 import { IntroVueComponent } from '../milieu/intro-vue.component';
 import { JemAddVueComponent } from './jem-add-vue.component';
@@ -32,7 +32,7 @@ import { MilieuService } from '../milieu/milieu.service';
   `],
   providers: [MilieuService]
 })
-export class JemMilieuComponent extends MilieuComponent implements OnInit {
+export class JemMilieuComponent extends Milieu implements OnInit {
 
   jems: Jem[];
   selectedJem: Jem;

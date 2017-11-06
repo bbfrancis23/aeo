@@ -4,7 +4,15 @@ import { MilieuService } from './milieu.service';
 
 'use strict';
 
-// opt-js-html-css //
+/*
+  Author: Brian Francis
+  Description: Filters Milieu's List Vue by Selecting Milieu Fields Values.
+
+  Milieu: Collection / Table WebPage Interface
+  Vue: Milieu Control (Accessor/Mutator)
+
+  QA: 11-5-2017
+*/
 
 @Component({
   selector: 'filter-vue',

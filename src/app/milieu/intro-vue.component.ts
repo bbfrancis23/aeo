@@ -4,8 +4,6 @@ import { MilieuService } from './milieu.service';
 
 'use strict';
 
-// opt-js-html-css //
-
 @Component({
   selector: 'intro-vue',
   template:

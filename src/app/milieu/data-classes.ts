@@ -1,14 +1,14 @@
-// opt-js //
+'use strict';
 
-'use strict'
+// FieldRaw converts to Field to make config files easier to understand for the user.  
 
 export class Config {
   title = '';
   name = '';
-  dataLabel = '';
-  directory = '';
+  dataLabel = ''; // Data Base Admin will provide this.
+  directory = ''; // Web Master will provide this.
   intro = '';
-  img = '';
+  img = '';       // Web Master will provide this.
 
   fieldsRaw: FieldRaw[] = [];
   fields: Field[] = [];

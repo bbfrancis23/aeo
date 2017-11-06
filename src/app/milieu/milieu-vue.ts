@@ -10,11 +10,13 @@ import { ModalVueComponent } from './modal-vue.component';
 
   Milieu: Collection / Table WebPage Interface
   Vue: Milieu Control (Accessor/Mutator)
+
+  QA: 11-5-2017
 */
 
 export abstract class MilieuVue {
   private show = true;
-  @ViewChild(ModalVueComponent) modalChild;
+  @ViewChild(ModalVueComponent) modalChild: ModalVueComponent;
   constructor(protected data: MilieuService) { };
 }
 

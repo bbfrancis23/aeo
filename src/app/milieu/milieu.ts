@@ -4,9 +4,7 @@ import { Utilities } from '../utilities';
 
 'use strict';
 
-// opt-js //
-
-export class MilieuComponent {
+export abstract class Milieu {
 
   columns: any[];
 

@@ -5,8 +5,6 @@ import { MilieuService } from '../milieu/milieu.service';
 
 'use strict';
 
-// opt-js //
-
 @Component({
   selector: 'log-in-vue',
   template: `
