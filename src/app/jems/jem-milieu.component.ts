@@ -12,6 +12,7 @@ import { Utilities } from '../utilities';
 import { Jem } from './jem';
 import { JEM_CONFIG } from './jem-config';
 import { MilieuService } from '../milieu/milieu.service';
+import { JemService } from './jem.service';
 
 'use strict';
 
@@ -46,7 +47,7 @@ export class JemMilieuComponent extends Milieu implements OnInit {
 
 
 
-  constructor(protected route: ActivatedRoute, protected utils: Utilities, protected data: MilieuService) {
+  constructor(protected route: ActivatedRoute, protected utils: Utilities, protected data: MilieuService, protected jem: JemService) {
     super(route, utils, data);
     data.config = JEM_CONFIG;
     this.initConfig();
@@ -58,6 +59,10 @@ export class JemMilieuComponent extends Milieu implements OnInit {
       this.updateVue.show = false;
       this.collectionVue.show = false;
     }
+
+    this.jem.data = this.data;
+
+    console.log(this.jem.data);
 
     this.columns = [
       [this.introVue, this.filterVue],

@@ -59,7 +59,7 @@ export class MilieuService {
 
   // todo see if there is a way of getting rid of observable => Promise => observable;
   refresh() {
-    console.log('Freash');
+    //console.log('Freash');
     this.http.get('api/session').toPromise().then(result => {
       if(result.json().message === 'Admin'){
         this.admin = true;

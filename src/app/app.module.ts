@@ -50,7 +50,7 @@ import { Utilities } from './utilities';
     MagicHandsHealingComponent
   ],
   providers: [
-    CollectionService, Utilities
+    CollectionService, Utilities, JemService
   ],
   bootstrap: [AppComponent]
 })

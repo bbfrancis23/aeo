@@ -11,7 +11,7 @@ export const JEM_CONFIG: Config = {
   directory: 'code-jems',
 
   fieldsRaw: [
-    { name: 'tech', values: ['Angular 4', 'CSS', 'Express', 'Git', 'HTML', 'JavaScript', 'Less', 'MongoDB', 'Mean Stack', 'NodeJS', 'TypeScript'] },
+    { name: 'tech', values: ['Angular', 'CSS', 'Express', 'Git', 'HTML', 'JavaScript', 'Less', 'MongoDB', 'Mean Stack', 'NodeJS', 'TypeScript'] },
     { name: 'type', values: ['Best Practices', 'How to', 'Mistakes', 'Short-Cut Keys', 'Style Guide'] }
   ],
   fields: []
