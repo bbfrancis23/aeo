@@ -60,6 +60,7 @@ export class JemMilieuComponent extends Milieu implements OnInit {
       this.collectionVue.show = false;
     }
 
+    // make jem data aviable through the app
     this.jem.data = this.data;
 
     console.log(this.jem.data);

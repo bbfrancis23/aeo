@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ListVue } from '../milieu/list-vue';
 import { MilieuService } from '../milieu/milieu.service';
+import { Jem } from './Jem';
 
 "use strict";
 
@@ -23,11 +24,11 @@ import { MilieuService } from '../milieu/milieu.service';
 
 
           <div class="tile"  *ngIf="showBig" >
-            <jem *ngFor="let jem of items" [jem]="jem" ></jem>
+            <jem *ngFor="let jem of items; trackBy: trackByJem" [jem]="jem" ></jem>
           </div>
 
           <div class="tile" *ngIf=!showBig>
-            <jem-sm *ngFor="let jem of items" [jem]="jem" ></jem-sm>
+            <jem-sm *ngFor="let jem of items; trackBy: trackByJem" [jem]="jem" ></jem-sm>
           </div>
         </div>
         </modal-vue>
@@ -47,7 +48,9 @@ export class JemListVueComponent extends ListVue implements OnInit {
   }
 
 
-
+  trackByJem(index:number, jem: Jem){
+    return jem._id;
+  }
 
 }
 
