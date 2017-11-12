@@ -32,7 +32,7 @@ import { Jem } from './Jem';
           </div>
         </div>
         </modal-vue>
-      `,
+      `
 })
 export class JemListVueComponent extends ListVue implements OnInit {
 

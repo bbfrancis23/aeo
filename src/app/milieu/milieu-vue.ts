@@ -13,7 +13,6 @@ import { ModalVueComponent } from './modal-vue.component';
 
   QA: 11-5-2017
 */
-
 export abstract class MilieuVue {
   private show = true;
   @ViewChild(ModalVueComponent) modalChild: ModalVueComponent;

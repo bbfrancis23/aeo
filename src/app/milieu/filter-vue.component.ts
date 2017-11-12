@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MilieuVue } from './milieu-vue';
 import { MilieuService } from './milieu.service';
 
+
 'use strict';
 
 /*
@@ -17,7 +18,7 @@ import { MilieuService } from './milieu.service';
 @Component({
   selector: 'filter-vue',
   template:`
-    <modal-vue><div class="card border-info vue" *ngIf="show" >
+    <modal-vue  ><div class="card border-info vue" *ngIf="show" >
       <div class="card-header bg-info">Filters</div>
       <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modalChild.modalMode=true" *ngIf="!modalChild.modalMode && data.dashBoard"></vue-controls>
       <modal-controls *ngIf="modalChild.modalMode"></modal-controls>
@@ -27,7 +28,7 @@ import { MilieuService } from './milieu.service';
           <div type="checkbox" *ngFor="let value of field.values" ><input type="checkbox" [(ngModel)]="value.filtered"  (change)="data.filter()"> {{value.name}}</div><hr>
         </div>
       </div>
-    </div></modal-vue>`,
+    </div></modal-vue>`
 
 })
 export class FilterVueComponent extends MilieuVue {
