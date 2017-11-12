@@ -19,6 +19,8 @@ import { JemComponent } from './jems/jem.component';
 import { JemSmallComponent } from './jems/jem-sm.component';
 import { JemService } from './jems/jem.service';
 
+import { RealEstateAgentMilieuComponent} from './real-estate/real-estate-milieu.component';
+
 import { AccountMilieuComponent } from './account/account-milieu.component';
 import { MagicHandsHealingComponent } from './jody/magic-hands-healing.component';
 
@@ -37,6 +39,8 @@ import { Utilities } from './utilities';
     AppComponent,
     AeoHeaderComponent,
 
+    AccountMilieuComponent,
+
     JemAddVueComponent,
     JemCollectionVueComponent,
     JemComponent,
@@ -45,9 +49,9 @@ import { Utilities } from './utilities';
     JemSmallComponent,
     JemUpdateVueComponent,
 
-    AccountMilieuComponent,
+    MagicHandsHealingComponent,
 
-    MagicHandsHealingComponent
+    RealEstateAgentMilieuComponent
   ],
   providers: [
     CollectionService, Utilities, JemService
