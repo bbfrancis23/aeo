@@ -9,6 +9,8 @@ export class Config {
   directory = ''; // Web Master will provide this.
   intro ?:  string;
   img ?: string;       // Web Master will provide this.
+  itemsMode ?: boolean;
+  requireAuth ?: boolean;
 
   fieldsRaw: FieldRaw[] = [];
   fields: Field[] = [];

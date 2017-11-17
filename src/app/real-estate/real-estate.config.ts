@@ -2,16 +2,17 @@ import { Config } from '../milieu/data-classes';
 
 'use strict';
 
-export const JEM_CONFIG: Config = {
+export const REAL_ESTATE_AGENT_CONFIG: Config = {
   title: 'Real Estate Agent',
   name: 'property',
   dataLabel: 'properties',
   directory: 'real-estate-agent',
 
-  fieldsRaw: [
-    { name: 'type', values: ['Residental','Land','Commercial','Multi-Unit','Farm','Residental Lease'] }
-  ],
-  fields: []
+  fieldsRaw: [],
+  fields: [],
+
+  itemsMode: false,
+  requireAuth: true
 };
 
 /* copyright 2017 AEO All Rights Reserved. */

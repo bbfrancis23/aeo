@@ -5,6 +5,10 @@ import { FilterVueComponent } from '../milieu/filter-vue.component';
 import { Utilities } from '../utilities';
 import { MilieuService } from '../milieu/milieu.service';
 import { Property } from './property';
+import { REAL_ESTATE_AGENT_CONFIG} from './real-estate.config';
+import { RealEstateAgentService } from './real-estate-agent.service';
+import { AgentVueComponent } from './agent-vue.component';
+
 
 'use strict';
 
@@ -12,15 +16,7 @@ import { Property } from './property';
   selector: 'real-estate-agent-vue',
   templateUrl: './real-estate-agent-milieu.component.html',
   styles: [`
-    .dash-board-controls{ padding-top: 56px; }
-    .container-classic{
-      margin-right: auto;
-      margin-left: auto;
-      padding-right: 15px;
-      padding-left: 15px;
-      width: 100%;
-      max-width: 1400px;
-    }
+
 
   `],
   providers: [MilieuService]
@@ -33,34 +29,37 @@ export class RealEstateAgentMilieuComponent extends Milieu implements OnInit {
   //@ViewChild(JemListVueComponent) listVue;
   //@ViewChild(JemAddVueComponent) addVue;
   //@ViewChild(JemUpdateVueComponent) updateVue;
-  //@ViewChild(IntroVueComponent) introVue;
+  @ViewChild(AgentVueComponent) agentVue;
   //@ViewChild(FilterVueComponent) filterVue;
 
 
 
   constructor(protected route: ActivatedRoute, protected utils: Utilities, protected data: MilieuService) {
     super(route, utils, data);
-    //data.config = JEM_CONFIG;
-    //this.initConfig();
+    //data.itemsMode= false;
+    data.config = REAL_ESTATE_AGENT_CONFIG;
+    this.initConfig();
+
+    console.log(data);
   }
 
   ngOnInit() {
-    /*
+
     if (!this.data.dashBoard) {
-      this.addVue.show = false;
-      this.updateVue.show = false;
-      this.collectionVue.show = false;
+      //this.addVue.show = false;
+      //this.updateVue.show = false;
+      //this.collectionVue.show = false;
     }
 
     // make jem data aviable through the app
-    this.jem.data = this.data;
+    //this.jem.data = this.data;
 
-    console.log(this.jem.data);
+    //console.log(this.jem.data);
 
     this.columns = [
-      [this.introVue, this.filterVue],
-      [this.listVue],
-      [this.addVue, this.updateVue, this.collectionVue]];
+      [this.agentVue],
+      [],
+      []];
     // */
   }
 

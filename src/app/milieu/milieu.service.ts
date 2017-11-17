@@ -24,6 +24,7 @@ export class MilieuService {
   itemsMode = true;
   authenticated = false;
   admin = false;
+  requireAuth = false;
 
 
   private readonly itemsSource = new BehaviorSubject<{}[]>([]);
@@ -61,8 +62,13 @@ export class MilieuService {
   refresh() {
     //console.log('Freash');
     this.http.get('api/session').toPromise().then(result => {
+
+      console.log(result.json());
+
       if(result.json().message === 'Admin'){
         this.admin = true;
+
+        this.authenticated = true;
       }
     });
 
@@ -85,6 +91,14 @@ export class MilieuService {
 
   init() {
 
+    if(this.config.itemsMode === false){
+      this.itemsMode = false;
+    }
+
+    if(this.config.requireAuth === true){
+      this.requireAuth = true;
+    }
+
     this.refresh();
     // takes fieldsRaw ['Git', 'JavaScript', 'HTML'] and converts them to [name: 'Git', filtered: false ]
     // this saves typing / time on config file creation.
@@ -95,6 +109,10 @@ export class MilieuService {
     });
     delete this.config.fieldsRaw;
     this.pageTitle = this.config.title;
+
+
+
+
   }
 
   // todo: overhaul on this after doing the server side //
