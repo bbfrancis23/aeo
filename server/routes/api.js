@@ -36,6 +36,8 @@ let response = {
   message: null
 };
 
+let responses = {  }
+
 // Error handling
 const sendError = ( err, res ) => {
   response.status = 500;
@@ -128,82 +130,65 @@ app.post( '/jems', ( req, res ) => {
   } );
 } );
 
+//let response = {
+//  status: 200,
+//  data: [],
+//  message: null
+//};
 
 app.get('/session', (req, res) =>{
-  console.log('called session');
   if(auth(req,res)){
     connection( ( db ) => {
-
-      db.collection('accounts').findOne({ token: sanitize( req.cookies.token ) }, (err, result) => {
-        if(result){
-          response.message = result.type;
-          res.json(response);
+      db.collection('accounts').findOne({ token: sanitize( req.cookies.token ) }, (err, doc) => {
+        if(err){
+          sendError(err, res);
         }else{
-          response.message = 'null';
-          res.json(response);
+          let message = doc ? doc.type : null;
+          res.json({status: 200, message: message});
         }
-        db.close;
       });
-
+      db.close;
     });
   }
 });
 
-app.post( '/login', ( req, result ) => {
 
-  //console.log( "Cookies :  ", req.cookies );
+app.post('/login', (req, res) => {
+  if(auth(req,res)){
+    connection( ( db ) => {
+      db.collection( 'accounts' ).findOne( {
+        email: sanitize(req.body.email)
+      }, ( err, doc ) => {
+        if ( err ) { sendError( err, res ); }
+        else{
+          if(doc){
+            bcrypt.compare( sanitize(req.body.password), sanitize(doc.password), (err, result) =>{
+              if(err){
+                sendError(err,res)
+              }else if (result){
+                var token = jwt.encode( sanitize(req.body.email), JWT_SECRET);
 
-  connection( ( db ) => {
-    db.collection( 'accounts' ).findOne( {
-      email: req.body.email
-    }, ( err, doc ) => {
-
-      if ( err ) { sendError(err,res);
-      } else {
-
-        if(doc){
-          bcrypt.compare( req.body.password, doc.password, ( err, res ) => {
-            if ( err ) {
-              sendError(err, res);
-            } else if ( res ) {
-              //console.log( req.body.password, doc.password );
-
-              var token = jwt.encode( req.body.email, JWT_SECRET );
-
-              db.collection('accounts').updateOne({ email: req.body.email}, {$set: {token: token}}, (err, res) =>{
-                if(err){
-                  sendError(err, res);
-                }else{
-                  result.cookie( 'token', token, {} ).send( 'login success' );
-                }
-              });
-
-
-
-
-
-            } else {
-
-              response.message = 'login failed';
-              result.json(response);
-            }
-
-          } );
-        }else{
-          response.message = 'Invalid Email';
-          result.json(response);
+                db.collection('accounts').updateOne({email: sanitize(req.body.email)}, {$set: {token: token}}, (err, doc) =>{
+                  if(err){
+                    sendError(err,res);
+                  }else{
+                    res.cookie('token', token,{}).json({status: 200, message: 'Login Successful'});
+                  }
+                });
+              }else{
+                res.json({status: 200, message: 'Login Failed'})
+              }
+            });
+          }else{
+            res.json({status: 200, message: 'Email Address not found.'});
+          }
         }
+      });
+      db.close;
+    });
+  }
+})
 
-
-
-      }
-
-    } );
-
-
-
-  } );
-} );
 
 
 // get collection

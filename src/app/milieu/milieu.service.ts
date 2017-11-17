@@ -47,15 +47,16 @@ export class MilieuService {
     this._dashBoard = b;
     this.updateUrl();
   }
+  //create(item: any): Promise<any> {
+  login(logInFields){
 
-  login(logInFields) {
-    //console.log(this.config.name);
-    //console.log(this.config.name);
+    return this.http.post(`api/login`, logInFields, { headers: this.headers }).toPromise().then(response => {
 
-    //console.log('service trying to submit');
+      console.log(response.json().message);
+      return response.json().message;
+    }).catch(this.handleError);
 
-    //let something = JSON.stringify(logInFields); // this need to change to data
-    let items = this.http.post(`api/login`, logInFields, { headers: this.headers }).toPromise().then(response => console.log(response));
+
   }
 
   // todo see if there is a way of getting rid of observable => Promise => observable;
@@ -63,7 +64,7 @@ export class MilieuService {
     //console.log('Freash');
     this.http.get('api/session').toPromise().then(result => {
 
-      console.log(result.json());
+      //console.log(result.json());
 
       if(result.json().message === 'Admin'){
         this.admin = true;

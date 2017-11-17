@@ -12,7 +12,7 @@ import { MilieuService } from '../milieu/milieu.service';
       <div class="card-header bg-primary"><h4>Log In</h4></div>
       <div class="card-block p-3" >
         <form  (ngSubmit)="onSubmit();" [formGroup]="logInForm" #formDir="ngForm">
-          <div [hidden]="formDir.submitted">
+          <div >
                   <div class="form-group">
                     <label for="email" class="sr-only">Email</label>
                     <input id="email" class="form-control" formControlName="email" placeholder="Email" required >
@@ -30,8 +30,8 @@ import { MilieuService } from '../milieu/milieu.service';
                         <div *ngIf="password.errors.minlength">Must be at least 4 character long.</div>
                       </div>
                     </div>
-                  <button type="submit" class="btn btn-outline-success float-right" [disabled]="logInForm.invalid" >Log In</button>
-
+                  <button type="submit" class="btn btn-outline-success float-right" [disabled]="logInForm.invalid" >Log In</button><br><br>
+                  <div class="alert" [ngClass]="{'alert-success': message === 'Login Successful', 'alert-danger': message !== 'Login Successful'}" *ngIf="message">{{message}}</div>
           </div>
         </form>
       </div>
@@ -40,6 +40,7 @@ import { MilieuService } from '../milieu/milieu.service';
 export class LogInVueComponent extends MilieuVue implements OnInit {
   submitted = false;
   logInForm: FormGroup;
+  message: string;
 
   constructor(protected data: MilieuService) { super(data); }
 
@@ -51,7 +52,14 @@ export class LogInVueComponent extends MilieuVue implements OnInit {
   }
 
   onSubmit(): void {
-    this.data.login(this.logInForm.value);
+
+    this.data.login(this.logInForm.value).then((data)=>{
+      this.message = data;
+    });
+
+    this.message
+
+    console.log(this.message, 'here');
   }
 
   get email() { return this.logInForm.get('email') }
