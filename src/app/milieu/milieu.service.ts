@@ -150,7 +150,7 @@ export class MilieuService {
 
   filter() {
 
-    let itemsFiltered: {}[];
+    let itemsFiltered: any[];
     this.currentItems.subscribe(items => {
       itemsFiltered = items;
 
@@ -162,7 +162,9 @@ export class MilieuService {
         if (filters.length > 0) {
           filters.forEach(filter => {
             itemsFiltered.forEach(item => {
-              if (item[field.name] === filter) filtered.push(item);
+              if (item[field.name] === filter){
+                filtered.push(item);
+              }
             });
           });
           itemsFiltered = filtered;
