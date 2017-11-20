@@ -2,6 +2,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { MilieuModule } from './milieu.module';
 
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
@@ -30,9 +32,10 @@ import { CollectionService } from './collection.service';
 import { Utilities } from './utilities';
 
 @NgModule({
-  imports: [
-    AppRoutingModule,
+  imports: [    
     BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
     FormsModule,
     HttpModule,
     MilieuModule

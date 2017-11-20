@@ -3,11 +3,26 @@ import { MilieuVue } from '../milieu/milieu-vue';
 import { MilieuService } from '../milieu/milieu.service';
 import { Jem } from './jem';
 
+import { trigger, state, style, animate, transition } from '@angular/animations';
+
 'use strict';
 
 @Component({
   selector: 'jem-add-vue',
-  templateUrl: './jem-form.component.html'
+  templateUrl: './jem-form.component.html',
+  animations: [
+    trigger('fadeInOut', [
+      state('in', style({transform: 'translateX(0)'})),
+      transition('void => *', [
+        style({ opacity:0 }),
+        animate('1000ms ease-in-out', style({ opacity:1 }))
+      ]),
+      transition('* => void', [
+        style({ opacity:1 }),
+            animate('1000ms ease-in-out', style({ opacity:0 }))
+      ])
+    ])
+  ]
 })
 export class JemAddVueComponent extends MilieuVue {
   function = "Add";

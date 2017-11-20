@@ -1,18 +1,21 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
+
 import { Milieu } from '../milieu/milieu';
+import { MilieuService } from '../milieu/milieu.service';
 import { FilterVueComponent } from '../milieu/filter-vue.component';
 import { IntroVueComponent } from '../milieu/intro-vue.component';
+import { Utilities } from '../utilities';
+
+
+import { JEM_CONFIG } from './jem-config';
+import { Jem } from './jem';
 import { JemAddVueComponent } from './jem-add-vue.component';
 import { JemCollectionVueComponent } from './jem-collection-vue.component';
 import { JemListVueComponent } from './jem-list-vue.component';
-import { JemUpdateVueComponent } from './jem-update-vue.component';
-import { Utilities } from '../utilities';
-
-import { Jem } from './jem';
-import { JEM_CONFIG } from './jem-config';
-import { MilieuService } from '../milieu/milieu.service';
 import { JemService } from './jem.service';
+import { JemUpdateVueComponent } from './jem-update-vue.component';
+
 
 'use strict';
 
@@ -28,15 +31,20 @@ import { JemService } from './jem.service';
       padding-left: 15px;
       width: 100%;
       max-width: 1400px;
-    }
-
-  `],
+    }`],
   providers: [MilieuService]
 })
 export class JemMilieuComponent extends Milieu implements OnInit {
 
   jems: Jem[];
   selectedJem: Jem;
+
+  state = 'active';
+
+  toggle() {
+    this.state = this.state === 'active' ? 'inactive' : 'active';
+    console.log(this.state);
+  }
 
   @ViewChild(JemListVueComponent) listVue;
   @ViewChild(JemAddVueComponent) addVue;
