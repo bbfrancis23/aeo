@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MilieuVue } from './milieu-vue';
 import { MilieuService } from './milieu.service';
 
@@ -34,7 +34,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
         </div>
         <div *ngFor="let field of fields">
           <b><p>{{field.name}}:</p></b>
-          <div type="checkbox" *ngFor="let value of field.values" ><input type="checkbox" [(ngModel)]="value.filtered"  (change)="data.filter()"> {{value.name}}</div><hr>
+          <div type="checkbox" *ngFor="let value of field.values" ><input type="checkbox" [(ngModel)]="value.filtered"  (change)="filter('title',searchTerm)"> {{value.name}}</div><hr>
         </div>
       </div>
     </div></modal-vue>`,
@@ -53,17 +53,27 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
     ]
 
 })
-export class FilterVueComponent extends MilieuVue {
+export class FilterVueComponent extends MilieuVue implements OnInit {
   fields = this.data.config.fields;
   private searchTerms = new Subject<String>();
+  searchTerm: String;
 
   constructor(protected data: MilieuService) {
     super(data);
   }
 
+
+  ngOnInit(){
+    this.searchTerms.subscribe((term)=> this.searchTerm = term);
+  }
+
+  filter(){
+    this.data.filter('title',this.searchTerm);
+  }
+
   search(term: string):void{
     this.searchTerms.next(term);
-    this.data.filterByFieldValue('title',term);
+    this.data.filter('title',term);
   }
 }
 

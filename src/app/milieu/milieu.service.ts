@@ -148,37 +148,7 @@ export class MilieuService {
     return 'success';
   }
 
-  filter() {
-
-    let itemsFiltered: any[];
-    this.currentItems.subscribe(items => {
-      itemsFiltered = items;
-
-      this.config.fields.forEach(field => {
-        let filtered = [], filters: string[] = [];
-
-        field.values.forEach(value => { if (value.filtered) filters.push(value.name) });
-
-        if (filters.length > 0) {
-          filters.forEach(filter => {
-            itemsFiltered.forEach(item => {
-              if (item[field.name] === filter){
-                filtered.push(item);
-              }
-            });
-          });
-          itemsFiltered = filtered;
-        }
-      });
-
-    });
-
-    this.changeFilteredItems(itemsFiltered);
-
-    this.updateUrl();
-  }
-
-  filterByFieldValue(col,value){
+  filter(col,value){
 
     let itemsFiltered: {}[];
     this.currentItems.subscribe(items => {
@@ -201,12 +171,24 @@ export class MilieuService {
             });
           });
           itemsFiltered = filtered;
+        }else{
+          itemsFiltered.forEach(item => {
+
+            //console.log();
+
+            let regExp = new RegExp(value, "i")
+            if(item[col].search(regExp) > -1){
+              filtered.push(item);
+            }
+          });
+          itemsFiltered = filtered;
         }
       });
 
     });
 
     this.changeFilteredItems(itemsFiltered);
+    this.updateUrl();
   }
 
   private updateUrl(): void {
