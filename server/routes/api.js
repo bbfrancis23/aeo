@@ -88,53 +88,59 @@ app.delete( '/jems/:id', ( req, res ) => {
 });
 
 app.post( '/jems', ( req, res ) => {
+
+
   connection( ( db ) => {
     let jem = req.body.jem || {};
+
     if ( jem._id ) {
       let id = jem._id;
       delete jem._id;
 
+      for (let key in jem){
+        jem[ key ] = jem[ key ] ? sanitize( jem[ key ]) : null;
+      }
+
       db.collection( 'jems' ).updateOne( {
         _id: ObjectId( id )
-      }, jem, ( err, res ) => {
+      }, jem, ( err, result ) => {
 
 
 
         if ( err ) {
-          //console.log( err );
+            sendError(err,res);
         } else {
-          //console.log( 'you updated a jem' );
-
-          //console.log(res);
+            res.json({status: 200, message: 'Jem Updated in the Database'});
         }
-        // */
 
       } );
     } else {
 
-      //jems.forEach( field => {
-      //  if ( field === 'required' ) {
-      //    jem[ field ] = jem[ field ] ? sanitize( jem[ field ] ) : '';
-      //  }
-      //} );
 
-      db.collection( 'jems' ).insertOne( jem, ( err, result ) => {} );
+
+      for (let key in jem){
+        jem[ key ] = jem[ key ] ? sanitize( jem[ key ]) : null;
+      }
+
+      db.collection( 'jems' ).insertOne( jem, ( err, result ) => {
+
+        if(err){
+          sendError(err,res);
+        }else{
+          res.json({status: 200, message: 'Jem Inserted into Database'});
+        }
+
+      });
     }
 
 
 
-    response.message = 'success';
-    res.json(response);
-
+    //response.message = 'success';
+    //res.json(response);
+    db.close;
 
   } );
 } );
-
-//let response = {
-//  status: 200,
-//  data: [],
-//  message: null
-//};
 
 app.get('/session', (req, res) =>{
   if(auth(req,res)){

@@ -110,7 +110,8 @@ body, html{
 }
 .item-controls .material-icons,
 .vue-controls .material-icons,
-.vue-controls-dk .material-icons {
+.vue-controls-dk .material-icons,
+.copy-control .material-icons{
   font-size: 1em;
 }
 .vue-controls {
@@ -122,6 +123,19 @@ body, html{
 .vue-controls:hover {
   color: black;
 }
+
+.copy-control {
+  position: absolute;
+  color: white;
+  top: 0px;
+  right: 5px;
+}
+
+.copy-control:hover {
+  color: teal;
+}
+
+
 .material-icons {
   display: inline-flex;
   vertical-align: middle;

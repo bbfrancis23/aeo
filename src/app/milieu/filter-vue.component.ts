@@ -55,8 +55,8 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 })
 export class FilterVueComponent extends MilieuVue implements OnInit {
   fields = this.data.config.fields;
-  private searchTerms = new Subject<String>();
-  searchTerm: String;
+  private searchTerms = new Subject<string>();
+  searchTerm: string;
 
   constructor(protected data: MilieuService) {
     super(data);

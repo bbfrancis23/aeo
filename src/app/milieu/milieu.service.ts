@@ -124,7 +124,7 @@ export class MilieuService {
       .post(url, something, { headers: this.headers })
       .toPromise()
       .then((res) => {
-        item._id = res.json(); //console.log(jem._id, res.json());
+        //item._id = res.json(); //console.log(jem._id, res.json());
         return item;
       })
       .catch(this.handleError);
@@ -148,7 +148,40 @@ export class MilieuService {
     return 'success';
   }
 
-  filter(col,value){
+  /*
+  filter() {
+
+    let itemsFiltered: any[];
+    this.currentItems.subscribe(items => {
+      itemsFiltered = items;
+
+      this.config.fields.forEach(field => {
+        let filtered = [], filters: string[] = [];
+
+        field.values.forEach(value => { if (value.filtered) filters.push(value.name) });
+
+        if (filters.length > 0) {
+          filters.forEach(filter => {
+            itemsFiltered.forEach(item => {
+              if (item[field.name] === filter){
+                filtered.push(item);
+              }
+            });
+          });
+          itemsFiltered = filtered;
+        }
+      });
+
+    });
+
+    this.changeFilteredItems(itemsFiltered);
+
+    this.updateUrl();
+  }
+  */ //
+
+
+  filter(col = "title", value = ''){
 
     let itemsFiltered: {}[];
     this.currentItems.subscribe(items => {
