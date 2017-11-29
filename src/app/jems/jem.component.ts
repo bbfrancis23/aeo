@@ -43,10 +43,12 @@ export class JemComponent {
   copy(){
     let txt = document.createElement("textarea");
     txt.value = this.jem.code;
-
+    txt.setAttribute('style',"poition: fixed; left: 0; top: 0; opacity: 0");
     document.body.appendChild(txt);
     txt.select();
     document.execCommand('copy');
+    document.body.removeChild(txt);
+
     this.contentCopied = true;
     setTimeout( () =>{
       this.contentCopied = false;
