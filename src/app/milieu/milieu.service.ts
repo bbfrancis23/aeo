@@ -39,7 +39,7 @@ export class MilieuService {
   changeFilteredItems(filteredItems: {}[]) { this.filteredItemsSource.next(filteredItems) }
   changeSelectedItem(selectedItem: {}) { this.selectedItemSource.next(selectedItem) }
 
-  constructor(protected route: ActivatedRoute, private readonly http: Http, private readonly utils: Utilities, private readonly location: Location) { }
+  constructor(protected route: ActivatedRoute, protected readonly http: Http, protected readonly utils: Utilities, protected readonly location: Location) { }
 
   get dashBoard() { return this._dashBoard; }
   set dashBoard(b: boolean) {
@@ -103,12 +103,15 @@ export class MilieuService {
     this.refresh();
     // takes fieldsRaw ['Git', 'JavaScript', 'HTML'] and converts them to [name: 'Git', filtered: false ]
     // this saves typing / time on config file creation.
+
+    //console.log(this.config.fieldsRaw);
+
     this.config.fieldsRaw.forEach(fieldRaw => {
       let newField: Field = { name: fieldRaw.name, values: [] };
       fieldRaw.values.forEach(value => newField.values.push({ name: value, filtered: false }));
       this.config.fields.push(newField);
     });
-    delete this.config.fieldsRaw;
+    //delete this.config.fieldsRaw;
     this.pageTitle = this.config.title;
 
 
