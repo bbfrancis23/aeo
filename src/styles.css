@@ -1,90 +1,9 @@
-/*****************************************************************
-body, html{
-  height:100%;
-  margin: 0;
-  font-size: 16px;
-  font-family: "lato", sans-serif;
-  font-weight: 400;
-  line-height:1.8em;
-  color: #666;
-}
-
-.parallax-img1, .parallax-img2, .parallax-img3, .parallax-img4{
-  position: relative;
-  opacity: 0.70;
-  background-position: center;
-  background-size: cover;
-
-  background-repeat: no-repeat;
-
-  background-attachment: fixed;
-
-
-}
-
-.parallax-img1{
-  background-image:url('/assets/img/eyes-wide-bw.jpg');
-  min-height:100%;
-}
-
-.parallax-img2{
-  background-image:url('/assets/img/reiki-healing-lg.jpg');
-
-  min-height: 500px;
-}
-
-.parallax-img3{
-  background-image:url('/assets/img/foot-zone.jpg');
-
-  min-height: 500px;
-}
-
-.parallax-img4{
-  background-image:url('/assets/img/tarot-wide-fade.jpg');
-
-  min-height: 500px;
-}
-
-.parallax-text{
-  position:absolute;
-  top: 50%;
+.screen-cover {
+  left: 0;
+  top: 0;
   width: 100%;
-  text-align: center;
-  color:#000;
-  font-size: 27px;
-  letter-spacing: 8px;
-  text-transform: uppercase;
+  height: 100%;
 }
-
-.parallax-border{
-  background-color: #111;
-  color: white;
-  padding: 20px;
-}
-
-.parallax-border-trans{
-  background-color: transparent;
-  color: white;
-  padding: 20px;
-}
-
-.section{
-  text-align: center;
-  padding: 50px 80px;
-}
-
-.section-light{
-  background-color: #f4f4f4;
-  color: #666;
-}
-
-.section-dark{
-  background-color: #282E34 ;
-  color: #ddd
-
-}
-************************************************************/
-/************************ milieu styles */
 .vue {
   margin-top: 1em;
 }
@@ -110,8 +29,7 @@ body, html{
 }
 .item-controls .material-icons,
 .vue-controls .material-icons,
-.vue-controls-dk .material-icons,
-.copy-control .material-icons{
+.vue-controls-dk .material-icons {
   font-size: 1em;
 }
 .vue-controls {
@@ -123,24 +41,10 @@ body, html{
 .vue-controls:hover {
   color: black;
 }
-
-.copy-control {
-  position: absolute;
-  color: white;
-  top: 0px;
-  right: 5px;
-}
-
-.copy-control:hover {
-  color: teal;
-}
-
-
 .material-icons {
   display: inline-flex;
   vertical-align: middle;
 }
-/******************************************/
 a {
   cursor: pointer;
   cursor: hand;
@@ -148,33 +52,24 @@ a {
 p:first-letter {
   text-transform: capitalize;
 }
-.tile {
-  margin-top: 1em;
-}
+/*
 .tile-controls {
   position: absolute;
   color: white;
   top: 0px;
   right: 5px;
 }
-.tile-item {
+
+
+.tile-item{
   font-size: small;
+
 }
-.tile-controls:hover {
+.tile-controls:hover{
   color: #d3d3d3;
 }
-/*
-.tile-controls-dk, .item-controls{
-  position: absolute;
-  color: grey;
-  top: 0px;
-  right: 5px;
-}
 
-.tile-controls-dk:hover, .item-controls:hover{
-  color: black;
-}
-*/
+//*/
 a.dropdown-item:hover:not([href]) {
   background-color: #007bff;
   color: white;
@@ -193,13 +88,13 @@ a.dropdown-item:hover:not([href]) {
   /* red */
 }
 .aeo-modal {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
   display: block;
   position: fixed;
   z-index: 9999999999999999;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
 }
@@ -209,4 +104,70 @@ a.dropdown-item:hover:not([href]) {
   /*padding: 20px;*/
   z-index: 1 ;
   box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #333;
+  overflow-x: hidden;
+}
+.header-content {
+  z-index: 2;
+}
+.header-overlay {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #225470;
+  z-index: 1;
+  opacity: 0.85;
+}
+.fullscreen-video-srap video {
+  min-width: 100%;
+  min-height: 100%;
+}
+.fullscreen-video-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+.v-header {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+.aeo-container {
+  max-width: 960px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin: auto;
+  text-align: center;
+}
+.header-content h1 {
+  font-size: 50px;
+  margin-bottom: 0;
+}
+.header-content p {
+  font-size: 1.5rem;
+  display: block;
+  padding-bottom: 2rem;
+}
+@media (max-width: 960) {
+  .aeo-container {
+    padding-right: 3rem;
+    padding-left: 3rem;
+  }
 }
