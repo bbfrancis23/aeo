@@ -10,8 +10,10 @@ import { AppComponent } from './app.component';
 
 import { MilieuModule } from './milieu.module';
 
+import { AeoFooterComponent } from './aeo-footer.component';
 import { AeoHeaderComponent } from './aeo-header.component';
 import { HomeComponent } from './home.component';
+import { ViewPortComponent } from './view-port.component';
 
 import { JemAddVueComponent } from './jems/jem-add-vue.component';
 import { JemMilieuComponent } from './jems/jem-milieu.component';
@@ -44,9 +46,13 @@ import { Utilities } from './utilities';
   ],
   declarations: [
     AccountMilieuComponent,
+
+    AeoFooterComponent,
     AeoHeaderComponent,
     AppComponent,
     HomeComponent,
+    ViewPortComponent,
+
     JemAddVueComponent,
     JemCollectionVueComponent,
     JemComponent,
@@ -57,7 +63,7 @@ import { Utilities } from './utilities';
 
     MagicHandsHealingComponent,
 
-    AgentVueComponent,    
+    AgentVueComponent,
     RealEstateAgentMilieuComponent
   ],
   providers: [

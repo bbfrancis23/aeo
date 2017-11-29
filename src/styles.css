@@ -21,7 +21,19 @@
   position: absolute;
   color: grey;
   top: 0px;
-  right: 0.5em;
+  right: .5em;
+}
+.copy-control {
+  position: absolute;
+  color: white;
+  top: 5px;
+  right: .5em;
+}
+.copy-control:hover {
+  position: absolute;
+  color: #00aaff;
+  top: 5px;
+  right: .5em;
 }
 .vue-controls-dk,
 .item-controls:hover {
@@ -29,7 +41,8 @@
 }
 .item-controls .material-icons,
 .vue-controls .material-icons,
-.vue-controls-dk .material-icons {
+.vue-controls-dk .material-icons,
+.copy-control .material-icons {
   font-size: 1em;
 }
 .vue-controls {
@@ -52,24 +65,6 @@ a {
 p:first-letter {
   text-transform: capitalize;
 }
-/*
-.tile-controls {
-  position: absolute;
-  color: white;
-  top: 0px;
-  right: 5px;
-}
-
-
-.tile-item{
-  font-size: small;
-
-}
-.tile-controls:hover{
-  color: #d3d3d3;
-}
-
-//*/
 a.dropdown-item:hover:not([href]) {
   background-color: #007bff;
   color: white;
@@ -86,24 +81,6 @@ a.dropdown-item:hover:not([href]) {
 .ng-untouched:not(form) {
   border: 1px solid gray;
   /* red */
-}
-.aeo-modal {
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  position: fixed;
-  z-index: 9999999999999999;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-.aeo-modal-content {
-  margin: 5% auto;
-  width: 70%;
-  /*padding: 20px;*/
-  z-index: 1 ;
-  box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
 }
 * {
   box-sizing: border-box;
@@ -131,30 +108,9 @@ body {
   z-index: 1;
   opacity: 0.85;
 }
-.fullscreen-video-srap video {
+.fullscreen-video-wrap video {
   min-width: 100%;
   min-height: 100%;
-}
-.fullscreen-video-wrap {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-}
-.v-header {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  color: #fff;
-}
-.aeo-container {
-  max-width: 960px;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  margin: auto;
-  text-align: center;
 }
 .header-content h1 {
   font-size: 50px;
@@ -164,10 +120,4 @@ body {
   font-size: 1.5rem;
   display: block;
   padding-bottom: 2rem;
-}
-@media (max-width: 960) {
-  .aeo-container {
-    padding-right: 3rem;
-    padding-left: 3rem;
-  }
 }
