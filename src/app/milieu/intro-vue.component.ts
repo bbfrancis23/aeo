@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MilieuVue } from './milieu-vue';
 import { MilieuService } from './milieu.service';
 
@@ -11,12 +11,12 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   template:
   ` <modal-vue><div [ngClass]="{modal: modal}">
       <div class="card border-primary vue" [@fadeInOut]="'in'" *ngIf="show" >
-        <img class="card-img-top" [src]="data.config.img" alt="{{data.config.title}}">
-        <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modalChild.modalMode=true" *ngIf="!modalChild.modalMode && data.dashBoard"></vue-controls>
+        <img class="card-img-top" [src]="milieuService.config.img" alt="{{milieuService.config.title}}">
+        <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modalChild.modalMode=true" *ngIf="!modalChild.modalMode && milieuService.dashBoard"></vue-controls>
         <modal-controls *ngIf="modalChild.modalMode === true"></modal-controls>
         <div class="card-block">
-          <h4 class="card-title">{{data.config.title}}</h4>
-          <p class="card-text">{{data.config.intro}}</p>
+          <h4 class="card-title">{{milieuService.config.title}}</h4>
+          <p class="card-text">{{milieuService.config.intro}}</p>
         </div>
       </div>
     </div></modal-vue>`,
@@ -34,6 +34,9 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
       ])
     ]
 })
-export class IntroVueComponent extends MilieuVue { constructor(protected data: MilieuService) { super(data); } }
+export class IntroVueComponent extends MilieuVue {
+  @Input() milieuService: any;
+  constructor(protected data: MilieuService) { super(data); }
+}
 
 /* Copyright AEO all rights reserved */

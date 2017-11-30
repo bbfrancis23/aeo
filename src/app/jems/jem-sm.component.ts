@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Jem } from './jem';
 import { MilieuService } from '../milieu/milieu.service';
+import { JemService } from './jem.service';
 
 "use strict";
 
@@ -13,7 +14,7 @@ import { MilieuService } from '../milieu/milieu.service';
         'bg-danger': jem.type === 'Mistakes',
         'bg-info': jem.type === 'How to',
         'bg-dark': jem.type === 'Style Guide'}" style="margin-bottom: 5px"><!-- to do get rid of this -->
-      <item-controls [item]="jem" *ngIf="data.dashBoard" ></item-controls>
+      <item-controls [item]="jem" *ngIf="jemService.dashBoard" ></item-controls>
         <p><b>{{jem.title}}: </b> {{jem.description}}</p>
         <pre >{{jem.code}}</pre>
     </div>`,
@@ -21,6 +22,7 @@ import { MilieuService } from '../milieu/milieu.service';
 export class JemSmallComponent {
 
   @Input() jem: Jem;
+  @Input() jemService: JemService;
 
   constructor(protected data: MilieuService) { }
 }

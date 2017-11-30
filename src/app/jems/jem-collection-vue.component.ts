@@ -8,7 +8,7 @@ import { Jem } from './jem';
 @Component({
   selector: 'jem-collection-vue',
   template:
-  `<div class="card border-info tile text-white" *ngIf="show " >
+  `<div class="card border-info vue text-white" *ngIf="show " >
       <div class="card-header bg-info"><h4>Jem Collection</h4></div>
       <vue-controls [title]="'Jem Collection'" (hideVueEvent)="show=!show" *ngIf="data.dashBoard"></vue-controls>
       <div class="card-block" style="padding: 10px">

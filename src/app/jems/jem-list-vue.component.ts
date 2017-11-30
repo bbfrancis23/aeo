@@ -1,7 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ListVue } from '../milieu/list-vue';
 import { MilieuService } from '../milieu/milieu.service';
 import { Jem } from './Jem';
+import { JemService } from './jem.service';
 
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
@@ -16,8 +17,9 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
           Jems List
           <modal-controls *ngIf="modalChild.modalMode === true"></modal-controls>
         </h4>
+        <div class="alert alert-warning" *ngIf="items?.length === 0">No Jems. Please try a Different Filter</div>
         <sized-items-vue-controls
-          *ngIf="modalChild.modalMode === false && data.dashBoard"
+          *ngIf="modalChild.modalMode === false && jemService.dashBoard"
           (hideVueEvent)="show=false"
           (modalVueEvent)="modalChild.modalMode=true;"
           (toggleItemSizeEvent)="showBig = !showBig" >
@@ -25,11 +27,11 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 
 
         <div class="tile"  *ngIf="showBig"  [@flyInOut]="'in'">
-          <jem *ngFor="let jem of items; trackBy: trackByJem" [jem]="jem"   [@flyInOut]="'in'"></jem>
+          <jem *ngFor="let jem of items; trackBy: trackByJem" [jem]="jem" [@flyInOut]="'in'" [jemService]="jemService"></jem>
         </div>
 
-        <div class="tile" *ngIf=!showBig>
-          <jem-sm *ngFor="let jem of items; trackBy: trackByJem" [jem]="jem" ></jem-sm>
+        <div class="tile" *ngIf="!showBig">
+          <jem-sm *ngFor="let jem of items; trackBy: trackByJem" [jem]="jem" [jemService]="jemService"></jem-sm>
         </div>
       </div>
       </modal-vue>
@@ -66,15 +68,15 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 })
 export class JemListVueComponent extends ListVue implements OnInit {
 
+  @Input() jemService: JemService;
+
   constructor(protected data: MilieuService) { super(data); }
 
   ngOnInit() {
-    this.data.currentFilteredItems.subscribe(filteredItems => {
+
+    this.jemService.currentFilteredItems.subscribe(filteredItems => {
       this.items = filteredItems;
-
-
     })
-
   }
 
 

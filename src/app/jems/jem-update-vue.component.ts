@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MilieuVue } from '../milieu/milieu-vue';
 import { MilieuService } from '../milieu/milieu.service';
+import { JemService } from './jem.service';
 
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
@@ -28,19 +29,22 @@ export class JemUpdateVueComponent extends MilieuVue implements OnInit {
   model: Object = {};
   submitted = false;
 
+  @Input() jemService: JemService;
+
   onSubmit(): void {
-    this.data.create(this.model).then((jem) => { });
-    this.data.refresh();
+    this.jemService.create(this.model).then((jem) => { });
+    this.jemService.refresh();
     this.submitted = true;
   }
 
   constructor(protected data: MilieuService) {
     super(data);
-    data.currentSelectedItem.subscribe(selectedItem => this.model = selectedItem);
+
   }
 
   ngOnInit() {
     //this.modal = document.getElementById('formModal');
+    this.jemService.currentSelectedItem.subscribe(selectedItem => this.model = selectedItem);
   }
 
 }

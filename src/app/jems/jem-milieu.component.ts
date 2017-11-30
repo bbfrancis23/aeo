@@ -55,37 +55,33 @@ export class JemMilieuComponent extends Milieu implements OnInit {
 
 
 
-  constructor(protected route: ActivatedRoute, protected utils: Utilities, protected data: MilieuService, protected jem: JemService) {
+  constructor(protected route: ActivatedRoute, protected utils: Utilities, protected data: MilieuService, protected jemService: JemService) {
     super(route, utils, data);
-    data.config = JEM_CONFIG;
-    this.initConfig();
+    data.config = JEM_CONFIG; // remove this at some point.
+    this.routeConfig(jemService);
+    //this.initConfig();
   }
 
   ngOnInit() {
-    if (!this.data.dashBoard) {
+    if (!this.jemService.dashBoard) {
       this.addVue.show = false;
       this.updateVue.show = false;
       this.collectionVue.show = false;
     }
 
-    // make jem data aviable through the app
-    //this.jem.data = this.data;
 
-    //console.log(this.jem.data);
 
     this.columns = [
       [this.introVue, this.filterVue],
       [this.listVue],
       [this.addVue, this.updateVue, this.collectionVue]];
-
-      //console.log(this.data);
   }
 
   toggleDashBoard() {
 
-    this.data.dashBoard = !this.data.dashBoard;
+    this.jemService.dashBoard = !this.jemService.dashBoard;
 
-    if (this.data.dashBoard) {
+    if (this.jemService.dashBoard) {
       this.updateVue.show = true;
       this.addVue.show = true;
       this.collectionVue.show = true;

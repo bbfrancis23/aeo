@@ -1,7 +1,7 @@
 <modal-vue >
   <div class="card border-info tile text-white" [@fadeInOut]="'in'" *ngIf="show" style="margin-top: 10px">
     <div class="card-header bg-info"><h4>{{function}} a Jem</h4></div>
-    <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modalChild.modalMode=true" *ngIf="!modalChild.modalMode && data.dashBoard" ></vue-controls>
+    <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modalChild.modalMode=true" *ngIf="!modalChild.modalMode && jemService.dashBoard" ></vue-controls>
     <modal-controls *ngIf="modalChild.modalMode === true"></modal-controls>
     <div class="card-block p-3" >
       <div [hidden]="submitted">
@@ -17,7 +17,7 @@
                 <label for="tech" class="sr-only">Tech</label>
                 <select class="form-control" id="tech" [(ngModel)]="model.tech" name="tech">
 
-                  <option *ngFor="let value of data.config.fields[0].values">{{value.name}}
+                  <option *ngFor="let value of jemService.config.fields[0].values">{{value.name}}
                 </select>
               </div>
             </div>
@@ -25,7 +25,7 @@
               <div class="form-group">
                 <label for="Type" class="sr-only">Type</label>
                 <select class="form-control" id="type" [(ngModel)]="model.type" name="type">
-                  <option *ngFor="let value of data.config.fields[1].values">{{value.name}}
+                  <option *ngFor="let value of jemService.config.fields[1].values">{{value.name}}
                 </select>
               </div>
             </div>

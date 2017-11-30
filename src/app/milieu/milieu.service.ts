@@ -52,7 +52,7 @@ export class MilieuService {
 
     return this.http.post(`api/login`, logInFields, { headers: this.headers }).toPromise().then(response => {
 
-      console.log(response.json().message);
+      //console.log(response.json().message);
       return response.json().message;
     }).catch(this.handleError);
 
@@ -222,6 +222,8 @@ export class MilieuService {
       });
 
     });
+
+    //console.log(itemsFiltered.length);
 
     this.changeFilteredItems(itemsFiltered);
     this.updateUrl();

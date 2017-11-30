@@ -18,14 +18,14 @@ export class JemService extends MilieuService implements OnInit{
     this.config = JEM_CONFIG;
     this.init();
 
-    console.log(this);
+
   }
 
 
   ngOnInit(){
     //this.init();
+    console.log('You called Init');
 
-
-    console.log('init called');
+    //console.log('init called');
   }
 }
