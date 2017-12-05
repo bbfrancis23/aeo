@@ -16,6 +16,8 @@ import { HomeComponent } from './home.component';
 import { ItemSearchComponent} from './milieu/item-search.component';
 import { ViewPortComponent } from './view-port.component';
 
+import { AccountService } from './account/account.service';
+
 import { JemAddVueComponent } from './jems/jem-add-vue.component';
 import { JemMilieuComponent } from './jems/jem-milieu.component';
 import { JemListVueComponent } from './jems/jem-list-vue.component';
@@ -69,7 +71,7 @@ import { Utilities } from './utilities';
     //RealEstateAgentMilieuComponent
   ],
   providers: [
-    CollectionService, Utilities, JemService, //RealEstateAgentService
+    CollectionService, Utilities, JemService, AccountService//RealEstateAgentService
   ],
   bootstrap: [AppComponent]
 })

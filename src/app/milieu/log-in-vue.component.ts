@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MilieuVue } from '../milieu/milieu-vue';
 import { MilieuService } from '../milieu/milieu.service';
@@ -42,6 +42,8 @@ export class LogInVueComponent extends MilieuVue implements OnInit {
   logInForm: FormGroup;
   message: string;
 
+  @Input() milieuService: any;
+
   //constructor(protected data: MilieuService) { super(data); }
 
   ngOnInit() {
@@ -53,9 +55,9 @@ export class LogInVueComponent extends MilieuVue implements OnInit {
 
   onSubmit(): void {
 
-    //this.data.login(this.logInForm.value).then((data)=>{
-    //  this.message = data;
-    //});
+    this.milieuService.login(this.logInForm.value).then((data)=>{
+      this.message = data;
+    });
 
     //this.message
 

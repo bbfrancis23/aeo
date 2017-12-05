@@ -7,6 +7,7 @@ import { LogInVueComponent } from '../milieu/log-in-vue.component';
 
 import { Account } from './account';
 import { ACCOUNT_CONFIG } from './account-config';
+import { AccountService } from './account.service';
 
 import { MilieuService } from '../milieu/milieu.service';
 
@@ -29,17 +30,15 @@ import { MilieuService } from '../milieu/milieu.service';
   `],
   providers: [MilieuService]
 })
-export class AccountMilieuComponent   {
+export class AccountMilieuComponent {
 
-  account: Account;
+  //account: Account;
 
-  @ViewChild(LogInVueComponent) logInVue;
+  //@ViewChild(LogInVueComponent) logInVue;
 
-  constructor(protected route: ActivatedRoute, protected utils: Utilities, protected data: MilieuService) {
-  //  super(route, utils, data);
-  //  data.itemsMode = false;
-  //  data.config = ACCOUNT_CONFIG;
-  //  this.initConfig();
+  constructor(protected route: ActivatedRoute, protected utils: Utilities, protected accountService: AccountService){
+  //constructor(protected route: ActivatedRoute, protected utils: Utilities, protected accountService: AccountService) {
+  //  super(route, utils);
   }
 
   //ngOnInit() {
@@ -48,8 +47,6 @@ export class AccountMilieuComponent   {
   //  }
 
   //  this.columns = [[this.logInVue]];
-
-  //  console.log(this.data);
   //}
 
   //toggleDashBoard() {

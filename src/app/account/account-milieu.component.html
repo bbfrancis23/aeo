@@ -2,18 +2,18 @@
   <div class="row bg-primary py-2">
 
     <div class="col-lg-6">
-      <h1 class="h2 text-white">{{data.pageTitle}}</h1>
+      <h1 class="h2 text-white">{{accountService.pageTitle}}</h1>
     </div>
 
     <div class="col-lg-6">
 
       <div class="btn-group ml-2 float-lg-right d-none d-lg-block" >
-        <button class="btn btn-outline-secondary material-icons" title="Dash Board" [ngClass]="{'active': data.dashBoard}"  (click)="toggleDashBoard()">
+        <button class="btn btn-outline-secondary material-icons" title="Dash Board" [ngClass]="{'active': accountService.dashBoard}"  (click)="toggleDashBoard()">
           dashboard
         </button>
       </div>
 
-      <div class="btn-group float-lg-right d-none d-lg-block" *ngIf="data.dashBoard" >
+      <div class="btn-group float-lg-right d-none d-lg-block" *ngIf="accountService.dashBoard" >
 
       </div>
 
@@ -25,7 +25,7 @@
   <div class="row">
     <div class="col-lg-3"></div>
     <div class="col-lg-6">
-      <log-in-vue></log-in-vue>
+      <log-in-vue [milieuService]="accountService"></log-in-vue>
     </div>
     <div class="col-lg-3"></div>
   </div>

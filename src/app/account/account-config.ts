@@ -13,7 +13,8 @@ export const ACCOUNT_CONFIG: Config = {
   fieldsRaw: [
 
   ],
-  fields: []
+  fields: [],
+  itemsMode: false
 };
 
 /* copyright 2017 AEO All Rights Reserved. */

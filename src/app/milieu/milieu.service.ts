@@ -61,10 +61,8 @@ export class MilieuService {
 
   // todo see if there is a way of getting rid of observable => Promise => observable;
   refresh() {
-    //console.log('Freash');
-    this.http.get('api/session').toPromise().then(result => {
 
-      //console.log(result.json());
+    this.http.get('api/session').toPromise().then(result => {
 
       if(result.json().message === 'Admin'){
         this.admin = true;
@@ -73,6 +71,7 @@ export class MilieuService {
       }
     });
 
+    //console.log(this.itemsMode);
 
     if (this.itemsMode === true) {
       let items = this.http.get(`api/${this.config.name}`).toPromise().then(response => response.json().data);
@@ -87,14 +86,16 @@ export class MilieuService {
 
 
     }
-
+    
   }
 
   init() {
 
+
     if(this.config.itemsMode === false){
       this.itemsMode = false;
     }
+
 
     if(this.config.requireAuth === true){
       this.requireAuth = true;
@@ -104,18 +105,14 @@ export class MilieuService {
     // takes fieldsRaw ['Git', 'JavaScript', 'HTML'] and converts them to [name: 'Git', filtered: false ]
     // this saves typing / time on config file creation.
 
-    //console.log(this.config.fieldsRaw);
 
     this.config.fieldsRaw.forEach(fieldRaw => {
       let newField: Field = { name: fieldRaw.name, values: [] };
       fieldRaw.values.forEach(value => newField.values.push({ name: value, filtered: false }));
       this.config.fields.push(newField);
     });
-    //delete this.config.fieldsRaw;
+    delete this.config.fieldsRaw;
     this.pageTitle = this.config.title;
-
-
-
 
   }
 
