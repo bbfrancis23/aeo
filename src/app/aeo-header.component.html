@@ -4,12 +4,10 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="width: 100%">
           <li class="nav-item active"><a class="nav-link" href="#">Projects</a></li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              JavaScript
-            </a>
+            <a style="white-space: nowrap;" class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">JavaScript</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
              <a class="dropdown-item" href="/code-jems/tech/javascript">JavaScript</a>
              <a class="dropdown-item" href="/code-jems/tech/javascript/type/best-practices">Best Practices</a>
@@ -18,11 +16,11 @@
              <a class="dropdown-item" href="/code-jems/tech/javascript/type/style-guide">Style Guide</a>
            </div>
           </li>
-          <li class="nav-item"><a class="nav-link" href="#">Angular</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/code-jems">Code Jems</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Best Practices</a></li>
+          <li style="white-space: nowrap;" class="nav-item"><a class="nav-link" href="#">Angular</a></li>
+          <li style="white-space: nowrap;" class="nav-item"><a class="nav-link" routerLink="/code-jems">Code Jems</a></li>
+          <li style="white-space: nowrap;" class="nav-item"><a class="nav-link" href="#">Best Practices</a></li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a style="white-space: nowrap;" class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Tools
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -35,10 +33,15 @@
         </ul>
 
 
+        <item-search class='mr-2' style="width: 25%"></item-search>
+        <div class="btn-group">
 
-        <ul class="navbar-nav  my-2 my-lg-0">
-          
-          <li class="nav-item active">  <a href="/account" class="nav-link material-icons" data-toggle="tooltip" title="Account">account_box</a></li>
-        </ul>
+          <a href="/account" class="btn btn-outline-secondary material-icons" title="Account">account_box</a>
+        </div>
+
+
+
       </div>
+
+
     </nav>
