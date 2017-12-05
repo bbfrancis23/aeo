@@ -42,7 +42,7 @@ export class LogInVueComponent extends MilieuVue implements OnInit {
   logInForm: FormGroup;
   message: string;
 
-  constructor(protected data: MilieuService) { super(data); }
+  //constructor(protected data: MilieuService) { super(data); }
 
   ngOnInit() {
     this.logInForm = new FormGroup({
@@ -53,13 +53,13 @@ export class LogInVueComponent extends MilieuVue implements OnInit {
 
   onSubmit(): void {
 
-    this.data.login(this.logInForm.value).then((data)=>{
-      this.message = data;
-    });
+    //this.data.login(this.logInForm.value).then((data)=>{
+    //  this.message = data;
+    //});
 
-    this.message
+    //this.message
 
-    console.log(this.message, 'here');
+    //console.log(this.message, 'here');
   }
 
   get email() { return this.logInForm.get('email') }

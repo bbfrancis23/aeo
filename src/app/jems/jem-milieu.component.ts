@@ -55,9 +55,10 @@ export class JemMilieuComponent extends Milieu implements OnInit {
 
 
 
-  constructor(protected route: ActivatedRoute, protected utils: Utilities, protected data: MilieuService, protected jemService: JemService) {
-    super(route, utils, data);
-    data.config = JEM_CONFIG; // remove this at some point.
+  constructor(protected route: ActivatedRoute, protected utils: Utilities, protected jemService: JemService) {
+    super(route, utils);
+    //data.config = JEM_CONFIG; // remove this at some point.
+    console.log(jemService);
     this.routeConfig(jemService);
     //this.initConfig();
   }

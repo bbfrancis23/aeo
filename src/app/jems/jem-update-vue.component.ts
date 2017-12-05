@@ -37,10 +37,10 @@ export class JemUpdateVueComponent extends MilieuVue implements OnInit {
     this.submitted = true;
   }
 
-  constructor(protected data: MilieuService) {
-    super(data);
+  //constructor(protected data: MilieuService) {
+  //  super(data);
 
-  }
+  //}
 
   ngOnInit() {
     //this.modal = document.getElementById('formModal');

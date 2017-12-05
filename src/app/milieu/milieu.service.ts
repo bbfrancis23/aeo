@@ -257,6 +257,10 @@ export class MilieuService {
     this.pageTitle = selectedFilters.length > 0 ? selectedFilters.join(' ') : this.config.title;
   }
 
+  searchItems(term: string){
+    return ['your mom', 'my mom', 'our mom'];
+  }
+
   // over hault this after backend
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only

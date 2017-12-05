@@ -10,14 +10,14 @@ import { Jem } from './jem';
   template:
   `<div class="card border-info vue text-white" *ngIf="show " >
       <div class="card-header bg-info"><h4>Jem Collection</h4></div>
-      <vue-controls [title]="'Jem Collection'" (hideVueEvent)="show=!show" *ngIf="data.dashBoard"></vue-controls>
+      <!-- <vue-controls [title]="'Jem Collection'" (hideVueEvent)="show=!show" *ngIf="data.dashBoard"></vue-controls> -->
       <div class="card-block" style="padding: 10px">
       </div>
     </div>`
 })
 export class JemCollectionVueComponent extends MilieuVue {
 
-  constructor(protected data: MilieuService) { super(data); }
+  //constructor(protected data: MilieuService) { super(data); }
 
 }
 

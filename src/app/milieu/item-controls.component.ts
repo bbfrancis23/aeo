@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { MilieuService } from './milieu.service';
 'use strict';
 
 @Component({
@@ -18,6 +17,5 @@ export class ItemControlsComponent {
 
   @Input() item: Object = {};
   @Input() milieuService: {};
-  constructor(private data: MilieuService) { };
 }
 /* Copyright AEO all rights reserved */

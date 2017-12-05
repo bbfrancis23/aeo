@@ -29,39 +29,39 @@ import { MilieuService } from '../milieu/milieu.service';
   `],
   providers: [MilieuService]
 })
-export class AccountMilieuComponent extends Milieu implements OnInit {
+export class AccountMilieuComponent   {
 
   account: Account;
 
   @ViewChild(LogInVueComponent) logInVue;
 
   constructor(protected route: ActivatedRoute, protected utils: Utilities, protected data: MilieuService) {
-    super(route, utils, data);
-    data.itemsMode = false;
-    data.config = ACCOUNT_CONFIG;
-    this.initConfig();
+  //  super(route, utils, data);
+  //  data.itemsMode = false;
+  //  data.config = ACCOUNT_CONFIG;
+  //  this.initConfig();
   }
 
-  ngOnInit() {
-    if (!this.data.dashBoard) {
+  //ngOnInit() {
+  //  if (!this.data.dashBoard) {
 
-    }
+  //  }
 
-    this.columns = [[this.logInVue]];
+  //  this.columns = [[this.logInVue]];
 
-    console.log(this.data);
-  }
+  //  console.log(this.data);
+  //}
 
-  toggleDashBoard() {
-    this.data.dashBoard = !this.data.dashBoard;
+  //toggleDashBoard() {
+  //  this.data.dashBoard = !this.data.dashBoard;
 
-    if (this.data.dashBoard) {
+  //  if (this.data.dashBoard) {
 
-    } else {
+  //  } else {
 
-    }
+  //  }
 
-  }
+  //}
 
 
 

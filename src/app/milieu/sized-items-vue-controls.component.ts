@@ -1,10 +1,7 @@
-import { Component, Input, EventEmitter, Output  } from '@angular/core';
+import { Component,  EventEmitter, Input, Output  } from '@angular/core';
 import { VueControlsComponent } from './vue-controls.component';
-import { MilieuService } from './milieu.service';
 
 'use strict';
-
-// opt-js-html //
 
 @Component({
   selector: 'sized-items-vue-controls',
@@ -19,8 +16,7 @@ import { MilieuService } from './milieu.service';
     </div>`
 })
 export class SizedItemsVueControlsComponent extends VueControlsComponent {
-  
+
   @Output() toggleItemSizeEvent = new EventEmitter();
-  constructor(protected data: MilieuService) { super(data); }
 }
 /* Copyright AEO all rights reserved */

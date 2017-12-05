@@ -21,6 +21,8 @@ import { MilieuService } from '../milieu/milieu.service';
       </div>
     </div></modal-vue>`
 })
-export class AgentVueComponent extends MilieuVue { constructor(protected data: MilieuService) { super(data); } }
+export class AgentVueComponent extends MilieuVue {
+  //constructor(protected data: MilieuService) { super(data); } 
+}
 
 /* Copyright AEO all rights reserved */

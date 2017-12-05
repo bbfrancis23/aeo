@@ -8,7 +8,7 @@ export abstract class Milieu {
 
   columns: any[];
 
-  constructor(protected readonly route: ActivatedRoute, protected readonly utils: Utilities, protected readonly data: any) { }
+  constructor(protected readonly route: ActivatedRoute, protected readonly utils: Utilities) { }
 
   initConfig() {
     //this.data.init();

@@ -31,9 +31,9 @@ export class JemAddVueComponent extends MilieuVue implements OnInit{
   model: Jem = new Jem();
   @Input() jemService: JemService;
 
-  constructor(protected data: MilieuService) {
-    super(data);
-  }
+  //constructor(protected data: MilieuService) {
+  //  super(data);
+  //}
 
   ngOnInit(){
     this.model.tech = this.jemService.config.fields[0].values[0].name;

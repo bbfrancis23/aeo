@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ListVue } from '../milieu/list-vue';
-import { MilieuService } from '../milieu/milieu.service';
 import { Jem } from './Jem';
 import { JemService } from './jem.service';
 
@@ -70,7 +69,7 @@ export class JemListVueComponent extends ListVue implements OnInit {
 
   @Input() jemService: JemService;
 
-  constructor(protected data: MilieuService) { super(data); }
+  //constructor(protected data: MilieuService) { super(data); }
 
   ngOnInit() {
 

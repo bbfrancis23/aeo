@@ -1,9 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MilieuVue } from './milieu-vue';
-import { MilieuService } from './milieu.service';
-
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Subject }    from 'rxjs/Subject';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { MilieuVue } from './milieu-vue';
 
 'use strict';
 
@@ -14,7 +12,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   Milieu: Collection / Table WebPage Interface
   Vue: Milieu Control (Accessor/Mutator)
 
-  QA: 11-5-2017
+  QA: 11-30-2017
 */
 
 @Component({
@@ -57,10 +55,6 @@ export class FilterVueComponent extends MilieuVue implements OnInit {
   @Input() milieuService: any;
   private searchTerms = new Subject<string>();
   searchTerm: string;
-
-  constructor(protected data: MilieuService) {
-    super(data);
-  }
 
   ngOnInit(){
     this.searchTerms.subscribe((term)=> this.searchTerm = term);

@@ -1,10 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { MilieuService } from './milieu.service';
 
 'use strict';
-
-// opt-js-html-css //
-
 
 @Component({
   selector: 'vue-controls',
@@ -23,7 +19,6 @@ export class VueControlsComponent {
 
   @Output() hideVueEvent = new EventEmitter();
   @Output() modalVueEvent = new EventEmitter();
-  constructor(protected data: MilieuService) { }
 
   get show(){
     return this._show;
