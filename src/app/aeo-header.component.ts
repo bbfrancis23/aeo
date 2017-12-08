@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { JemService } from './jems/jem.service';
 
 @Component({
   selector: 'aeo-header',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AeoHeaderComponent {
 
-
+  constructor(private jemService: JemService){
+    //console.log(jemService);
+  }
 }

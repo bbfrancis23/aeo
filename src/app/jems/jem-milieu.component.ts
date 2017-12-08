@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 
 import { Milieu } from '../milieu/milieu';
@@ -43,7 +43,6 @@ export class JemMilieuComponent extends Milieu implements OnInit {
 
   toggle() {
     this.state = this.state === 'active' ? 'inactive' : 'active';
-    console.log(this.state);
   }
 
   @ViewChild(JemListVueComponent) listVue;
@@ -58,9 +57,15 @@ export class JemMilieuComponent extends Milieu implements OnInit {
   constructor(protected route: ActivatedRoute, protected utils: Utilities, protected jemService: JemService) {
     super(route, utils);
     this.routeConfig(jemService);
+    jemService.refresh();
   }
 
+
   ngOnInit() {
+
+    //this.jemService.filter();
+
+
     if (!this.jemService.dashBoard) {
       this.addVue.show = false;
       this.updateVue.show = false;

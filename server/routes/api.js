@@ -11,6 +11,8 @@ const sanitize = require( 'mongo-sanitize' );
 
 app.use( cookieParser() );
 
+//console.log('New MongoClient');
+
 let jem = {
   description: { required: true, type: 'string' },
   tech: { required: true, type: 'string' },
@@ -61,7 +63,10 @@ app.get( '/jems', ( req, res ) => {
     connection( db => {
       db.collection( 'jems' ).find().sort( { title: 1  } ).toArray()
       .then( ( jems ) => {
+
+          //console.log('closing DB from get');
           db.close();
+
           response = {data: jems, message: 'success', status: 200};
           res.json( response );
         })
@@ -153,6 +158,7 @@ app.get('/session', (req, res) =>{
           res.json({status: 200, message: message});
         }
       });
+      //console.log('closing db from session');
       db.close;
     });
   }

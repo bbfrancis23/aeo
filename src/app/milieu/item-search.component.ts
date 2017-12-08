@@ -66,6 +66,5 @@ export class ItemSearchComponent{
   keyTerms: object [];
   search(string: ''){
     this.keyTerms = [{link: '/code-jems', title: 'yourmom is a cold hearted snake'}]
-    console.log(this.keyTerms)
   }
 }

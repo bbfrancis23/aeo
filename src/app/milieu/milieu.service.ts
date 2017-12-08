@@ -26,6 +26,8 @@ export class MilieuService {
   admin = false;
   requireAuth = false;
 
+  //filterMode = false;
+
 
   private readonly itemsSource = new BehaviorSubject<{}[]>([]);
   private readonly filteredItemsSource = new BehaviorSubject<{}[]>([]);
@@ -36,12 +38,13 @@ export class MilieuService {
   readonly currentSelectedItem = this.selectedItemSource.asObservable();
 
   changeItems(items: {}[]) { this.itemsSource.next(items) }
-  changeFilteredItems(filteredItems: {}[]) { this.filteredItemsSource.next(filteredItems) }
+  changeFilteredItems(filteredItems: {}[]) { this.filteredItemsSource.next(filteredItems);}
   changeSelectedItem(selectedItem: {}) { this.selectedItemSource.next(selectedItem) }
 
   constructor(protected route: ActivatedRoute, protected readonly http: Http, protected readonly utils: Utilities, protected readonly location: Location) { }
 
   get dashBoard() { return this._dashBoard; }
+
   set dashBoard(b: boolean) {
     if(this.dashBoardPermission === 'admin' && this.admin || !(this.dashBoardPermission === 'admin'))
     this._dashBoard = b;
@@ -51,8 +54,6 @@ export class MilieuService {
   login(logInFields){
 
     return this.http.post(`api/login`, logInFields, { headers: this.headers }).toPromise().then(response => {
-
-      //console.log(response.json().message);
       return response.json().message;
     }).catch(this.handleError);
 
@@ -61,6 +62,8 @@ export class MilieuService {
 
   // todo see if there is a way of getting rid of observable => Promise => observable;
   refresh() {
+
+    console.log('refresh called');
 
     this.http.get('api/session').toPromise().then(result => {
 
@@ -71,8 +74,6 @@ export class MilieuService {
       }
     });
 
-    //console.log(this.itemsMode);
-
     if (this.itemsMode === true) {
       let items = this.http.get(`api/${this.config.name}`).toPromise().then(response => response.json().data);
       items.then(items => {
@@ -82,14 +83,16 @@ export class MilieuService {
           this.changeSelectedItem(items[0]);
         });
         this.filter();
+
       });
 
 
     }
-    
+
   }
 
   init() {
+
 
 
     if(this.config.itemsMode === false){
@@ -101,7 +104,32 @@ export class MilieuService {
       this.requireAuth = true;
     }
 
-    this.refresh();
+    //this.refresh();
+
+    this.http.get('api/session').toPromise().then(result => {
+
+      if(result.json().message === 'Admin'){
+        this.admin = true;
+
+        this.authenticated = true;
+      }
+    });
+
+
+
+    if (this.itemsMode === true) {
+      let items = this.http.get(`api/${this.config.name}`).toPromise().then(response => response.json().data);
+      items.then(items => {
+        this.changeItems(items);
+        this.changeFilteredItems(items);
+        this.currentItems.subscribe(items => {
+          this.changeSelectedItem(items[0]);
+        });
+
+      });
+
+
+    }
     // takes fieldsRaw ['Git', 'JavaScript', 'HTML'] and converts them to [name: 'Git', filtered: false ]
     // this saves typing / time on config file creation.
 
@@ -124,7 +152,6 @@ export class MilieuService {
       .post(url, something, { headers: this.headers })
       .toPromise()
       .then((res) => {
-        //item._id = res.json(); //console.log(jem._id, res.json());
         return item;
       })
       .catch(this.handleError);
@@ -135,15 +162,10 @@ export class MilieuService {
 
     let url = `api/${this.config.name}/${id}`
 
-    //console.log(url);
-
     this.http.delete(url).toPromise().then((response) => {
-      //console.log(response);
     });
 
     this.refresh();
-
-    //console.log(response);
 
     return 'success';
   }
@@ -183,8 +205,11 @@ export class MilieuService {
 
   filter(col = "title", value = ''){
 
+    //console.log('filter called');
+
     let itemsFiltered: {}[];
     this.currentItems.subscribe(items => {
+
       itemsFiltered = items;
 
       this.config.fields.forEach(field => {
@@ -207,8 +232,6 @@ export class MilieuService {
         }else{
           itemsFiltered.forEach(item => {
 
-            //console.log();
-
             let regExp = new RegExp(value, "i")
             if(item[col].search(regExp) > -1){
               filtered.push(item);
@@ -219,16 +242,12 @@ export class MilieuService {
       });
 
     });
-
-    //console.log(itemsFiltered.length);
-
     this.changeFilteredItems(itemsFiltered);
     this.updateUrl();
   }
 
   private updateUrl(): void {
 
-    //console.log(this.dashBoard);
 
     let url = this.config.directory, qs: string = '', fieldPaths: string[] = [], queryStrings: string[] = [], selectedFilters: string[] = [];
 
@@ -252,6 +271,8 @@ export class MilieuService {
 
     this.location.replaceState(`${url}/${fieldPaths.join('/')}`, `${queryStrings.join('&')}`);
     this.pageTitle = selectedFilters.length > 0 ? selectedFilters.join(' ') : this.config.title;
+
+
   }
 
   searchItems(term: string){
