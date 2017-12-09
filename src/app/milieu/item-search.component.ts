@@ -1,4 +1,4 @@
-import { Component } from '@angular/core' ;
+import { Component, Input, OnInit } from '@angular/core' ;
 
 @Component({
   selector: 'item-search',
@@ -7,7 +7,7 @@ import { Component } from '@angular/core' ;
       <input #searchBox id="search-box" (keyup)="search(searchBox.value)" class="form-control search-box" type="text" placeholder="Search" aria-label="Search">
         <ul class='grot search-result' *ngIf='keyTerms'>
           <li *ngFor="let keyterm of keyTerms">
-            <a href="/code-jems">{{keyterm.title}}</a>
+            <a href="/{{keyterm.link}}">{{keyterm.title}}</a>
           </li>
         </ul>
     </div>`,
@@ -17,7 +17,8 @@ import { Component } from '@angular/core' ;
   .grot{
     position: fixed;
     z-index: 99999;
-    text-align: right;
+    //width: 1%;
+    //text-align: right;
   }
 
   .search-box{
@@ -62,9 +63,44 @@ ul.search-result {
 }
     `]
 })
-export class ItemSearchComponent{
-  keyTerms: object [];
+export class ItemSearchComponent implements OnInit{
+  keyTerms = [];
+  keyWords = [];
+  @Input() milieuService: any;
+
+  constructor(){
+  }
+
+  ngOnInit(){
+
+    //console.log(this.milieuService.config.fields[0]);
+    let count = 0;
+    this.milieuService.config.fields.forEach((field)=>{
+      count++;
+      field['values'].forEach((value)=>{
+        let directory = this.milieuService.utils.urlify(value['name'])
+        this.keyWords.push({link: `${this.milieuService.config.directory}/${field['name']}/${this.milieuService.utils.urlify(value['name'])}`, title: value['name']});
+
+        if(count < this.milieuService.config.fields.length) {
+          let subField = (this.milieuService.config.fields[count]);
+
+          subField['values'].forEach((subValue)=>{
+            this.keyWords.push({link: `${this.milieuService.config.directory}/${field['name']}/${this.milieuService.utils.urlify(value['name'])}/${subField['name']}/${this.milieuService.utils.urlify(subValue['name'])}`, title: `${value['name']} ${subValue['name']}`} );
+          });
+        }
+      });
+    });
+  }
+
+
+
   search(string: ''){
-    this.keyTerms = [{link: '/code-jems', title: 'yourmom is a cold hearted snake'}]
+    this.keyTerms = [];
+    this.keyWords.forEach((word)=>{
+      let regEx = new RegExp(string,'i')
+      if(word['title'].match(regEx)){
+        this.keyTerms.push(word);
+      }
+    });
   }
 }
