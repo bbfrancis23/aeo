@@ -15,9 +15,9 @@ import { AppComponent } from './app.component';
 import { MilieuModule } from './milieu.module';
 
 import { AeoFooterComponent } from './aeo-footer.component';
-import { AeoHeaderComponent } from './aeo-header.component';
+import { AppHeaderComponent } from './app-header.component';
 import { AeoLogInComponent} from './aeo-log-in.component';
-import { AeoModalComponent } from './aeo-modal.component';
+import { AppModalComponent } from './app-modal.component';
 import { HomeComponent } from './home.component';
 import { ItemSearchComponent} from './milieu/item-search.component';
 import { ViewPortComponent } from './view-port.component';
@@ -49,6 +49,7 @@ import { Utilities } from './utilities';
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
@@ -58,8 +59,8 @@ import { Utilities } from './utilities';
     AccountMilieuComponent,
 
     AeoFooterComponent,
-    AeoHeaderComponent,
-    AeoModalComponent,
+    AppHeaderComponent,
+    AppModalComponent,
     AeoLogInComponent,
     AppComponent,
     HomeComponent,

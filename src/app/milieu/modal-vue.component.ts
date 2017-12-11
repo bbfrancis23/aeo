@@ -59,6 +59,8 @@ export class ModalVueComponent {
       this.modalMode = false;
     }
   }
+
+
 }
 
 /* copyright AEO all right reserved */

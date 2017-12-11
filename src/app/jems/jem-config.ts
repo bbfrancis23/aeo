@@ -12,7 +12,7 @@ export const JEM_CONFIG: Config = {
 
   fieldsRaw: [
     { name: 'tech', values: ['Angular', 'CSS', 'Express', 'Git', 'HTML', 'JavaScript', 'Less', 'MongoDB', 'Mean Stack', 'NodeJS', 'TypeScript'] },
-    { name: 'type', values: ['Best Practices', 'How to', 'Mistakes', 'Short-Cut Keys', 'Style Guide'] }
+    { name: 'type', values: ['Best Practices', 'How to', 'Mistakes', 'Style Guide'] }
   ],
   fields: []
 };
