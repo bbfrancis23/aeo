@@ -1,16 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MilieuVue } from '../milieu/milieu-vue';
-import { MilieuService } from '../milieu/milieu.service';
+import { MilieuVue } from './milieu/milieu-vue';
+import { MilieuService } from './milieu/milieu.service';
 
 'use strict';
 
 @Component({
-  selector: 'log-in-vue',
+  selector: 'aeo-log-in',
   template: `
 
-      <div class="card border-primary tile " style="margin-top: 10px">
-        <div class="card-header bg-primary"><h4>Log In</h4></div>
+      <div class="card border-primary log-in" >
+        <div class="card-header bg-secondary"><h4>Log In</h4></div>
         <div class="card-block p-3" >
           <form  (ngSubmit)="onSubmit();" [formGroup]="logInForm" #formDir="ngForm">
             <div >
@@ -38,10 +38,16 @@ import { MilieuService } from '../milieu/milieu.service';
         </div>
       </div>`,
     styles:[`
-
+      .log-in{
+        position: fixed;
+        right: 50px;
+        z-index: 10000;
+        width: 500px;
+        box-shadow: 10px 10px 1px 0 rgba(0,0,0,0.3)
+      }
     `]
 })
-export class LogInVueComponent extends MilieuVue implements OnInit {
+export class AeoLogInComponent extends MilieuVue implements OnInit {
   submitted = false;
   logInForm: FormGroup;
   message: string;

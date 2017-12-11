@@ -61,7 +61,6 @@
 a {
   cursor: pointer;
   cursor: hand;
-  text-decoration: none;
 }
 p:first-letter {
   text-transform: capitalize;

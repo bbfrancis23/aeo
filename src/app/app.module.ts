@@ -1,10 +1,14 @@
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+
+
+import { CommonModule } from '@angular/common';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 
@@ -12,6 +16,8 @@ import { MilieuModule } from './milieu.module';
 
 import { AeoFooterComponent } from './aeo-footer.component';
 import { AeoHeaderComponent } from './aeo-header.component';
+import { AeoLogInComponent} from './aeo-log-in.component';
+import { AeoModalComponent } from './aeo-modal.component';
 import { HomeComponent } from './home.component';
 import { ItemSearchComponent} from './milieu/item-search.component';
 import { ViewPortComponent } from './view-port.component';
@@ -44,6 +50,7 @@ import { Utilities } from './utilities';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     MilieuModule
   ],
@@ -52,6 +59,8 @@ import { Utilities } from './utilities';
 
     AeoFooterComponent,
     AeoHeaderComponent,
+    AeoModalComponent,
+    AeoLogInComponent,
     AppComponent,
     HomeComponent,
     ItemSearchComponent,

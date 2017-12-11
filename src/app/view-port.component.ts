@@ -51,9 +51,9 @@ import { Component } from '@angular/core';
         top: 0;
         width: 100%;
         height: 100%;
-        background: #225470;
+        background: #000;
         z-index: 1;
-        opacity: .85
+        opacity: .75
       }
 
       .view-port-content{
