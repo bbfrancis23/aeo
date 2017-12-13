@@ -54,6 +54,11 @@ export class MilieuService {
   login(logInFields){
 
     return this.http.post(`api/login`, logInFields, { headers: this.headers }).toPromise().then(response => {
+
+      if(response.json().message === 'Login Successful'){
+        this.refresh();
+      }
+
       return response.json().message;
     }).catch(this.handleError);
 

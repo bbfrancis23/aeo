@@ -14,7 +14,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   selector: 'app-modal',
   template: `
     <div *ngIf="modalMode === 'on'" [ngClass]="{'app-modal': modalMode === 'on'}"   (click)="modalClick($event)" [@fadeInOut]="modalMode">
-      <div class="app-modal-content"  ><ng-content></ng-content></div>
+      <div class="app-modal-content" ><ng-content></ng-content></div>
     </div>
   `,
     animations: [

@@ -16,7 +16,7 @@ import { MilieuModule } from './milieu.module';
 
 import { AeoFooterComponent } from './aeo-footer.component';
 import { AppHeaderComponent } from './app-header.component';
-import { AeoLogInComponent} from './aeo-log-in.component';
+import { AppLogInComponent} from './app-log-in.component';
 import { AppModalComponent } from './app-modal.component';
 import { HomeComponent } from './home.component';
 import { ItemSearchComponent} from './milieu/item-search.component';
@@ -61,7 +61,7 @@ import { Utilities } from './utilities';
     AeoFooterComponent,
     AppHeaderComponent,
     AppModalComponent,
-    AeoLogInComponent,
+    AppLogInComponent,
     AppComponent,
     HomeComponent,
     ItemSearchComponent,

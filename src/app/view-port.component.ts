@@ -13,13 +13,11 @@ import { Component } from '@angular/core';
   selector: 'view-port',
   template: `
     <header class="view-port-container">
-      <div class="media-wrapper">
+      <div class="med-wrapper">
         <ng-content select="media"></ng-content>
       </div>
       <div class="view-port-overlay"></div>
-      <div class="view-port-content">
-        <ng-content select="content"></ng-content>
-      </div>
+
     </header> `,
     styles: [`
       .view-port-container{
@@ -34,7 +32,7 @@ import { Component } from '@angular/core';
         text-align:  center;
       }
 
-      .media-wrapper{
+      .med-wrapper{
         position: absolute;
         top: 0;
         left: 0;

@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'aeo-footer',
   template: `
-    <footer class="fluid-container">
+    <footer class="background-sky fluid-container">
       <div class="row">
         <div class="col-lg-12 pt-5">
           <img src='assets/img/angular-white.png' height="40px">

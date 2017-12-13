@@ -10,7 +10,7 @@
 
 
 
-      <div class="btn-group ml-2 float-lg-right d-none d-lg-block" *ngIf="jemService.admin">
+      <div class="btn-group ml-2 float-lg-right d-none d-lg-block" *ngIf="jemService.authenticated">
         <button class="btn btn-outline-secondary material-icons" title="Dash Board" [ngClass]="{'active': jemService.dashBoard}"  (click)="toggleDashBoard()">
           dashboard
         </button>
