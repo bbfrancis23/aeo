@@ -13,6 +13,36 @@ import { AppModalComponent } from './app-modal.component';
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >ANGULAR</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+           <a class="dropdown-item" href="/code-jems/tech/angular">Angular</a>
+           <a class="dropdown-item" href="/code-jems/tech/angular/type/best-practices">Best Practices</a>
+           <a class="dropdown-item" href="/code-jems/tech/angular/type/how-to">How To</a>
+           <a class="dropdown-item" href="/code-jems/tech/angular/type/mistakes">Mistakes</a>
+           <a class="dropdown-item" href="/code-jems/tech/angular/type/style-guide">Style Guide</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">CSS</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+           <a class="dropdown-item" href="/code-jems/tech/css">CSS</a>
+           <a class="dropdown-item" href="/code-jems/tech/css/type/best-practices">Best Practices</a>
+           <a class="dropdown-item" href="/code-jems/tech/css/type/how-to">How To</a>
+           <a class="dropdown-item" href="/code-jems/tech/css/type/mistakes">Mistakes</a>
+           <a class="dropdown-item" href="/code-jems/tech/css/type/style-guide">Style Guide</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">HTML</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+           <a class="dropdown-item" href="/code-jems/tech/html">HTML</a>
+           <a class="dropdown-item" href="/code-jems/tech/html/type/best-practices">Best Practices</a>
+           <a class="dropdown-item" href="/code-jems/tech/html/type/how-to">How To</a>
+           <a class="dropdown-item" href="/code-jems/tech/html/type/mistakes">Mistakes</a>
+           <a class="dropdown-item" href="/code-jems/tech/html/type/style-guide">Style Guide</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">JAVASCRIPT</a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
            <a class="dropdown-item" href="/code-jems/tech/javascript">JavaScript</a>
@@ -22,6 +52,16 @@ import { AppModalComponent } from './app-modal.component';
            <a class="dropdown-item" href="/code-jems/tech/javascript/type/style-guide">Style Guide</a>
           </div>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MONGODB</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+           <a class="dropdown-item" href="/code-jems/tech/mongodb">MongoDB</a>
+           <a class="dropdown-item" href="/code-jems/tech/mongodb/type/best-practices">Best Practices</a>
+           <a class="dropdown-item" href="/code-jems/tech/mongodb/type/how-to">How To</a>
+           <a class="dropdown-item" href="/code-jems/tech/mongodb/type/mistakes">Mistakes</a>
+           <a class="dropdown-item" href="/code-jems/tech/mongodb/type/style-guide">Style Guide</a>
+          </div>
+        </li>
         <li class="nav-item"><a class="nav-link" href="/code-jems">CODE JEMS</a></li>
       </ul>
       <item-search class="mr-2 d-none d-lg-block" [milieuService]="jemService"></item-search>
@@ -29,8 +69,21 @@ import { AppModalComponent } from './app-modal.component';
     </div>
   </nav>
   <app-modal><app-log-in [milieuService]="jemService" (modalCloseEvent)="modalChild.modalMode='off'"></app-log-in></app-modal>`,
+  styles:[`
+    li.nav-item a.nav-link{
+      color: white;
+      font-weight: 400;
+    }
 
-  styles:[``]
+    li.nav-item:hover{
+      background-color: #007bff;
+    }
+
+    .navbar-brand{
+      font-family: "Montserrat", sans-serif;
+      font-weight: bolder
+    }
+  `]
 })
 export class AppHeaderComponent {
 
