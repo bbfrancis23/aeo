@@ -16,6 +16,9 @@ import { Component } from '@angular/core';
       <div class="med-wrapper">
         <ng-content select="media"></ng-content>
       </div>
+      <div class="view-port-content">
+        <ng-content select="content"></ng-content>
+      </div>
       <div class="view-port-overlay"></div>
 
     </header> `,
@@ -56,6 +59,8 @@ import { Component } from '@angular/core';
 
       .view-port-content{
           z-index: 2;
+          width: 100vw;
+          font-family: "Montserrat", sans-serif;
       }
     `]
 })

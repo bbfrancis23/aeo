@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'aeo-footer',
+  selector: 'app-footer',
   template: `
     <footer class="background-sky fluid-container">
       <div class="row">
@@ -21,18 +21,16 @@ import { Component } from '@angular/core';
     </footer>`,
   styles:[`
     footer{
-      background-color: black;
       color: white;
       text-align: center;
       font-family: "Montserrat", sans-serif;
     }
 
     .row{
-
       height: 100px;
     }
   `]
 })
-export class AeoFooterComponent{
+export class AppFooterComponent{
 
 }

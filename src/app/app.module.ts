@@ -14,7 +14,7 @@ import { AppComponent } from './app.component';
 
 import { MilieuModule } from './milieu.module';
 
-import { AeoFooterComponent } from './aeo-footer.component';
+import { AppFooterComponent } from './app-footer.component';
 import { AppHeaderComponent } from './app-header.component';
 import { AppLogInComponent} from './app-log-in.component';
 import { AppModalComponent } from './app-modal.component';
@@ -58,7 +58,7 @@ import { Utilities } from './utilities';
   declarations: [
     AccountMilieuComponent,
 
-    AeoFooterComponent,
+    AppFooterComponent,
     AppHeaderComponent,
     AppModalComponent,
     AppLogInComponent,
