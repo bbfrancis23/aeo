@@ -36,7 +36,7 @@ export class AccountMilieuComponent {
 
   //@ViewChild(LogInVueComponent) logInVue;
 
-  constructor(protected route: ActivatedRoute, protected utils: Utilities, protected accountService: AccountService){
+  constructor(public route: ActivatedRoute, protected utils: Utilities, public accountService: AccountService){
 
     console.log(accountService);
   //constructor(protected route: ActivatedRoute, protected utils: Utilities, protected accountService: AccountService) {

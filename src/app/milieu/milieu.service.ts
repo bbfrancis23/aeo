@@ -41,7 +41,7 @@ export class MilieuService {
   changeFilteredItems(filteredItems: {}[]) { this.filteredItemsSource.next(filteredItems);}
   changeSelectedItem(selectedItem: {}) { this.selectedItemSource.next(selectedItem) }
 
-  constructor(protected route: ActivatedRoute, protected readonly http: Http, protected readonly utils: Utilities, protected readonly location: Location) { }
+  constructor(public route: ActivatedRoute, protected readonly http: Http, protected readonly utils: Utilities, public readonly location: Location) { }
 
   get dashBoard() { return this._dashBoard; }
 

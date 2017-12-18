@@ -6,12 +6,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-log-in',
   template: `
-    <div class="card border-primary log-in" [ngClass]="{'border-danger': message && message !== 'Login Successful'}">
+    <div class="card account" [ngClass]="{'border-danger': message && message !== 'Login Successful'}">
       <modal-controls></modal-controls>
-      <div class="card-header bg-primary"  [ngClass]="{'bg-danger': message && message !== 'Login Successful'}"><h4>Log In</h4></div>
-      <div class="card-block p-3" >
+      <div class="card-header"  [ngClass]="{'bg-danger': message && message !== 'Login Successful'}">Log In</div>
+      <div class="card-block" >
         <form  (ngSubmit)="onSubmit();" [formGroup]="logInForm" #formLogIn="ngForm" *ngIf="message !== 'Login Successful'">
-          <div >
             <div class="form-group">
               <label for="email" class="sr-only">Email</label>
               <input id="email" class="form-control" formControlName="email" placeholder="Email" required >
@@ -29,20 +28,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
                 </div>
               </div>
             <button type="submit" class="btn btn-outline-success float-right" [disabled]="logInForm.invalid" >Log In</button><br><br>
-          </div>
         </form>
         <div class="alert" [ngClass]="{'alert-success': message === 'Login Successful', 'alert-danger': message !== 'Login Successful'}" *ngIf="message">{{message}}</div>
       </div>
-    </div>`,
-  styles:[`
-      .log-in{
-        position: fixed;
-        right: 50px;
-        z-index: 10000;
-        width: 500px;
-        box-shadow: 10px 10px 1px 0 rgba(0,0,0,0.3)
-      }
-    `]
+    </div>`
 })
 export class AppLogInComponent implements OnInit {
   submitted = false;

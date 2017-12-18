@@ -3,9 +3,9 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-footer',
   template: `
-    <footer class="background-sky fluid-container">
+    <footer class="fluid-container">
       <div class="row">
-        <div class="col-lg-12 pt-5">
+        <div class="col-lg-12 pb-4">
           <img src='assets/img/angular-white.png' height="40px">
           <img src='assets/img/mongo-white.png' height="40px">
           <img src='assets/img/node-white.png' height="40px">
@@ -14,22 +14,11 @@ import { Component } from '@angular/core';
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-12 pt-4">
+        <div class="col-lg-12">
         © 2017 AEO ALL RIGHT RESERVED
         </div>
       </div>
-    </footer>`,
-  styles:[`
-    footer{
-      color: white;
-      text-align: center;
-      font-family: "Montserrat", sans-serif;
-    }
-
-    .row{
-      height: 100px;
-    }
-  `]
+    </footer>`
 })
 export class AppFooterComponent{
 

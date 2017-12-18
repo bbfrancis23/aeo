@@ -13,7 +13,7 @@ export class AccountService extends MilieuService {
 
   //data: MilieuService;
 
-  constructor(protected route: ActivatedRoute, protected readonly http: Http, protected readonly utils: Utilities, protected readonly location: Location) {
+  constructor(public route: ActivatedRoute, protected readonly http: Http, protected readonly utils: Utilities, public readonly location: Location) {
     super(route,http,utils,location);
     this.config = ACCOUNT_CONFIG;
     this.init();

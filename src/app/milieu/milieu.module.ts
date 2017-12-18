@@ -3,15 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { FilterVueComponent } from './milieu/filter-vue.component';
-import { IntroVueComponent } from './milieu/intro-vue.component';
-import { ItemControlsComponent } from './milieu/item-controls.component';
-import { ModalControlsComponent } from './milieu/modal-controls.component';
-import { ModalVueComponent } from './milieu/modal-vue.component';
-import { SizedItemsVueControlsComponent } from './milieu/sized-items-vue-controls.component';
-import { VueControlsComponent } from './milieu/vue-controls.component';
+import { FilterVueComponent } from './filter-vue.component';
+import { IntroVueComponent } from './intro-vue.component';
+import { ItemControlsComponent } from './item-controls.component';
+import { ModalControlsComponent } from './modal-controls.component';
+import { ModalVueComponent } from './modal-vue.component';
+import { SizedItemsVueControlsComponent } from './sized-items-vue-controls.component';
+import { VueControlsComponent } from './vue-controls.component';
 
-import { LogInVueComponent } from './milieu/log-in-vue.component';
+import { LogInVueComponent } from './log-in-vue.component';
 
 @NgModule({
   imports: [

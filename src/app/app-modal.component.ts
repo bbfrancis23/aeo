@@ -36,14 +36,14 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
         width: 100%; height: 100%;
         display: block;
         position: fixed;
-        z-index: 9999;
+        z-index: 2;
         overflow: auto;
         background-color: rgba(0,0,0,0.5);
       }
       .app-modal-content{
         margin: 5% auto;
         width: 70%;
-        z-index:1 ;
+        z-index:2;
         box-shadow: 10px 10px 1px 0 rgba(0,0,0,0.3)
       }
     `]

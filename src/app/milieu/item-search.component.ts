@@ -12,13 +12,13 @@ import { Component, Input, OnInit } from '@angular/core' ;
 
   styles: [`
     #search-box{
-      width: 400px;
+      width: 250px;
       border-bottom-right-radius: 0;
       border-bottom-left-radius: 0;
     }
 
     .search-result{
-      width:400px;
+      width:250px;
       position: absolute;
       z-index: 99999;
       max-height: 350px;
@@ -30,11 +30,6 @@ export class ItemSearchComponent implements OnInit{
   keyWords = [];
 
   @Input() milieuService: any;
-
-  constructor(){
-
-
-  }
 
   ngOnInit(){
     let count = 0;
@@ -54,8 +49,6 @@ export class ItemSearchComponent implements OnInit{
       });
     });
   }
-
-
 
   search(string: ''){
     this.searchResults = [];
