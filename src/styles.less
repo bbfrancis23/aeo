@@ -1,67 +1,165 @@
+@import "cards";
 
-@dark:    #008080;
-@med:     #66b2b2;
-@light:   #b2d8d8;
-@c-dark:  #c2b280;
-@c-light: #dbd1b4;
+@dark-color:    #008080;
+@med-color:     #66b2b2;
+@light-color:   #b2d8d8;
+@complimentry-dark-color:  #b2a270;
+@complimentry-light-color: #dbd1b4;
 
-@dark-gradient: linear-gradient( 50deg, black 10%, @dark);
+@dark-color-gradient: linear-gradient( 50deg, black 10%, @dark-color);
 
-@feature-text: "Montserrat", sans-serif;
+@feature-font: "Montserrat", sans-serif;
+@special-font: Helvetica;
+@regular-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
-// Z-index guide
-//
+@overlay-layer: 2;
+@overlay-content-layer: 3;
+@sticky-layer: 4;
+@modals-layer: 5;
+@modals-content-layer: 6;
+
+//***** TAGS *****//
 
 a{
   cursor: pointer; cursor: hand;
 }
 
-a.dropdown-item:hover{
-  .item-select;
-}
-
-.account.card{
-  border-color: @dark;
-}
-
-.account .card-header{
-  background-color: @dark;
-  .vue .card-header;
-}
-
-.account{
-  position: fixed;
-  right: 50px;
-  z-index: 2;
-  width: 500px;
-  box-shadow: 10px 10px 1px 0 rgba(0,0,0,0.3)
-}
-
 body{
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: @regular-font;
   font-size: 1rem;
   line-height: 1.5;
   color: #333;
   overflow-x: hidden;
 }
 
-.card-block{
-  padding: 1em;
+p:first-letter {
+  text-transform:capitalize;
+  font-family: @regular-font;
 }
 
-.control-position{
+hr{
+  background-color: @complimentry-light-color;
+}
+
+//***** ABSTRACT CLASSES *****//
+
+.item-select(){
+  background-color: @light-color;
+  color: black;
+}
+
+.control-position(){
   position: absolute;
-  color: white;
   top: 0px;
   right: 5px;
+}
+
+//***** COMPONENTS *****/
+
+a.dropdown-item:hover{
+  .item-select;
+}
+
+app-header{
+  .navbar.fixed-top{
+
+    z-index: @modals-layer;
+    background: @dark-color-gradient;
+
+    .navbar-brand {
+      color: white;
+      font-family: @feature-font;
+      font-size: 150%;
+      font-weight: 800;
+    }
+
+    li.nav-item {
+
+      a.nav-link{
+        font-weight: 400;
+        color: white;
+      }
+
+      menu a.featured{
+        color: @dark-color;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+app-modal{
+  .app-modal{
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    display: block;
+    position: fixed;
+    z-index: @modals-layer;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+  }
+
+  .app-modal-content{
+    margin: 5% auto;
+    width: 70%;
+    z-index: @modals-content-layer;
+    box-shadow: 10px 10px 1px 0 rgba(0,0,0,0.3)
+  }
+}
+
+.jem-milieu{
+  .sticky-top{
+    padding-top: 56px;
+    background-color: @complimentry-light-color;
+
+    .row{
+      padding-top: 16px;
+      padding-bottom: 7px;
+    }
+    
+    h1{
+      color: black;
+      font-size: 200%;
+      font-family: @special-font;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .btn-group .btn{
+      background-color: rgba(0,0,0, .0);
+      color: grey;
+      border: 1px solid grey;
+
+      &:hover{
+        .btn-group .btn.active;
+        font-weight: 600;
+      }
+    }
+
+    .btn-group .btn.active{
+      background-color: @light-color;
+      color: @med-color;
+      border: 1px solid @med-color;
+    }
+  }
+}
+
+.copy-control{
+  .control-position;
+  color: white;
+}
+
+.copy-control:hover{
+  &:extend(.copy-control);
+  color: #00aaff;
 }
 
 footer{
   background: black;
   color: white;
   text-align: center;
-  font-family: @feature-text;
+  font-family: @feature-font;
 }
 
 footer.fluid-container{
@@ -69,34 +167,32 @@ footer.fluid-container{
   padding-bottom: 3em;
 }
 
+h1{
+  font-family: @feature-font;
+  font-size: 400%;
+  font-weight:bold;
+  color: @complimentry-dark-color;
+}
+
+h2{
+  font-family: @feature-font;
+  color: @complimentry-light-color;
+}
+
+
+
+/*
+input{
+  background-color: red;
+  color:red;
+}
+*/
+
 .item-controls .material-icons, .vue-controls .material-icons, .vue-controls-dk .material-icons, .copy-control .material-icons,{
   font-size: 1em;
 }
 
-.item-select{
-  background-color: @light;
-  color: black;
-}
 
-.navbar-dark{
-  background: @dark-gradient;
-}
-
-.navbar-dark li.nav-item a.nav-link{
-  font-weight: 400;
-  color: white;
-}
-
-.navbar-dark li.nav-item a.nav-link:hover{
-  color: @c-light;
-}
-
-.navbar-dark .navbar-brand {
-  color: white;
-  font-family: @feature-text;
-  font-size: 150%;
-  font-weight: 800;
-}
 
 .ng-valid[required], .ng-valid.required  {
 border: 2px solid #42A948; /* green */
@@ -115,44 +211,25 @@ border: 2px solid #42A948; /* green */
   vertical-align: middle;
 }
 
-p:first-letter {
-  text-transform:capitalize;
+.vue-modal{
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  display: block;
+  position: fixed;
+  z-index: @modals-layer;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
 }
 
-.search-result a.dropdown-item{
-  background-color: white;
-  color: black;
-}
-
-.search-result a.dropdown-item:hover{
-  .item-select;
-}
-
-.vue .card-header{
-  color: white;
-  font-size: 150%;
-  font-weight: 600;
-  font-family: Helvetica;
-}
-
-.vue-controls {
-  .control-position;
-}
-
-.vue-controls:hover{
-  color: black;
+.vue-modal-content{
+  margin: 5% auto;
+  width: 70%;
+  z-index: @modals-content-layer;
+  box-shadow: 10px 10px 1px 0 rgba(0,0,0,0.3)
 }
 
 
 
-
-
-
-
-
-/* custom classes */
-
-/* special rules */
 .screen-cover{
   left: 0;
   top: 0;
@@ -160,35 +237,85 @@ p:first-letter {
   height: 100%;
 }
 
-.vue{
-  margin-top: 1em;
+.search-result a.dropdown-item{
+  background-color: white;
+  color: black;
+
+  &:hover{
+    .item-select;
+  }
 }
 
 
 
+.sticky-top{
+  z-index: @sticky-layer;
+}
+
+
+
+#title-search-box{
+  border-color: @complimentry-dark-color;
+}
+
+.view-port-container{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  max-width:  960px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin: auto;
+  text-align:  center;
+}
+
+.view-port-overlay{
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: @overlay-layer;
+  opacity: .75
+}
+
+.view-port-content{
+    z-index: @overlay-content-layer;
+    width: 100vw;
+}
+
+/*
+.vue{
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
 .vue .card-block{
   padding: 1em;
 }
 
-.vue-controls-dk, .item-controls{
-  position: absolute;
-  color: grey;
-  top: 0px;
-  right: .5em;
-}
-
-.copy-control{
-  position: absolute;
+.vue .card-header{
   color: white;
-  top: 5px;
-  right: .5em;
+  font-size: 150%;
+  font-weight: 600;
+
+}
+*/
+
+.vue-controls {
+  .control-position;
+  color: white;
 }
 
-.copy-control:hover{
-  position: absolute;
-  color: #00aaff;
-  top: 5px;
-  right: .5em;
+.vue-controls:hover{
+  color: black;
+}
+.vue-controls-dk, .item-controls{
+  .control-position;
+  color: @complimentry-dark-color;
 }
 
 .vue-controls-dk, .item-controls:hover{
@@ -206,10 +333,7 @@ p:first-letter {
 
 
 
-a.dropdown-item:hover:not([href]){
-  background-color: #007bff;
-  color: white;
-}
+
 
 
 

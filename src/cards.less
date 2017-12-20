@@ -1,0 +1,95 @@
+// GLOBAL //
+
+.card-header{
+  font-size: 150%;
+  font-weight: 600;
+  font-family: @special-font;
+}
+
+.card-block{
+  padding: 1em;
+}
+
+/// ABSTRACT //
+
+.app-card(){
+  border-color: @dark-color;
+}
+
+.app-card-header(){
+  background-color: @dark-color;
+  color: white;
+}
+
+.jem-card(){
+  border-color: @complimentry-dark-color;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.jem-card-header(){
+  background-color: @complimentry-light-color;
+  color: black;
+}
+
+.jem-card-active-header(){
+  &:extend(.jem-card-header);
+  background-color: @complimentry-dark-color;
+}
+
+// COMPONENTS //
+app-log-in{
+  .card{
+    .app-card;
+    .card-header{ .app-card-header; }
+    
+    position: fixed;
+    right: 50px;
+    z-index: @modals-content-layer;
+    width: 250px;
+    box-shadow: 10px 10px 1px 0 rgba(0,0,0,0.3);
+  }
+}
+
+intro-vue{
+  .card{
+    .jem-card;
+    font-family: @feature-font;
+    h4{
+      color: @dark-color;
+      font-weight: bolder;
+    }
+    p{
+      color: black;
+      font-family: @special-font;
+    }
+  }
+}
+
+filter-vue{
+  .card{
+    .jem-card;
+    .card-header{ .jem-card-header; }
+  }
+}
+
+jem-list-vue{
+  .card{
+    .jem-card;
+    .card-header{ .jem-card-active-header;}
+  }
+}
+
+jem-add-vue{
+  .card{
+    .jem-card;
+    .card-header{ .jem-card-header;}
+  }
+}
+
+jem-update-vue{
+  .card{
+    .jem-card;
+    .card-header{ .jem-card-header;}
+  }
+}

@@ -31,25 +31,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
           animate('500ms linear', style({ opacity:1 }))
         ])
       ])
-    ],
-    styles: [`
-      .vue-modal{
-        left: 0; top: 0;
-        width: 100%; height: 100%;
-        display: block;
-        position: fixed;
-        z-index: 9999;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.5);
-      }
-
-      .vue-modal-content{
-        margin: 5% auto;
-        width: 70%;
-        z-index:1 ;
-        box-shadow: 10px 10px 1px 0 rgba(0,0,0,0.3)
-      }
-    `]
+    ]
 })
 export class ModalVueComponent {
   modalMode = false;

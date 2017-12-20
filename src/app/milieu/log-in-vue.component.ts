@@ -36,10 +36,7 @@ import { MilieuService } from '../milieu/milieu.service';
             </div>
           </form>
         </div>
-      </div>`,
-    styles:[`
-
-    `]
+      </div>`
 })
 export class LogInVueComponent extends MilieuVue implements OnInit {
   submitted = false;

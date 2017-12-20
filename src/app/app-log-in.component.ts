@@ -6,7 +6,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-log-in',
   template: `
-    <div class="card account" [ngClass]="{'border-danger': message && message !== 'Login Successful'}">
+    <div class="card" [ngClass]="{'border-danger': message && message !== 'Login Successful'}">
       <modal-controls></modal-controls>
       <div class="card-header"  [ngClass]="{'bg-danger': message && message !== 'Login Successful'}">Log In</div>
       <div class="card-block" >

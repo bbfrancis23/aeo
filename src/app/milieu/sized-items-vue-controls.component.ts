@@ -6,7 +6,7 @@ import { VueControlsComponent } from './vue-controls.component';
 @Component({
   selector: 'sized-items-vue-controls',
   template: `
-    <div class="vue-controls-dk dropdown" >
+    <div class="vue-controls dropdown" > 
       <a class="dropdown-toggle" data-toggle="dropdown"></a>
       <div class="dropdown-menu dropdown-menu-right" >
         <a class="dropdown-item" (click)="hideVueEvent.emit()"><div class="material-icons">remove_circle</div> Hide</a>

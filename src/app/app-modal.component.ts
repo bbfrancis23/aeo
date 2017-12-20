@@ -29,24 +29,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
           animate('500ms linear', style({ opacity:0 }))
         ])
       ])
-    ],
-    styles: [`
-      .app-modal{
-        left: 0; top: 0;
-        width: 100%; height: 100%;
-        display: block;
-        position: fixed;
-        z-index: 2;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.5);
-      }
-      .app-modal-content{
-        margin: 5% auto;
-        width: 70%;
-        z-index:2;
-        box-shadow: 10px 10px 1px 0 rgba(0,0,0,0.3)
-      }
-    `]
+    ]
 })
 export class AppModalComponent {
   modalMode = 'off';

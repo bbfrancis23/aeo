@@ -10,11 +10,7 @@ export abstract class Milieu {
 
   constructor(protected readonly route: ActivatedRoute, protected readonly utils: Utilities) { }
 
-  initConfig() {
-    //this.data.init();
-    //console.log(this.data)
-    //this.routeConfig();
-  }
+  
 
   routeConfig(milieuService) {
 

@@ -11,11 +11,13 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   selector: 'jem-list-vue',
   template: `
       <modal-vue>
-      <div class="vue" [@fadeInOut]="'in'" *ngIf="show"  >
-        <h4 class="card p-3 bg-primary text-white">
+      <div [@fadeInOut]="'in'" *ngIf="show"  >
+        <div class="card">
+        <div class="card-header">
           Jems List
-          <modal-controls *ngIf="modalChild.modalMode === true"></modal-controls>
-        </h4>
+        </div>
+        </div>
+        <modal-controls *ngIf="modalChild.modalMode === true"></modal-controls>
         <div class="alert alert-warning" *ngIf="items?.length === 0">No Jems. Please try a Different Filter</div>
         <sized-items-vue-controls
           *ngIf="modalChild.modalMode === false && jemService.dashBoard"

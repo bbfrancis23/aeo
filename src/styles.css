@@ -1,27 +1,75 @@
-a {
-  cursor: pointer;
-  cursor: hand;
-}
-a.dropdown-item:hover {
-  background-color: #b2d8d8;
-  color: black;
-}
-.account.card {
-  border-color: #008080;
-}
-.account .card-header {
-  background-color: #008080;
-  color: white;
+.card-header {
   font-size: 150%;
   font-weight: 600;
   font-family: Helvetica;
 }
-.account {
+.card-block {
+  padding: 1em;
+}
+app-log-in .card {
+  border-color: #008080;
   position: fixed;
   right: 50px;
-  z-index: 2;
-  width: 500px;
+  z-index: 6;
+  width: 250px;
   box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
+}
+app-log-in .card .card-header {
+  background-color: #008080;
+  color: white;
+}
+intro-vue .card {
+  border-color: #b2a270;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  font-family: "Montserrat", sans-serif;
+}
+intro-vue .card h4 {
+  color: #008080;
+  font-weight: bolder;
+}
+intro-vue .card p {
+  color: black;
+  font-family: Helvetica;
+}
+filter-vue .card {
+  border-color: #b2a270;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+filter-vue .card .card-header {
+  background-color: #dbd1b4;
+  color: black;
+}
+jem-list-vue .card {
+  border-color: #b2a270;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+jem-list-vue .card .card-header {
+  background-color: #b2a270;
+}
+jem-add-vue .card {
+  border-color: #b2a270;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+jem-add-vue .card .card-header {
+  background-color: #dbd1b4;
+  color: black;
+}
+jem-update-vue .card {
+  border-color: #b2a270;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+jem-update-vue .card .card-header {
+  background-color: #dbd1b4;
+  color: black;
+}
+a {
+  cursor: pointer;
+  cursor: hand;
 }
 body {
   margin: 0;
@@ -31,14 +79,92 @@ body {
   color: #333;
   overflow-x: hidden;
 }
-.card-block {
-  padding: 1em;
+p:first-letter {
+  text-transform: capitalize;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.control-position {
-  position: absolute;
+hr {
+  background-color: #dbd1b4;
+}
+a.dropdown-item:hover {
+  background-color: #b2d8d8;
+  color: black;
+}
+app-header .navbar.fixed-top {
+  z-index: 5;
+  background: linear-gradient(50deg, black 10%, #008080);
+}
+app-header .navbar.fixed-top .navbar-brand {
   color: white;
+  font-family: "Montserrat", sans-serif;
+  font-size: 150%;
+  font-weight: 800;
+}
+app-header .navbar.fixed-top li.nav-item a.nav-link {
+  font-weight: 400;
+  color: white;
+}
+app-header .navbar.fixed-top li.nav-item menu a.featured {
+  color: #008080;
+  font-weight: bold;
+}
+app-modal .app-modal {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: fixed;
+  z-index: 5;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+app-modal .app-modal-content {
+  margin: 5% auto;
+  width: 70%;
+  z-index: 6;
+  box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
+}
+.jem-milieu .sticky-top {
+  padding-top: 56px;
+  background-color: #dbd1b4;
+}
+.jem-milieu .sticky-top .row {
+  padding-top: 16px;
+  padding-bottom: 7px;
+}
+.jem-milieu .sticky-top h1 {
+  color: black;
+  font-size: 200%;
+  font-family: Helvetica;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.jem-milieu .sticky-top .btn-group .btn {
+  background-color: rgba(0, 0, 0, 0);
+  color: grey;
+  border: 1px solid grey;
+}
+.jem-milieu .sticky-top .btn-group .btn:hover {
+  background-color: #b2d8d8;
+  color: #66b2b2;
+  border: 1px solid #66b2b2;
+  font-weight: 600;
+}
+.jem-milieu .sticky-top .btn-group .btn.active {
+  background-color: #b2d8d8;
+  color: #66b2b2;
+  border: 1px solid #66b2b2;
+}
+.copy-control,
+.copy-control:hover {
+  position: absolute;
   top: 0px;
   right: 5px;
+  color: white;
+}
+.copy-control:hover {
+  color: #00aaff;
 }
 footer {
   background: black;
@@ -50,31 +176,27 @@ footer.fluid-container {
   padding-top: 3em;
   padding-bottom: 3em;
 }
+h1 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 400%;
+  font-weight: bold;
+  color: #b2a270;
+}
+h2 {
+  font-family: "Montserrat", sans-serif;
+  color: #dbd1b4;
+}
+/*
+input{
+  background-color: red;
+  color:red;
+}
+*/
 .item-controls .material-icons,
 .vue-controls .material-icons,
 .vue-controls-dk .material-icons,
 .copy-control .material-icons {
   font-size: 1em;
-}
-.item-select {
-  background-color: #b2d8d8;
-  color: black;
-}
-.navbar-dark {
-  background: linear-gradient(50deg, black 10%, #008080);
-}
-.navbar-dark li.nav-item a.nav-link {
-  font-weight: 400;
-  color: white;
-}
-.navbar-dark li.nav-item a.nav-link:hover {
-  color: #dbd1b4;
-}
-.navbar-dark .navbar-brand {
-  color: white;
-  font-family: "Montserrat", sans-serif;
-  font-size: 150%;
-  font-weight: 800;
 }
 .ng-valid[required],
 .ng-valid.required {
@@ -93,8 +215,28 @@ footer.fluid-container {
   display: inline-flex;
   vertical-align: middle;
 }
-p:first-letter {
-  text-transform: capitalize;
+.vue-modal {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: fixed;
+  z-index: 5;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.vue-modal-content {
+  margin: 5% auto;
+  width: 70%;
+  z-index: 6;
+  box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
+}
+.screen-cover {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
 .search-result a.dropdown-item {
   background-color: white;
@@ -104,59 +246,72 @@ p:first-letter {
   background-color: #b2d8d8;
   color: black;
 }
-.vue .card-header {
-  color: white;
-  font-size: 150%;
-  font-weight: 600;
-  font-family: Helvetica;
+.sticky-top {
+  z-index: 4;
 }
-.vue-controls {
+#title-search-box {
+  border-color: #b2a270;
+}
+.view-port-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  max-width: 960px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin: auto;
+  text-align: center;
+}
+.view-port-overlay {
+  height: 100vh;
+  width: 100vw;
   position: absolute;
-  color: white;
-  top: 0px;
-  right: 5px;
-}
-.vue-controls:hover {
-  color: black;
-}
-/* custom classes */
-/* special rules */
-.screen-cover {
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
+  background: #000;
+  z-index: 2;
+  opacity: 0.75;
 }
-.vue {
+.view-port-content {
+  z-index: 3;
+  width: 100vw;
+}
+/*
+.vue{
   margin-top: 1em;
+  margin-bottom: 1em;
 }
-.vue .card-block {
+.vue .card-block{
   padding: 1em;
+}
+
+.vue .card-header{
+  color: white;
+  font-size: 150%;
+  font-weight: 600;
+
+}
+*/
+.vue-controls {
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  color: white;
+}
+.vue-controls:hover {
+  color: black;
 }
 .vue-controls-dk,
 .item-controls {
   position: absolute;
-  color: grey;
   top: 0px;
-  right: .5em;
-}
-.copy-control {
-  position: absolute;
-  color: white;
-  top: 5px;
-  right: .5em;
-}
-.copy-control:hover {
-  position: absolute;
-  color: #00aaff;
-  top: 5px;
-  right: .5em;
+  right: 5px;
+  color: #b2a270;
 }
 .vue-controls-dk,
 .item-controls:hover {
   color: black;
-}
-a.dropdown-item:hover:not([href]) {
-  background-color: #007bff;
-  color: white;
 }

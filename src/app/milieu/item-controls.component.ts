@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
         <div class="dropdown-menu dropdown-menu-right" >
           <a class="dropdown-item" (click)="milieuService.delete(item._id)" ><div class="material-icons">delete_forever</div>Delete</a>
           <a class="dropdown-item" (click)="milieuService.changeSelectedItem(this.item)"><div class="material-icons">create</div> Update</a>
-          <a class="dropdown-item" ><div class="material-icons">favorite</div> Favorite</a>
+          <!-- <a class="dropdown-item" ><div class="material-icons">favorite</div> Favorite</a> -->
         </div>
     </div>`
 })

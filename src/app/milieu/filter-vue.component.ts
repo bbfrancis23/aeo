@@ -19,18 +19,19 @@ import { MilieuVue } from './milieu-vue';
   selector: 'filter-vue',
   template:`
     <modal-vue>
-      <div class="card border-info vue"  [@fadeInOut]="'in'" *ngIf="show" >
-        <div class="card-header bg-info">Filters</div>
+      <div class="card"  [@fadeInOut]="'in'" *ngIf="show" >
+        <div class="card-header">Filters</div>
         <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modalChild.modalMode=true" *ngIf="!modalChild.modalMode && milieuService.dashBoard"></vue-controls>
         <modal-controls *ngIf="modalChild.modalMode"></modal-controls>
         <div class="card-block" >
           <div class="form-group">
             <label for="title" class="sr-only">Title Search</label>
-            <input type="text" class="form-control " id="title" placeholder="Title Search" #searchBox id="search-box" (keyup)="search(searchBox.value)">
+            <input type="text" class="form-control " id="title" placeholder="Title Search" #searchBox id="title-search-box" (keyup)="search(searchBox.value)">
           </div>
           <div *ngFor="let field of milieuService.config.fields">
+            <hr>
             <b><p>{{field.name}}:</p></b>
-            <div type="checkbox" *ngFor="let value of field.values" ><input type="checkbox" [(ngModel)]="value.filtered"  (change)="milieuService.filter('title',searchTerm)"> {{value.name}}</div><hr>
+            <div type="checkbox" *ngFor="let value of field.values" ><input type="checkbox" [(ngModel)]="value.filtered"  (change)="milieuService.filter('title',searchTerm)"> {{value.name}}</div>
           </div>
         </div>
       </div>

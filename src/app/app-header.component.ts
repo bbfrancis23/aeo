@@ -15,7 +15,7 @@ import { AppModalComponent } from './app-modal.component';
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >ANGULAR</a>
           <menu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-           <a class="dropdown-item" href="/code-jems/tech/angular">Angular</a>
+           <a class="dropdown-item featured" href="/code-jems/tech/angular">ANGULAR</a>
            <a class="dropdown-item" href="/code-jems/tech/angular/type/best-practices">Best Practices</a>
            <a class="dropdown-item" href="/code-jems/tech/angular/type/how-to">How To</a>
            <a class="dropdown-item" href="/code-jems/tech/angular/type/mistakes">Mistakes</a>
@@ -25,17 +25,21 @@ import { AppModalComponent } from './app-modal.component';
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">CSS</a>
           <menu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-           <a class="dropdown-item" href="/code-jems/tech/css">CSS</a>
+           <a class="dropdown-item featured" href="/code-jems/tech/css">CSS</a>
            <a class="dropdown-item" href="/code-jems/tech/css/type/best-practices">Best Practices</a>
            <a class="dropdown-item" href="/code-jems/tech/css/type/how-to">How To</a>
            <a class="dropdown-item" href="/code-jems/tech/css/type/mistakes">Mistakes</a>
            <a class="dropdown-item" href="/code-jems/tech/css/type/style-guide">Style Guide</a>
+           <div class="dropdown-divider"></div>
+           <a class="dropdown-item featured" href="/code-jems/tech/less">LESS</a>
+           <a class="dropdown-item" href="/code-jems/tech/less/type/best-practices">Best Practices</a>
+           <a class="dropdown-item" href="/code-jems/tech/less/type/how-to">How To</a>
           </menu>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">HTML</a>
           <menu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-           <a class="dropdown-item" href="/code-jems/tech/html">HTML</a>
+           <a class="dropdown-item featured" href="/code-jems/tech/html">HTML</a>
            <a class="dropdown-item" href="/code-jems/tech/html/type/best-practices">Best Practices</a>
            <a class="dropdown-item" href="/code-jems/tech/html/type/how-to">How To</a>
            <a class="dropdown-item" href="/code-jems/tech/html/type/mistakes">Mistakes</a>
@@ -45,7 +49,7 @@ import { AppModalComponent } from './app-modal.component';
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">JAVASCRIPT</a>
           <menu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-           <a class="dropdown-item" href="/code-jems/tech/javascript">JavaScript</a>
+           <a class="dropdown-item featured" href="/code-jems/tech/javascript">JAVASCRIPT</a>
            <a class="dropdown-item" href="/code-jems/tech/javascript/type/best-practices">Best Practices</a>
            <a class="dropdown-item" href="/code-jems/tech/javascript/type/how-to">How To</a>
            <a class="dropdown-item" href="/code-jems/tech/javascript/type/mistakes">Mistakes</a>
@@ -53,9 +57,9 @@ import { AppModalComponent } from './app-modal.component';
           </menu>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MONGODB</a>
+          <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MONGO-DB</a>
           <menu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-           <a class="dropdown-item" href="/code-jems/tech/mongodb">MongoDB</a>
+           <a class="dropdown-item featured" href="/code-jems/tech/mongodb">MONGO-DB</a>
            <a class="dropdown-item" href="/code-jems/tech/mongodb/type/best-practices">Best Practices</a>
            <a class="dropdown-item" href="/code-jems/tech/mongodb/type/how-to">How To</a>
            <a class="dropdown-item" href="/code-jems/tech/mongodb/type/mistakes">Mistakes</a>
