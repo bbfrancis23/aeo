@@ -146,15 +146,15 @@ app-modal .app-modal-content {
   border: 1px solid grey;
 }
 .jem-milieu .sticky-top .btn-group .btn:hover {
-  background-color: #b2d8d8;
-  color: #66b2b2;
-  border: 1px solid #66b2b2;
+  background-color: black;
+  color: #b2a270;
+  border: 1px solid #b2a270;
   font-weight: 600;
 }
 .jem-milieu .sticky-top .btn-group .btn.active {
-  background-color: #b2d8d8;
-  color: #66b2b2;
-  border: 1px solid #66b2b2;
+  background-color: black;
+  color: #b2a270;
+  border: 1px solid #b2a270;
 }
 .copy-control,
 .copy-control:hover {

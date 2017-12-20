@@ -80,7 +80,7 @@ export class AppHeaderComponent {
   @ViewChild(AppModalComponent) modalChild: AppModalComponent;
 
   constructor(private jemService: JemService){
-    console.log(jemService.location.path());
+    //console.log(jemService.location.path());
   }
 }
 

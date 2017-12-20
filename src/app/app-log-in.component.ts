@@ -27,9 +27,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
                   <div *ngIf="password.errors.minlength">Must be at least 4 character long.</div>
                 </div>
               </div>
-            <button type="submit" class="btn btn-outline-success float-right" [disabled]="logInForm.invalid" >Log In</button><br><br>
+            <button type="submit" class="btn btn-outline-success float-right" [disabled]="logInForm.invalid" >LOG IN</button><br><br>
         </form>
         <div class="alert" [ngClass]="{'alert-success': message === 'Login Successful', 'alert-danger': message !== 'Login Successful'}" *ngIf="message">{{message}}</div>
+        <hr>
+        <div style="text-align: center"><a routerLink="account" class="btn btn-outline-primary" style="margin: 0 auto">CREATE ACCOUNT</a></div>
       </div>
     </div>`
 })

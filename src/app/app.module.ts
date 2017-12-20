@@ -16,6 +16,8 @@ import { AppContentComponent } from './app.content.component';
 import { ItemSearchComponent} from './milieu/item-search.component';
 import { ViewPortComponent } from './view-port.component';
 
+import { AccountMilieuComponent } from './account/account-milieu.component';
+
 import { JemAddVueComponent } from './jems/jem-add-vue.component';
 import { JemMilieuComponent } from './jems/jem-milieu.component';
 import { JemListVueComponent } from './jems/jem-list-vue.component';
@@ -48,6 +50,8 @@ import { Utilities } from './utilities';
     AppContentComponent,
     ItemSearchComponent,
     ViewPortComponent,
+
+    AccountMilieuComponent,
 
     JemAddVueComponent,
     JemCollectionVueComponent,
