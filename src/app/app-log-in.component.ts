@@ -30,8 +30,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
             <button type="submit" class="btn btn-outline-success float-right" [disabled]="logInForm.invalid" >LOG IN</button><br><br>
         </form>
         <div class="alert" [ngClass]="{'alert-success': message === 'Login Successful', 'alert-danger': message !== 'Login Successful'}" *ngIf="message">{{message}}</div>
-        <hr>
-        <div style="text-align: center"><a routerLink="account" class="btn btn-outline-primary" style="margin: 0 auto">CREATE ACCOUNT</a></div>
+
+        <div class="create-account" *ngIf="message !== 'Login Successful'" ><hr><a routerLink="account" class="btn btn-outline-primary close-modal" >CREATE ACCOUNT</a></div>
       </div>
     </div>`
 })

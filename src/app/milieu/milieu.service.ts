@@ -56,7 +56,7 @@ export class MilieuService {
     return this.http.post(`api/login`, logInFields, { headers: this.headers }).toPromise().then(response => {
 
       if(response.json().message === 'Login Successful'){
-        this.refresh();
+        window.location.reload();
       }
 
       return response.json().message;
@@ -94,6 +94,13 @@ export class MilieuService {
 
     }
 
+  }
+
+  logOut(){
+    this.http.get('api/logout').toPromise().then(response => {
+      //console.log(response);
+      window.location.reload();
+    });
   }
 
   init() {

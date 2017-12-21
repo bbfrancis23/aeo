@@ -11,12 +11,14 @@ import { AppComponent } from './app.component';
 import { AppFooterComponent } from './app-footer.component';
 import { AppHeaderComponent } from './app-header.component';
 import { AppLogInComponent} from './app-log-in.component';
+import { AppLogOutComponent} from './app-log-out.component';
 import { AppModalComponent } from './app-modal.component';
 import { AppContentComponent } from './app.content.component';
 import { ItemSearchComponent} from './milieu/item-search.component';
 import { ViewPortComponent } from './view-port.component';
 
 import { AccountMilieuComponent } from './account/account-milieu.component';
+import { AccountService } from './account/account.service';
 
 import { JemAddVueComponent } from './jems/jem-add-vue.component';
 import { JemMilieuComponent } from './jems/jem-milieu.component';
@@ -46,6 +48,7 @@ import { Utilities } from './utilities';
     AppHeaderComponent,
     AppModalComponent,
     AppLogInComponent,
+    AppLogOutComponent,
     AppComponent,
     AppContentComponent,
     ItemSearchComponent,
@@ -62,7 +65,7 @@ import { Utilities } from './utilities';
     JemUpdateVueComponent,
   ],
   providers: [
-    Utilities, JemService,
+    Utilities, JemService, AccountService
   ],
   bootstrap: [AppComponent]
 })

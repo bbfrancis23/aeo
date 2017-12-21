@@ -164,6 +164,16 @@ app.get('/session', (req, res) =>{
   }
 });
 
+app.get('/logout',(req,res) =>{
+  if(auth(req,res)){
+
+    res.clearCookie("token");
+    console.log('clear Cookie attempted');
+
+    res.json({status: 200, message: 'cookie cleared'});
+  }
+});
+
 
 app.post('/login', (req, res) => {
   if(auth(req,res)){

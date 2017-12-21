@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { AccountService } from './account/account.service';
 import { JemService } from './jems/jem.service';
 import { AppModalComponent } from './app-modal.component';
 
@@ -69,18 +70,29 @@ import { AppModalComponent } from './app-modal.component';
         <li class="nav-item"><a class="nav-link" href="/code-jems">CODE JEMS</a></li>
       </ul>
       <item-search class="mr-2 d-none d-lg-block" [milieuService]="jemService"></item-search>
-      <button (click)="this.modalChild.modalMode = 'on'" class="btn material-icons btn-account" [ngClass]="{'btn-outline-success' : jemService.authenticated === true, 'btn-outline-warning': jemService.authenticated !== true}" title="Account">account_box</button>
+      <button (click)="accountClick()" class="btn material-icons btn-account" [ngClass]="{'btn-outline-success' : jemService.authenticated === true, 'btn-outline-warning': jemService.authenticated !== true}" title="Account">account_box</button>
     </div>
   </nav>
 
-  <app-modal><app-log-in [milieuService]="jemService" (modalCloseEvent)="modalChild.modalMode='off'"></app-log-in></app-modal>`
+  <app-modal #logIn><app-log-in [milieuService]="jemService" (modalCloseEvent)="modalLogIn.modalMode='off'"></app-log-in></app-modal>
+  <app-modal #logOut><app-log-out [milieuService]="accountService" ></app-log-out></app-modal>
+   `
 })
 export class AppHeaderComponent {
 
-  @ViewChild(AppModalComponent) modalChild: AppModalComponent;
+  @ViewChild("logIn") modalLogIn: AppModalComponent;
+  @ViewChild("logOut") modalLogOut: AppModalComponent;
 
-  constructor(private jemService: JemService){
-    //console.log(jemService.location.path());
+  constructor(private jemService: JemService, private accountService: AccountService ){
+    console.log(accountService);
+  }
+
+  accountClick(){
+    if(this.accountService.authenticated === true){
+      this.modalLogOut.modalMode = 'on';
+    }else{
+      this.modalLogIn.modalMode = 'on';
+    }
   }
 }
 

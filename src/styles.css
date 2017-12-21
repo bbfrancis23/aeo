@@ -6,6 +6,12 @@
 .card-block {
   padding: 1em;
 }
+app-log-in .create-account {
+  text-align: center;
+}
+app-log-in .create-account .btn {
+  margin: 0 auto;
+}
 app-log-in .card {
   border-color: #008080;
   position: fixed;
@@ -17,6 +23,24 @@ app-log-in .card {
 app-log-in .card .card-header {
   background-color: #008080;
   color: white;
+}
+app-log-out .card {
+  border-color: #008080;
+  position: fixed;
+  right: 50px;
+  z-index: 6;
+  width: 250px;
+  box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
+}
+app-log-out .card .card-header {
+  background-color: #008080;
+  color: white;
+}
+app-log-out .center {
+  text-align: center;
+}
+app-log-out .center .btn {
+  margin: 0 auto;
 }
 intro-vue .card {
   border-color: #b2a270;
