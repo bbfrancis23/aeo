@@ -14,25 +14,25 @@ import { MilieuService } from '../milieu/milieu.service';
         <div class="card-block p-3" >
           <form  (ngSubmit)="onSubmit();" [formGroup]="logInForm" #formDir="ngForm">
             <div >
-                    <div class="form-group">
-                      <label for="email" class="sr-only">Email</label>
-                      <input id="email" class="form-control" formControlName="email" placeholder="Email" required >
-                      <div *ngIf="email.invalid && (email.touched)" class="alert alert-danger">
-                        <div *ngIf="email.errors.required">Email is required.</div>
-                        <div *ngIf="email.errors.email">Must be valid Email.</div>
-                      </div>
-                    </div>
+              <div class="form-group">
+                <label for="email" class="sr-only">Email</label>
+                <input id="email" class="form-control" formControlName="email" placeholder="Email" required >
+                <div *ngIf="email.invalid && (email.touched)" class="alert alert-danger">
+                  <div *ngIf="email.errors.required">Email is required.</div>
+                  <div *ngIf="email.errors.email">Must be valid Email.</div>
+                </div>
+              </div>
 
-                    <div class="form-group">
-                      <label for="email" class="sr-only">Password</label>
-                        <input id="password" type="password" class="form-control "  formControlName="password" placeholder="Password" required>
-                        <div *ngIf="password.invalid && (password.touched)" class="alert alert-danger">
-                          <div *ngIf="password.errors.required">Password is required.</div>
-                          <div *ngIf="password.errors.minlength">Must be at least 4 character long.</div>
-                        </div>
-                      </div>
-                    <button type="submit" class="btn btn-outline-success float-right" [disabled]="logInForm.invalid" >Log In</button><br><br>
-                    <div class="alert" [ngClass]="{'alert-success': message === 'Login Successful', 'alert-danger': message !== 'Login Successful'}" *ngIf="message">{{message}}</div>
+              <div class="form-group">
+                <label for="password" class="sr-only">Password</label>
+                <input id="password" type="password" class="form-control "  formControlName="password" placeholder="Password" required>
+                <div *ngIf="password.invalid && (password.touched)" class="alert alert-danger">
+                  <div *ngIf="password.errors.required">Password is required.</div>
+                  <div *ngIf="password.errors.minlength">Must be at least 4 character long.</div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-outline-success float-right" [disabled]="logInForm.invalid" >Log In</button><br><br>
+              <div class="alert" [ngClass]="{'alert-success': message === 'Login Successful', 'alert-danger': message !== 'Login Successful'}" *ngIf="message">{{message}}</div>
             </div>
           </form>
         </div>
@@ -59,10 +59,6 @@ export class LogInVueComponent extends MilieuVue implements OnInit {
     this.milieuService.login(this.logInForm.value).then((data)=>{
       this.message = data;
     });
-
-    //this.message
-
-    //console.log(this.message, 'here');
   }
 
   get email() { return this.logInForm.get('email') }

@@ -5,7 +5,7 @@ import { Config } from '../milieu/data-classes';
 export const REAL_ESTATE_AGENT_CONFIG: Config = {
   title: 'Real Estate Agent',
   name: 'property',
-  dataLabel: 'properties',
+  //dataLabel: 'properties',
   directory: 'real-estate-agent',
 
   fieldsRaw: [],

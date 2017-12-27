@@ -5,7 +5,7 @@ import { Config } from '../milieu/data-classes';
 export const JEM_CONFIG: Config = {
   title: 'Code Jems',
   name: 'jems',
-  dataLabel: 'jem',
+  //dataLabel: "jem",
   intro: "Short-cut keys, Best Practices, How to and Mistakes. Code Jems,  it's all here",
   img: "assets/img/code-jems.jpg",
   directory: 'code-jems',

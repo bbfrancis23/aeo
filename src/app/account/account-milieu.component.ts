@@ -1,69 +1,22 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
-import { Milieu } from '../milieu/milieu';
-import { Utilities } from '../utilities';
-import { LogInVueComponent } from '../milieu/log-in-vue.component';
-
-
-import { Account } from './account';
-import { ACCOUNT_CONFIG } from './account-config';
+import { Component } from '@angular/core';
 import { AccountService } from './account.service';
-
 import { MilieuService } from '../milieu/milieu.service';
 
 'use strict';
 
 @Component({
   selector: 'account-milieu',
-  templateUrl: './account-milieu.component.html',
-  styles: [`
-    .dash-board-controls{ padding-top: 56px; }
-    .container-classic{
-      margin-right: auto;
-      margin-left: auto;
-      padding-right: 15px;
-      padding-left: 15px;
-      width: 100%;
-      max-width: 1400px;
-    }
-
-  `],
+  template: `
+  <view-port>
+    <media><div class="media-wrapper"><img src="assets/img/code.jpg" ></div></media>
+    <content>
+      <create-account-vue [accountService]="accountService"></create-account-vue>
+    </content>
+  </view-port>`,
   providers: [MilieuService]
 })
-export class AccountMilieuComponent {
-
-  //account: Account;
-
-  //@ViewChild(LogInVueComponent) logInVue;
-
-  constructor(public route: ActivatedRoute, protected utils: Utilities, public accountService: AccountService){
-
-    console.log(accountService);
-  //constructor(protected route: ActivatedRoute, protected utils: Utilities, protected accountService: AccountService) {
-  //  super(route, utils);
+export class AccountMilieuComponent{
+  constructor(public accountService: AccountService){
   }
-
-  //ngOnInit() {
-  //  if (!this.data.dashBoard) {
-
-  //  }
-
-  //  this.columns = [[this.logInVue]];
-  //}
-
-  //toggleDashBoard() {
-  //  this.data.dashBoard = !this.data.dashBoard;
-
-  //  if (this.data.dashBoard) {
-
-  //  } else {
-
-  //  }
-
-  //}
-
-
-
-
 }
 /* Copyright AEO all rights reserved */

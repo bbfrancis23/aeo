@@ -1,6 +1,6 @@
 export class Account {
-  _id = '';
-  firstname = '';
-  lastname = '';
+  _id?: '';
+  username = '';
   email = '';
+  password = '';
 }

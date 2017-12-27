@@ -22,6 +22,12 @@ let jem = {
   keys: { required: false, type: 'string' }
 }
 
+const Account = {
+  username: { required: true, regexp: /^[\w]{4,16}$/ },
+  email:{ required: true, regexp: /^\w+([\.-]?\ w+)*@\w+([\.-]?\ w+)*(\.\w{2,10})+$/ },
+  password:{ required: true, regexp: /^[^\s]{4,16}$/ }
+}
+
 // Connect
 // TODO: add user name and password
 const connection = ( closure ) => {
@@ -90,6 +96,84 @@ app.delete( '/jems/:id', ( req, res ) => {
       });
     });
   }
+});
+
+
+checkFields = function(protoType, item){
+  for(let key in protoType){
+    if(protoType[key].required === true){
+      if(item[key]){
+        if(!protoType[key].regexp.test(item[key])){
+          return false;
+        }
+      }else{
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+app.post( '/accounts', (request, response) =>{
+
+  response.json({created: true, message: 'Account Created'});
+
+  /*if(auth(request,response)){
+    connection((db)=>{
+      let account = request.body.item || {};
+
+      if(account._id){
+
+      }else{
+
+        if(checkFields(Account,account)){
+
+          for (let key in account){
+            account[ key ] = account[ key ] ? sanitize( account[ key ]) : null;
+          }
+
+          //account['email'] = 'bbfrancis23@gmail.com';
+
+          db.collection('accounts').findOne({username: account['username']},(err, doc) => {
+            if( err ){ sendError(err, response);}
+            else{
+              if(doc){
+                response.json({created: false, message: 'User Name is already taken'});
+              }else{
+
+                db.collection('accounts').findOne({email: account['email']},(err,doc)=>{
+                  if(err){sendError(err,response);}
+                  else{
+                    if(doc){
+                      response.json({created: false, message: 'Email is already taken'});
+                    }else{
+                      account.type = 'User';
+                      account.password = bcrypt.hashSync(account.password, 10);
+                      db.collection('accounts').insertOne(account, (err, result) =>{
+                        if(err){sendError(err, response);}
+                        else{
+                          if(result.result.n ===1){
+                            response.json({created: true, message: 'account created'});
+                          }else{
+                            response.json({created: false, message: 'unknown database error'});
+                          }
+                        }
+                      });
+                    }
+                  }
+                });
+              }
+            }
+          });
+
+        }else{
+          response.json({created: false, message: 'Missing fields or invalid'});
+        }
+
+      }
+      db.close;
+    });
+  }*/
 });
 
 app.post( '/jems', ( req, res ) => {
@@ -184,7 +268,14 @@ app.post('/login', (req, res) => {
         if ( err ) { sendError( err, res ); }
         else{
           if(doc){
+
+            console.log(jwt.encode(sanitize(req.body.password), JWT_SECRET), sanitize(doc.password));
+
             bcrypt.compare( sanitize(req.body.password), sanitize(doc.password), (err, result) =>{
+
+
+              console.log("result", result);
+
               if(err){
                 sendError(err,res)
               }else if (result){
@@ -209,9 +300,48 @@ app.post('/login', (req, res) => {
       db.close;
     });
   }
-})
+});
 
+app.post('/unique-user-name', (req,res) =>{
 
+  if(auth(req,req)){
+    connection((db)=>{
+      db.collection('accounts').findOne({
+        username: sanitize(req.body.username)
+      }, (err, doc) =>{
+          if ( err ) { sendError( err, res ); }
+          else{
+            if(doc){
+              res.json({unique: false, message: 'User Name is already taken'});
+            }else{
+              res.json({unique: true, message: 'User Name is unique'});
+            }
+          }
+      });
+      db.close;
+    });
+  }
+});
+
+app.post('/unique-email', (req,res)=>{
+  if(auth(req,req)){
+    connection((db)=>{
+      db.collection('accounts').findOne({
+        email: sanitize(req.body.email)
+      }, (err, doc)=>{
+        if(err) {sendError(err,res);}
+        else{
+          if(doc){
+            res.json({unique: false, message: 'E-mail Address is already taken'});
+          }else{
+            res.json({unique: true, message: 'E-mail is unique'})
+          }
+        }
+      });
+    db.close;
+    });
+  }
+});
 
 // get collection
 app.get( '/collection/:id', ( req, res ) => {

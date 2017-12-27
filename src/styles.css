@@ -42,6 +42,13 @@ app-log-out .center {
 app-log-out .center .btn {
   margin: 0 auto;
 }
+create-account-vue .card {
+  border-color: #008080;
+}
+create-account-vue .card .card-header {
+  background-color: #008080;
+  color: white;
+}
 intro-vue .card {
   border-color: #b2a270;
   margin-top: 1em;
@@ -303,22 +310,6 @@ input{
   z-index: 3;
   width: 100vw;
 }
-/*
-.vue{
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-.vue .card-block{
-  padding: 1em;
-}
-
-.vue .card-header{
-  color: white;
-  font-size: 150%;
-  font-weight: 600;
-
-}
-*/
 .vue-controls {
   position: absolute;
   top: 0px;

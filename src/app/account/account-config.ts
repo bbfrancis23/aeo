@@ -4,17 +4,15 @@ import { Config } from '../milieu/data-classes';
 
 export const ACCOUNT_CONFIG: Config = {
   title: 'User Account',
-  name: 'account',
-  dataLabel: 'accounts',
-  intro: "Here is your User Account",
-  img: "assets/img/code-jems.jpg",
-  directory: 'account',
-
-  fieldsRaw: [
-
-  ],
-  fields: [],
+  name: 'accounts',
+  directory: 'account',  
   itemsMode: false
+  //dataLabel: 'account',
+  //intro: "Here is your User Account",
+  //img: "assets/img/code-jems.jpg",
+
+  //fieldsRaw: [],
+  //fields: [],
 };
 
 /* copyright 2017 AEO All Rights Reserved. */

@@ -27,7 +27,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 })
 export class JemAddVueComponent extends MilieuVue implements OnInit{
   function = "Add";
-  submitted = false
+  submitted = false;
   model: Jem = new Jem();
   @Input() jemService: JemService;
 

@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   template: `
     <view-port>
-      <media><video  src="assets/img/code.mov" autoplay="true" loop="true" ></video></media>
+      <media><video src="assets/img/code.mov" autoplay="true" loop="true" ></video></media>
       <content>
         <h1>AEO - TECH</h1>
         <h2> Home of Code Jems</h2>
@@ -16,7 +16,7 @@ import { Component } from '@angular/core';
         <a href="code-jems/tech/css"><img src="assets/img/javascript.png" width="40px"></a>
         <a href="code-jems/tech/css"><img src="assets/img/mongo.png" width="40px"></a>
       </content>
-    </view-port>`
+    </view-port>`,
 })
 export class AppContentComponent{
 

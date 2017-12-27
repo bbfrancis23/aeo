@@ -17,6 +17,7 @@ import { AppContentComponent } from './app.content.component';
 import { ItemSearchComponent} from './milieu/item-search.component';
 import { ViewPortComponent } from './view-port.component';
 
+import { CreateAccountVueComponent } from "./account/create-account-vue.component";
 import { AccountMilieuComponent } from './account/account-milieu.component';
 import { AccountService } from './account/account.service';
 
@@ -55,6 +56,7 @@ import { Utilities } from './utilities';
     ViewPortComponent,
 
     AccountMilieuComponent,
+    CreateAccountVueComponent,
 
     JemAddVueComponent,
     JemCollectionVueComponent,

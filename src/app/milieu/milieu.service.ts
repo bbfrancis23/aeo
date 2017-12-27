@@ -16,7 +16,7 @@ export class MilieuService {
 
   config: Config;
 
-  private readonly headers = new Headers({ 'Content-Type': 'application/json' });
+  protected readonly headers = new Headers({ 'Content-Type': 'application/json' });
   api = 'api';
   _dashBoard = false;
   dashBoardPermission = 'admin';
@@ -145,13 +145,17 @@ export class MilieuService {
     // takes fieldsRaw ['Git', 'JavaScript', 'HTML'] and converts them to [name: 'Git', filtered: false ]
     // this saves typing / time on config file creation.
 
+    if(this.config.fieldsRaw){
+      this.config.fieldsRaw.forEach(fieldRaw => {
+        let newField: Field = { name: fieldRaw.name, values: [] };
+        fieldRaw.values.forEach(value => newField.values.push({ name: value, filtered: false }));
+        this.config.fields.push(newField);
+      });
+      delete this.config.fieldsRaw;
+    }
 
-    this.config.fieldsRaw.forEach(fieldRaw => {
-      let newField: Field = { name: fieldRaw.name, values: [] };
-      fieldRaw.values.forEach(value => newField.values.push({ name: value, filtered: false }));
-      this.config.fields.push(newField);
-    });
-    delete this.config.fieldsRaw;
+
+
     this.pageTitle = this.config.title;
 
   }
@@ -159,12 +163,25 @@ export class MilieuService {
   // todo: overhaul on this after doing the server side //
   create(item: any): Promise<any> {
     const url = `${this.api}/${this.config.name}`;
-    let something = JSON.stringify({ 'jem': item }); // this need to change to data
+    let something = JSON.stringify({ 'jem' : item }); // this need to change to data
+    console.log(something);
     return this.http
       .post(url, something, { headers: this.headers })
       .toPromise()
       .then((res) => {
         return item;
+      })
+      .catch(this.handleError);
+  }
+
+  createItem(item: any){
+    const url = `${this.api}/${this.config.name}`;
+    let something = JSON.stringify({ 'item' : item });
+    return this.http
+      .post(url, something, { headers: this.headers })
+      .toPromise()
+      .then((res) => {
+        return res.json();
       })
       .catch(this.handleError);
   }
@@ -292,7 +309,7 @@ export class MilieuService {
   }
 
   // over hault this after backend
-  private handleError(error: any): Promise<any> {
+  protected handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
