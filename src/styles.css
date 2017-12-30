@@ -42,6 +42,17 @@ app-log-out .center {
 app-log-out .center .btn {
   margin: 0 auto;
 }
+account-vue .card {
+  border-color: #008080;
+}
+account-vue .card .card-header {
+  background-color: #008080;
+  color: white;
+}
+account-vue .card-block {
+  color: black;
+  text-align: left;
+}
 create-account-vue .card {
   border-color: #008080;
 }
@@ -223,6 +234,15 @@ input{
   color:red;
 }
 */
+.field-name {
+  font-size: 120%;
+  font-weight: bolder;
+  padding: 10px;
+}
+.field {
+  font-size: 120%;
+  padding: 10px;
+}
 .item-controls .material-icons,
 .vue-controls .material-icons,
 .vue-controls-dk .material-icons,

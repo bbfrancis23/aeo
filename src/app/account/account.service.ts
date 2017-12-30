@@ -9,10 +9,20 @@ import { ACCOUNT_CONFIG } from './account-config';
 @Injectable()
 export class AccountService extends MilieuService {
 
+  username: '';
+  email: '';
+
   constructor(public route: ActivatedRoute, protected readonly http: Http, protected readonly utils: Utilities, public readonly location: Location) {
     super(route,http,utils,location);
     this.config = ACCOUNT_CONFIG;
     this.init();
+
+    this.http.get('api/account').toPromise().then(result => {
+      //console.log(result.json().data);
+
+      this.username = result.json().data.username;
+      this.email = result.json().data.email;
+    });
   }
 
   uniqueUserName(username){

@@ -114,11 +114,32 @@ checkFields = function(protoType, item){
   return true;
 }
 
+
+app.get('/account', (request,response)=>{
+  if(auth(request,response)){
+    connection((db)=>{
+
+      db.collection('accounts').findOne({ token: sanitize( request.cookies.token ) }, {fields:{username: 1, email: 1}}, (err, doc) => {
+        if(err){
+          sendError(err, response);
+        }else{
+
+
+          response.json({data: doc, message: 'Account Infromation'});
+
+
+
+        }
+      });
+
+      db.close;
+    });
+  }
+});
+
 app.post( '/accounts', (request, response) =>{
 
-  response.json({created: true, message: 'Account Created'});
-
-  /*if(auth(request,response)){
+  if(auth(request,response)){
     connection((db)=>{
       let account = request.body.item || {};
 
@@ -131,8 +152,6 @@ app.post( '/accounts', (request, response) =>{
           for (let key in account){
             account[ key ] = account[ key ] ? sanitize( account[ key ]) : null;
           }
-
-          //account['email'] = 'bbfrancis23@gmail.com';
 
           db.collection('accounts').findOne({username: account['username']},(err, doc) => {
             if( err ){ sendError(err, response);}
@@ -153,7 +172,22 @@ app.post( '/accounts', (request, response) =>{
                         if(err){sendError(err, response);}
                         else{
                           if(result.result.n ===1){
-                            response.json({created: true, message: 'account created'});
+
+
+                            // log user in //
+                            var token = jwt.encode( ( Math.floor(Math.random()*100)+1 ), JWT_SECRET);
+
+                            db.collection('accounts').updateOne({email: sanitize(account['email'])}, {$set: {token: token}}, (err, doc) =>{
+                              if(err){
+                                sendError(err,response);
+                              }else{
+                                  //response.json({created: true, message: 'Account Created'});
+                                  response.cookie('token', token,{}).json({created: true, message: 'Account Created'});
+                              }
+                            });
+
+
+
                           }else{
                             response.json({created: false, message: 'unknown database error'});
                           }
@@ -173,7 +207,7 @@ app.post( '/accounts', (request, response) =>{
       }
       db.close;
     });
-  }*/
+  }
 });
 
 app.post( '/jems', ( req, res ) => {
@@ -238,6 +272,9 @@ app.get('/session', (req, res) =>{
         if(err){
           sendError(err, res);
         }else{
+
+          console.log(req.cookies.token, doc)  ;
+
           let message = doc ? doc.type : null;
           res.json({status: 200, message: message});
         }
@@ -252,7 +289,7 @@ app.get('/logout',(req,res) =>{
   if(auth(req,res)){
 
     res.clearCookie("token");
-    console.log('clear Cookie attempted');
+    //console.log('clear Cookie attempted');
 
     res.json({status: 200, message: 'cookie cleared'});
   }
@@ -269,23 +306,19 @@ app.post('/login', (req, res) => {
         else{
           if(doc){
 
-            console.log(jwt.encode(sanitize(req.body.password), JWT_SECRET), sanitize(doc.password));
-
             bcrypt.compare( sanitize(req.body.password), sanitize(doc.password), (err, result) =>{
-
-
-              console.log("result", result);
 
               if(err){
                 sendError(err,res)
               }else if (result){
-                var token = jwt.encode( sanitize(req.body.email), JWT_SECRET);
+                var token = jwt.encode( ( Math.floor(Math.random()*100)+1 ), JWT_SECRET);
 
                 db.collection('accounts').updateOne({email: sanitize(req.body.email)}, {$set: {token: token}}, (err, doc) =>{
                   if(err){
                     sendError(err,res);
                   }else{
                     res.cookie('token', token,{}).json({status: 200, message: 'Login Successful'});
+                    console.log('login was successful');
                   }
                 });
               }else{

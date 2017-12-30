@@ -22,8 +22,9 @@ export class MilieuService {
   dashBoardPermission = 'admin';
   pageTitle = '';
   itemsMode = true;
-  authenticated = false;
+  authenticated = null;
   admin = false;
+  user = false;
   requireAuth = false;
 
   //filterMode = false;
@@ -41,6 +42,9 @@ export class MilieuService {
   changeFilteredItems(filteredItems: {}[]) { this.filteredItemsSource.next(filteredItems);}
   changeSelectedItem(selectedItem: {}) { this.selectedItemSource.next(selectedItem) }
 
+  //private readonly itemSource = new BehaviorSubject<{}[]>([]);
+  //readonly currentItem = this.itemSource.asObservable();
+
   constructor(public route: ActivatedRoute, protected readonly http: Http, protected readonly utils: Utilities, public readonly location: Location) { }
 
   get dashBoard() { return this._dashBoard; }
@@ -55,7 +59,10 @@ export class MilieuService {
 
     return this.http.post(`api/login`, logInFields, { headers: this.headers }).toPromise().then(response => {
 
+
+      console.log(response.json().message);
       if(response.json().message === 'Login Successful'){
+
         window.location.reload();
       }
 
@@ -76,6 +83,10 @@ export class MilieuService {
         this.admin = true;
 
         this.authenticated = true;
+      }else{
+        console.log(result.json().message);
+        this.authenticated = true;
+        this.admin = true;
       }
     });
 
@@ -105,18 +116,13 @@ export class MilieuService {
 
   init() {
 
-
-
     if(this.config.itemsMode === false){
       this.itemsMode = false;
     }
 
-
     if(this.config.requireAuth === true){
       this.requireAuth = true;
     }
-
-    //this.refresh();
 
     this.http.get('api/session').toPromise().then(result => {
 
@@ -124,7 +130,14 @@ export class MilieuService {
         this.admin = true;
 
         this.authenticated = true;
+      }else if (result.json().message === 'User'){
+        this.user = true;
+        this.authenticated = true;
+
+      }else{
+        this.authenticated = false;
       }
+
     });
 
 

@@ -19,6 +19,7 @@ import { ViewPortComponent } from './view-port.component';
 
 import { CreateAccountVueComponent } from "./account/create-account-vue.component";
 import { AccountMilieuComponent } from './account/account-milieu.component';
+import { AccountVueComponent } from './account/account-vue.component';
 import { AccountService } from './account/account.service';
 
 import { JemAddVueComponent } from './jems/jem-add-vue.component';
@@ -56,6 +57,7 @@ import { Utilities } from './utilities';
     ViewPortComponent,
 
     AccountMilieuComponent,
+    AccountVueComponent,
     CreateAccountVueComponent,
 
     JemAddVueComponent,

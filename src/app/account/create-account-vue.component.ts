@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { MilieuVue} from '../milieu/milieu-vue';
+
 import { AccountService } from "./account.service";
 import { Account } from './account';
 
@@ -9,7 +11,7 @@ import { Account } from './account';
 @Component({
   selector: "create-account-vue",
   template: `
-    <main class="row">
+    <main class="row" *ngIf="show">
       <div class="col-md-3"></div>
       <div class="col-md-6">
         <div class="card">
@@ -55,7 +57,8 @@ import { Account } from './account';
       <div class="col-md-3"></div>
     </main>`
 })
-export class CreateAccountVueComponent implements OnInit{
+export class CreateAccountVueComponent extends MilieuVue implements OnInit{
+
   createAccountForm: FormGroup;
   uniqueUser: boolean = null;
   uniqueEmail: boolean = null;
@@ -65,7 +68,6 @@ export class CreateAccountVueComponent implements OnInit{
   userNameParams = {min:4, max:16, pattern:/^[\w]+$/ };
   emailParams = {max: 64 };
   passwordParams = {min:4, max: 16};
-
 
   @Input() accountService: AccountService;
 
@@ -81,7 +83,7 @@ export class CreateAccountVueComponent implements OnInit{
     this.accountService.createItem(this.model).then((data)=>{
       this.accountCreated = data.created;
       this.message = data.message;
-      console.log(this.message);
+      window.location.reload();
     });
   }
 
