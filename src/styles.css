@@ -109,6 +109,42 @@ jem-update-vue .card .card-header {
   background-color: #dbd1b4;
   color: black;
 }
+app-footer footer {
+  background: linear-gradient(50deg, black 10%, #008080);
+  color: white;
+  text-align: center;
+  padding: 50px 5px;
+  font-size: 125%;
+  font-weight: bold;
+}
+app-footer footer .row {
+  margin: 25px;
+}
+app-footer footer img {
+  filter: grayscale(100%);
+  transition: filter 1s;
+}
+app-footer footer img:hover {
+  filter: grayscale(0%);
+}
+app-footer footer img.angular {
+  height: 45px;
+}
+app-footer footer img.mongo {
+  height: 40px;
+  margin: 5px;
+}
+app-footer footer img.node {
+  height: 40px;
+}
+app-footer footer img.bootstrap {
+  height: 50px;
+}
+app-footer footer img.digitalocean {
+  height: 35px;
+  margin: 3px;
+}
+/* OLD */
 a {
   cursor: pointer;
   cursor: hand;
@@ -207,16 +243,6 @@ app-modal .app-modal-content {
 }
 .copy-control:hover {
   color: #00aaff;
-}
-footer {
-  background: black;
-  color: white;
-  text-align: center;
-  font-family: "Montserrat", sans-serif;
-}
-footer.fluid-container {
-  padding-top: 3em;
-  padding-bottom: 3em;
 }
 h1 {
   font-family: "Montserrat", sans-serif;

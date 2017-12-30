@@ -18,6 +18,41 @@
 @modals-layer: 5;
 @modals-content-layer: 6;
 
+
+app-footer{
+
+  footer{
+    background: @dark-color-gradient;
+    color: white;
+    text-align: center;
+    padding: 50px 5px;
+    font-size: 125%;
+    font-weight: bold;
+
+    .row{margin: 25px;}
+
+    img{
+      filter: grayscale(100%);
+      transition: filter 1s;
+      &:hover{
+        filter: grayscale(0%);
+      }
+    }
+
+    // these aren't the droids you are looking for... Move along //
+    img.angular{ height: 45px; }
+    img.mongo{ height: 40px; margin: 5px }
+    img.node{ height: 40px; }
+    img.bootstrap{ height: 50px;}
+    img.digitalocean{ height: 35px; margin: 3px }
+
+
+
+
+  }
+}
+
+/* OLD */
 //***** TAGS *****//
 
 a{
@@ -156,17 +191,7 @@ app-modal{
   color: #00aaff;
 }
 
-footer{
-  background: black;
-  color: white;
-  text-align: center;
-  font-family: @feature-font;
-}
 
-footer.fluid-container{
-  padding-top: 3em;
-  padding-bottom: 3em;
-}
 
 h1{
   font-family: @feature-font;
