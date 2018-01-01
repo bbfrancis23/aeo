@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { AccountService } from './account/account.service';
 
 @Component({
   selector: 'app-log-out',
@@ -14,10 +15,12 @@ import { Component, Input } from '@angular/core';
 })
 export class AppLogOutComponent{
 
-  @Input() milieuService: any;
+  constructor(private accountService: AccountService){
+
+  }
 
   logOut(){
     console.log("You clicky");
-    this.milieuService.logOut();
+    this.accountService.logOut();
   }
 }

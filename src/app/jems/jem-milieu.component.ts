@@ -23,7 +23,7 @@ import { JemUpdateVueComponent } from './jem-update-vue.component';
   selector: 'jem-milieu',
   templateUrl: './jem-milieu.component.html',
   styles: [`
-    
+
     .container-classic{
       margin-right: auto;
       margin-left: auto;
@@ -58,6 +58,9 @@ export class JemMilieuComponent extends Milieu implements OnInit {
   constructor(protected route: ActivatedRoute, protected utils: Utilities, protected jemService: JemService) {
     super(route, utils);
     this.routeConfig(jemService);
+
+
+    console.log('jem milieu constructor called');
     jemService.refresh();
   }
 

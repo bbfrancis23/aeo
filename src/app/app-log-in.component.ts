@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AccountService } from './account/account.service';
 
 'use strict';
 
@@ -36,12 +37,15 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
     </div>`
 })
 export class AppLogInComponent implements OnInit {
+
   submitted = false;
   logInForm: FormGroup;
   message: string;
-
-  @Input() milieuService: any;
   @Output() modalCloseEvent = new EventEmitter();
+
+  constructor(private accountService: AccountService){
+
+  }
 
   ngOnInit() {
     this.logInForm = new FormGroup({
@@ -51,7 +55,7 @@ export class AppLogInComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.milieuService.login(this.logInForm.value).then((data)=>{
+    this.accountService.login(this.logInForm.value).then((data)=>{
       this.message = data;
 
 

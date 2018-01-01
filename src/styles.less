@@ -1,12 +1,14 @@
 @import "cards";
 
-@dark-color:    #008080;
+@primary-color: #008080;
+@alternate-color: #8c6751;
+
 @med-color:     #66b2b2;
 @light-color:   #b2d8d8;
 @complimentry-dark-color:  #b2a270;
 @complimentry-light-color: #dbd1b4;
 
-@dark-color-gradient: linear-gradient( 8deg, black 10% , @dark-color);
+@primary-color-gradient: linear-gradient( 8deg, black 10% , @primary-color);
 
 @feature-font: "Montserrat", sans-serif;
 @special-font: Helvetica;
@@ -19,32 +21,53 @@
 @modals-content-layer: 6;
 
 
-app-footer{
+app-footer footer{
 
-  footer{
-    background: @dark-color-gradient;
+  background: @primary-color-gradient;
+  color: white;
+  text-align: center;
+  padding: 50px 5px;
+  font-size: 125%;
+  font-weight: bold;
+
+  .row{margin: 25px;}
+
+  img{
+    filter: grayscale(100%);
+    transition: filter 2s;
+    height: 35px;
+    margin: 1px;
+    &:hover{
+      filter: grayscale(0%);
+    }
+  }
+}
+
+app-header .navbar.fixed-top{
+
+  z-index: @modals-layer;
+  background: @primary-color-gradient;
+
+  .navbar-brand {
     color: white;
-    text-align: center;
-    padding: 50px 5px;
-    font-size: 125%;
-    font-weight: bold;
+    font-family: @feature-font;
+    font-size: 150%;
+    font-weight: 800;
+  }
 
-    .row{margin: 25px;}
+  li.nav-item{
+    
+    a.nav-link{
+      font-weight: 400;
+      color: white;
 
-    img{
-      filter: grayscale(100%);
-      transition: filter 2s;
-      height: 35px;
-      margin: 1px;
-      &:hover{
-        filter: grayscale(0%);
-      }
+      &:hover{ color: lighten(@alternate-color, 40%); }
     }
 
-
-
-
-
+    menu a.featured{
+      color: @primary-color;
+      font-weight: bold;
+    }
   }
 }
 
@@ -92,33 +115,7 @@ a.dropdown-item:hover{
   .item-select;
 }
 
-app-header{
-  .navbar.fixed-top{
 
-    z-index: @modals-layer;
-    background: @dark-color-gradient;
-
-    .navbar-brand {
-      color: white;
-      font-family: @feature-font;
-      font-size: 150%;
-      font-weight: 800;
-    }
-
-    li.nav-item {
-
-      a.nav-link{
-        font-weight: 400;
-        color: white;
-      }
-
-      menu a.featured{
-        color: @dark-color;
-        font-weight: bold;
-      }
-    }
-  }
-}
 
 
 app-modal{

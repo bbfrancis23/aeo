@@ -9,7 +9,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppFooterComponent } from './footer.component';
-import { AppHeaderComponent } from './app-header.component';
+import { AppHeaderComponent } from './header.component';
 import { AppLogInComponent} from './app-log-in.component';
 import { AppLogOutComponent} from './app-log-out.component';
 import { AppModalComponent } from './app-modal.component';

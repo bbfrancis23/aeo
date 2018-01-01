@@ -18,6 +18,7 @@ export class JemService extends MilieuService implements OnInit{
     this.config = JEM_CONFIG;
     this.init();
 
+    console.log('constructor called');
   }
 
 

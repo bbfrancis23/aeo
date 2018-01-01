@@ -10,16 +10,23 @@ export abstract class Milieu {
 
   constructor(protected readonly route: ActivatedRoute, protected readonly utils: Utilities) { }
 
-  
+
 
   routeConfig(milieuService) {
 
     this.route.params.subscribe(params => {
       milieuService.config.fields.forEach(field => {
         if (params[field.name]) {
+
+          field.values.forEach(data=>{
+            data.filtered = false;
+          })
+
           let param = this.utils.unUrlify(params[field.name]);
           field.values[field.values.findIndex(value => value.name.toLowerCase() === param)].filtered = true;
         }
+        milieuService.filter();
+        //console.log(field);
       });
     });
 

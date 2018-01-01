@@ -129,6 +129,27 @@ app-footer footer img {
 app-footer footer img:hover {
   filter: grayscale(0%);
 }
+app-header .navbar.fixed-top {
+  z-index: 5;
+  background: linear-gradient(8deg, black 10%, #008080);
+}
+app-header .navbar.fixed-top .navbar-brand {
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-size: 150%;
+  font-weight: 800;
+}
+app-header .navbar.fixed-top li.nav-item a.nav-link {
+  font-weight: 400;
+  color: white;
+}
+app-header .navbar.fixed-top li.nav-item a.nav-link:hover {
+  color: #e0d2c9;
+}
+app-header .navbar.fixed-top li.nav-item menu a.featured {
+  color: #008080;
+  font-weight: bold;
+}
 /* OLD */
 a {
   cursor: pointer;
@@ -152,24 +173,6 @@ hr {
 a.dropdown-item:hover {
   background-color: #b2d8d8;
   color: black;
-}
-app-header .navbar.fixed-top {
-  z-index: 5;
-  background: linear-gradient(8deg, black 10%, #008080);
-}
-app-header .navbar.fixed-top .navbar-brand {
-  color: white;
-  font-family: "Montserrat", sans-serif;
-  font-size: 150%;
-  font-weight: 800;
-}
-app-header .navbar.fixed-top li.nav-item a.nav-link {
-  font-weight: 400;
-  color: white;
-}
-app-header .navbar.fixed-top li.nav-item menu a.featured {
-  color: #008080;
-  font-weight: bold;
 }
 app-modal .app-modal {
   left: 0;
