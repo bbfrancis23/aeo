@@ -6,7 +6,7 @@
 @complimentry-dark-color:  #b2a270;
 @complimentry-light-color: #dbd1b4;
 
-@dark-color-gradient: linear-gradient( 50deg, black 10%, @dark-color);
+@dark-color-gradient: linear-gradient( 8deg, black 10% , @dark-color);
 
 @feature-font: "Montserrat", sans-serif;
 @special-font: Helvetica;
@@ -33,18 +33,14 @@ app-footer{
 
     img{
       filter: grayscale(100%);
-      transition: filter 1s;
+      transition: filter 2s;
+      height: 35px;
+      margin: 1px;
       &:hover{
         filter: grayscale(0%);
       }
     }
 
-    // these aren't the droids you are looking for... Move along //
-    img.angular{ height: 45px; }
-    img.mongo{ height: 40px; margin: 5px }
-    img.node{ height: 40px; }
-    img.bootstrap{ height: 50px;}
-    img.digitalocean{ height: 35px; margin: 3px }
 
 
 

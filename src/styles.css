@@ -110,7 +110,7 @@ jem-update-vue .card .card-header {
   color: black;
 }
 app-footer footer {
-  background: linear-gradient(50deg, black 10%, #008080);
+  background: linear-gradient(8deg, black 10%, #008080);
   color: white;
   text-align: center;
   padding: 50px 5px;
@@ -122,27 +122,12 @@ app-footer footer .row {
 }
 app-footer footer img {
   filter: grayscale(100%);
-  transition: filter 1s;
+  transition: filter 2s;
+  height: 35px;
+  margin: 1px;
 }
 app-footer footer img:hover {
   filter: grayscale(0%);
-}
-app-footer footer img.angular {
-  height: 45px;
-}
-app-footer footer img.mongo {
-  height: 40px;
-  margin: 5px;
-}
-app-footer footer img.node {
-  height: 40px;
-}
-app-footer footer img.bootstrap {
-  height: 50px;
-}
-app-footer footer img.digitalocean {
-  height: 35px;
-  margin: 3px;
 }
 /* OLD */
 a {
@@ -170,7 +155,7 @@ a.dropdown-item:hover {
 }
 app-header .navbar.fixed-top {
   z-index: 5;
-  background: linear-gradient(50deg, black 10%, #008080);
+  background: linear-gradient(8deg, black 10%, #008080);
 }
 app-header .navbar.fixed-top .navbar-brand {
   color: white;
