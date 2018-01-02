@@ -2,7 +2,6 @@ import { Injectable, OnInit} from '@angular/core';
 import { MilieuService } from '../milieu/milieu.service';
 import { Headers, Http } from '@angular/http';
 import { Location } from '@angular/common';
-import { Utilities } from '../utilities';
 
 import { ActivatedRoute } from "@angular/router";
 
@@ -13,8 +12,8 @@ export class JemService extends MilieuService implements OnInit{
 
   //data: MilieuService;
 
-  constructor(public route: ActivatedRoute, protected readonly http: Http, protected readonly utils: Utilities, public readonly location: Location) {
-    super(route,http,utils,location);
+  constructor(public route: ActivatedRoute, protected readonly http: Http,  public readonly location: Location) {
+    super(route,http,location);
     this.config = JEM_CONFIG;
     this.init();
 

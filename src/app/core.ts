@@ -91,8 +91,9 @@ export class AppHeaderComponent {
 }
 
 @Component({
+  selector: 'app-content',
   template: `
-    <view-port >
+    <view-port id="app-content">
       <media><video src="assets/img/code.mov" autoplay="true" loop="true" ></video></media>
       <content>
         <h1>AEO - TECH</h1>

@@ -5,7 +5,6 @@ import { Field } from './data-classes';
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import { Location } from '@angular/common';
-import { Utilities } from '../utilities';
 
 'use strict';
 
@@ -45,7 +44,7 @@ export class MilieuService {
   //private readonly itemSource = new BehaviorSubject<{}[]>([]);
   //readonly currentItem = this.itemSource.asObservable();
 
-  constructor(public route: ActivatedRoute, protected readonly http: Http, protected readonly utils: Utilities, public readonly location: Location) { }
+  constructor(public route: ActivatedRoute, protected readonly http: Http, public readonly location: Location) { }
 
   get dashBoard() { return this._dashBoard; }
 
@@ -303,11 +302,11 @@ export class MilieuService {
       field.values.forEach(value => { if (value.filtered) filters.push(value.name) });
 
       if (filters.length === 1) {
-        fieldPaths.push(`${this.utils.urlify(field.name)}/${this.utils.urlify(filters[0])}`);
+        fieldPaths.push(`${this.urlify(field.name)}/${this.urlify(filters[0])}`);
         selectedFilters.push(filters[0]);
 
       } else if (filters.length > 1) {
-        queryStrings.push(`${this.utils.urlify(field.name)}=${this.utils.urlify(filters.join(','))}`);
+        queryStrings.push(`${this.urlify(field.name)}=${this.urlify(filters.join(','))}`);
       }
     });
 
@@ -329,7 +328,28 @@ export class MilieuService {
 
 
 
+  unUrlify(string: string) {
+    string = string || '';
 
+    string = string.replace(/[^A-Za-z0-9\s\-]/g, '');
+    string.trim();
+    string = string.replace(/\-+/g, " ");
+    string = string.toLowerCase();
+
+    return string;
+  }
+
+
+  urlify(string: string): string {
+    string = string || '';
+
+    string = string.replace(/[^A-Za-z0-9\s\,\-]/g, '');
+    string.trim();
+    string = string.replace(/\s+/g, "-");
+    string = string.toLowerCase();
+
+    return string;
+  }
 }
 
 /* Copyright AEO all rights reserved */

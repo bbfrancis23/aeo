@@ -5,7 +5,6 @@ import { Milieu } from '../milieu/milieu';
 import { MilieuService } from '../milieu/milieu.service';
 import { FilterVueComponent } from '../milieu/filter-vue.component';
 import { IntroVueComponent } from '../milieu/intro-vue.component';
-import { Utilities } from '../utilities';
 
 
 import { JEM_CONFIG } from './jem-config';
@@ -55,8 +54,8 @@ export class JemMilieuComponent extends Milieu implements OnInit {
 
 
 
-  constructor(protected route: ActivatedRoute, protected utils: Utilities, protected jemService: JemService) {
-    super(route, utils);
+  constructor(protected route: ActivatedRoute, protected jemService: JemService) {
+    super(route, jemService);
     this.routeConfig(jemService);
 
 

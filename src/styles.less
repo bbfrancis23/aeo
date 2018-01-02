@@ -1,7 +1,7 @@
 @import "cards";
 
 @primary-color: #008080;
-@alternate-color: #8c6751;
+@alt-color: #382920;
 
 @med-color:     #66b2b2;
 @light-color:   #b2d8d8;
@@ -10,8 +10,8 @@
 
 @primary-color-gradient: linear-gradient( 8deg, black 10% , @primary-color);
 
-@feature-font: "Montserrat", sans-serif;
-@special-font: Helvetica;
+@primary-font: "Montserrat", sans-serif;
+@alt-font: Helvetica;
 @regular-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
 @overlay-layer: 2;
@@ -27,7 +27,7 @@ app-header .navbar.fixed-top{
 
   .navbar-brand {
     color: white;
-    font-family: @feature-font;
+    font-family: @primary-font;
     font-size: 150%;
     font-weight: 800;
   }
@@ -38,7 +38,7 @@ app-header .navbar.fixed-top{
       font-weight: 400;
       color: white;
 
-      &:hover{ color: lighten(@alternate-color, 40%); }
+      &:hover{ color: lighten(@alt-color, 40%); }
     }
 
     menu a.featured{
@@ -52,7 +52,48 @@ app-header .navbar.fixed-top{
   }
 }
 
+app-content{
+  .view-port-container{
 
+    align-items: center;
+    color: #fff;
+    max-width:  960px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: auto;
+    text-align:  center;
+
+    .view-port-overlay{
+      background: #000;
+      z-index: @overlay-layer;
+      opacity: .75
+    }
+
+    .view-port-content{
+        z-index: @overlay-content-layer;
+    }
+
+    h1{
+      color: lighten(@alt-color, 40%);
+      font-family: @primary-font;
+      font-size: 400%;
+      font-weight: 800;
+    }
+
+    h2{
+      font-family: @primary-font;
+      font-size: 300%;
+      font-weight: 800;
+    }
+    img{
+      filter: brightness(80%);
+      transition: filter 2s;
+      &:hover{
+        filter: brightness(200%);
+      }
+    }
+  }
+}
 
 app-footer footer{
 
@@ -157,7 +198,7 @@ app-modal{
     h1{
       color: black;
       font-size: 200%;
-      font-family: @special-font;
+      font-family: @alt-font;
       text-transform: uppercase;
       font-weight: 700;
     }
@@ -193,17 +234,7 @@ app-modal{
 
 
 
-h1{
-  font-family: @feature-font;
-  font-size: 400%;
-  font-weight:bold;
-  color: @complimentry-dark-color;
-}
 
-h2{
-  font-family: @feature-font;
-  color: @complimentry-light-color;
-}
 
 
 
@@ -295,35 +326,12 @@ border: 2px solid #42A948; /* green */
   border-color: @complimentry-dark-color;
 }
 
-.view-port-container{
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  color: #fff;
-  max-width:  960px;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  margin: auto;
-  text-align:  center;
-}
+/*
 
-.view-port-overlay{
-  height: 100vh;
-  width: 100vw;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: #000;
-  z-index: @overlay-layer;
-  opacity: .75
-}
+//
 
-.view-port-content{
-    z-index: @overlay-content-layer;
-    width: 100vw;
-}
+
+// */
 
 .vue-controls {
   .control-position;

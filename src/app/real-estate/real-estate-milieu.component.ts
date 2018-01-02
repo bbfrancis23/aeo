@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { Milieu } from '../milieu/milieu';
 import { FilterVueComponent } from '../milieu/filter-vue.component';
-import { Utilities } from '../utilities';
 import { MilieuService } from '../milieu/milieu.service';
 import { Property } from './property';
 import { REAL_ESTATE_AGENT_CONFIG} from './real-estate.config';

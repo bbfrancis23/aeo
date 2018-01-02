@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Subject }    from 'rxjs/Subject';
 import { MilieuVue } from './milieu-vue';
+import { fadeInOutAnimation } from './animations';
 
 'use strict';
 
@@ -36,19 +37,7 @@ import { MilieuVue } from './milieu-vue';
         </div>
       </div>
     </modal-vue>`,
-    animations: [
-      trigger('fadeInOut', [
-        state('in', style({transform: 'translateX(0)'})),
-        transition('void => *', [
-          style({ opacity:0 }),
-          animate('1000ms ease-in-out', style({ opacity:1 }))
-        ]),
-        transition('* => void', [
-          style({ opacity:1 }),
-              animate('1000ms ease-in-out', style({ opacity:0 }))
-        ])
-      ])
-    ]
+    animations: [ fadeInOutAnimation]
 
 })
 export class FilterVueComponent extends MilieuVue implements OnInit {

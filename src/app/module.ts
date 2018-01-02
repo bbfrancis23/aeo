@@ -1,4 +1,4 @@
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
@@ -13,7 +13,7 @@ import { AppComponent, AppHeaderComponent, AppFooterComponent, AppContentCompone
 import { AccountServicesComponent } from './account/services.component';
 import { AppModalComponent } from './app-modal.component';
 import { ItemSearchComponent} from './milieu/item-search.component';
-import { ViewPortComponent } from './view-port.component';
+import { ViewPortComponent } from './milieu/view-port.component';
 
 import { CreateAccountVueComponent } from "./account/create-account-vue.component";
 import { AccountMilieuComponent } from './account/account-milieu.component';
@@ -28,7 +28,6 @@ import { JemCollectionVueComponent } from './jems/jem-collection-vue.component';
 import { JemComponent } from './jems/jem.component';
 import { JemSmallComponent } from './jems/jem-sm.component';
 import { JemService } from './jems/jem.service';
-import { Utilities } from './utilities';
 
 @NgModule({
   imports: [
@@ -66,7 +65,7 @@ import { Utilities } from './utilities';
     JemUpdateVueComponent,
   ],
   providers: [
-    Utilities, JemService, AccountService
+    JemService, AccountService
   ],
   bootstrap: [AppComponent]
 })

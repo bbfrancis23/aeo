@@ -124,7 +124,7 @@ app-header .navbar.fixed-top li.nav-item a.nav-link {
   color: white;
 }
 app-header .navbar.fixed-top li.nav-item a.nav-link:hover {
-  color: #e0d2c9;
+  color: #b08b74;
 }
 app-header .navbar.fixed-top li.nav-item menu a.featured {
   color: #008080;
@@ -132,6 +132,41 @@ app-header .navbar.fixed-top li.nav-item menu a.featured {
 }
 app-header .navbar.fixed-top item-search {
   margin-right: 5px;
+}
+app-content .view-port-container {
+  align-items: center;
+  color: #fff;
+  max-width: 960px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin: auto;
+  text-align: center;
+}
+app-content .view-port-container .view-port-overlay {
+  background: #000;
+  z-index: 2;
+  opacity: 0.75;
+}
+app-content .view-port-container .view-port-content {
+  z-index: 3;
+}
+app-content .view-port-container h1 {
+  color: #b08b74;
+  font-family: "Montserrat", sans-serif;
+  font-size: 400%;
+  font-weight: 800;
+}
+app-content .view-port-container h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 300%;
+  font-weight: 800;
+}
+app-content .view-port-container img {
+  filter: brightness(80%);
+  transition: filter 2s;
+}
+app-content .view-port-container img:hover {
+  filter: brightness(200%);
 }
 app-footer footer {
   background: linear-gradient(8deg, black 10%, #008080);
@@ -235,16 +270,6 @@ app-modal .app-modal-content {
 .copy-control:hover {
   color: #00aaff;
 }
-h1 {
-  font-family: "Montserrat", sans-serif;
-  font-size: 400%;
-  font-weight: bold;
-  color: #b2a270;
-}
-h2 {
-  font-family: "Montserrat", sans-serif;
-  color: #dbd1b4;
-}
 /*
 input{
   background-color: red;
@@ -314,33 +339,12 @@ input{
 #title-search-box {
   border-color: #b2a270;
 }
-.view-port-container {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  color: #fff;
-  max-width: 960px;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  margin: auto;
-  text-align: center;
-}
-.view-port-overlay {
-  height: 100vh;
-  width: 100vw;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: #000;
-  z-index: 2;
-  opacity: 0.75;
-}
-.view-port-content {
-  z-index: 3;
-  width: 100vw;
-}
+/*
+
+//
+
+
+// */
 .vue-controls {
   position: absolute;
   top: 0px;

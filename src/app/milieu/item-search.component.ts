@@ -36,14 +36,14 @@ export class ItemSearchComponent implements OnInit{
     this.milieuService.config.fields.forEach((field)=>{
       count++;
       field['values'].forEach((value)=>{
-        let directory = this.milieuService.utils.urlify(value['name'])
-        this.keyWords.push({link: `${this.milieuService.config.directory}/${field['name']}/${this.milieuService.utils.urlify(value['name'])}`, title: value['name']});
+        let directory = this.milieuService.urlify(value['name'])
+        this.keyWords.push({link: `${this.milieuService.config.directory}/${field['name']}/${this.milieuService.urlify(value['name'])}`, title: value['name']});
 
         if(count < this.milieuService.config.fields.length) {
           let subField = (this.milieuService.config.fields[count]);
 
           subField['values'].forEach((subValue)=>{
-            this.keyWords.push({link: `${this.milieuService.config.directory}/${field['name']}/${this.milieuService.utils.urlify(value['name'])}/${subField['name']}/${this.milieuService.utils.urlify(subValue['name'])}`, title: `${value['name']} ${subValue['name']}`} );
+            this.keyWords.push({link: `${this.milieuService.config.directory}/${field['name']}/${this.milieuService.urlify(value['name'])}/${subField['name']}/${this.milieuService.urlify(subValue['name'])}`, title: `${value['name']} ${subValue['name']}`} );
           });
         }
       });

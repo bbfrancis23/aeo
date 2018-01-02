@@ -1,6 +1,5 @@
 import { ActivatedRoute } from "@angular/router";
 import { MilieuService } from './milieu.service';
-import { Utilities } from '../utilities';
 
 'use strict';
 
@@ -8,7 +7,7 @@ export abstract class Milieu {
 
   columns: any[];
 
-  constructor(protected readonly route: ActivatedRoute, protected readonly utils: Utilities) { }
+  constructor(protected readonly route: ActivatedRoute, public milieuService: MilieuService) { }
 
 
 
@@ -22,7 +21,7 @@ export abstract class Milieu {
             data.filtered = false;
           })
 
-          let param = this.utils.unUrlify(params[field.name]);
+          let param = this.milieuService.unUrlify(params[field.name]);
           field.values[field.values.findIndex(value => value.name.toLowerCase() === param)].filtered = true;
         }
         milieuService.filter();
@@ -40,7 +39,7 @@ export abstract class Milieu {
         if (params[field.name]) {
           let values: string[] = params[field.name].split(',');
           values.forEach(value => {
-            let param = this.utils.unUrlify(value);
+            let param = this.milieuService.unUrlify(value);
             field.values[field.values.findIndex(value => value.name.toLowerCase() === param)].filtered = true;
           });
         }
