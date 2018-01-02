@@ -7,13 +7,11 @@ import { HttpModule } from '@angular/http';
 import { MilieuModule } from './milieu/milieu.module';
 import { NgModule } from '@angular/core';
 
-import { AppComponent } from './app.component';
-import { AppFooterComponent } from './footer.component';
-import { AppHeaderComponent } from './header.component';
-import { AppLogInComponent} from './app-log-in.component';
-import { AppLogOutComponent} from './app-log-out.component';
+
+import { AppComponent, AppHeaderComponent, AppFooterComponent, AppContentComponent } from './core';
+
+import { AccountServicesComponent } from './account/services.component';
 import { AppModalComponent } from './app-modal.component';
-import { AppContentComponent } from './app.content.component';
 import { ItemSearchComponent} from './milieu/item-search.component';
 import { ViewPortComponent } from './view-port.component';
 
@@ -49,8 +47,7 @@ import { Utilities } from './utilities';
     AppFooterComponent,
     AppHeaderComponent,
     AppModalComponent,
-    AppLogInComponent,
-    AppLogOutComponent,
+    AccountServicesComponent,
     AppComponent,
     AppContentComponent,
     ItemSearchComponent,

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AccountMilieuComponent} from './account/account-milieu.component';
-import { AppContentComponent} from './app.content.component';
+import { AppContentComponent} from './core';
 import { JemMilieuComponent } from './jems/jem-milieu.component';
 
 

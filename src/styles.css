@@ -6,13 +6,13 @@
 .card-block {
   padding: 1em;
 }
-app-log-in .create-account {
+account-services .create-account {
   text-align: center;
 }
-app-log-in .create-account .btn {
+account-services .create-account .btn {
   margin: 0 auto;
 }
-app-log-in .card {
+account-services .card {
   border-color: #008080;
   position: fixed;
   right: 50px;
@@ -20,7 +20,7 @@ app-log-in .card {
   width: 250px;
   box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
 }
-app-log-in .card .card-header {
+account-services .card .card-header {
   background-color: #008080;
   color: white;
 }
@@ -109,26 +109,6 @@ jem-update-vue .card .card-header {
   background-color: #dbd1b4;
   color: black;
 }
-app-footer footer {
-  background: linear-gradient(8deg, black 10%, #008080);
-  color: white;
-  text-align: center;
-  padding: 50px 5px;
-  font-size: 125%;
-  font-weight: bold;
-}
-app-footer footer .row {
-  margin: 25px;
-}
-app-footer footer img {
-  filter: grayscale(100%);
-  transition: filter 2s;
-  height: 35px;
-  margin: 1px;
-}
-app-footer footer img:hover {
-  filter: grayscale(0%);
-}
 app-header .navbar.fixed-top {
   z-index: 5;
   background: linear-gradient(8deg, black 10%, #008080);
@@ -149,6 +129,29 @@ app-header .navbar.fixed-top li.nav-item a.nav-link:hover {
 app-header .navbar.fixed-top li.nav-item menu a.featured {
   color: #008080;
   font-weight: bold;
+}
+app-header .navbar.fixed-top item-search {
+  margin-right: 5px;
+}
+app-footer footer {
+  background: linear-gradient(8deg, black 10%, #008080);
+  color: white;
+  text-align: center;
+  padding: 50px 5px;
+  font-size: 125%;
+  font-weight: bold;
+}
+app-footer footer .row {
+  margin: 25px;
+}
+app-footer footer img {
+  filter: grayscale(100%);
+  transition: filter 2s;
+  height: 35px;
+  margin: 1px;
+}
+app-footer footer img:hover {
+  filter: grayscale(0%);
 }
 /* OLD */
 a {
@@ -296,12 +299,6 @@ input{
   width: 70%;
   z-index: 6;
   box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
-}
-.screen-cover {
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
 }
 .search-result a.dropdown-item {
   background-color: white;

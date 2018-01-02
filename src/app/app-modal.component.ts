@@ -10,6 +10,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   QA: 12/11/2017
 */
 
+// todo change milieu modal vue to use string on off then get rid of this
+
 @Component({
   selector: 'app-modal',
   template: `

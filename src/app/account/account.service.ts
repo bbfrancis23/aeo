@@ -18,10 +18,13 @@ export class AccountService extends MilieuService {
     this.init();
 
     this.http.get('api/account').toPromise().then(result => {
-      //console.log(result.json().data);
 
-      this.username = result.json().data.username;
-      this.email = result.json().data.email;
+      if(result.json().data){
+
+              this.username = result.json().data.username;
+              this.email = result.json().data.email;
+      }
+
     });
   }
 
