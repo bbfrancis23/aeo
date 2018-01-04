@@ -1,11 +1,11 @@
-import { Config } from '../milieu/data-classes';
+import { Config } from '../milieu/interfaces';
 
 'use strict';
 
 export const ACCOUNT_CONFIG: Config = {
   title: 'User Account',
   name: 'accounts',
-  directory: 'account',  
+  directory: 'account',
   itemsMode: false
   //dataLabel: 'account',
   //intro: "Here is your User Account",

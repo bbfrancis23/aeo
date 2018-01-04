@@ -7,8 +7,12 @@
           <button class="btn btn-outline-secondary material-icons" title="Dash Board" [ngClass]="{'active': jemService.dashBoard}"  (click)="toggleDashBoard()">dashboard</button>
         </div>
         <div class="btn-group float-right d-none d-md-block d-lg-block" *ngIf="jemService.dashBoard" >
-          <button class="btn material-icons" (click)="introVue.show = !introVue.show" [ngClass]="{'active': introVue.show}"  title="Jem Info View">info_outline</button><button class="btn material-icons" (click)="toggleFilterVue();" [ngClass]="{'active':filterVue.show}"  title="Jem Filter View">filter_list</button><button class="btn material-icons" (click)="toggleListVue();" [ngClass]="{'active': listVue.show}"  title="Jem List View">list</button><button class="btn material-icons" (click)="addVue.show = !addVue.show" [ngClass]="{'active': addVue.show}"  title="Add Jem View">add</button><button class="btn material-icons" (click)="updateVue.show = !updateVue.show" [ngClass]="{'active': updateVue.show}"  title="Edit Jem View">create</button>
-          <!-- <button class="btn btn-primary material-icons" (click)="collectionVue.show = !collectionVue.show" [ngClass]="{'active': collectionVue.show}"  title="Jem Collection View">
+          <button class="btn material-icons" (click)="introVue.show = !introVue.show" [ngClass]="{'active': introVue.show}"  title="Jem Info View">info_outline</button>
+          <button class="btn material-icons" (click)="toggleFilterVue();" [ngClass]="{'active':filterVue.show}"  title="Jem Filter View">filter_list</button>
+          <button class="btn material-icons" (click)="toggleListVue();" [ngClass]="{'active': listVue.show}"  title="Jem List View">list</button>
+          <button class="btn material-icons" (click)="addVue.show = !addVue.show" [ngClass]="{'active': addVue.show}"  title="Add Jem View">add</button>
+          <!-- <button class="btn material-icons" (click)="updateVue.show = !updateVue.show" [ngClass]="{'active': updateVue.show}"  title="Edit Jem View">create</button>
+          <button class="btn btn-primary material-icons" (click)="collectionVue.show = !collectionVue.show" [ngClass]="{'active': collectionVue.show}"  title="Jem Collection View">
             playlist_add
           </button> -->
         </div>
@@ -33,8 +37,9 @@
         </div>
 
         <div  [ngClass]=" isColumnVisible(1) ? 'col-lg-6' : 'col-lg-12'">
-          <jem-add-vue (jemAddedEvent)="addNewJem($event)" [jemService]="jemService" ></jem-add-vue>
-          <jem-update-vue [jemService]="jemService"></jem-update-vue>
+          <manage-jem [jemService]="jemService" [manageType]="'Add'"  ></manage-jem>
+          <!-- <jem-add-vue (jemAddedEvent)="addNewJem($event)" [jemService]="jemService" ></jem-add-vue>
+          <jem-update-vue [jemService]="jemService"></jem-update-vue> -->
           <!-- <jem-collection-vue></jem-collection-vue> -->
         </div>
 

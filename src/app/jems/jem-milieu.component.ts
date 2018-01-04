@@ -14,6 +14,7 @@ import { JemCollectionVueComponent } from './jem-collection-vue.component';
 import { JemListVueComponent } from './jem-list-vue.component';
 import { JemService } from './jem.service';
 import { JemUpdateVueComponent } from './jem-update-vue.component';
+import { ManageJemComponent } from './manage';
 
 
 'use strict';
@@ -46,8 +47,8 @@ export class JemMilieuComponent extends Milieu implements OnInit {
   }
 
   @ViewChild(JemListVueComponent) listVue;
-  @ViewChild(JemAddVueComponent) addVue;
-  @ViewChild(JemUpdateVueComponent) updateVue;
+  @ViewChild(ManageJemComponent) addVue;
+  //@ViewChild(JemUpdateVueComponent) updateVue;
   //@ViewChild(JemCollectionVueComponent) collectionVue;
   @ViewChild(IntroVueComponent) introVue;
   @ViewChild(FilterVueComponent) filterVue;
@@ -72,7 +73,7 @@ export class JemMilieuComponent extends Milieu implements OnInit {
 
     if (!this.jemService.dashBoard) {
       this.addVue.show = false;
-      this.updateVue.show = false;
+      //this.updateVue.show = false;
       //this.collectionVue.show = false;
     }
 
@@ -81,7 +82,7 @@ export class JemMilieuComponent extends Milieu implements OnInit {
     this.columns = [
       [this.introVue, this.filterVue],
       [this.listVue],
-      [this.addVue, this.updateVue]];
+      [this.addVue]];
       //[this.addVue, this.updateVue, this.collectionVue]];
   }
 
@@ -90,11 +91,11 @@ export class JemMilieuComponent extends Milieu implements OnInit {
     this.jemService.dashBoard = !this.jemService.dashBoard;
 
     if (this.jemService.dashBoard) {
-      this.updateVue.show = true;
+      //this.updateVue.show = true;
       this.addVue.show = true;
       //this.collectionVue.show = true;
     } else {
-      this.updateVue.show = false;
+      //this.updateVue.show = false;
       this.addVue.show = false;
       //this.collectionVue.show = false;
     }

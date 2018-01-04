@@ -25,6 +25,8 @@ import { JemCollectionVueComponent } from './jems/jem-collection-vue.component';
 import { JemComponent } from './jems/jem.component';
 import { JemSmallComponent } from './jems/jem-sm.component';
 import { JemService } from './jems/jem.service';
+import { ManageJemComponent } from './jems/manage';
+
 
 @NgModule({
   imports: [
@@ -57,6 +59,7 @@ import { JemService } from './jems/jem.service';
     JemMilieuComponent,
     JemSmallComponent,
     JemUpdateVueComponent,
+    ManageJemComponent
   ],
   providers: [
     JemService, AccountService

@@ -15,7 +15,7 @@ import { AccountService } from './account.service';
           <form  (ngSubmit)="onSubmit();" [formGroup]="logInForm" #formLogIn="ngForm" *ngIf="message !== 'Login Successful'">
               <div class="form-group">
                 <label for="email" class="sr-only">Email</label>
-                <input id="email" class="form-control" formControlName="email" placeholder="Email" required >
+                <input class="form-control" formControlName="email" placeholder="Email" required >
                 <div *ngIf="email.invalid && (email.touched)" class="alert alert-danger">
                   <div *ngIf="email.errors.required">Email is required.</div>
                   <div *ngIf="email.errors.email">Must be valid Email.</div>
