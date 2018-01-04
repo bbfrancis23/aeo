@@ -1,11 +1,3 @@
-.card-header {
-  font-size: 150%;
-  font-weight: 600;
-  font-family: Helvetica;
-}
-.card-block {
-  padding: 1em;
-}
 account-services .create-account {
   text-align: center;
 }
@@ -20,10 +12,6 @@ account-services .card {
   width: 250px;
   box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
 }
-account-services .card .card-header {
-  background-color: #008080;
-  color: white;
-}
 app-log-out .card {
   border-color: #008080;
   position: fixed;
@@ -31,10 +19,6 @@ app-log-out .card {
   z-index: 6;
   width: 250px;
   box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
-}
-app-log-out .card .card-header {
-  background-color: #008080;
-  color: white;
 }
 app-log-out .center {
   text-align: center;
@@ -45,10 +29,6 @@ app-log-out .center .btn {
 account-vue .card {
   border-color: #008080;
 }
-account-vue .card .card-header {
-  background-color: #008080;
-  color: white;
-}
 account-vue .card-block {
   color: black;
   text-align: left;
@@ -56,35 +36,8 @@ account-vue .card-block {
 create-account-vue .card {
   border-color: #008080;
 }
-create-account-vue .card .card-header {
-  background-color: #008080;
-  color: white;
-}
-intro-vue .card {
-  border-color: #b2a270;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  font-family: "Montserrat", sans-serif;
-}
-intro-vue .card h4 {
-  color: #008080;
-  font-weight: bolder;
-}
-intro-vue .card p {
-  color: black;
-  font-family: Helvetica;
-}
-filter-vue .card {
-  border-color: #b2a270;
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-filter-vue .card .card-header {
-  background-color: #dbd1b4;
-  color: black;
-}
 jem-list-vue .card {
-  border-color: #b2a270;
+  border-color: #008080;
   margin-top: 1em;
   margin-bottom: 1em;
 }
@@ -92,22 +45,60 @@ jem-list-vue .card .card-header {
   background-color: #b2a270;
 }
 jem-add-vue .card {
-  border-color: #b2a270;
+  border-color: #008080;
   margin-top: 1em;
   margin-bottom: 1em;
 }
 jem-add-vue .card .card-header {
-  background-color: #dbd1b4;
-  color: black;
+  background-color: #008080;
+  color: white;
 }
 jem-update-vue .card {
-  border-color: #b2a270;
+  border-color: #008080;
   margin-top: 1em;
   margin-bottom: 1em;
 }
 jem-update-vue .card .card-header {
-  background-color: #dbd1b4;
+  background-color: #008080;
+  color: white;
+}
+.item-select {
+  background-color: #cdffff;
   color: black;
+}
+a.dropdown-item:hover {
+  background-color: #cdffff;
+  color: black;
+}
+.card {
+  border-color: #008080;
+}
+.card .card-header {
+  font-size: 150%;
+  font-weight: 600;
+  font-family: Helvetica;
+  background-color: #008080;
+  color: white;
+}
+.card .card-block {
+  padding: 1em;
+}
+#account-services-modal .modal-mode {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: fixed;
+  z-index: 5;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#account-services-modal .modal-content {
+  margin: 5% auto;
+  width: 70%;
+  z-index: 6;
+  box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
 }
 app-header .navbar.fixed-top {
   z-index: 5;
@@ -188,6 +179,99 @@ app-footer footer img {
 app-footer footer img:hover {
   filter: grayscale(0%);
 }
+.jem-card {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+#jem-filter-vue .card {
+  border-color: #008080;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+#jem-intro-vue .card {
+  border-color: #008080;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  font-family: "Montserrat", sans-serif;
+}
+#jem-intro-vue .card h4 {
+  color: #008080;
+  font-weight: bolder;
+}
+#jem-intro-vue .card p {
+  color: black;
+  font-family: Helvetica;
+}
+modal-controls {
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  color: white;
+}
+modal-vue .modal-mode {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: fixed;
+  z-index: 5;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+modal-vue .modal-vue-content {
+  margin: 5% auto;
+  width: 70%;
+  z-index: 6;
+  box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
+}
+vue-controls {
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  color: white;
+}
+vue-controls:hover {
+  color: black;
+}
+#nav-search {
+  width: 250px;
+}
+#nav-search input {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+#nav-search .search-result {
+  width: 250px;
+  position: absolute;
+  z-index: 99999;
+  max-height: 350px;
+  overflow-y: auto;
+}
+#nav-search .search-result a.dropdown-item {
+  background-color: white;
+  color: black;
+}
+#nav-search .search-result a.dropdown-item:hover {
+  background-color: #cdffff;
+  color: black;
+}
+.item-controls .material-icons,
+.vue-controls .material-icons,
+.vue-controls-dk .material-icons,
+.copy-control .material-icons {
+  font-size: 1em;
+}
+.vue-controls-dk,
+.item-controls {
+  position: absolute;
+  top: 0px;
+  right: 5px;
+}
+.vue-controls-dk:hover,
+.item-controls:hover {
+  color: black;
+}
 /* OLD */
 a {
   cursor: pointer;
@@ -207,27 +291,6 @@ p:first-letter {
 }
 hr {
   background-color: #dbd1b4;
-}
-a.dropdown-item:hover {
-  background-color: #b2d8d8;
-  color: black;
-}
-app-modal .app-modal {
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  position: fixed;
-  z-index: 5;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-app-modal .app-modal-content {
-  margin: 5% auto;
-  width: 70%;
-  z-index: 6;
-  box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
 }
 .jem-milieu .sticky-top {
   padding-top: 56px;
@@ -270,12 +333,6 @@ app-modal .app-modal-content {
 .copy-control:hover {
   color: #00aaff;
 }
-/*
-input{
-  background-color: red;
-  color:red;
-}
-*/
 .field-name {
   font-size: 120%;
   font-weight: bolder;
@@ -284,12 +341,6 @@ input{
 .field {
   font-size: 120%;
   padding: 10px;
-}
-.item-controls .material-icons,
-.vue-controls .material-icons,
-.vue-controls-dk .material-icons,
-.copy-control .material-icons {
-  font-size: 1em;
 }
 .ng-valid[required],
 .ng-valid.required {
@@ -308,43 +359,9 @@ input{
   display: inline-flex;
   vertical-align: middle;
 }
-.vue-modal {
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  position: fixed;
-  z-index: 5;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-.vue-modal-content {
-  margin: 5% auto;
-  width: 70%;
-  z-index: 6;
-  box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
-}
-.search-result a.dropdown-item {
-  background-color: white;
-  color: black;
-}
-.search-result a.dropdown-item:hover {
-  background-color: #b2d8d8;
-  color: black;
-}
 .sticky-top {
   z-index: 4;
 }
-#title-search-box {
-  border-color: #b2a270;
-}
-/*
-
-//
-
-
-// */
 .vue-controls {
   position: absolute;
   top: 0px;
@@ -352,16 +369,5 @@ input{
   color: white;
 }
 .vue-controls:hover {
-  color: black;
-}
-.vue-controls-dk,
-.item-controls {
-  position: absolute;
-  top: 0px;
-  right: 5px;
-  color: #b2a270;
-}
-.vue-controls-dk,
-.item-controls:hover {
   color: black;
 }

@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 
-import { Milieu } from '../milieu/milieu';
+import { Milieu } from '../milieu/core';
 import { MilieuService } from '../milieu/milieu.service';
-import { FilterVueComponent } from '../milieu/filter-vue.component';
-import { IntroVueComponent } from '../milieu/intro-vue.component';
+import { FilterVueComponent } from '../milieu/core';
+import { IntroVueComponent } from '../milieu/core';
 
 
 import { JEM_CONFIG } from './jem-config';
@@ -56,10 +56,11 @@ export class JemMilieuComponent extends Milieu implements OnInit {
 
   constructor(protected route: ActivatedRoute, protected jemService: JemService) {
     super(route, jemService);
-    this.routeConfig(jemService);
+    jemService.routeConfig(this.route);
 
+    //this.routeConfig(jemService);
 
-    console.log('jem milieu constructor called');
+    //console.log('jem milieu constructor called');
     jemService.refresh();
   }
 

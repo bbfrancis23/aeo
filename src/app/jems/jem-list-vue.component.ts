@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ListVue } from '../milieu/list-vue';
+import { ListVue } from '../milieu/core';
 import { Jem } from './Jem';
 import { JemService } from './jem.service';
 

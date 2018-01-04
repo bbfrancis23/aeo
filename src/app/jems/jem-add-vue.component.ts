@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MilieuVue } from '../milieu/milieu-vue';
+import { MilieuVue } from '../milieu/core';
 import { MilieuService } from '../milieu/milieu.service';
 import { Jem } from './jem';
 import { JemService } from './jem.service';

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MilieuVue } from '../milieu/milieu-vue';
+import { MilieuVue } from '../milieu/core';
 import { MilieuService } from '../milieu/milieu.service';
 
 'use strict';
@@ -22,7 +22,7 @@ import { MilieuService } from '../milieu/milieu.service';
     </div></modal-vue>`
 })
 export class AgentVueComponent extends MilieuVue {
-  //constructor(protected data: MilieuService) { super(data); } 
+  //constructor(protected data: MilieuService) { super(data); }
 }
 
 /* Copyright AEO all rights reserved */

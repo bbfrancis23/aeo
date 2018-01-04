@@ -20,8 +20,8 @@
 <div class="milieu-content " [ngClass]=" (isColumnVisible(0) && isColumnVisible(1) && isColumnVisible(2)) ? 'container-fluid' : 'container-classic' " >
   <div class="row">
     <div [ngClass]=" (isColumnVisible(0) && isColumnVisible(1) && isColumnVisible(2)) ? 'col-lg-2' : 'col-lg-3' ">
-      <intro-vue [milieuService]="jemService"></intro-vue>
-      <filter-vue [milieuService]="jemService"></filter-vue>
+      <intro-vue id="jem-intro-vue" [milieuService]="jemService"></intro-vue>
+      <filter-vue id="jem-filter-vue" [milieuService]="jemService"></filter-vue>
     </div>
 
 

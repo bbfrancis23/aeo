@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MilieuVue } from '../milieu/milieu-vue';
+import { MilieuVue } from '../milieu/core';
 import { MilieuService } from '../milieu/milieu.service';
 
 'use strict';

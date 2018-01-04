@@ -1,3 +1,5 @@
+// VARS
+
 @import "cards";
 
 @primary-color: #008080;
@@ -19,6 +21,59 @@
 @sticky-layer: 4;
 @modals-layer: 5;
 @modals-content-layer: 6;
+
+// ABSTRACT
+
+.item-select{
+  background-color: lighten(@primary-color, 65%);
+  color: black;
+}
+
+// GLOBALS
+
+// TAGS
+
+a.dropdown-item:hover{
+  .item-select;
+}
+
+// CLASSES
+.card{
+  border-color: @primary-color;
+
+  .card-header{
+    font-size: 150%;
+    font-weight: 600;
+    font-family: @alt-font;
+    background-color: @primary-color;
+    color: white;
+  }
+
+  .card-block{
+    padding: 1em;
+  }
+}
+
+// APP
+
+#account-services-modal{
+  .modal-mode{
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    display: block;
+    position: fixed;
+    z-index: @modals-layer;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+  }
+
+  .modal-content{
+    margin: 5% auto;
+    width: 70%;
+    z-index: @modals-content-layer;
+    box-shadow: 10px 10px 1px 0 rgba(0,0,0,0.3)
+  }
+}
 
 app-header .navbar.fixed-top{
 
@@ -117,6 +172,137 @@ app-footer footer{
   }
 }
 
+// ***** JEM ***** //
+
+// ABSTRACT //
+
+// All Jem Vue Cards Need a top and bottom margin, but not all cards need it.
+
+.jem-card{
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+// IDS //
+
+// Where a vue is from milieu without inheritance we use an ID to uniquly Identi
+
+#jem-filter-vue{
+  .card{
+    .jem-card;
+  }
+}
+
+#jem-intro-vue{
+
+  .card{
+    .jem-card;
+
+    font-family: @primary-font;
+
+    h4{
+      color: @primary-color;
+      font-weight: bolder;
+    }
+    p{
+      color: black;
+      font-family: @alt-font;
+    }
+  }
+}
+
+// ***** MILIEU ***** //
+
+// TAGS //
+
+modal-controls{
+  .control-position;
+  color: white;
+}
+
+modal-vue{
+  .modal-mode{
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    display: block;
+    position: fixed;
+    z-index: @modals-layer;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+  }
+
+  .modal-vue-content{
+    margin: 5% auto;
+    width: 70%;
+    z-index: @modals-content-layer;
+    box-shadow: 10px 10px 1px 0 rgba(0,0,0,0.3)
+  }
+}
+
+
+vue-controls{
+    .control-position;
+    color: white;
+
+    &:hover{
+      color: black;
+    }
+}
+
+// ABSTRACT //
+
+.control-position(){
+  position: absolute;
+  top: 0px;
+  right: 5px;
+}
+
+// IDS //
+
+#nav-search {
+  width: 250px;
+
+  input{
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .search-result{
+    width:250px;
+    position: absolute;
+    z-index: 99999;
+    max-height: 350px;
+    overflow-y: auto;
+
+    a.dropdown-item{
+      background-color: white;
+      color: black;
+
+      &:hover{
+        .item-select;
+      }
+    }
+  }
+}
+
+// CLASSES //
+
+.item-controls .material-icons, .vue-controls .material-icons, .vue-controls-dk .material-icons, .copy-control .material-icons,{
+  font-size: 1em;
+}
+
+.vue-controls-dk, .item-controls{
+  .control-position;
+
+  &:hover{
+    color: black;
+  }
+}
+
+
+
+
+
 
 
 /* OLD */
@@ -146,44 +332,10 @@ hr{
 
 //***** ABSTRACT CLASSES *****//
 
-.item-select(){
-  background-color: @light-color;
-  color: black;
-}
-
-.control-position(){
-  position: absolute;
-  top: 0px;
-  right: 5px;
-}
-
-//***** COMPONENTS *****/
-
-a.dropdown-item:hover{
-  .item-select;
-}
 
 
 
 
-app-modal{
-  .app-modal{
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    display: block;
-    position: fixed;
-    z-index: @modals-layer;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.5);
-  }
-
-  .app-modal-content{
-    margin: 5% auto;
-    width: 70%;
-    z-index: @modals-content-layer;
-    box-shadow: 10px 10px 1px 0 rgba(0,0,0,0.3)
-  }
-}
 
 .jem-milieu{
   .sticky-top{
@@ -238,13 +390,6 @@ app-modal{
 
 
 
-/*
-input{
-  background-color: red;
-  color:red;
-}
-*/
-
 .field-name{
   font-size: 120%;
   font-weight: bolder;
@@ -256,9 +401,7 @@ input{
   padding: 10px;
 }
 
-.item-controls .material-icons, .vue-controls .material-icons, .vue-controls-dk .material-icons, .copy-control .material-icons,{
-  font-size: 1em;
-}
+
 
 
 
@@ -279,40 +422,12 @@ border: 2px solid #42A948; /* green */
   vertical-align: middle;
 }
 
-.vue-modal{
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  display: block;
-  position: fixed;
-  z-index: @modals-layer;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.5);
-}
-
-.vue-modal-content{
-  margin: 5% auto;
-  width: 70%;
-  z-index: @modals-content-layer;
-  box-shadow: 10px 10px 1px 0 rgba(0,0,0,0.3)
-}
 
 
 
-//.screen-cover{
-//  left: 0;
-//  top: 0;
-//  width: 100%;
-//  height: 100%;
-//}
 
-.search-result a.dropdown-item{
-  background-color: white;
-  color: black;
 
-  &:hover{
-    .item-select;
-  }
-}
+
 
 
 
@@ -322,33 +437,17 @@ border: 2px solid #42A948; /* green */
 
 
 
-#title-search-box{
-  border-color: @complimentry-dark-color;
-}
-
-/*
-
-//
 
 
-// */
-
-.vue-controls {
-  .control-position;
-  color: white;
+.vue-controls{
+    .control-position;
+    color: white;
 }
 
 .vue-controls:hover{
   color: black;
 }
-.vue-controls-dk, .item-controls{
-  .control-position;
-  color: @complimentry-dark-color;
-}
 
-.vue-controls-dk, .item-controls:hover{
-  color: black;
-}
 
 
 

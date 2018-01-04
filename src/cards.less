@@ -1,14 +1,11 @@
 // GLOBAL //
 
-.card-header{
-  font-size: 150%;
-  font-weight: 600;
-  font-family: @alt-font;
-}
 
-.card-block{
-  padding: 1em;
-}
+
+
+
+
+
 
 /// ABSTRACT //
 
@@ -17,19 +14,18 @@
 }
 
 .app-card-header(){
-  background-color: @primary-color;
-  color: white;
+
 }
 
 .jem-card(){
-  border-color: @complimentry-dark-color;
+  border-color: @primary-color;
   margin-top: 1em;
   margin-bottom: 1em;
 }
 
 .jem-card-header(){
-  background-color: @complimentry-light-color;
-  color: black;
+  background-color: @primary-color;
+  color: white;
 }
 
 .jem-card-active-header(){
@@ -103,27 +99,9 @@ create-account-vue{
   }
 }
 
-intro-vue{
-  .card{
-    .jem-card;
-    font-family: @primary-font;
-    h4{
-      color: @primary-color;
-      font-weight: bolder;
-    }
-    p{
-      color: black;
-      font-family: @alt-font;
-    }
-  }
-}
 
-filter-vue{
-  .card{
-    .jem-card;
-    .card-header{ .jem-card-header; }
-  }
-}
+
+
 
 jem-list-vue{
   .card{

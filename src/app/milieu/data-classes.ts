@@ -5,14 +5,13 @@
 export class Config {
   title = '';
   name = '';
-  //dataLabel = ''; // Data Base Admin will provide this.
   directory = ''; // Web Master will provide this.
   intro ?:  string;
   img ?: string;       // Web Master will provide this.
   itemsMode ?: boolean;
   requireAuth ?: boolean;
 
-  fieldsRaw?: FieldRaw[] = [];
+  fieldsRaw?: FieldRaw[] = []; // Only fill this in.
   fields?: Field[] = [];
 }
 

@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { AccountService } from './account/account.service';
 import { JemService } from './jems/jem.service';
-import { AppModalComponent } from './app-modal.component';
+import { MilieuModalComponent } from './milieu/modals';
 
 @Component({
   selector: 'app-root',
@@ -78,15 +78,15 @@ export class AppComponent {}
           </li>
           <li class="nav-item"><a class="nav-link" routerLink="/code-jems">CODE JEMS</a></li>
         </ul>
-        <item-search class="d-none d-lg-block" [milieuService]="jemService"></item-search>
-        <button (click)="accountServices.modalMode = 'on'" class="btn material-icons btn-account" [ngClass]="{'btn-outline-success' : accountService.authenticated, 'btn-outline-warning': !accountService.authenticated }" title="Account">account_box</button>
+        <item-search id="nav-search" class="d-none d-lg-block" [milieuService]="jemService"></item-search>
+        <button (click)="accountServices.modalMode = true" class="btn material-icons btn-account" [ngClass]="{'btn-outline-success' : accountService.authenticated, 'btn-outline-warning': !accountService.authenticated }" title="Account">account_box</button>
       </div>
     </nav>
 
-    <app-modal><account-services (modalCloseEvent)="modalLogIn.modalMode='off'"></account-services></app-modal>`
+    <milieu-modal id="account-services-modal"><account-services (modalCloseEvent)="modalLogIn.modalMode=false"></account-services></milieu-modal>`
 })
 export class AppHeaderComponent {
-  @ViewChild(AppModalComponent) accountServices: AppModalComponent;
+  @ViewChild(MilieuModalComponent) accountServices: MilieuModalComponent;
   constructor(private jemService: JemService, private accountService: AccountService ){}
 }
 

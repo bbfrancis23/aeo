@@ -59,7 +59,7 @@ export class MilieuService {
     return this.http.post(`api/login`, logInFields, { headers: this.headers }).toPromise().then(response => {
 
 
-      console.log(response.json().message);
+      //console.log(response.json().message);
       if(response.json().message === 'Login Successful'){
 
         window.location.reload();
@@ -74,7 +74,7 @@ export class MilieuService {
   // todo see if there is a way of getting rid of observable => Promise => observable;
   refresh() {
 
-    console.log('refresh called');
+    //console.log('refresh called');
 
     this.http.get('api/session').toPromise().then(result => {
 
@@ -83,7 +83,7 @@ export class MilieuService {
 
         this.authenticated = true;
       }else{
-        console.log(result.json().message);
+        //console.log(result.json().message);
         this.authenticated = true;
         this.admin = true;
       }
@@ -176,7 +176,7 @@ export class MilieuService {
   create(item: any): Promise<any> {
     const url = `${this.api}/${this.config.name}`;
     let something = JSON.stringify({ 'jem' : item }); // this need to change to data
-    console.log(something);
+    //console.log(something);
     return this.http
       .post(url, something, { headers: this.headers })
       .toPromise()
@@ -250,6 +250,8 @@ export class MilieuService {
 
     let itemsFiltered: {}[];
     this.currentItems.subscribe(items => {
+
+      //console.log(items);
 
       itemsFiltered = items;
 
@@ -349,6 +351,48 @@ export class MilieuService {
     string = string.toLowerCase();
 
     return string;
+  }
+
+
+  routeConfig(route) {
+
+    route.params.subscribe(params => {
+
+      this.config.fields.forEach(field => {
+
+        field.values.forEach(data=>{
+          data.filtered = false;
+        })
+
+        if (params[field.name]) {
+
+
+
+          let param = this.unUrlify(params[field.name]);
+          field.values[field.values.findIndex(value => value.name.toLowerCase() === param)].filtered = true;
+        }
+        this.filter();
+        //console.log(field);
+      });
+    });
+
+    route.queryParams.subscribe(params => {
+
+      if (params['dash-board'] ) {
+        this.dashBoard = true;
+      }
+
+      this.config.fields.forEach(field => {
+        if (params[field.name]) {
+          let values: string[] = params[field.name].split(',');
+          values.forEach(value => {
+            let param = this.unUrlify(value);
+            field.values[field.values.findIndex(value => value.name.toLowerCase() === param)].filtered = true;
+          });
+        }
+      });
+    });
+
   }
 }
 

@@ -3,15 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { FilterVueComponent } from './filter-vue.component';
-import { IntroVueComponent } from './intro-vue.component';
-import { ItemControlsComponent } from './item-controls.component';
-import { ModalControlsComponent } from './modal-controls.component';
-import { ModalVueComponent } from './modal-vue.component';
-import { SizedItemsVueControlsComponent } from './sized-items-vue-controls.component';
-import { VueControlsComponent } from './vue-controls.component';
+import { FilterVueComponent, IntroVueComponent, ItemControlsComponent, ItemSearchComponent, ModalControlsComponent, SizedItemsVueControlsComponent,  VueControlsComponent, ViewPortComponent } from './core';
+import { MilieuModalComponent, ModalVueComponent } from './modals'   ;
 
-import { LogInVueComponent } from './log-in-vue.component';
 
 @NgModule({
   imports: [
@@ -23,21 +17,25 @@ import { LogInVueComponent } from './log-in-vue.component';
     FilterVueComponent,
     IntroVueComponent,
     ItemControlsComponent,
-    LogInVueComponent,
+    ItemSearchComponent,
+    MilieuModalComponent,
     ModalControlsComponent,
     ModalVueComponent,
     SizedItemsVueControlsComponent,
+    ViewPortComponent,
     VueControlsComponent
   ],
   exports: [
     FilterVueComponent,
     IntroVueComponent,
     ItemControlsComponent,
-    LogInVueComponent,
+    ItemSearchComponent,
+    MilieuModalComponent,
     ModalControlsComponent,
     ModalVueComponent,
     SizedItemsVueControlsComponent,
-    VueControlsComponent
+    VueControlsComponent,
+    ViewPortComponent
   ]
 })
 export class MilieuModule { }

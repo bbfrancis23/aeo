@@ -13,3 +13,17 @@ export const fadeInOutAnimation: AnimationEntryMetadata =
           animate('1000ms ease-in-out', style({ opacity:0 }))
     ])
   ]);
+
+export const modalVueFadeInOut: AnimationEntryMetadata =
+
+  trigger('modalVueFadeInOut', [
+    state('true', style({transform: 'translateX(0)'})),
+    transition('false => true', [
+      style({ opacity:0 }),
+      animate('1000ms linear', style({ opacity:1 }))
+    ]),
+    transition('true => false', [
+      style({ opacity:0 }),
+      animate('1000ms linear', style({ opacity:1 }))
+    ])
+  ]);
