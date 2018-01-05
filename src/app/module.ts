@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MilieuModule } from './milieu/module';
+import { JemsModule} from './jems/module';
 import { NgModule } from '@angular/core';
 
 
@@ -17,10 +18,9 @@ import { AccountMilieuComponent } from './account/account-milieu.component';
 import { AccountVueComponent } from './account/account-vue.component';
 import { AccountService } from './account/account.service';
 
-import { JemAddVueComponent } from './jems/jem-add-vue.component';
+
 import { JemMilieuComponent } from './jems/jem-milieu.component';
-import { JemListVueComponent } from './jems/jem-list-vue.component';
-import { JemUpdateVueComponent } from './jems/jem-update-vue.component';
+import { JemListVueComponent } from './jems/core';
 import { JemCollectionVueComponent } from './jems/jem-collection-vue.component';
 import { JemComponent } from './jems/jem.component';
 import { JemSmallComponent } from './jems/jem-sm.component';
@@ -37,9 +37,8 @@ import { ManageJemComponent } from './jems/manage';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    MilieuModule
-  ],
-  exports:[
+    MilieuModule,
+    JemsModule
   ],
   declarations: [
     AppFooterComponent,
@@ -51,16 +50,12 @@ import { ManageJemComponent } from './jems/manage';
     AccountMilieuComponent,
     AccountVueComponent,
     CreateAccountVueComponent,
-
-    JemAddVueComponent,
     JemCollectionVueComponent,
-    JemComponent,
-    JemListVueComponent,
     JemMilieuComponent,
-    JemSmallComponent,
-    JemUpdateVueComponent,
     ManageJemComponent
   ],
+
+  exports:[ ],
   providers: [
     JemService, AccountService
   ],

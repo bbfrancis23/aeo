@@ -27,3 +27,21 @@ export const modalVueFadeInOut: AnimationEntryMetadata =
       animate('1000ms linear', style({ opacity:1 }))
     ])
   ]);
+
+export const flyInOut: AnimationEntryMetadata =
+  trigger('flyInOut', [
+    state('in', style({opacity: 1, transform: 'translateX(0)'})),
+    transition('void => *', [
+      style({
+        opacity: 0,
+        transform: 'translateX(-100%)'
+      }),
+      animate('1s ease-in')
+    ]),
+    transition('* => void', [
+      animate('1s 0.1s ease-out', style({
+        opacity: 0,
+        transform: 'translateX(100%)'
+      }))
+    ])
+  ])

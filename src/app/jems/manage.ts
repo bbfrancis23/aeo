@@ -30,7 +30,7 @@ import { Jem} from './jem';
               <div class="form-group">
                 <label for="tech" class="sr-only">Tech</label>
                 <select class="form-control" [(ngModel)]="model.tech" formControlName="tech">
-                  <option *ngFor="let value of jemService.config.fields[0].values">{{value.name}}
+                  <option class="grot" *ngFor="let value of jemService.config.fields[0].values">{{value.name}}
                 </select>
               </div>
             </div>
@@ -59,7 +59,7 @@ import { Jem} from './jem';
               <aside *ngIf="code.errors.maxLength">Code must not be over {{CODE.maxLength}} characters.</aside>
             </div>
           </div>
-          <button type="submit" class="btn btn-outline-success float-right" [disabled]="jemForm.invalid" >Create Jem</button>
+          <button type="submit" class="btn btn-outline-success float-right" [disabled]="jemForm.invalid" >{{manageType}} Jem</button>
         </form>
         <div class="loader" *ngIf="submitted"></div>
         <div class="alert alert-success" *ngIf="message">{{message}}</div>
@@ -75,15 +75,12 @@ export class ManageJemComponent extends MilieuVue implements OnInit {
   message = null;
   submitted = false;
   jemForm: FormGroup;
-  model: Jem = new Jem();
+  model: any = new Jem();
   readonly TITLE = {maxLength: 64};
   readonly DESC = {maxLength: 1024 };
   readonly CODE = {maxLength: 16384};
 
   ngOnInit(){
-
-    this.model.tech = this.jemService.config.fields[0].values[0].name;
-    this.model.type = this.jemService.config.fields[1].values[0].name;
 
     this.jemForm = new FormGroup({
       'title' : new FormControl('',[Validators.required, Validators.maxLength(this.TITLE.maxLength)]),
@@ -92,23 +89,32 @@ export class ManageJemComponent extends MilieuVue implements OnInit {
       'desc' : new FormControl('',[Validators.required, Validators.maxLength(this.DESC.maxLength)]),
       'code' : new FormControl('',[Validators.maxLength(this.CODE.maxLength)])
     });
+
+
+    if(this.manageType === 'Add'){
+      this.model.tech = this.jemService.config.fields[0].values[0].name;
+      this.model.type = this.jemService.config.fields[1].values[0].name;
+
+
+    }else{
+      this.jemService.currentSelectedItem.subscribe(selectedItem => { this.model = selectedItem; });
+    }
+
   }
 
   onSubmit(){
-    if(this.manageType === 'Add'){
+    //if(this.manageType === 'Add'){
       this.submitted = true;
       this.jemService.create(this.model).then((data)=>{
         this.jemService.refresh();
-        this.message = "Jem inserted into the database.";
+        this.message = "The Database was updated";
         this.submitted = false;
-
         setTimeout( () =>{
-
-          this.resetForm();
+          if(this.manageType === 'Add'){ this.resetForm(); }
           this.message = null;
         }, 3000);
       });
-    }
+    //}
   }
 
   resetForm(){

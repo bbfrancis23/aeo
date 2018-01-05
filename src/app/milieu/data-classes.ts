@@ -2,7 +2,7 @@
 
 // FieldRaw converts to Field to make config files easier to understand for the user.
 
-export interface Config {
+export class Config {
   title: string ;
   name: string ;
   directory: string ; // Web Master will provide this.
@@ -15,12 +15,12 @@ export interface Config {
   fields?: Field[];
 }
 
-export interface Field {
+export class Field {
   name: string ;
-  values: any;  //[{ name: string, filtered: boolean }];
+  values =  [{ name: '', filtered: false }];
 }
 
-export interface FieldRaw {
+export class FieldRaw {
   name: string;
   values: string[];
 }

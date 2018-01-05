@@ -1,14 +1,10 @@
 // VARS
 
 @import "cards";
+@import "app-tags";
 
 @primary-color: #008080;
 @alt-color: #382920;
-
-@med-color:     #66b2b2;
-@light-color:   #b2d8d8;
-@complimentry-dark-color:  #b2a270;
-@complimentry-light-color: #dbd1b4;
 
 @primary-color-gradient: linear-gradient( 8deg, black 10% , @primary-color);
 
@@ -19,25 +15,19 @@
 @overlay-layer: 2;
 @overlay-content-layer: 3;
 @sticky-layer: 4;
-@modals-layer: 5;
-@modals-content-layer: 6;
+@dropdown-layer: 5;
+@modals-layer: 6;
+@modals-content-layer: 7;
 
 // ABSTRACT
 
-.item-select{
+.item-select(){
   background-color: lighten(@primary-color, 65%);
   color: black;
 }
 
-// GLOBALS
-
-// TAGS
-
-a.dropdown-item:hover{
-  .item-select;
-}
-
 // CLASSES
+
 .card{
   border-color: @primary-color;
 
@@ -48,13 +38,40 @@ a.dropdown-item:hover{
     background-color: @primary-color;
     color: white;
   }
-
-  .card-block{
-    padding: 1em;
-  }
+  .card-block{ padding: 1em }
 }
 
-// APP
+.material-icons{
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.sticky-top{
+  z-index: @sticky-layer;
+}
+
+// TAGS
+
+a.dropdown-item{ &:hover { .item-select } }
+
+a{ cursor: pointer; cursor: hand; }
+
+body{
+  margin: 0;
+  font-family: @regular-font;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #333;
+  overflow-x: hidden;
+}
+
+p:first-letter { text-transform:capitalize; font-family: @regular-font; }
+
+hr{
+  background-color: @primary-color;
+}
+
+// IDS
 
 #account-services-modal{
   .modal-mode{
@@ -66,7 +83,6 @@ a.dropdown-item:hover{
     overflow: auto;
     background-color: rgba(0,0,0,0.5);
   }
-
   .modal-content{
     margin: 5% auto;
     width: 70%;
@@ -75,162 +91,67 @@ a.dropdown-item:hover{
   }
 }
 
-app-header .navbar.fixed-top{
-
-  z-index: @modals-layer;
-  background: @primary-color-gradient;
-
-  .navbar-brand {
-    color: white;
-    font-family: @primary-font;
-    font-size: 150%;
-    font-weight: 800;
-  }
-
-  li.nav-item{
-
-    a.nav-link{
-      font-weight: 400;
-      color: white;
-
-      &:hover{ color: lighten(@alt-color, 40%); }
-    }
-
-    menu a.featured{
-      color: @primary-color;
-      font-weight: bold;
-    }
-  }
-
-  item-search{
-    margin-right: 5px;
-  }
-}
-
-app-content{
-  .view-port-container{
-
-    align-items: center;
-    color: #fff;
-    max-width:  960px;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    margin: auto;
-    text-align:  center;
-
-    .view-port-overlay{
-      background: #000;
-      z-index: @overlay-layer;
-      opacity: .75
-    }
-
-    .view-port-content{
-        z-index: @overlay-content-layer;
-    }
-
-    h1{
-      color: lighten(@alt-color, 40%);
-      font-family: @primary-font;
-      font-size: 400%;
-      font-weight: 800;
-    }
-
-    h2{
-      font-family: @primary-font;
-      font-size: 300%;
-      font-weight: 800;
-    }
-    img{
-      filter: brightness(80%);
-      transition: filter 2s;
-      &:hover{
-        filter: brightness(200%);
-      }
-    }
-  }
-}
-
-app-footer footer{
-
-  background: @primary-color-gradient;
-  color: white;
-  text-align: center;
-  padding: 50px 5px;
-  font-size: 125%;
-  font-weight: bold;
-
-  .row{margin: 25px;}
-
-  img{
-    filter: grayscale(100%);
-    transition: filter 2s;
-    height: 35px;
-    margin: 1px;
-    &:hover{
-      filter: grayscale(0%);
-    }
-  }
-}
-
-// ***** JEM ***** //
+// ***** MILIEU ***** //
 
 // ABSTRACT //
 
-// All Jem Vue Cards Need a top and bottom margin, but not all cards need it.
-
-.jem-card{
-  margin-top: 1em;
-  margin-bottom: 1em;
+.control-position(){
+  position: absolute;
+  top: 0px;
+  right: 5px;
 }
 
-// IDS //
-
-// TAGS //
-
-manage-jem{
-  .card{
-    .jem-card;
-  }
-
-  .alert{
-    margin-top: 1em;
-  }
-}
-
-// Where a vue is from milieu without inheritance we use an ID to uniquly Identi
-
-#jem-filter-vue{
-  .card{
-    .jem-card;
-  }
-}
-
-#jem-intro-vue{
-
-  .card{
-    .jem-card;
-
-    font-family: @primary-font;
-
-    h4{
-      color: @primary-color;
-      font-weight: bolder;
-    }
-    p{
-      color: black;
-      font-family: @alt-font;
-    }
-  }
-}
-
-// ***** MILIEU ***** //
-
-// TAGS //
-
-modal-controls{
+.control(){
   .control-position;
   color: white;
+  &:hover{ color: black }
 }
+
+// TAGS //
+
+.jem-milieu{
+  background-color: #e3e3e3;
+
+  .sticky-top{
+    padding-top: 56px;
+    background-color: @primary-color;
+
+    .row{ padding-top: 16px; padding-bottom: 7px; }
+
+    h1{
+      color: white;
+      font-size: 200%;
+      font-family: @regular-font;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .btn-group .btn{
+      background-color: rgba(0,0,0, .0);
+      color: white;
+      border: 1px solid white;
+
+      &:hover{
+        background-color: white;
+        color: @primary-color;
+        filter: brightness(150%);
+      }
+    }
+    .btn-group .btn.active{
+      background-color: white;
+      color: @primary-color;
+
+      &:hover{ opacity: .90 }
+    }
+  }
+}
+
+modal-controls, vue-controls, item-controls, sized-items-vue-controls{
+  .control;
+
+  .material-icons{ font-size: 1em }
+}
+
+modal-controls { .material-icons{ font-size: 1em } }
 
 modal-vue{
   .modal-mode{
@@ -242,31 +163,12 @@ modal-vue{
     overflow: auto;
     background-color: rgba(0,0,0,0.5);
   }
-
   .modal-vue-content{
     margin: 5% auto;
     width: 70%;
     z-index: @modals-content-layer;
     box-shadow: 10px 10px 1px 0 rgba(0,0,0,0.3)
   }
-}
-
-
-vue-controls{
-    .control-position;
-    color: white;
-
-    &:hover{
-      color: black;
-    }
-}
-
-// ABSTRACT //
-
-.control-position(){
-  position: absolute;
-  top: 0px;
-  right: 5px;
 }
 
 // IDS //
@@ -278,123 +180,104 @@ vue-controls{
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
   }
-
   .search-result{
     width:250px;
     position: absolute;
-    z-index: 99999;
+    z-index: @dropdown-layer;
     max-height: 350px;
     overflow-y: auto;
+    border:  1px ridge #d3d3d3;
 
     a.dropdown-item{
       background-color: white;
       color: black;
-
-      &:hover{
-        .item-select;
-      }
+      &:hover{ .item-select }
     }
   }
 }
 
 // CLASSES //
 
-.item-controls .material-icons, .vue-controls .material-icons, .vue-controls-dk .material-icons, .copy-control .material-icons,{
-  font-size: 1em;
-}
+.copy-control{ .material-icons{ font-size: 1em; } }
 
-.vue-controls-dk, .item-controls{
-  .control-position;
+// ***** JEM ***** //
 
-  &:hover{
-    color: black;
+// ABSTRACT //
+
+.jem-card(){
+  .card{
+    margin-top: 1em;
+    margin-bottom: 1em;
+
+    .alert{ margin-top: 1em }
   }
 }
 
-
-
-
-
-
-
-/* OLD */
-//***** TAGS *****//
-
-a{
-  cursor: pointer; cursor: hand;
-}
-
-body{
-  margin: 0;
-  font-family: @regular-font;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #333;
-  overflow-x: hidden;
-}
-
-p:first-letter {
-  text-transform:capitalize;
-  font-family: @regular-font;
-}
-
-hr{
-  background-color: @complimentry-light-color;
-}
-
-//***** ABSTRACT CLASSES *****//
-
-
-
-
-
-
-.jem-milieu{
-  .sticky-top{
-    padding-top: 56px;
-    background-color: @complimentry-light-color;
-
-    .row{
-      padding-top: 16px;
-      padding-bottom: 7px;
-    }
-
-    h1{
-      color: black;
-      font-size: 200%;
-      font-family: @alt-font;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-
-    .btn-group .btn{
-      background-color: rgba(0,0,0, .0);
-      color: grey;
-      border: 1px solid grey;
-
-      &:hover{
-        .btn-group .btn.active;
-        font-weight: 600;
-      }
-    }
-
-    .btn-group .btn.active{
-      background-color: black;
-      color: @complimentry-dark-color;
-      border: 1px solid @complimentry-dark-color;
-    }
-  }
-}
+// CLASSES //
 
 .copy-control{
   .control-position;
   color: white;
+
+  &:hover{ color: lighten(@primary-color, 50%) }
 }
 
-.copy-control:hover{
-  &:extend(.copy-control);
-  color: #00aaff;
+// TAGS //
+
+manage-jem, #jem-filter-vue{ .jem-card }
+
+jem-list-vue{
+  .jem-card;
+
+  .card-header{ .jem-card-active-header; }
 }
+
+jem {
+  item-controls{
+    &:extend(.control);
+    color: black;
+
+    &:hover{ color: grey }
+  }
+}
+
+// IDS //
+
+#jem-intro-vue{
+  .card{
+    .jem-card;
+    font-family: @primary-font;
+
+    h4{ color: @primary-color; font-weight: bolder; }
+
+    p{ color: black; font-family: @alt-font; }
+  }
+}
+
+// ANGULAR CLASSES //
+
+.ng-valid[required], .ng-valid.required  {
+border: 2px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border: 2px solid #a94442; /* red */
+}
+
+.ng-untouched:not(form)  {
+  border: 1px solid gray; /* red */
+}
+
+
+/* OLD */
+
+
+
+
+
+
+
+
 
 
 
@@ -417,22 +300,6 @@ hr{
 
 
 
-.ng-valid[required], .ng-valid.required  {
-border: 2px solid #42A948; /* green */
-}
-
-.ng-invalid:not(form)  {
-  border: 2px solid #a94442; /* red */
-}
-
-.ng-untouched:not(form)  {
-  border: 1px solid gray; /* red */
-}
-
-.material-icons{
-  display: inline-flex;
-  vertical-align: middle;
-}
 
 
 
@@ -443,22 +310,15 @@ border: 2px solid #42A948; /* green */
 
 
 
-.sticky-top{
-  z-index: @sticky-layer;
-}
 
 
 
 
 
-.vue-controls{
-    .control-position;
-    color: white;
-}
 
-.vue-controls:hover{
-  color: black;
-}
+
+
+
 
 
 
@@ -480,22 +340,3 @@ border: 2px solid #42A948; /* green */
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-*{
-  box-sizing: border-box;
-}
-*/

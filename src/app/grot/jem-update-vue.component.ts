@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+/*import { Component, Input, OnInit } from '@angular/core';
 import { MilieuVue } from '../milieu/core';
 import { MilieuService } from '../milieu/milieu.service';
 import { JemService } from './jem.service';
@@ -48,3 +48,4 @@ export class JemUpdateVueComponent extends MilieuVue implements OnInit {
   }
 
 }
+*/

@@ -1,4 +1,4 @@
-import { Config } from '../milieu/interfaces';
+import { Config } from '../milieu/data-classes';
 
 'use strict';
 

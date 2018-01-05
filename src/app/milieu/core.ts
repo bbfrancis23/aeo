@@ -1,22 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-
-import { ActivatedRoute } from "@angular/router";
-import { Subject }    from 'rxjs/Subject';
-
 import { fadeInOutAnimation, modalVueFadeInOut } from './animations';
-
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
 import { MilieuService } from './milieu.service';
-
 import { MilieuModalComponent, ModalVueComponent} from './modals';
-
+import { Subject } from 'rxjs/Subject';
 
 'use strict';
 
 export abstract class MilieuVue {
-  private show = true;
+  show = true;
   @ViewChild(ModalVueComponent) modalChild: ModalVueComponent;
 }
-
 
 @Component({
   selector: 'filter-vue',
@@ -39,8 +33,7 @@ export abstract class MilieuVue {
         </div>
       </div>
     </modal-vue>`,
-    animations: [ fadeInOutAnimation]
-
+  animations: [ fadeInOutAnimation]
 })
 export class FilterVueComponent extends MilieuVue implements OnInit {
 
@@ -72,7 +65,7 @@ export class FilterVueComponent extends MilieuVue implements OnInit {
           </div>
         </div>
     </modal-vue>`,
-    animations: [ fadeInOutAnimation ]
+  animations: [ fadeInOutAnimation ]
 })
 export class IntroVueComponent extends MilieuVue {
   @Input() milieuService: any;
@@ -81,7 +74,7 @@ export class IntroVueComponent extends MilieuVue {
 @Component({
   selector: 'item-controls',
   template: `
-    <div class="item-controls dropdown">
+    <div class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown"></a>
         <div class="dropdown-menu dropdown-menu-right" >
           <a class="dropdown-item" (click)="milieuService.delete(item._id)" ><div class="material-icons">delete_forever</div>Delete</a>
@@ -100,10 +93,9 @@ export class ItemControlsComponent {
   selector: 'item-search',
   template: `
     <input #searchBox (keyup)="search(searchBox.value)" class="form-control" type="text" placeholder="Search" aria-label="Search">
-      <div class='search-result' *ngIf='searchResults'>
+      <div class='search-result' *ngIf="searchResults.length > 0">
         <a *ngFor="let result of searchResults" class="dropdown-item" href="/{{result.link}}">{{result.title}}</a>
-      </div>
-  `
+      </div>`
 })
 export class ItemSearchComponent implements OnInit{
   searchResults = [];
@@ -128,18 +120,22 @@ export class ItemSearchComponent implements OnInit{
         }
       });
     });
+
+    console.log(this.searchResults);
   }
 
   search(string: ''){
     this.searchResults = [];
     if(string.length > 0){
-    this.keyWords.forEach((word)=>{
-      let regEx = new RegExp(string,'i')
-      if(word['title'].match(regEx)){
-        this.searchResults.push(word);
-      }
-    });
-  }
+      this.keyWords.forEach((word)=>{
+        let regEx = new RegExp(string,'i')
+        if(word['title'].match(regEx)){
+          this.searchResults.push(word);
+        }
+      });
+    }
+
+    console.log(this.searchResults.length);
   }
 }
 
@@ -160,9 +156,6 @@ export abstract class Milieu {
   }
 }
 
-
-
-
 @Component({
   selector: 'view-port',
   template: `
@@ -175,7 +168,7 @@ export abstract class Milieu {
       </div>
       <div class="view-port-overlay"></div>
     </div> `,
-    styles: [`
+  styles: [`
       .view-port-container{
         height: 100vh;
         display: flex;
@@ -202,9 +195,7 @@ export abstract class Milieu {
       }
     `]
 })
-export class ViewPortComponent{
-
-}
+export class ViewPortComponent{ }
 
 
 //***** VUE CONTROLS & EXTENDS *****/
@@ -234,14 +225,14 @@ export class VueControlsComponent {
 
 @Component({
   selector: 'modal-controls',
-  template: `<div class="vue-controls"><a class="material-icons" ><div class="close-modal">clear</div></a></div>`
+  template: `<div><a class="material-icons" ><div class="close-modal">clear</div></a></div>`
 })
 export class ModalControlsComponent extends VueControlsComponent{}
 
 @Component({
   selector: 'sized-items-vue-controls',
   template: `
-    <div class="vue-controls dropdown" >
+    <div class="dropdown" >
       <a class="dropdown-toggle" data-toggle="dropdown"></a>
       <div class="dropdown-menu dropdown-menu-right" >
         <a class="dropdown-item" (click)="hideVueEvent.emit()"><div class="material-icons">remove_circle</div> Hide</a>

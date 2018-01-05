@@ -30,7 +30,8 @@
 
 .jem-card-active-header(){
   &:extend(.jem-card-header);
-  background-color: @complimentry-dark-color;
+  background-color: @primary-color;
+  filter: brightness(150%);
 }
 
 // COMPONENTS //
@@ -103,12 +104,7 @@ create-account-vue{
 
 
 
-jem-list-vue{
-  .card{
-    .jem-card;
-    .card-header{ .jem-card-active-header;}
-  }
-}
+
 
 jem-add-vue{
   .card{

@@ -1,0 +1,89 @@
+app-content{
+  .view-port-container{
+
+    align-items: center;
+    color: #fff;
+    max-width:  960px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: auto;
+    text-align:  center;
+
+    .view-port-overlay{
+      background: #000;
+      z-index: @overlay-layer;
+      opacity: .75
+    }
+    .view-port-content{
+        z-index: @overlay-content-layer;
+    }
+    h1{
+      color: lighten(@alt-color, 40%);
+      font-family: @primary-font;
+      font-size: 400%;
+      font-weight: 800;
+    }
+    h2{
+      font-family: @primary-font;
+      font-size: 300%;
+      font-weight: 800;
+    }
+    img{
+      filter: brightness(80%);
+      transition: filter 2s;
+      &:hover{
+        filter: brightness(200%);
+      }
+    }
+  }
+}
+
+app-footer footer{
+  background: @primary-color-gradient;
+  color: white;
+  text-align: center;
+  padding: 50px 5px;
+  font-size: 125%;
+  font-weight: bold;
+
+  .row{margin: 25px;}
+
+  img{
+    filter: grayscale(100%);
+    transition: filter 2s;
+    height: 35px;
+    margin: 1px;
+    &:hover{
+      filter: grayscale(0%);
+    }
+  }
+}
+
+app-header .navbar.fixed-top{
+
+  z-index: @modals-layer;
+  background: @primary-color-gradient;
+
+  .navbar-brand {
+    color: white;
+    font-family: @primary-font;
+    font-size: 150%;
+    font-weight: 800;
+  }
+  li.nav-item{
+
+    a.nav-link{
+      font-weight: 400;
+      color: white;
+      transition: background-color .75s;
+      border-radius: 2px;
+
+      &:hover{ background-color: @primary-color; }
+    }
+    menu a.featured{
+      color: @primary-color;
+      font-weight: bold;
+    }
+  }
+  item-search{ margin-right: 5px; }
+}

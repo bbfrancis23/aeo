@@ -1,7 +1,6 @@
 import { ActivatedRoute } from "@angular/router";
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Config } from './interfaces';
-import { Field } from './interfaces';
+import { Config, Field } from './data-classes';
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import { Location } from '@angular/common';

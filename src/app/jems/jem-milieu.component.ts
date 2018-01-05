@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 
 import { Milieu } from '../milieu/core';
@@ -9,11 +9,9 @@ import { IntroVueComponent } from '../milieu/core';
 
 import { JEM_CONFIG } from './jem-config';
 import { Jem } from './jem';
-import { JemAddVueComponent } from './jem-add-vue.component';
 import { JemCollectionVueComponent } from './jem-collection-vue.component';
-import { JemListVueComponent } from './jem-list-vue.component';
+import { JemListVueComponent } from './core';
 import { JemService } from './jem.service';
-import { JemUpdateVueComponent } from './jem-update-vue.component';
 import { ManageJemComponent } from './manage';
 
 
@@ -47,9 +45,8 @@ export class JemMilieuComponent extends Milieu implements OnInit {
   }
 
   @ViewChild(JemListVueComponent) listVue;
-  @ViewChild(ManageJemComponent) addVue;
-  //@ViewChild(JemUpdateVueComponent) updateVue;
-  //@ViewChild(JemCollectionVueComponent) collectionVue;
+  @ViewChild('manageAdd') addVue: ManageJemComponent;
+  @ViewChild('manageUpdate') updateVue: ManageJemComponent;
   @ViewChild(IntroVueComponent) introVue;
   @ViewChild(FilterVueComponent) filterVue;
 
@@ -57,24 +54,17 @@ export class JemMilieuComponent extends Milieu implements OnInit {
 
   constructor(protected route: ActivatedRoute, protected jemService: JemService) {
     super(route, jemService);
-    jemService.routeConfig(this.route);
-
-    //this.routeConfig(jemService);
-
-    //console.log('jem milieu constructor called');
+    jemService.routeConfig(route);
     jemService.refresh();
   }
 
 
   ngOnInit() {
 
-    //this.jemService.filter();
-
 
     if (!this.jemService.dashBoard) {
       this.addVue.show = false;
-      //this.updateVue.show = false;
-      //this.collectionVue.show = false;
+      this.updateVue.show = false;
     }
 
 
@@ -82,8 +72,7 @@ export class JemMilieuComponent extends Milieu implements OnInit {
     this.columns = [
       [this.introVue, this.filterVue],
       [this.listVue],
-      [this.addVue]];
-      //[this.addVue, this.updateVue, this.collectionVue]];
+      [this.addVue,this.updateVue]];
   }
 
   toggleDashBoard() {
@@ -91,13 +80,11 @@ export class JemMilieuComponent extends Milieu implements OnInit {
     this.jemService.dashBoard = !this.jemService.dashBoard;
 
     if (this.jemService.dashBoard) {
-      //this.updateVue.show = true;
+      this.updateVue.show = true;
       this.addVue.show = true;
-      //this.collectionVue.show = true;
     } else {
-      //this.updateVue.show = false;
+      this.updateVue.show = false;
       this.addVue.show = false;
-      //this.collectionVue.show = false;
     }
 
   }

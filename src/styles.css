@@ -8,7 +8,7 @@ account-services .card {
   border-color: #008080;
   position: fixed;
   right: 50px;
-  z-index: 6;
+  z-index: 7;
   width: 250px;
   box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
 }
@@ -16,7 +16,7 @@ app-log-out .card {
   border-color: #008080;
   position: fixed;
   right: 50px;
-  z-index: 6;
+  z-index: 7;
   width: 250px;
   box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
 }
@@ -36,18 +36,17 @@ account-vue .card-block {
 create-account-vue .card {
   border-color: #008080;
 }
-jem-list-vue .card {
-  border-color: #008080;
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-jem-list-vue .card .card-header {
-  background-color: #b2a270;
-}
 jem-add-vue .card {
   border-color: #008080;
   margin-top: 1em;
   margin-bottom: 1em;
+}
+jem-add-vue .card .card {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+jem-add-vue .card .card .alert {
+  margin-top: 1em;
 }
 jem-add-vue .card .card-header {
   background-color: #008080;
@@ -58,71 +57,16 @@ jem-update-vue .card {
   margin-top: 1em;
   margin-bottom: 1em;
 }
+jem-update-vue .card .card {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+jem-update-vue .card .card .alert {
+  margin-top: 1em;
+}
 jem-update-vue .card .card-header {
   background-color: #008080;
   color: white;
-}
-.item-select {
-  background-color: #cdffff;
-  color: black;
-}
-a.dropdown-item:hover {
-  background-color: #cdffff;
-  color: black;
-}
-.card {
-  border-color: #008080;
-}
-.card .card-header {
-  font-size: 150%;
-  font-weight: 600;
-  font-family: Helvetica;
-  background-color: #008080;
-  color: white;
-}
-.card .card-block {
-  padding: 1em;
-}
-#account-services-modal .modal-mode {
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  position: fixed;
-  z-index: 5;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-#account-services-modal .modal-content {
-  margin: 5% auto;
-  width: 70%;
-  z-index: 6;
-  box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
-}
-app-header .navbar.fixed-top {
-  z-index: 5;
-  background: linear-gradient(8deg, black 10%, #008080);
-}
-app-header .navbar.fixed-top .navbar-brand {
-  color: white;
-  font-family: "Montserrat", sans-serif;
-  font-size: 150%;
-  font-weight: 800;
-}
-app-header .navbar.fixed-top li.nav-item a.nav-link {
-  font-weight: 400;
-  color: white;
-}
-app-header .navbar.fixed-top li.nav-item a.nav-link:hover {
-  color: #b08b74;
-}
-app-header .navbar.fixed-top li.nav-item menu a.featured {
-  color: #008080;
-  font-weight: bold;
-}
-app-header .navbar.fixed-top item-search {
-  margin-right: 5px;
 }
 app-content .view-port-container {
   align-items: center;
@@ -179,108 +123,56 @@ app-footer footer img {
 app-footer footer img:hover {
   filter: grayscale(0%);
 }
-.jem-card {
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-manage-jem .card {
-  border-color: #008080;
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-manage-jem .alert {
-  margin-top: 1em;
-}
-#jem-filter-vue .card {
-  border-color: #008080;
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-#jem-intro-vue .card {
-  border-color: #008080;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  font-family: "Montserrat", sans-serif;
-}
-#jem-intro-vue .card h4 {
-  color: #008080;
-  font-weight: bolder;
-}
-#jem-intro-vue .card p {
-  color: black;
-  font-family: Helvetica;
-}
-modal-controls {
-  position: absolute;
-  top: 0px;
-  right: 5px;
-  color: white;
-}
-modal-vue .modal-mode {
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  position: fixed;
-  z-index: 5;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-modal-vue .modal-vue-content {
-  margin: 5% auto;
-  width: 70%;
+app-header .navbar.fixed-top {
   z-index: 6;
-  box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
+  background: linear-gradient(8deg, black 10%, #008080);
 }
-vue-controls {
-  position: absolute;
-  top: 0px;
-  right: 5px;
+app-header .navbar.fixed-top .navbar-brand {
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-size: 150%;
+  font-weight: 800;
+}
+app-header .navbar.fixed-top li.nav-item a.nav-link {
+  font-weight: 400;
+  color: white;
+  transition: background-color 0.75s;
+  border-radius: 2px;
+}
+app-header .navbar.fixed-top li.nav-item a.nav-link:hover {
+  background-color: #008080;
+}
+app-header .navbar.fixed-top li.nav-item menu a.featured {
+  color: #008080;
+  font-weight: bold;
+}
+app-header .navbar.fixed-top item-search {
+  margin-right: 5px;
+}
+.card {
+  border-color: #008080;
+}
+.card .card-header {
+  font-size: 150%;
+  font-weight: 600;
+  font-family: Helvetica;
+  background-color: #008080;
   color: white;
 }
-vue-controls:hover {
-  color: black;
+.card .card-block {
+  padding: 1em;
 }
-#nav-search {
-  width: 250px;
+.material-icons {
+  display: inline-flex;
+  vertical-align: middle;
 }
-#nav-search input {
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+.sticky-top {
+  z-index: 4;
 }
-#nav-search .search-result {
-  width: 250px;
-  position: absolute;
-  z-index: 99999;
-  max-height: 350px;
-  overflow-y: auto;
-}
-#nav-search .search-result a.dropdown-item {
-  background-color: white;
-  color: black;
-}
-#nav-search .search-result a.dropdown-item:hover {
+a.dropdown-item:hover {
   background-color: #cdffff;
   color: black;
 }
-.item-controls .material-icons,
-.vue-controls .material-icons,
-.vue-controls-dk .material-icons,
-.copy-control .material-icons {
-  font-size: 1em;
-}
-.vue-controls-dk,
-.item-controls {
-  position: absolute;
-  top: 0px;
-  right: 5px;
-}
-.vue-controls-dk:hover,
-.item-controls:hover {
-  color: black;
-}
-/* OLD */
 a {
   cursor: pointer;
   cursor: hand;
@@ -298,57 +190,193 @@ p:first-letter {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 hr {
-  background-color: #dbd1b4;
+  background-color: #008080;
+}
+#account-services-modal .modal-mode {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: fixed;
+  z-index: 6;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#account-services-modal .modal-content {
+  margin: 5% auto;
+  width: 70%;
+  z-index: 7;
+  box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
+}
+.jem-milieu {
+  background-color: #e3e3e3;
 }
 .jem-milieu .sticky-top {
   padding-top: 56px;
-  background-color: #dbd1b4;
+  background-color: #008080;
 }
 .jem-milieu .sticky-top .row {
   padding-top: 16px;
   padding-bottom: 7px;
 }
 .jem-milieu .sticky-top h1 {
-  color: black;
+  color: white;
   font-size: 200%;
-  font-family: Helvetica;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
 }
 .jem-milieu .sticky-top .btn-group .btn {
   background-color: rgba(0, 0, 0, 0);
-  color: grey;
-  border: 1px solid grey;
+  color: white;
+  border: 1px solid white;
 }
 .jem-milieu .sticky-top .btn-group .btn:hover {
-  background-color: black;
-  color: #b2a270;
-  border: 1px solid #b2a270;
-  font-weight: 600;
+  background-color: white;
+  color: #008080;
+  filter: brightness(150%);
 }
 .jem-milieu .sticky-top .btn-group .btn.active {
-  background-color: black;
-  color: #b2a270;
-  border: 1px solid #b2a270;
+  background-color: white;
+  color: #008080;
 }
-.copy-control,
-.copy-control:hover {
+.jem-milieu .sticky-top .btn-group .btn.active:hover {
+  opacity: 0.9;
+}
+modal-controls,
+vue-controls,
+item-controls,
+sized-items-vue-controls {
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  color: white;
+}
+modal-controls:hover,
+vue-controls:hover,
+item-controls:hover,
+sized-items-vue-controls:hover {
+  color: black;
+}
+modal-controls .material-icons,
+vue-controls .material-icons,
+item-controls .material-icons,
+sized-items-vue-controls .material-icons {
+  font-size: 1em;
+}
+modal-controls .material-icons {
+  font-size: 1em;
+}
+modal-vue .modal-mode {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: fixed;
+  z-index: 6;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+modal-vue .modal-vue-content {
+  margin: 5% auto;
+  width: 70%;
+  z-index: 7;
+  box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
+}
+#nav-search {
+  width: 250px;
+}
+#nav-search input {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+#nav-search .search-result {
+  width: 250px;
+  position: absolute;
+  z-index: 5;
+  max-height: 350px;
+  overflow-y: auto;
+  border: 1px ridge #d3d3d3;
+}
+#nav-search .search-result a.dropdown-item {
+  background-color: white;
+  color: black;
+}
+#nav-search .search-result a.dropdown-item:hover {
+  background-color: #cdffff;
+  color: black;
+}
+.copy-control .material-icons {
+  font-size: 1em;
+}
+.copy-control {
   position: absolute;
   top: 0px;
   right: 5px;
   color: white;
 }
 .copy-control:hover {
-  color: #00aaff;
+  color: #80ffff;
 }
-.field-name {
-  font-size: 120%;
+manage-jem,
+#jem-filter-vue {
+  border-color: #008080;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+manage-jem .card,
+#jem-filter-vue .card {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+manage-jem .card .alert,
+#jem-filter-vue .card .alert {
+  margin-top: 1em;
+}
+jem-list-vue {
+  border-color: #008080;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+jem-list-vue .card {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+jem-list-vue .card .alert {
+  margin-top: 1em;
+}
+jem-list-vue .card-header {
+  background-color: #008080;
+  filter: brightness(150%);
+}
+jem item-controls {
+  color: black;
+}
+jem item-controls:hover {
+  color: grey;
+}
+#jem-intro-vue .card {
+  border-color: #008080;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  font-family: "Montserrat", sans-serif;
+}
+#jem-intro-vue .card .card {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+#jem-intro-vue .card .card .alert {
+  margin-top: 1em;
+}
+#jem-intro-vue .card h4 {
+  color: #008080;
   font-weight: bolder;
-  padding: 10px;
 }
-.field {
-  font-size: 120%;
-  padding: 10px;
+#jem-intro-vue .card p {
+  color: black;
+  font-family: Helvetica;
 }
 .ng-valid[required],
 .ng-valid.required {
@@ -363,21 +391,15 @@ hr {
   border: 1px solid gray;
   /* red */
 }
-.material-icons {
-  display: inline-flex;
-  vertical-align: middle;
+/* OLD */
+.field-name {
+  font-size: 120%;
+  font-weight: bolder;
+  padding: 10px;
 }
-.sticky-top {
-  z-index: 4;
-}
-.vue-controls {
-  position: absolute;
-  top: 0px;
-  right: 5px;
-  color: white;
-}
-.vue-controls:hover {
-  color: black;
+.field {
+  font-size: 120%;
+  padding: 10px;
 }
 .loader {
   margin: 0 auto;
