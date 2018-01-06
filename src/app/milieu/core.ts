@@ -9,6 +9,8 @@ import { Subject } from 'rxjs/Subject';
 
 export abstract class MilieuVue {
   show = true;
+  modalOnlyMode = false;
+
   @ViewChild(ModalVueComponent) modalChild: ModalVueComponent;
 }
 
@@ -19,13 +21,14 @@ export abstract class MilieuVue {
       <div class="card"  [@fadeInOut]="'in'" *ngIf="show" >
         <div class="card-header">Filters</div>
         <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modalChild.modalMode=true" *ngIf="!modalChild.modalMode && milieuService.dashBoard"></vue-controls>
-        <modal-controls *ngIf="modalChild.modalMode"></modal-controls>
+        <modal-controls *ngIf="modalChild.modalMode || milieuService.tabletMode === true"></modal-controls>
         <div class="card-block" >
           <div class="form-group">
             <label for="title" class="sr-only">Title Search</label>
             <input type="text" class="form-control " id="title" placeholder="Title Search" #searchBox id="title-search-box" (keyup)="search(searchBox.value)">
           </div>
           <div *ngFor="let field of milieuService.config.fields">
+            {{milieuService.modalMode}}
             <hr>
             <b><p>{{field.name}}:</p></b>
             <div type="checkbox" *ngFor="let value of field.values" ><input type="checkbox" [(ngModel)]="value.filtered"  (change)="milieuService.filter('title',searchTerm)"> {{value.name}}</div>
@@ -78,7 +81,7 @@ export class IntroVueComponent extends MilieuVue {
         <a class="dropdown-toggle" data-toggle="dropdown"></a>
         <div class="dropdown-menu dropdown-menu-right" >
           <a class="dropdown-item" (click)="milieuService.delete(item._id)" ><div class="material-icons">delete_forever</div>Delete</a>
-          <a class="dropdown-item" (click)="milieuService.changeSelectedItem(this.item)"><div class="material-icons">create</div> Update</a>
+          <a class="dropdown-item update" (click)="milieuService.changeSelectedItem(this.item)"><div class="material-icons">create</div> Update</a>
           <!-- <a class="dropdown-item" ><div class="material-icons">favorite</div> Favorite</a> -->
         </div>
     </div>`

@@ -17,9 +17,14 @@ import { fadeInOutAnimation, modalVueFadeInOut } from './animations';
 export class MilieuModalComponent {
   modalMode = false;
 
+
   modalClick(e) {
-    if(e.target.className.search(/app-modal/) > -1  || e.target.className.search(/close-modal/) > -1){
+    //console.log(e);
+
+    if(e.target.className.search(/modal-mode/) > -1  || e.target.className.search(/close-modal/) > -1){
       this.modalMode = false;
+
+
     }
   }
 }

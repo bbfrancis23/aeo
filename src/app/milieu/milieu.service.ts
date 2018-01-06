@@ -24,6 +24,7 @@ export class MilieuService {
   admin = false;
   user = false;
   requireAuth = false;
+  tabletMode = false;
 
   //filterMode = false;
 
@@ -43,7 +44,12 @@ export class MilieuService {
   //private readonly itemSource = new BehaviorSubject<{}[]>([]);
   //readonly currentItem = this.itemSource.asObservable();
 
-  constructor(public route: ActivatedRoute, protected readonly http: Http, public readonly location: Location) { }
+  constructor(public route: ActivatedRoute, protected readonly http: Http, public readonly location: Location) {
+
+    if(window.innerWidth < 1000){
+      this.tabletMode = true;
+    }
+  }
 
   get dashBoard() { return this._dashBoard; }
 
@@ -77,14 +83,18 @@ export class MilieuService {
 
     this.http.get('api/session').toPromise().then(result => {
 
+      console.log(result);
+
       if(result.json().message === 'Admin'){
         this.admin = true;
 
         this.authenticated = true;
-      }else{
-        //console.log(result.json().message);
+      }else if (result.json().message === 'User'){
+        this.user = true;
         this.authenticated = true;
-        this.admin = true;
+
+      }else{
+        this.authenticated = false;
       }
     });
 

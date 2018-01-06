@@ -13,7 +13,7 @@ import { JemCollectionVueComponent } from './jem-collection-vue.component';
 import { JemListVueComponent } from './core';
 import { JemService } from './jem.service';
 import { ManageJemComponent } from './manage';
-
+import { MilieuModalComponent} from '../milieu/modals';
 
 'use strict';
 
@@ -51,6 +51,7 @@ export class JemMilieuComponent extends Milieu implements OnInit {
   @ViewChild(FilterVueComponent) filterVue;
 
 
+  @ViewChild(MilieuModalComponent) accountServices: MilieuModalComponent;
 
   constructor(protected route: ActivatedRoute, protected jemService: JemService) {
     super(route, jemService);
@@ -61,18 +62,26 @@ export class JemMilieuComponent extends Milieu implements OnInit {
 
   ngOnInit() {
 
+    console.log(this.jemService.tabletMode);
 
     if (!this.jemService.dashBoard) {
       this.addVue.show = false;
       this.updateVue.show = false;
     }
 
+    //if(this.jemService.tabletMode){
+    //  this.columns = [ [this.introVue], [this.listVue], [this.addVue,this.updateVue]];
+
+    //  this.filterVue.show = false;
+    //  this.filterVue.modalOnlyMode = true;
+
+    //}else{
+      this.columns = [ [this.introVue, this.filterVue], [this.listVue], [this.addVue,this.updateVue]];
+    //}
 
 
-    this.columns = [
-      [this.introVue, this.filterVue],
-      [this.listVue],
-      [this.addVue,this.updateVue]];
+    console.log(this.jemService);
+
   }
 
   toggleDashBoard() {
@@ -80,7 +89,7 @@ export class JemMilieuComponent extends Milieu implements OnInit {
     this.jemService.dashBoard = !this.jemService.dashBoard;
 
     if (this.jemService.dashBoard) {
-      this.updateVue.show = true;
+      //this.updateVue.show = true;
       this.addVue.show = true;
     } else {
       this.updateVue.show = false;
@@ -90,12 +99,18 @@ export class JemMilieuComponent extends Milieu implements OnInit {
   }
 
   toggleFilterVue(): void {
-    if (this.filterVue.show === true) {
-      this.filterVue.show = false
-    } else {
-      this.filterVue.show = true;
-      this.listVue.show = true;
-    }
+
+    //if(this.jemService.tabletMode){
+    //  this.filterVue.modalChild.modalMode = true;
+    //  this.filterVue.show =  true;
+    //}else{
+      if (this.filterVue.show === true) {
+        this.filterVue.show = false
+      } else {
+        this.filterVue.show = true;
+        this.listVue.show = true;
+      }
+    //}
   }
 
   toggleListVue(): void {
@@ -107,6 +122,13 @@ export class JemMilieuComponent extends Milieu implements OnInit {
     }
   }
 
+  clickCheck(e){
+    //console.log(e.target.className);
+    if(e.target.className.search('update') > -1){
+      this.updateVue.show = true;
+      this.updateVue.modalChild.modalMode = true;
+    }
+  }
 
 }
 /* Copyright AEO all rights reserved */
