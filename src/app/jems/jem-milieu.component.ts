@@ -9,7 +9,6 @@ import { IntroVueComponent } from '../milieu/core';
 
 import { JEM_CONFIG } from './jem-config';
 import { Jem } from './jem';
-import { JemCollectionVueComponent } from './jem-collection-vue.component';
 import { JemListVueComponent } from './core';
 import { JemService } from './jem.service';
 import { ManageJemComponent } from './manage';

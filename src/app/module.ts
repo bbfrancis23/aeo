@@ -21,7 +21,6 @@ import { AccountService } from './account/account.service';
 
 import { JemMilieuComponent } from './jems/jem-milieu.component';
 import { JemListVueComponent } from './jems/core';
-import { JemCollectionVueComponent } from './jems/jem-collection-vue.component';
 import { JemComponent } from './jems/jem.component';
 import { JemSmallComponent } from './jems/jem-sm.component';
 import { JemService } from './jems/jem.service';
@@ -50,7 +49,6 @@ import { ManageJemComponent } from './jems/manage';
     AccountMilieuComponent,
     AccountVueComponent,
     CreateAccountVueComponent,
-    JemCollectionVueComponent,
     JemMilieuComponent,
     ManageJemComponent
   ],
