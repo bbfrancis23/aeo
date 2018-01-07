@@ -7,7 +7,7 @@ import { MilieuService } from '../milieu/milieu.service';
 
 import { JemListVueComponent } from './core';
 import { JemService } from './jem.service';
-import { ManageJemComponent } from './manage';
+import { ManageJemComponent } from './core';
 
 'use strict';
 

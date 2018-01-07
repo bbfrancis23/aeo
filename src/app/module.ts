@@ -20,11 +20,10 @@ import { AccountService } from './account/account.service';
 
 
 import { JemMilieuComponent } from './jems/jem-milieu.component';
-import { JemListVueComponent } from './jems/core';
 import { JemComponent } from './jems/jem.component';
 import { JemSmallComponent } from './jems/jem-sm.component';
 import { JemService } from './jems/jem.service';
-import { ManageJemComponent } from './jems/manage';
+//import { ManageJemComponent } from './jems/core';
 
 
 @NgModule({
@@ -50,7 +49,7 @@ import { ManageJemComponent } from './jems/manage';
     AccountVueComponent,
     CreateAccountVueComponent,
     JemMilieuComponent,
-    ManageJemComponent
+    //ManageJemComponent
   ],
 
   exports:[ ],
