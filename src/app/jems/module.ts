@@ -1,13 +1,9 @@
-import { JemListVueComponent, ManageJemComponent } from './core';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MilieuModule } from '../milieu/module';
-
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { JemComponent } from './jem.component';
+import { JemListVueComponent, JemComponent, ManageJemComponent } from './core';
 import { JemMilieuComponent } from './jem-milieu.component';
+import { MilieuModule } from '../milieu/module';
 
 @NgModule({
   imports: [ CommonModule, MilieuModule, FormsModule, ReactiveFormsModule ],
