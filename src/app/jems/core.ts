@@ -25,11 +25,8 @@ import { fadeInOutAnimation, flyInOut } from '../milieu/animations';
           (modalVueEvent)="modalChild.modalMode=true;"
           (toggleItemSizeEvent)="showBig = !showBig" >
         </sized-items-vue-controls>
-        <div class="tile"  *ngIf="showBig"  [@flyInOut]="'in'">
-          <jem *ngFor="let jem of items; trackBy: trackByJem" [jem]="jem" [@flyInOut]="'in'" [jemService]="jemService"></jem>
-        </div>
-        <div class="tile" *ngIf="!showBig">
-          <jem-sm *ngFor="let jem of items; trackBy: trackByJem" [jem]="jem" [jemService]="jemService"></jem-sm>
+        <div class="tile">
+          <jem *ngFor="let jem of items; trackBy: trackByJem" [jem]="jem" [jemService]="jemService" [showBig]="showBig" ></jem>
         </div>
       </div>
     </modal-vue>`,

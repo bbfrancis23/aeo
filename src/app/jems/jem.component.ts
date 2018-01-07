@@ -8,11 +8,12 @@ import { JemService } from './jem.service';
 @Component({
   selector: 'jem',
   template: `
+
     <div  class="card mb-3"
         [ngClass]="{  'border-success': jem.type === 'Best Practices',
                       'border-danger': jem.type === 'Mistakes',
                       'border-info': jem.type === 'How to',
-                      'border-dark': jem.type === 'Style Guide'}">
+                      'border-dark': jem.type === 'Style Guide'}" *ngIf="showBig">
     <item-controls [item]="jem" *ngIf="jemService.dashBoard" [milieuService]="jemService"></item-controls>
     <div class="card-body">
       <h4 class="card-title">{{jem.title}}</h4>
@@ -33,15 +34,25 @@ import { JemService } from './jem.service';
         <div class="alert alert-success" *ngIf="contentCopied">Content Copied</div>
       </div>
     </div>
+  </div>
+  <div class="card p-1 text-white"
+    [ngClass]="{
+      'bg-success': jem.type === 'Best Practices',
+      'bg-danger': jem.type === 'Mistakes',
+      'bg-info': jem.type === 'How to',
+      'bg-dark': jem.type === 'Style Guide'}" style="margin-bottom: 5px" *ngIf="!showBig">
+    <item-controls [item]="jem" *ngIf="jemService.dashBoard" ></item-controls>
+      <p><b>{{jem.title}}: </b> {{jem.description}}</p>
+      <pre >{{jem.code}}</pre>
   </div>`
 })
 export class JemComponent {
 
+  @Input() showBig: boolean = true;
   contentCopied = false;
 
   @Input() jem: Jem;
   @Input() jemService: JemService;
-  constructor(protected data: MilieuService) { }
 
   copy(){
     let txt = document.createElement("textarea");

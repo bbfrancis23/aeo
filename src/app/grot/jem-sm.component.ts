@@ -1,6 +1,5 @@
-import { Component, Input } from '@angular/core';
+/*import { Component, Input } from '@angular/core';
 import { Jem } from './jem';
-import { MilieuService } from '../milieu/milieu.service';
 import { JemService } from './jem.service';
 
 "use strict";
@@ -23,6 +22,4 @@ export class JemSmallComponent {
 
   @Input() jem: Jem;
   @Input() jemService: JemService;
-
-  constructor(protected data: MilieuService) { }
-}
+}*/
