@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AccountService } from './account.service';
 import { MilieuService } from '../milieu/milieu.service';
 import { CreateAccountVueComponent } from './create-account-vue.component';
@@ -18,20 +18,11 @@ import { CreateAccountVueComponent } from './create-account-vue.component';
   </view-port>`,
   providers: [MilieuService]
 })
-export class AccountMilieuComponent implements OnInit{
+export class AccountMilieuComponent {
 
   @ViewChild(CreateAccountVueComponent) createVue;
 
   constructor(public accountService: AccountService){
-
-  }
-
-  ngOnInit(){
-
-
-
-
-
 
   }
 }

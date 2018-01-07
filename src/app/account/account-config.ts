@@ -7,12 +7,6 @@ export const ACCOUNT_CONFIG: Config = {
   name: 'accounts',
   directory: 'account',
   itemsMode: false
-  //dataLabel: 'account',
-  //intro: "Here is your User Account",
-  //img: "assets/img/code-jems.jpg",
-
-  //fieldsRaw: [],
-  //fields: [],
 };
 
 /* copyright 2017 AEO All Rights Reserved. */
