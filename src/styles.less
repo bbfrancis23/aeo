@@ -1,3 +1,38 @@
+// new
+
+// ACCOUNT tags
+
+account-milieu{
+  .view-port-container{
+
+    align-items: center;
+    color: #fff;
+    max-width:  960px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: auto;
+    text-align:  center;
+
+    .view-port-overlay{
+      background: #000;
+      z-index: @overlay-layer;
+      opacity: .75
+    }
+    .view-port-content{
+        z-index: @overlay-content-layer;
+    }
+  
+    img{
+      filter: brightness(80%);
+      transition: filter 2s;
+      &:hover{
+        filter: brightness(200%);
+      }
+    }
+  }
+}
+
+
 // VARS
 
 //@import "cards";
@@ -39,6 +74,8 @@
     color: white;
   }
   .card-block{ padding: 1em }
+
+  .alert{ margin-top: 1em }
 }
 
 .material-icons{
@@ -232,7 +269,7 @@ modal-vue{
 }
 // TAGS //
 
-manage-jem{ .jem-card }
+alert-jem{ .jem-card }
 
 jem-list-vue{
   .jem-card;

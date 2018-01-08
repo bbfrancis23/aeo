@@ -1,5 +1,6 @@
 export class Account {
-  _id?: '';
+
+  _id? = '';
   username = '';
   email = '';
   password = '';

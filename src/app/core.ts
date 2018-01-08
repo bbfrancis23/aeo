@@ -83,7 +83,7 @@ export class AppComponent {}
       </div>
     </nav>
 
-    <milieu-modal id="account-services-modal"><account-services (modalCloseEvent)="modalLogIn.modalMode=false"></account-services></milieu-modal>`
+    <milieu-modal id="account-services-modal"><account-services ></account-services></milieu-modal>`
 })
 export class AppHeaderComponent {
   @ViewChild(MilieuModalComponent) accountServices: MilieuModalComponent;

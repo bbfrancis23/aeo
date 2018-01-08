@@ -1,3 +1,27 @@
+account-milieu .view-port-container {
+  align-items: center;
+  color: #fff;
+  max-width: 960px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin: auto;
+  text-align: center;
+}
+account-milieu .view-port-container .view-port-overlay {
+  background: #000;
+  z-index: 2;
+  opacity: 0.75;
+}
+account-milieu .view-port-container .view-port-content {
+  z-index: 3;
+}
+account-milieu .view-port-container img {
+  filter: brightness(80%);
+  transition: filter 2s;
+}
+account-milieu .view-port-container img:hover {
+  filter: brightness(200%);
+}
 app-content .view-port-container {
   align-items: center;
   color: #fff;
@@ -91,6 +115,9 @@ app-header .navbar.fixed-top item-search {
 }
 .card .card-block {
   padding: 1em;
+}
+.card .alert {
+  margin-top: 1em;
 }
 .material-icons {
   display: inline-flex;
@@ -251,11 +278,11 @@ modal-vue .modal-vue-content {
 .copy-control:hover {
   color: #80ffff;
 }
-manage-jem .card {
+alert-jem .card {
   margin-top: 1em;
   margin-bottom: 1em;
 }
-manage-jem .card .alert {
+alert-jem .card .alert {
   margin-top: 1em;
 }
 jem-list-vue .card {

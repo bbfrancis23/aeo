@@ -8,8 +8,9 @@ import { ACCOUNT_CONFIG } from './account-config';
 @Injectable()
 export class AccountService extends MilieuService {
 
-  username: '';
-  email: '';
+  email = {min:5, max:64, value: ''};
+  username = { min: 4, max: 16, pattern: /^[\w]+$/, value: ''};
+  password = { min: 4, max: 16, pattern: /^[^\s]+$/};
 
   constructor(public route: ActivatedRoute, protected readonly http: Http, public readonly location: Location) {
     super(route,http,location);
@@ -20,8 +21,8 @@ export class AccountService extends MilieuService {
 
       if(result.json().data){
 
-              this.username = result.json().data.username;
-              this.email = result.json().data.email;
+              this.username.value = result.json().data.username;
+              this.email.value = result.json().data.email;
       }
 
     });

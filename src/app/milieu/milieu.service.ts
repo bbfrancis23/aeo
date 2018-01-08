@@ -65,12 +65,14 @@ export class MilieuService {
 
 
       //console.log(response.json().message);
-      if(response.json().message === 'Login Successful'){
+      if(response.json().login){
 
-        window.location.reload();
+        setTimeout(()=>{
+          window.location.reload();
+        },3000);
       }
 
-      return response.json().message;
+      return response.json();
     }).catch(this.handleError);
 
 

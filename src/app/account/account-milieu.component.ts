@@ -12,7 +12,7 @@ import { CreateAccountVueComponent } from './create-account-vue.component';
   <view-port>
     <media><div class="media-wrapper"><img src="assets/img/code.jpg" ></div></media>
     <content>
-      <div *ngIf="accountService.authenticated === false;"><create-account-vue [accountService]="accountService" ></create-account-vue></div>
+      <div *ngIf="accountService.authenticated === false"><create-account-vue [accountService]="accountService" ></create-account-vue></div>
       <div *ngIf="accountService.authenticated === true;"><account-vue></account-vue></div>
     </content>
   </view-port>`,

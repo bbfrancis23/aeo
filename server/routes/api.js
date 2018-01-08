@@ -317,16 +317,15 @@ app.post('/login', (req, res) => {
                   if(err){
                     sendError(err,res);
                   }else{
-                    res.cookie('token', token,{}).json({status: 200, message: 'Login Successful'});
-                    console.log('login was successful');
+                    res.cookie('token', token,{}).json({login: true, message: 'Login Successful'});
                   }
                 });
               }else{
-                res.json({status: 200, message: 'Login Failed'})
+                res.json({login: false, message: 'Login Failed'})
               }
             });
           }else{
-            res.json({status: 200, message: 'Email Address not found.'});
+            res.json({login: false, message: 'Email Address not found.'});
           }
         }
       });
