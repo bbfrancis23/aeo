@@ -8,6 +8,7 @@ const jwt = require( 'jwt-simple' );
 const cookieParser = require( 'cookie-parser' );
 const JWT_SECRET = 'maeglin';
 const sanitize = require( 'mongo-sanitize' );
+var mailer = require('nodemailer');
 
 app.use( cookieParser() );
 
@@ -21,6 +22,7 @@ let jem = {
   code: { required: false, type: 'string' },
   keys: { required: false, type: 'string' }
 }
+
 
 const Account = {
   username: { required: true, regexp: /^[\w]{4,16}$/ },
@@ -61,6 +63,39 @@ const auth = (req,res) => {
     res.sendStatus(403);
   }
 }
+
+// mailer /////////////////////////////////////////////////
+
+
+
+app.get('/reset-password',(request, response) =>{
+  if(auth(request,response)){
+
+    var transporter = mailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: 'bbfrancis23@gmail.com',
+        pass: 'hjotqwdiujscucmq'
+    }
+    });
+
+    let mailOptions = {
+      from: "bbfrancis23@gmail.com",
+      to: "bbfrancis23@gmail.com",
+      subject: "Sending Email using Node.js",
+      text: "That was easy!"
+    }
+
+    transporter.sendMail(mailOptions, (error, info) =>{
+      if(error){
+        response.json({mailsent: false, message: error});
+      }else{
+        console.log(info);
+        response.json({mailsent: true, message: 'info.response'});
+      }
+    })
+  }
+});
 
 
 // jems /////////////////////////////////////////////////////////////////////////////////////
@@ -133,6 +168,98 @@ app.get('/account', (request,response)=>{
       });
 
       db.close;
+    });
+  }
+});
+
+
+app.post('/update-user-name',(request,response)=>{
+  if(auth(request,response)){
+    connection((db)=>{
+      db.collection('accounts').findOne({
+        username: sanitize(request.body.username)
+      }, (err, doc) =>{
+          if ( err ) { sendError( err, response ); }
+          else{
+            if(doc){
+              response.json({update: false, unique: false, message: 'User Name is already taken'});
+            }else{
+              db.collection('accounts').updateOne(
+                { "token": sanitize( request.cookies.token ) },
+                { $set: { "username": sanitize(request.body.username) }}, (err, doc) => {
+                  if ( err ) { sendError(err, response); }
+                  else{
+                    if(doc.result.n ===1){
+                      response.json({update: true, message: 'User Name has been Updated.'})
+                    }else{
+                      response.json({update: false, message: 'Unknown database Error.'});
+                    }
+                  }
+                }
+              );
+            }
+          }
+      });
+    db.close;
+    });
+  }
+});
+
+
+app.post('/update-email',(request,response)=>{
+  if(auth(request,response)){
+    connection((db)=>{
+      db.collection('accounts').findOne({
+        username: sanitize(request.body.email)
+      }, (err, doc) =>{
+          if ( err ) { sendError( err, response ); }
+          else{
+            if(doc){
+              response.json({update: false, unique: false, message: 'Email is already taken'});
+            }else{
+              db.collection('accounts').updateOne(
+                { "token": sanitize( request.cookies.token ) },
+                { $set: { "email": sanitize(request.body.email) }}, (err, doc) => {
+                  if ( err ) { sendError(err, response); }
+                  else{
+                    if(doc.result.n ===1){
+                      response.json({update: true, message: 'Email has been Updated.'})
+                    }else{
+                      response.json({update: false, message: 'Unknown database Error.'});
+                    }
+                  }
+                }
+              );
+            }
+          }
+      });
+    db.close;
+    });
+  }
+});
+
+
+app.post('/update-password',(request,response)=>{
+  if(auth(request,response)){
+    connection((db)=>{
+
+      let password = bcrypt.hashSync(request.body.password, 10);
+
+      db.collection('accounts').updateOne(
+        { "token": sanitize( request.cookies.token ) },
+        { $set: { "password": password }}, (err, doc) => {
+          if ( err ) { sendError(err, response); }
+          else{
+            if(doc.result.n ===1){
+              response.json({update: true, message: 'Password has been Updated.'})
+            }else{
+              response.json({update: false, message: 'Unknown database Error.'});
+            }
+          }
+        }
+      );
+
+    db.close;
     });
   }
 });

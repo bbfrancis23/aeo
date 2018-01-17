@@ -1,36 +1,5 @@
 // new
 
-// ACCOUNT tags
-
-account-milieu{
-  .view-port-container{
-
-    align-items: center;
-    color: #fff;
-    max-width:  960px;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    margin: auto;
-    text-align:  center;
-
-    .view-port-overlay{
-      background: #000;
-      z-index: @overlay-layer;
-      opacity: .75
-    }
-    .view-port-content{
-        z-index: @overlay-content-layer;
-    }
-  
-    img{
-      filter: brightness(80%);
-      transition: filter 2s;
-      &:hover{
-        filter: brightness(200%);
-      }
-    }
-  }
-}
 
 
 // VARS
@@ -54,11 +23,34 @@ account-milieu{
 @modals-layer: 6;
 @modals-content-layer: 7;
 
+
+email-input{
+  border: 0px none;
+}
+
 // ABSTRACT
 
 .item-select(){
   background-color: lighten(@primary-color, 65%);
   color: black;
+}
+
+
+
+.input-group{
+  button.material-icons{
+    border-radius: 0px;
+    font-size: 1em;
+
+    &:focus{
+      box-shadow: none;
+    }
+
+    &:last-child{
+      border-radius: 0px 5px 5px 0px;
+    }
+  }
+
 }
 
 // CLASSES
@@ -91,7 +83,11 @@ account-milieu{
 
 a.dropdown-item{ &:hover { .item-select } }
 
-a{ cursor: pointer; cursor: hand; }
+a, button{ cursor: pointer;  }
+
+button:disabled{
+  cursor: not-allowed;
+}
 
 body{
   margin: 0;
@@ -108,7 +104,65 @@ hr{
   background-color: @primary-color;
 }
 
-// IDS
+// ACCOUNT tags
+
+account-milieu{
+  .view-port-container{
+
+    align-items: center;
+    color: #fff;
+    max-width:  960px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: auto;
+    text-align:  center;
+
+    .view-port-overlay{
+      background: #000;
+      z-index: @overlay-layer;
+      opacity: .75
+    }
+    .view-port-content{
+      z-index: @overlay-content-layer;
+    }
+
+    .card-block{
+      margin: auto;
+    }
+
+    form{
+      .input-group{
+        button{
+          border-radius: 0px;
+
+          &:focus{
+            box-shadow: none;
+          }
+
+          &:last-child{
+            border-radius: 0px 5px 5px 0px;
+          }
+        }
+
+      }
+    }
+
+    img{
+      filter: brightness(80%);
+      transition: filter 2s;
+      &:hover{
+        filter: brightness(200%);
+      }
+    }
+  }
+}
+
+account-vue{
+  .card-block{
+    color: black;
+    text-align: left;
+  }
+}
 
 
 
@@ -306,11 +360,11 @@ jem {
 border: 2px solid #42A948; /* green */
 }
 
-.ng-invalid:not(form)  {
+input.ng-invalid  {
   border: 2px solid #a94442; /* red */
 }
 
-.ng-untouched:not(form)  {
+input.ng-untouched  {
   border: 1px solid gray; /* red */
 }
 
@@ -332,14 +386,13 @@ border: 2px solid #42A948; /* green */
 
 
 .field-name{
-  font-size: 120%;
   font-weight: bolder;
-  padding: 10px;
+  padding: 5px;
 }
 
 .field{
-  font-size: 120%;
-  padding: 10px;
+  //font-size: 120%;
+  padding: 5px;
 }
 
 

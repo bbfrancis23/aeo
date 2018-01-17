@@ -28,6 +28,12 @@ export class AccountService extends MilieuService {
     });
   }
 
+  resetPassword(){
+    this.http.get('api/reset-password').toPromise().then(response => {
+      console.log(response);
+    })
+  }
+
   uniqueUserName(username){
     return this.http.post(`api/unique-user-name`, JSON.stringify({'username':username}), { headers: this.headers }).toPromise().then(response => {
       return response.json().unique;
@@ -40,4 +46,25 @@ export class AccountService extends MilieuService {
     }).catch(this.handleError);
   }
 
+
+  updateUserName(username){
+    return this.http.post(`api/update-user-name`, JSON.stringify({'username':username}), { headers: this.headers }).toPromise().then(response => {
+      //console.log(response.json());
+      return response.json();
+    }).catch(this.handleError);
+  }
+
+  updateEmail(email){
+    return this.http.post(`api/update-email`, JSON.stringify({'email':email}), { headers: this.headers }).toPromise().then(response => {
+      //console.log(response.json());
+      return response.json();
+    }).catch(this.handleError);
+  }
+
+  updatePassword(password){
+    return this.http.post(`api/update-password`, JSON.stringify({'password':password}), { headers: this.headers }).toPromise().then(response => {
+      //console.log(response.json());
+      return response.json();
+    }).catch(this.handleError);
+  }
 }

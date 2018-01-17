@@ -88,7 +88,7 @@ export class AppComponent {}
 export class AppHeaderComponent {
   @ViewChild(MilieuModalComponent) accountServices: MilieuModalComponent;
   constructor(private jemService: JemService, private accountService: AccountService ){
-    console.log(jemService, accountService);
+    //console.log(jemService, accountService);
   }
 }
 

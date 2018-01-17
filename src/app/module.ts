@@ -11,7 +11,8 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent, AppHeaderComponent, AppFooterComponent, AppContentComponent } from './core';
 
-import { AccountServicesComponent } from './account/services.component';
+import { AccountServicesComponent,  } from './account/services.component';
+import { EmailInputComponent } from './account/core';
 
 import { CreateAccountVueComponent } from "./account/create-account-vue.component";
 import { AccountMilieuComponent } from './account/account-milieu.component';
@@ -43,7 +44,8 @@ import { JemService } from './jems/jem.service';
 
     AccountMilieuComponent,
     AccountVueComponent,
-    CreateAccountVueComponent
+    CreateAccountVueComponent,
+    EmailInputComponent
   ],
 
   exports:[ ],

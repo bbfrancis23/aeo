@@ -1,5 +1,6 @@
 import { fadeInOutAnimation, modalVueFadeInOut } from './animations';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from "@angular/router";
 import { MilieuService } from './milieu.service';
 import { MilieuModalComponent, ModalVueComponent} from './modals';
@@ -12,6 +13,10 @@ export abstract class MilieuVue {
   modalOnlyMode = false;
 
   @ViewChild(ModalVueComponent) modalChild: ModalVueComponent;
+}
+
+export class MilieuFormGroup extends FormGroup{
+  focus: null;
 }
 
 @Component({
@@ -124,7 +129,7 @@ export class ItemSearchComponent implements OnInit{
       });
     });
 
-    console.log(this.searchResults);
+    //console.log(this.searchResults);
   }
 
   search(string: ''){
@@ -137,8 +142,6 @@ export class ItemSearchComponent implements OnInit{
         }
       });
     }
-
-    console.log(this.searchResults.length);
   }
 }
 
