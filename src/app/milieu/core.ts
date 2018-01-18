@@ -16,7 +16,7 @@ export abstract class MilieuVue {
 }
 
 export class MilieuFormGroup extends FormGroup{
-  focus: null;
+  focus: string = null;
 }
 
 @Component({

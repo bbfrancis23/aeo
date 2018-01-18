@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { AccountService } from './account.service';
 import { Account } from './account';
@@ -9,9 +9,7 @@ import { MilieuFormGroup } from '../milieu/core';
 
 @Component({
   selector: 'account-services',
-  host:{
-    '(document:keypress)': 'handleKeyboardEvent($event)'
-  },
+
   template: `
     <div class="card" >
       <modal-controls></modal-controls>
@@ -20,26 +18,14 @@ import { MilieuFormGroup } from '../milieu/core';
       <div class="card-block" >
         <div *ngIf="showResetForm">
           <form (ngSubmit)="resetPassword()" [formGroup]="resetForm" #formReset="ngForm">
-            <!-- <email-input [emailFormGroup]="resetForm"></email-input> -->
+            <email-input [form]="resetForm"></email-input>
           </form>
         </div>
         <div *ngIf="!accountService.authenticated && !showResetForm">
           <form  (ngSubmit)="onSubmit()" [formGroup]="logInForm" #formLogIn="ngForm" *ngIf="!loggedIn">
-            <email-input [emailFormGroup]="logInForm" ></email-input><br>
-            <div class="form-group">
-              <div class="input-group">
-                <input class="form-control" [type]="inputType" formControlName="password" placeholder="Password" (focus)="logInForm.focus='password'" autocorrect="off" autocomplete="off" required>
-                <button class="btn btn-outline-secondary material-icons" *ngIf="logInForm.focus==='password'" title="Show Password" (mousedown)="inputType ='text'" (mouseup)="inputType='password'">visibility</button>
-                <button class="btn btn-outline-secondary material-icons" *ngIf="logInForm.focus==='password'" title="Reset Password" (click)="password.reset()">clear</button>
-              </div>
-              <div *ngIf="password.invalid && (password.touched)" class="alert alert-danger">
-                <aside *ngIf="password.errors.required">Password is required.</aside>
-                <aside *ngIf="password.errors.minlength">Password must be at least {{accountService.password.min}}</aside>
-                <aside *ngIf="password.errors.maxlength">Password can only have {{accountService.password.max}} characters.</aside>
-                <aside *ngIf="password.errors.pattern">Invalid Password.</aside>
-              </div>
-            </div>
-            <div class="alert alert-warning" *ngIf="caps">CAPS IS ON</div><button type="submit" class="btn btn-success float-right" [disabled]="logInForm.invalid" >LOG IN</button><br><br>
+            <email-input [form]="logInForm" ></email-input>
+            <password-input  [form]="logInForm"></password-input>
+            <button type="submit" class="btn btn-success mt-2 float-right" [disabled]="logInForm.invalid" >LOG IN</button><br><br>
           </form>
           <div class="alert" [ngClass]="{'alert-success': loggedIn, 'alert-danger': !loggedIn}" *ngIf="serverMessage">{{serverMessage}}</div>
 
@@ -56,14 +42,10 @@ import { MilieuFormGroup } from '../milieu/core';
 })
 export class AccountServicesComponent implements OnInit {
 
-
-  showResetForm = false;
-
-  inputType = 'password';
-  caps = false;
-
   logInForm: MilieuFormGroup;
   resetForm: MilieuFormGroup;
+
+  showResetForm = false;
   submitted = false;
   serverMessage = '';
   loggedIn: boolean = null;
@@ -73,13 +55,10 @@ export class AccountServicesComponent implements OnInit {
 
   }
 
-  handleKeyboardEvent(event: KeyboardEvent) {
-    this.caps = event.getModifierState( 'CapsLock' );
-  }
+
 
   ngOnInit() {
     this.logInForm = new MilieuFormGroup({
-      'password': new FormControl('', [Validators.required, Validators.minLength(this.accountService.password.min), Validators.maxLength(this.accountService.password.max), Validators.pattern(this.accountService.password.pattern)])
     });
   }
 
@@ -97,9 +76,6 @@ export class AccountServicesComponent implements OnInit {
 
   resetPassword(){
   }
-
-
-  get password() { return this.logInForm.get('password') }
 }
 
 /* Copyright AEO all rights reserved */

@@ -79,8 +79,8 @@ app-header .navbar.fixed-top li.nav-item menu a.featured {
 app-header .navbar.fixed-top item-search {
   margin-right: 5px;
 }
-email-input {
-  border: 0px none;
+.input-group {
+  margin-bottom: 1em;
 }
 .input-group button.material-icons {
   border-radius: 0px;

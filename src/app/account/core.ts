@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { MilieuFormGroup } from '../milieu/core';
 import { AccountService } from './account.service';
 import { FormControl, Validators } from '@angular/forms';
@@ -8,9 +8,9 @@ import { FormControl, Validators } from '@angular/forms';
 @Component ({
   selector: 'email-input',
   template: `
-    <div class="input-group" [formGroup]="emailFormGroup">
-      <input class="form-control" formControlName="email" placeholder="Email" (focus)="emailFormGroup.focus='email'" required>
-      <button class="btn btn-outline-secondary material-icons" *ngIf="emailFormGroup.focus==='email'" title="Reset Email" (click)="email.reset()" >clear</button>
+    <div class="input-group" [formGroup]="form">
+      <input class="form-control" formControlName="email" placeholder="Email"  (keypress)="form.focus='email' " required>
+      <button class="btn btn-outline-secondary material-icons" *ngIf="form.focus==='email'" title="Reset Email" (click)="email.reset()" >clear</button>
     </div>
     <div *ngIf="email.invalid && email.touched" class="alert alert-danger">
       <aside *ngIf="errors.required">Email is required.</aside>
@@ -21,14 +21,56 @@ import { FormControl, Validators } from '@angular/forms';
     `
 })
 export class EmailInputComponent implements OnInit {
-  @Input() emailFormGroup: MilieuFormGroup;
+  @Input() form: MilieuFormGroup;
 
-  constructor(public accountService:AccountService){}
+  constructor(private accountService:AccountService){}
 
   ngOnInit(){
-    this.emailFormGroup.addControl('email',  new FormControl('', [Validators.required, Validators.minLength(this.accountService.email.min),Validators.maxLength(this.accountService.email.max),Validators.email]));
+    this.form.addControl('email',  new FormControl('', [Validators.required, Validators.minLength(this.accountService.email.min),Validators.maxLength(this.accountService.email.max),Validators.email]));
   }
 
-  get email() { return this.emailFormGroup.get('email') }
+  get email() { return this.form.get('email') }
   get errors() { return this.email.errors }
+}
+
+@Component({
+  selector: 'password-input',
+  host:{
+    '(document:keypress)': 'handleKeyboardEvent($event)'
+  },
+  template:`
+    <div class="input-group" [formGroup]="form">
+      <input class="form-control" [type]="inputType" formControlName="password" placeholder="Password" (keypress)="this.form.focus='password'" autocorrect="off" autocomplete="off" required>
+      <button class="btn btn-outline-secondary material-icons" *ngIf="focus==='password'" title="Show Password" (mousedown)="inputType ='text'" (mouseup)="inputType='password'">visibility</button>
+      <button class="btn btn-outline-secondary material-icons" *ngIf="focus==='password'" title="Reset Password" (click)="password.reset()">clear</button>
+    </div>
+    <div *ngIf="password.invalid && (password.touched)" class="alert alert-danger">
+      <aside *ngIf="errors.required">Password is required.</aside>
+      <aside *ngIf="errors.minlength">Password min {{errors.minlength.requiredLength}} characters.<br>You have {{errors.minlength.actualLength}}.</aside>
+      <aside *ngIf="errors.maxlength">Password max {{errors.maxlength.requiredLength}} characters.<br>You have {{errors.maxlength.actualLength}}.</aside>
+      <aside *ngIf="errors.pattern">Space characters are invalid for Passwords.</aside>
+    </div>
+    <div class="alert alert-warning" *ngIf="caps">CAPS IS ON</div>`
+})
+export class PasswordInputComponent implements OnInit{
+  @Input() form: MilieuFormGroup;
+
+  caps = false;
+  inputType = 'password';
+
+  constructor(private accountService:AccountService){}
+
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if(this.focus==='password'){
+      this.caps = event.getModifierState( 'CapsLock' );
+    }
+  }
+
+  ngOnInit(){
+    this.form.addControl('password',  new FormControl('', [Validators.required, Validators.minLength(this.accountService.password.min), Validators.maxLength(this.accountService.password.max), Validators.pattern(this.accountService.password.pattern)]));
+  }
+
+  get password() { return this.form.get('password') }
+  get errors() { return this.password.errors }
+  get focus() { return this.form.focus }
 }
