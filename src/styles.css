@@ -92,6 +92,19 @@ app-header .navbar.fixed-top item-search {
 .input-group button.material-icons:last-child {
   border-radius: 0px 5px 5px 0px;
 }
+account-services .card {
+  position: fixed;
+  right: 50px;
+  z-index: 7;
+  width: 250px;
+  box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
+}
+account-services .card div {
+  text-align: center;
+}
+account-services .card div .btn {
+  margin: 0 auto;
+}
 .card {
   border-color: #008080;
 }
@@ -404,19 +417,6 @@ input.ng-untouched {
   margin: 5% auto;
   width: 70%;
   z-index: 7;
-  box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
-}
-account-services .create-account {
-  text-align: center;
-}
-account-services .create-account .btn {
-  margin: 0 auto;
-}
-account-services .card {
-  position: fixed;
-  right: 50px;
-  z-index: 7;
-  width: 250px;
   box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
 }
 .loader {

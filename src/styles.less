@@ -42,7 +42,22 @@
 
 // TAGS
 
+account-services {
+  .card{
+    position: fixed;
+    right: 50px;
+    z-index: @modals-content-layer;
+    width: 250px;
+    box-shadow: 10px 10px 1px 0 rgba(0,0,0,0.3);
 
+    div{
+      text-align: center;
+      .btn{
+        margin: 0 auto;
+      }
+    }
+  }
+}
 
 /////////////////////
 // old
@@ -443,24 +458,7 @@ input.ng-untouched  {
 
 
 
-account-services {
 
-  .create-account{
-    text-align: center;
-    .btn{
-      margin: 0 auto;
-    }
-  }
-
-  .card{
-
-    position: fixed;
-    right: 50px;
-    z-index: @modals-content-layer;
-    width: 250px;
-    box-shadow: 10px 10px 1px 0 rgba(0,0,0,0.3);
-  }
-}
 
 
 
