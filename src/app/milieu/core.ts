@@ -19,6 +19,13 @@ export class MilieuFormGroup extends FormGroup{
   focus: string = null;
 }
 
+export abstract class MilieuInputComponent{
+  @Input() form: MilieuFormGroup;
+  @Input() tabIndex = 1;
+
+  constructor(protected milieuService: MilieuService){}
+}
+
 @Component({
   selector: 'filter-vue',
   template:`

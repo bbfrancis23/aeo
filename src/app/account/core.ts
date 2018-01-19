@@ -1,5 +1,5 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { MilieuFormGroup } from '../milieu/core';
+import { MilieuInputComponent } from '../milieu/core';
 import { AccountService } from './account.service';
 import { FormControl, Validators } from '@angular/forms';
 
@@ -9,7 +9,7 @@ import { FormControl, Validators } from '@angular/forms';
   selector: 'email-input',
   template: `
     <div class="input-group" [formGroup]="form">
-      <input class="form-control" formControlName="email" placeholder="Email"  (keypress)="form.focus='email' " required>
+      <input class="form-control" formControlName="email" placeholder="Email"  (keypress)="form.focus='email'" tabindex="{{tabIndex}}" required>
       <button class="btn btn-outline-secondary material-icons" *ngIf="form.focus==='email'" title="Reset Email" (click)="email.reset()" >clear</button>
     </div>
     <div *ngIf="email.invalid && email.touched" class="alert alert-danger">
@@ -20,10 +20,9 @@ import { FormControl, Validators } from '@angular/forms';
     </div>
     `
 })
-export class EmailInputComponent implements OnInit {
-  @Input() form: MilieuFormGroup;
+export class EmailInputComponent extends MilieuInputComponent implements OnInit {
 
-  constructor(private accountService:AccountService){}
+  constructor(protected accountService:AccountService){ super(accountService)}
 
   ngOnInit(){
     this.form.addControl('email',  new FormControl('', [Validators.required, Validators.minLength(this.accountService.email.min),Validators.maxLength(this.accountService.email.max),Validators.email]));
@@ -40,7 +39,7 @@ export class EmailInputComponent implements OnInit {
   },
   template:`
     <div class="input-group" [formGroup]="form">
-      <input class="form-control" [type]="inputType" formControlName="password" placeholder="Password" (keypress)="this.form.focus='password'" autocorrect="off" autocomplete="off" required>
+      <input class="form-control" [type]="inputType" formControlName="password" placeholder="Password" (keypress)="this.form.focus='password'" autocorrect="off" autocomplete="off" tabindex="{{tabIndex}}" required>
       <button class="btn btn-outline-secondary material-icons" *ngIf="focus==='password'" title="Show Password" (mousedown)="inputType ='text'" (mouseup)="inputType='password'">visibility</button>
       <button class="btn btn-outline-secondary material-icons" *ngIf="focus==='password'" title="Reset Password" (click)="password.reset()">clear</button>
     </div>
@@ -52,13 +51,12 @@ export class EmailInputComponent implements OnInit {
     </div>
     <div class="alert alert-warning" *ngIf="caps">CAPS IS ON</div>`
 })
-export class PasswordInputComponent implements OnInit{
-  @Input() form: MilieuFormGroup;
+export class PasswordInputComponent extends MilieuInputComponent implements OnInit{
 
   caps = false;
   inputType = 'password';
 
-  constructor(private accountService:AccountService){}
+  constructor(protected accountService:AccountService){ super(accountService)}
 
   handleKeyboardEvent(event: KeyboardEvent) {
     if(this.focus==='password'){
