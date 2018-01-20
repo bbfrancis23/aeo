@@ -28,10 +28,17 @@ export class AccountService extends MilieuService {
     });
   }
 
-  resetPassword(){
-    this.http.get('api/reset-password').toPromise().then(response => {
-      console.log(response);
-    })
+  validResetId(id){
+    return this.http.post('api/valid-reset-id', JSON.stringify({'resetCode':id}), { headers: this.headers }).toPromise().then(response => {
+
+      return response.json().valid;
+    });
+  }
+
+  resetPassword(email){
+    return this.http.post('api/reset-password', JSON.stringify({'email':email}), { headers: this.headers }).toPromise().then(response => {
+      return response.json().mailsent;
+    });
   }
 
   uniqueUserName(username){

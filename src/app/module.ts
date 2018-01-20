@@ -16,6 +16,7 @@ import { EmailInputComponent, PasswordInputComponent } from './account/core';
 
 import { CreateAccountVueComponent } from "./account/create-account-vue.component";
 import { AccountMilieuComponent } from './account/account-milieu.component';
+import { AccountResetCompoent } from './account/account-reset.componet';
 import { AccountVueComponent } from './account/account-vue.component';
 import { AccountService } from './account/account.service';
 
@@ -43,6 +44,7 @@ import { JemService } from './jems/jem.service';
     AppContentComponent,
 
     AccountMilieuComponent,
+    AccountResetCompoent,
     AccountVueComponent,
     CreateAccountVueComponent,
     EmailInputComponent,

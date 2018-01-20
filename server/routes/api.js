@@ -66,34 +66,89 @@ const auth = (req,res) => {
 
 // mailer /////////////////////////////////////////////////
 
-
-
-app.get('/reset-password',(request, response) =>{
+app.post('/valid-reset-id', (request, response) =>{
   if(auth(request,response)){
 
-    var transporter = mailer.createTransport({
-    service: 'Gmail',
-    auth: {
-        user: 'bbfrancis23@gmail.com',
-        pass: 'hjotqwdiujscucmq'
-    }
+    connection((db)=>{
+
+      db.collection('accounts').aggregate(
+       [{$match: {resetCode: sanitize(request.body.resetCode)}},  { $project: { item: 1, dateDifference: { $subtract: [ new Date(), "$resetTime" ] } } } ]
+      ,(err,doc)=>{
+        if(err) { sendError(err,response);  }
+        else{
+          if(doc){
+            if(doc.length === 1){
+
+              if( ((doc[0].dateDifference / 1000) /60) <= 60){
+                response.json({valid: true, message: 'Valid Code'});
+              }else{
+
+                response.json({valid: false, message: 'Expired Code'});
+              }
+            }else{
+              response.json({valid: false, message: 'Invalid Code'});
+            }
+          }else{
+            response.json({valid: false, message: 'Invalid Code'});
+          }
+        }
+      });
+
     });
 
-    let mailOptions = {
-      from: "bbfrancis23@gmail.com",
-      to: "bbfrancis23@gmail.com",
-      subject: "Sending Email using Node.js",
-      text: "That was easy!"
-    }
 
-    transporter.sendMail(mailOptions, (error, info) =>{
-      if(error){
-        response.json({mailsent: false, message: error});
-      }else{
-        console.log(info);
-        response.json({mailsent: true, message: 'info.response'});
-      }
-    })
+  }
+});
+
+app.post('/reset-password',(request, response) =>{
+  if(auth(request,response)){
+
+    connection((db)=>{
+      db.collection('accounts').findOne({
+        email: sanitize(request.body.email)
+      }, (err, doc)=>{
+        if(err) {sendError(err,response);}
+        else{
+          if(doc){
+
+            var token = jwt.encode( ( Math.floor(Math.random()*100)+1 ), JWT_SECRET);
+
+            db.collection('accounts').updateOne({ email: sanitize(request.body.email) }, { $currentDate: { resetTime: true }, $set: { resetCode: token} }, (err, doc) =>{
+              if(err){
+                console.log(err);
+              }else{
+                var transporter = mailer.createTransport({
+                service: 'Gmail',
+                auth: {
+                    user: 'bbfrancis23@gmail.com',
+                    pass: 'hjotqwdiujscucmq'
+                }
+                });
+
+                let mailOptions = {
+                  from: "bbfrancis23@gmail.com",
+                  to: request.body.email,
+                  subject: "Reset your Password Instructions",
+                  html: `Click this link to reset your password <a href="http://localhost:3000/account/reset/${token}">Reset Password</a>.<br>This link will expire in 1 hour`
+                }
+
+                transporter.sendMail(mailOptions, (error, info) =>{
+                  if(error){
+                    response.json({mailsent: false, message: error});
+                  }else{
+                    response.json({mailsent: true, message: info.response});
+                  }
+                })
+              }
+            });
+
+          }else{
+            response.json({mailsent: false, message: 'Email was not in our system. Please set up a Free Account'})
+          }
+        }
+      });
+    db.close;
+    });
   }
 });
 

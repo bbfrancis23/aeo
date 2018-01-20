@@ -17,12 +17,15 @@ import { MilieuFormGroup } from '../milieu/core';
       <div class="card-header" *ngIf="showResetForm">Reset Password</div>
       <div class="card-block" >
         <div *ngIf="showResetForm">
-          <form  [formGroup]="resetForm" #formReset="ngForm" (ngSubmit)="resetPassword()">
+          <form  [formGroup]="resetForm" #formReset="ngForm" (ngSubmit)="resetPassword()" *ngIf="!mailsent && !submitted">
             <email-input [form]="resetForm" [tabIndex]="1" #resetEmail (emailBlur)="checkUniqueEmail($event,resetEmail.form.get('email').value)"></email-input>
             <button type="submit" class="btn mb-2" [ngClass]="{'btn-outline-primary': resetForm.invalid, 'btn-primary': resetForm.valid}" [disabled]="resetForm.invalid" tabindex="2" >RESET PASSWORD</button>
             <button type="button" class="btn btn-outline-secondary no-email-check" tabindex="3" (mousedown)="toggleResetForm()" >CANCEL</button>
           </form>
           <div class="alert alert-danger" *ngIf="uniqueEmail">Email Address not found.</div>
+          <div class="alert alert-success" *ngIf="submitted">Processing</div>
+          <div class="alert alert-success" *ngIf="mailsent">Reset Instructions have been to sent to your Email.</div>
+          <button type="button" class="btn btn-primary close-modal" *ngIf="mailsent" (click)="toggleResetForm()" >OK</button>
         </div>
         <div *ngIf="!accountService.authenticated && !showResetForm">
           <form [formGroup]="logInForm" *ngIf="!loggedIn"  (ngSubmit)="onSubmit()">
@@ -32,8 +35,8 @@ import { MilieuFormGroup } from '../milieu/core';
           </form>
           <div class="alert" [ngClass]="{'alert-success': loggedIn, 'alert-danger': !loggedIn}" *ngIf="serverMessage">{{serverMessage}}</div>
           <div class="alert alert-danger" *ngIf="uniqueEmail">Email Address not found.</div>
-          <hr>
-          <div *ngIf="!accountService.authenticated" >
+          <div *ngIf="!accountService.authenticated && !loggedIn" >
+            <hr>
             <button class="btn btn-outline-secondary mb-2 no-email-check" (mousedown)="toggleResetForm()" >RESET PASSWORD</button>
             <a routerLink="account" class="btn btn-primary close-modal" >FREE ACCOUNT</a>
           </div>
@@ -56,6 +59,7 @@ export class AccountServicesComponent implements OnInit {
   serverMessage = '';
   loggedIn: boolean = null;
   uniqueEmail:boolean = null;
+  mailsent = null;
 
   constructor(private accountService: AccountService){}
 
@@ -80,6 +84,7 @@ export class AccountServicesComponent implements OnInit {
     this.resetForm.reset();
     this.logInForm.focus = null;
     this.resetForm.focus = null;
+    this.mailsent = false;
   }
 
   checkUniqueEmail(event,email){
@@ -93,7 +98,11 @@ export class AccountServicesComponent implements OnInit {
   }
 
   resetPassword(){
-    console.log('reset password');
+    this.submitted = true;
+    this.accountService.resetPassword(this.resetForm.get('email').value).then( mailsent =>{
+      this.mailsent = mailsent;
+      this.submitted = false;
+    });
   }
 }
 
