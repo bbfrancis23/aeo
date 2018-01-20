@@ -1,7 +1,9 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
-import { MilieuInputComponent } from '../milieu/core';
+import { MilieuInputComponent, MilieuFormGroup } from '../milieu/core';
 import { AccountService } from './account.service';
 import { FormControl, Validators } from '@angular/forms';
+
+
 
 'use strict';
 
@@ -43,7 +45,7 @@ export class EmailInputComponent extends MilieuInputComponent implements OnInit 
     <div class="input-group" [formGroup]="form">
       <input class="form-control" [type]="inputType" formControlName="password" placeholder="Password" (keypress)="this.form.focus='password'" autocorrect="off" autocomplete="off" tabindex="{{tabIndex}}" required>
       <button class="btn btn-outline-secondary material-icons" type="button" *ngIf="focus==='password'" title="Show Password" (mousedown)="inputType ='text'" (mouseup)="inputType='password'">visibility</button>
-      <button class="btn btn-outline-secondary material-icons" type="button" *ngIf="focus==='password'" title="Reset Password" (click)="password.reset()">clear</button>
+      <button class="btn btn-outline-secondary material-icons" type="button" *ngIf="focus==='password'" title="Clear Password" (click)="password.reset()">clear</button>
     </div>
     <div *ngIf="password.invalid && (password.touched)" class="alert alert-danger">
       <aside *ngIf="errors.required">Password is required.</aside>
@@ -59,6 +61,52 @@ export class PasswordInputComponent extends MilieuInputComponent implements OnIn
   inputType = 'password';
 
   constructor(protected accountService:AccountService){ super(accountService)}
+
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if(this.focus==='password'){
+      this.caps = event.getModifierState( 'CapsLock' );
+    }
+  }
+
+  ngOnInit(){
+    this.form.addControl('password',  new FormControl('', [Validators.required, Validators.minLength(this.accountService.password.min), Validators.maxLength(this.accountService.password.max), Validators.pattern(this.accountService.password.pattern)]));
+  }
+
+  get password() { return this.form.get('password') }
+  get errors() { return this.password.errors }
+  get focus() { return this.form.focus }
+}
+
+@Component({
+  selector: 'update-password-form',
+  host:{
+    '(document:keypress)': 'handleKeyboardEvent($event)'
+  },
+  template: `
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="input-group">
+        <input class="form-control" type="inputType" formControlName="Password" (keypress)="form.focus='password'" autocorrect="off" autocomplete="off" tabindex="1" required>
+        <button class="btn btn-outline-secondary material-icons" type="button" title="Show Password" (mousedown)="inputType='text'" mouseup="inputType='password'" tabindex="2"></button>
+        <button class="btn btn-outline-secondary material-icona" type="button" title="Clear Password" (click)="password.reset()" tabindex="3">clear</button>
+        <button class="btn" [ngClass]="{'btn-outline-success': form.invalid, 'btn-success': form.valid}" title="Update Password" tabindex="4">done</button>
+        <button class="btn btn-secondary" title="Cancel Password Update" tabindex="5">clear</button>
+      </div>
+      <div class="alert alert-warning" *ngIf="caps">CAPS IS ON</div>
+      <div class="alert alert-danger" *ngIf="password.invalid && password.touched">
+        <aside *ngIf="errors.required">Password is required.</aside>
+        <aside *ngIf="errors.minlength">Password min {{errors.minlength.requiredLength}} characters.<br>You have {{errors.minlength.actualLength}}.</aside>
+        <aside *ngIf="errors.maxlength">Password max {{errors.maxlength.requiredLength}} characters.<br>You have {{errors.maxlength.actualLength}}.</aside>
+        <aside *ngIf="errors.pattern">Space characters are invalid for Passwords.</aside>
+      </div>
+    </form>`,
+    styles: [``]
+})
+export class UpdatePasswordForm{
+  caps = false;
+  inputType = 'password';
+  form: MilieuFormGroup;
+
+  constructor(protected accountService:AccountService){}
 
   handleKeyboardEvent(event: KeyboardEvent) {
     if(this.focus==='password'){

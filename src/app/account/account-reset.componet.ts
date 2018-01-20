@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-
 import { AccountService } from './account.service';
 
 @Component({
@@ -15,9 +14,8 @@ import { AccountService } from './account.service';
           <div class="card">
           <div class="card-header">Reset Password</div>
             <div class="card-block">
-
-            <div class="alert alert-danger" *ngIf="!validCode">This link is Invalid or Expired.</div>
-
+              <div class="alert alert-danger" *ngIf="!validCode">This link is Invalid or Expired.</div>
+              
             </div>
           </div>
         </div>
@@ -26,16 +24,16 @@ import { AccountService } from './account.service';
     </content>
   </view-port>`
 })
-export class AccountResetCompoent implements OnInit{
+export class AccountResetCompoent {
+
 
   validCode = null;
+  token: string = null;
 
-  constructor(public route: ActivatedRoute, public accountService: AccountService){}
-
-
-  ngOnInit(){
+  constructor(public route: ActivatedRoute, public accountService: AccountService){
     this.route.params.subscribe(params => {
 
+      this.token = params.id;
       this.accountService.validResetId(params.id).then(valid=>{
         this.validCode = valid;
       });
