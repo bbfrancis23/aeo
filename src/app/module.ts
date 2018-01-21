@@ -12,7 +12,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent, AppHeaderComponent, AppFooterComponent, AppContentComponent } from './core';
 
 import { AccountServicesComponent,  } from './account/services.component';
-import { EmailInputComponent, PasswordInputComponent } from './account/core';
+import { EmailInputComponent, PasswordInputComponent, UpdatePasswordForm } from './account/core';
 
 import { CreateAccountVueComponent } from "./account/create-account-vue.component";
 import { AccountMilieuComponent } from './account/account-milieu.component';
@@ -48,7 +48,8 @@ import { JemService } from './jems/jem.service';
     AccountVueComponent,
     CreateAccountVueComponent,
     EmailInputComponent,
-    PasswordInputComponent
+    PasswordInputComponent,
+    UpdatePasswordForm
   ],
 
   exports:[ ],

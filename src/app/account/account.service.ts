@@ -68,10 +68,16 @@ export class AccountService extends MilieuService {
     }).catch(this.handleError);
   }
 
-  updatePassword(password){
-    return this.http.post(`api/update-password`, JSON.stringify({'password':password}), { headers: this.headers }).toPromise().then(response => {
-      //console.log(response.json());
-      return response.json();
-    }).catch(this.handleError);
+  updatePassword(password:string, token?:string){
+
+    if(token){
+      return this.http.post(`api/reset-pw`, JSON.stringify({'password':password, 'resetToken': token}), { headers: this.headers }).toPromise().then(response => {
+        return response.json();
+      }).catch(this.handleError);
+    }else{
+      return this.http.post(`api/update-password`, JSON.stringify({'password':password}), { headers: this.headers }).toPromise().then(response => {
+        return response.json();
+      }).catch(this.handleError);
+    }
   }
 }

@@ -66,6 +66,51 @@ const auth = (req,res) => {
 
 // mailer /////////////////////////////////////////////////
 
+
+
+app.post('/reset-pw',(request, response) =>{
+  if(auth(request,response)){
+    connection((db)=>{
+
+      db.collection('accounts').aggregate(
+        [{$match: {resetCode: sanitize(request.body.resetToken)}},  { $project: { item: 1, dateDifference: { $subtract: [ new Date(), "$resetTime" ] } } } ],
+      ( err, doc ) => {
+
+        if(err) { response.json({ valid: false, message: err });db.close; }
+        else{
+          if( doc ){
+            if( doc.length === 1 ){
+              if( ((doc[0].dateDifference / 1000) /60) <= 60){
+
+                let password = bcrypt.hashSync(request.body.password, 10);
+
+                db.collection('accounts').updateOne( { "resetCode": sanitize( request.body.resetToken ) }, { $set: { "password": password }}, (err, doc) => {
+                    if ( err ) { response.json({ valid: true, update: false, message: err });db.close }
+                    else{
+                      if(doc){
+                        if(doc.result.n ===1){
+
+                          db.collection('accounts').updateOne({ "resetCode": sanitize( request.body.resetToken ) }, {$unset: {resetTime: "", resetCode: ""} },(err,doc)=>{});
+
+                          response.json({ valid: true, update: true, message: 'Password has been Updated.' })
+                          db.close;
+                        }else{ response.json({ valid: true, update: false, message: 'No Matching Documents.' });db.close; }
+                      }else{ response.json({ valid: true, update: false, message: 'Query Failed' });db.close; }
+                    }
+                  }
+                );// updateOne password
+
+              }else{ response.json({ valid: true, update: false, message: 'Expired Link.'}) }
+            }else{ response.json({ valid: false, message: 'No or Too Many Matching Documents.'});db.close; }
+          }else{ response.json({ valid: false, message: 'Query Failed.' });db.close }
+        }
+
+      }); // aggregate
+      //db.close();
+    }); // connection
+  } // auth
+});
+
 app.post('/valid-reset-id', (request, response) =>{
   if(auth(request,response)){
 
@@ -499,7 +544,7 @@ app.post('/login', (req, res) => {
                   if(err){
                     sendError(err,res);
                   }else{
-                    res.cookie('token', token,{}).json({login: true, message: 'Login Successful'});
+                    res.cookie('token', token,{ maxAge: 1000 * 60 * 60 * 24 * 7 }).json({login: true, message: 'Login Successful'});
                   }
                 });
               }else{

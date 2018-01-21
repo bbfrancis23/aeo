@@ -78,47 +78,67 @@ export class PasswordInputComponent extends MilieuInputComponent implements OnIn
 }
 
 @Component({
+
   selector: 'update-password-form',
-  host:{
-    '(document:keypress)': 'handleKeyboardEvent($event)'
-  },
+
+  host:{ '( document:keypress )': 'handleKeyboardEvent( $event )' },
+
   template: `
-    <form [formGroup]="form" (ngSubmit)="submit()">
+    <form [formGroup]="form" (ngSubmit)="submit()" *ngIf="!submitted">
       <div class="input-group">
-        <input class="form-control" type="inputType" formControlName="Password" (keypress)="form.focus='password'" autocorrect="off" autocomplete="off" tabindex="1" required>
-        <button class="btn btn-outline-secondary material-icons" type="button" title="Show Password" (mousedown)="inputType='text'" mouseup="inputType='password'" tabindex="2"></button>
-        <button class="btn btn-outline-secondary material-icona" type="button" title="Clear Password" (click)="password.reset()" tabindex="3">clear</button>
-        <button class="btn" [ngClass]="{'btn-outline-success': form.invalid, 'btn-success': form.valid}" title="Update Password" tabindex="4">done</button>
-        <button class="btn btn-secondary" title="Cancel Password Update" tabindex="5">clear</button>
+        <input class="form-control" [type]="inputType" (keypress)="form.focus = 'password' " formControlName="password" autocorrect="off" autocomplete="off" tabindex="1" placeholder="Password" required>
+        <button class="btn btn-outline-secondary material-icons" type="button" title="Show Password" (mousedown)="inputType='text'" (mouseup)="inputType='password'" tabindex="2">visibility</button>
+        <button class="btn btn-outline-secondary material-icons" type="button" title="Clear Password" (click)="password.reset()" tabindex="3">clear</button>
+        <button class="btn btn-success material-icons update"  [disabled]="form.invalid" title="Update Password" tabindex="4">done</button>
+        <button class="btn btn-secondary material-icons" *ngIf="showCancelButton" title="Cancel Password Update" tabindex="5">clear</button>
       </div>
-      <div class="alert alert-warning" *ngIf="caps">CAPS IS ON</div>
-      <div class="alert alert-danger" *ngIf="password.invalid && password.touched">
-        <aside *ngIf="errors.required">Password is required.</aside>
-        <aside *ngIf="errors.minlength">Password min {{errors.minlength.requiredLength}} characters.<br>You have {{errors.minlength.actualLength}}.</aside>
-        <aside *ngIf="errors.maxlength">Password max {{errors.maxlength.requiredLength}} characters.<br>You have {{errors.maxlength.actualLength}}.</aside>
-        <aside *ngIf="errors.pattern">Space characters are invalid for Passwords.</aside>
-      </div>
-    </form>`,
-    styles: [``]
+    </form>
+    <div class="alert alert-warning" *ngIf="caps">CAPS IS ON</div>
+    <div class="alert alert-danger" *ngIf="password.invalid && password.touched">
+      <aside *ngIf="errors.required">Password is required.</aside>
+      <aside *ngIf="errors.minlength">Password min {{errors.minlength.requiredLength}} characters.<br>You have {{errors.minlength.actualLength}}.</aside>
+      <aside *ngIf="errors.maxlength">Password max {{errors.maxlength.requiredLength}} characters.<br>You have {{errors.maxlength.actualLength}}.</aside>
+      <aside *ngIf="errors.pattern">Space characters are invalid for Passwords.</aside>
+    </div>
+    <div class="alert" [ngClass]="{'alert-success': passwordUpdated, 'alert-danger': !passwordUpdated}" *ngIf="message" >{{message}}</div>`,
+
+  styles: [` form div.input-group button.btn.material-icons.update{ padding-right: 25px; padding-left: 25px; } `]
 })
 export class UpdatePasswordForm{
+
   caps = false;
   inputType = 'password';
-  form: MilieuFormGroup;
+  message = null;
+  submitted = false;
+  passwordUpdated = false;
 
-  constructor(protected accountService:AccountService){}
+  @Input() showCancelButton = true;
+  @Input() resetToken: string = null;
 
-  handleKeyboardEvent(event: KeyboardEvent) {
-    if(this.focus==='password'){
-      this.caps = event.getModifierState( 'CapsLock' );
-    }
-  }
-
-  ngOnInit(){
-    this.form.addControl('password',  new FormControl('', [Validators.required, Validators.minLength(this.accountService.password.min), Validators.maxLength(this.accountService.password.max), Validators.pattern(this.accountService.password.pattern)]));
-  }
+  form: MilieuFormGroup = new MilieuFormGroup({
+    password: new FormControl(
+      '',
+      [ Validators.required,
+        Validators.minLength( this.accountService.password.min ),
+        Validators.maxLength( this.accountService.password.max ),
+        Validators.pattern( this.accountService.password.pattern ) ] )
+  });
 
   get password() { return this.form.get('password') }
   get errors() { return this.password.errors }
   get focus() { return this.form.focus }
+
+  constructor( public accountService: AccountService ){}
+
+  handleKeyboardEvent(event: KeyboardEvent) { if( this.focus==='password' ) this.caps = event.getModifierState( 'CapsLock' ) }
+
+  submit(){
+    this.submitted = true;
+    this.accountService.updatePassword(this.password.value, this.resetToken).then(response =>{
+      this.message = response.message;
+      if(response.valid && response.update){
+        this.passwordUpdated = true;
+      }
+    })
+  }
 }

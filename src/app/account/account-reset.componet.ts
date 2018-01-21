@@ -15,7 +15,7 @@ import { AccountService } from './account.service';
           <div class="card-header">Reset Password</div>
             <div class="card-block">
               <div class="alert alert-danger" *ngIf="!validCode">This link is Invalid or Expired.</div>
-              
+              <update-password-form [showCancelButton]="false" *ngIf="validCode===true" [resetToken]="token" ></update-password-form>
             </div>
           </div>
         </div>
