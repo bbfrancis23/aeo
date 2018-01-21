@@ -1,7 +1,7 @@
 import { Component,  OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { AccountService } from './account.service';
-import { Account } from './account';
+import { AccountService } from './data';
+import { Account } from './data';
 
 import { MilieuFormGroup } from '../milieu/core';
 

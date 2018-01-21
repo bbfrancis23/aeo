@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { AccountService } from './account/account.service';
-import { JemService } from './jems/jem.service';
+import { AccountService }       from './account/data';
+import { JemService }           from './jems/jem.service';
 import { MilieuModalComponent } from './milieu/modals';
 
 @Component({

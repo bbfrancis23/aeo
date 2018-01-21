@@ -1,9 +1,28 @@
+import { Config } from '../milieu/data-classes';
 import { Injectable} from '@angular/core';
 import { MilieuService } from '../milieu/milieu.service';
 import { Http } from '@angular/http';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from "@angular/router";
-import { ACCOUNT_CONFIG } from './account-config';
+
+
+'use strict';
+
+export const ACCOUNT_CONFIG: Config = {
+  title: 'User Account',
+  name: 'accounts',
+  directory: 'account',
+  itemsMode: false
+};
+
+
+export class Account {
+
+  _id? = '';
+  username = '';
+  email = '';
+  password = '';
+}
 
 @Injectable()
 export class AccountService extends MilieuService {
@@ -81,3 +100,4 @@ export class AccountService extends MilieuService {
     }
   }
 }
+/* copyright 2017 AEO All Rights Reserved. */

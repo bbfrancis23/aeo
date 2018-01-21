@@ -1,17 +1,9 @@
-import { Component, Directive, Input, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { AccountService} from './account.service';
-import { MilieuVue } from '../milieu/core';
+import { Component, Input, OnInit }            from "@angular/core";
+import { FormControl, FormGroup, Validators }  from "@angular/forms";
+import { AccountService}                       from './data';
+import { MilieuVue }                           from '../milieu/core';
 
 "use strict";
-
-@Directive({
-  selector: '[var]',
-  exportAs: 'var'
-})
-class VarDirective {
-  @Input() var:any;
-}
 
 @Component({
 selector: "account-vue",

@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { MilieuVue} from '../milieu/core';
 
-import { AccountService } from "./account.service";
-import { Account } from './account';
+import { AccountService } from "./data";
+import { Account } from './data';
 
 "use strict";
 

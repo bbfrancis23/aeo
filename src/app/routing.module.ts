@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AccountMilieuComponent } from './account/account-milieu.component';
-import { AccountResetCompoent } from './account/account-reset.componet';
+import { AccountMilieuComponent } from './account/core';
+import { AccountResetCompoent } from './account/core';
 import { AppContentComponent} from './core';
 import { JemMilieuComponent } from './jems/jem-milieu.component';
 
