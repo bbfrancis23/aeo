@@ -9,6 +9,7 @@ import { CreateAccountVueComponent } from './create-account-vue.component';
 
 
 import { ActivatedRoute } from "@angular/router";
+import { MilieuVue } from '../milieu/core';
 
 'use strict';
 
@@ -94,8 +95,8 @@ export class PasswordInputComponent extends MilieuInputComponent implements OnIn
         <input class="form-control" [type]="inputType" (keypress)="form.focus = 'password' " formControlName="password" autocorrect="off" autocomplete="off" tabindex="1" placeholder="Password" required>
         <button class="btn btn-outline-secondary material-icons" type="button" title="Show Password" (mousedown)="inputType='text'" (mouseup)="inputType='password'" tabindex="2">visibility</button>
         <button class="btn btn-outline-secondary material-icons" type="button" title="Clear Password" (click)="password.reset()" tabindex="3">clear</button>
-        <button class="btn btn-success material-icons update"  [disabled]="form.invalid" title="Update Password" tabindex="4">done</button>
-        <button class="btn btn-secondary material-icons" *ngIf="showCancelButton" title="Cancel Password Update" tabindex="5">clear</button>
+        <button class="btn btn-success material-icons submit-check-button"  [disabled]="form.invalid" title="Update Password" tabindex="4">done</button>
+        <button class="btn btn-secondary material-icons" type="button" *ngIf="showCancelButton" (click)="cancelUpdate.emit($event)" title="Cancel Password Update" tabindex="5">clear</button>
       </div>
     </form>
     <div class="alert alert-warning" *ngIf="caps">CAPS IS ON</div>
@@ -105,9 +106,7 @@ export class PasswordInputComponent extends MilieuInputComponent implements OnIn
       <aside *ngIf="errors.maxlength">Password max {{errors.maxlength.requiredLength}} characters.<br>You have {{errors.maxlength.actualLength}}.</aside>
       <aside *ngIf="errors.pattern">Space characters are invalid for Passwords.</aside>
     </div>
-    <div class="alert" [ngClass]="{'alert-success': passwordUpdated, 'alert-danger': !passwordUpdated}" *ngIf="message" >{{message}}</div>`,
-
-  styles: [` form div.input-group button.btn.material-icons.update{ padding-right: 25px; padding-left: 25px; } `]
+    <div class="alert" [ngClass]="{'alert-success': passwordUpdated, 'alert-danger': !passwordUpdated}" *ngIf="message" >{{message}}</div>`
 })
 export class UpdatePasswordForm{
 
@@ -119,6 +118,8 @@ export class UpdatePasswordForm{
 
   @Input() showCancelButton = true;
   @Input() resetToken: string = null;
+
+  @Output() cancelUpdate = new EventEmitter();
 
   form: MilieuFormGroup = new MilieuFormGroup({
     password: new FormControl(
@@ -140,10 +141,10 @@ export class UpdatePasswordForm{
   submit(){
     this.submitted = true;
     this.accountService.updatePassword(this.password.value, this.resetToken).then(response =>{
+
       this.message = response.message;
-      if(response.valid && response.update){
-        this.passwordUpdated = true;
-      }
+      this.passwordUpdated = response.update;
+
     })
   }
 }
@@ -154,7 +155,7 @@ export class UpdatePasswordForm{
   <view-port>
     <media><div class="media-wrapper"><img src="assets/img/code.jpg" ></div></media>
     <content>
-      <div *ngIf="accountService.authenticated === false"><create-account-vue [accountService]="accountService" ></create-account-vue></div>
+      <div *ngIf="accountService.authenticated === false"><create-account-vue accountService]="accountService" ></create-account-vue></div>
       <div *ngIf="accountService.authenticated === true;"><account-vue [accountService]="accountService" ></account-vue></div>
     </content>
   </view-port>`,
@@ -208,4 +209,48 @@ export class AccountResetCompoent {
 
     });
   }
+}
+
+@Component({
+selector: "account-vue",
+template: `
+  <main class="row"><div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header" >Account Info</div>
+        <div class="card-block">
+          <table>
+            <tr>
+              <td><button class="btn btn-outline-primary material-icons" [ngClass]="{'active': editUserName}" title="Update User Name" (click)="editUserName=!editUserName" >create</button></td>
+              <td class="field-name" >User Name:</td>
+              <td class="field" *ngIf="!editUserName">{{accountService.username.value}}</td>
+              <td *ngIf="editUserName"><username-form (cancel)="editUserName=false"></username-form></td>
+            </tr>
+            <tr>
+              <td><button class="btn btn-outline-primary material-icons" [ngClass]="{'active': editEmail}" title="Update Email" (click)="editEmail=!editEmail" >create</button></td>
+              <td class="field-name">Email:</td>
+              <td class="field" *ngIf="editEmail===false">{{accountService.email.value}}</td>
+              <td *ngIf="editEmail===true"><email-form (cancel)="editEmail=false" ></email-form></td>
+            </tr>
+            <tr>
+              <td><button class="btn btn-outline-primary material-icons" [ngClass]="{'active': editPassword}" title="Update Password"  (click)="editPassword=!editPassword" >create</button></td>
+              <td class="field-name">Password:</td>
+              <td class="field" *ngIf="editPassword===false"></td>
+              <td *ngIf="editPassword===true"><update-password-form (cancelUpdate)="editPassword=false"></update-password-form></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  <div class="col-md-2"></div></main>`
+})
+export class AccountVueComponent extends MilieuVue {
+
+  editUserName = false;
+  editEmail = false;
+  editPassword = false;
+
+  @Input() accountService: AccountService;
+
+
 }

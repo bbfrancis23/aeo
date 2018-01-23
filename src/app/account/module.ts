@@ -8,8 +8,9 @@ import { RouterModule } from '@angular/router';
 
 import { AccountMilieuComponent, EmailInputComponent, PasswordInputComponent, UpdatePasswordForm  } from './core';
 import { AccountResetCompoent} from './core';
-import { AccountVueComponent } from './account-vue.component'
+import { AccountVueComponent } from './core'
 import { AccountServicesComponent} from './services.component';
+import { EmailFormComponent, UserNameFormComponent } from './forms';
 
 @NgModule({
   imports: [ CommonModule, RouterModule, MilieuModule, ReactiveFormsModule, ],
@@ -21,7 +22,9 @@ import { AccountServicesComponent} from './services.component';
     PasswordInputComponent,
     UpdatePasswordForm,
     AccountServicesComponent,
-    AccountResetCompoent
+    AccountResetCompoent,
+    UserNameFormComponent,
+    EmailFormComponent
   ],
   exports: [
     CreateAccountVueComponent,
@@ -31,7 +34,9 @@ import { AccountServicesComponent} from './services.component';
     PasswordInputComponent,
     UpdatePasswordForm,
     AccountServicesComponent,
-    AccountResetCompoent
+    AccountResetCompoent,
+    UserNameFormComponent,
+    EmailFormComponent
   ]
 })
 export class AccountModule { }
