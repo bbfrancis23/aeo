@@ -43,7 +43,7 @@ import { MilieuFormGroup } from '../milieu/core';
         </div>
 
         <div *ngIf="accountService.authenticated">
-          <a href="#" (click)="accountService.logOut()" class="btn btn-outline-secondary mb-2 close-modal"  >LOG OUT</a>
+          <a (click)="accountService.logOut()" class="btn btn-outline-secondary mb-2 close-modal"  >LOG OUT</a>
           <a routerLink="/account" class="btn btn-secondary close-modal">VIEW PROFILE</a>
         </div>
       </div>

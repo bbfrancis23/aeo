@@ -83,6 +83,9 @@ app-header .navbar.fixed-top item-search {
   padding-right: 25px;
   padding-left: 25px;
 }
+create-account-vue .input-group {
+  margin-bottom: 1em;
+}
 .input-group button.material-icons {
   border-radius: 0px;
   font-size: 1em;
@@ -109,7 +112,7 @@ account-services .card div {
 account-services .card div .btn {
   margin: 0 auto;
 }
-account-reset .view-port-container {
+reset-password .view-port-container {
   align-items: center;
   color: #fff;
   max-width: 960px;
@@ -118,31 +121,31 @@ account-reset .view-port-container {
   margin: auto;
   text-align: center;
 }
-account-reset .view-port-container .view-port-overlay {
+reset-password .view-port-container .view-port-overlay {
   background: #000;
   z-index: 2;
   opacity: 0.75;
 }
-account-reset .view-port-container .view-port-content {
+reset-password .view-port-container .view-port-content {
   z-index: 3;
 }
-account-reset .view-port-container .card-block {
+reset-password .view-port-container .card-block {
   margin: auto;
 }
-account-reset .view-port-container form .input-group button {
+reset-password .view-port-container form .input-group button {
   border-radius: 0px;
 }
-account-reset .view-port-container form .input-group button:focus {
+reset-password .view-port-container form .input-group button:focus {
   box-shadow: none;
 }
-account-reset .view-port-container form .input-group button:last-child {
+reset-password .view-port-container form .input-group button:last-child {
   border-radius: 0px 5px 5px 0px;
 }
-account-reset .view-port-container img {
+reset-password .view-port-container img {
   filter: brightness(80%);
   transition: filter 2s;
 }
-account-reset .view-port-container img:hover {
+reset-password .view-port-container img:hover {
   filter: brightness(200%);
 }
 .card {

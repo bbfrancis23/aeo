@@ -18,7 +18,7 @@ export const ACCOUNT_CONFIG: Config = {
 
 export class Account {
 
-  _id? = '';
+  _id?: string ;
   username = '';
   email = '';
   password = '';

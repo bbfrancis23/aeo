@@ -16,13 +16,21 @@
 @modals-layer: 6;
 @modals-content-layer: 7;
 
-//form div.input-group button.btn.material-icons.update{  }
+// ABSTRACT
+
+.stacked-input(){
+  margin-bottom: 1em;
+}
+
+// CLASSES
 
 .submit-check-button{
   padding-right: 25px; padding-left: 25px;
 }
 
+// TAGS
 
+create-account-vue{ .input-group{ .stacked-input } }
 
 
 /////////////////////////////////////////////////////// old ///////////////////////////////////////////
@@ -74,7 +82,7 @@ account-services {
   }
 }
 
-account-reset{
+reset-password{
   .view-port-container{
 
     align-items: center;

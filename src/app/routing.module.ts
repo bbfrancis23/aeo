@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AccountMilieuComponent } from './account/core';
-import { AccountResetCompoent } from './account/core';
+import { ResetPasswordCompoent } from './account/core';
 import { AppContentComponent} from './core';
 import { JemMilieuComponent } from './jems/jem-milieu.component';
 
 
 const routes: Routes = [
   { path: 'account', component: AccountMilieuComponent},
-  { path: 'account/reset/:id', component: AccountResetCompoent },
+  { path: 'account/reset/:id', component: ResetPasswordCompoent },
   { path: 'code-jems', component: JemMilieuComponent },
   { path: 'code-jems/tech/:tech', component: JemMilieuComponent },
   { path: 'code-jems/type/:type', component: JemMilieuComponent },

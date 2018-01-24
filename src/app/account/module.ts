@@ -1,16 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CreateAccountVueComponent } from './create-account-vue.component';
+import { CreateAccountVueComponent } from './core';
 import { MilieuModule } from '../milieu/module';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { RouterModule } from '@angular/router';
 
-import { AccountMilieuComponent, EmailInputComponent, PasswordInputComponent, UpdatePasswordForm  } from './core';
-import { AccountResetCompoent} from './core';
-import { AccountVueComponent } from './core'
+import { AccountMilieuComponent, ResetPasswordCompoent, AccountVueComponent  } from './core';
 import { AccountServicesComponent} from './services.component';
-import { EmailFormComponent, UserNameFormComponent } from './forms';
+import { EmailFormComponent, EmailInputComponent, UserNameFormComponent, UserNameInputComponent, PasswordInputComponent, UpdatePasswordForm } from './forms';
 
 @NgModule({
   imports: [ CommonModule, RouterModule, MilieuModule, ReactiveFormsModule, ],
@@ -22,9 +20,10 @@ import { EmailFormComponent, UserNameFormComponent } from './forms';
     PasswordInputComponent,
     UpdatePasswordForm,
     AccountServicesComponent,
-    AccountResetCompoent,
+    ResetPasswordCompoent,
     UserNameFormComponent,
-    EmailFormComponent
+    EmailFormComponent,
+    UserNameInputComponent
   ],
   exports: [
     CreateAccountVueComponent,
@@ -34,9 +33,10 @@ import { EmailFormComponent, UserNameFormComponent } from './forms';
     PasswordInputComponent,
     UpdatePasswordForm,
     AccountServicesComponent,
-    AccountResetCompoent,
+    ResetPasswordCompoent,
     UserNameFormComponent,
-    EmailFormComponent
+    EmailFormComponent,
+    UserNameInputComponent
   ]
 })
 export class AccountModule { }

@@ -16,12 +16,13 @@ export abstract class MilieuVue {
 }
 
 export class MilieuFormGroup extends FormGroup{
-  focus: string = null;
+  focus: string = null;  
 }
 
 export abstract class MilieuInputComponent{
   @Input() form: MilieuFormGroup;
   @Input() tabIndex = 1;
+  @Input() autofocus = false;
 
   constructor(protected milieuService: MilieuService){}
 }
