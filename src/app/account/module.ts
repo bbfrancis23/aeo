@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { RouterModule } from '@angular/router';
 
-import { AccountMilieuComponent, ResetPasswordCompoent, AccountVueComponent  } from './core';
+import { AccountMilieuComponent, AccountResetFormComponent, ResetPasswordCompoent, AccountVueComponent  } from './core';
 import { AccountServicesComponent} from './services.component';
 import { EmailFormComponent, EmailInputComponent, UserNameFormComponent, UserNameInputComponent, PasswordInputComponent, UpdatePasswordForm } from './forms';
 
@@ -23,7 +23,8 @@ import { EmailFormComponent, EmailInputComponent, UserNameFormComponent, UserNam
     ResetPasswordCompoent,
     UserNameFormComponent,
     EmailFormComponent,
-    UserNameInputComponent
+    UserNameInputComponent,
+    AccountResetFormComponent
   ],
   exports: [
     CreateAccountVueComponent,
@@ -36,7 +37,8 @@ import { EmailFormComponent, EmailInputComponent, UserNameFormComponent, UserNam
     ResetPasswordCompoent,
     UserNameFormComponent,
     EmailFormComponent,
-    UserNameInputComponent
+    UserNameInputComponent,
+    AccountResetFormComponent
   ]
 })
 export class AccountModule { }
