@@ -86,6 +86,9 @@ app-header .navbar.fixed-top item-search {
 create-account-vue .input-group {
   margin-bottom: 1em;
 }
+account-reset-form .input-group {
+  margin-bottom: 1em;
+}
 .input-group button.material-icons {
   border-radius: 0px;
   font-size: 1em;

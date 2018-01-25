@@ -12,11 +12,22 @@ export abstract class MilieuVue {
   show = true;
   modalOnlyMode = false;
 
+  constructor(){}
+
+  @ViewChild(ModalVueComponent) modalChild: ModalVueComponent;
+}
+
+export abstract class MilieuVuePlus {
+  show = true;
+  modalOnlyMode = false;
+
+  constructor(milieuService:MilieuService){}
+
   @ViewChild(ModalVueComponent) modalChild: ModalVueComponent;
 }
 
 export class MilieuFormGroup extends FormGroup{
-  focus: string = null;  
+  focus: string = null;
 }
 
 export abstract class MilieuInputComponent{

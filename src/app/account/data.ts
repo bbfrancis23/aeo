@@ -3,7 +3,7 @@ import { Injectable} from '@angular/core';
 import { MilieuService } from '../milieu/milieu.service';
 import { Http } from '@angular/http';
 import { Location } from '@angular/common';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 
 'use strict';
@@ -31,7 +31,7 @@ export class AccountService extends MilieuService {
   username = { min: 4, max: 16, pattern: /^[\w]+$/, value: ''};
   password = { min: 4, max: 16, pattern: /^[^\s]+$/};
 
-  constructor(public route: ActivatedRoute, protected readonly http: Http, public readonly location: Location) {
+  constructor(public route: ActivatedRoute, protected readonly http: Http, public readonly location: Location, public router: Router) {
     super(route,http,location);
     this.config = ACCOUNT_CONFIG;
     this.init();

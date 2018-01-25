@@ -1,9 +1,9 @@
 import { Component, Input }           from '@angular/core';
-import { ActivatedRoute }             from "@angular/router";
+import { ActivatedRoute, Router }             from "@angular/router";
 
 import { AccountService }             from './data';
 
-import { Milieu, MilieuFormGroup, MilieuVue }          from '../milieu/core'
+import { Milieu, MilieuFormGroup, MilieuVue, MilieuVuePlus }          from '../milieu/core'
 
 'use strict';
 
@@ -11,16 +11,17 @@ import { Milieu, MilieuFormGroup, MilieuVue }          from '../milieu/core'
 
 /* ACCOUNT FORM VUE ************************************************************/
 
-export abstract class AccountFormVue extends MilieuVue {
+export abstract class AccountFormVue extends MilieuVuePlus {
   uniqueUser: boolean = null;
   uniqueEmail: boolean = null;
   accountCreated = null;
   message = "";
   form = new MilieuFormGroup({});
+  processing = false;
 
   @Input() accountService: AccountService;
 
-  constructor(){super()}
+  constructor(accountService:AccountService){super(accountService)}
 
   get username() { return this.form.get('username'); }
   get email(){ return this.form.get('email'); }
@@ -34,13 +35,17 @@ export abstract class AccountFormVue extends MilieuVue {
   }
 
   checkUniqueUserName(){
+    this.processing = true;
     this.accountService.uniqueUserName(this.username.value).then((data)=>{
+      this.processing = false;
       this.uniqueUser = data;
     });
   }
 
   checkUniqueEmail(){
+    this.processing = true;
     this.accountService.uniqueEmail(this.email.value).then( unique => {
+      this.processing = false;
       this.uniqueEmail = unique;
     });
   }
@@ -117,10 +122,13 @@ export class AccountVueComponent extends MilieuVue {
           <div class="card-block" >
             <form (ngSubmit)="createAccount()" [formGroup]="form" *ngIf="!accountCreated">
               <username-input (usernameBlur)="checkUniqueUserName()" [form]="form" [tabIndex]="1" [autofocus]="true"></username-input>
-              <div class="alert alert-danger" *ngIf="!uniqueUser && username.touched" >User Name is already Taken.</div>
+              <div class="alert alert-danger" *ngIf="!uniqueUser && username.touched && !processing" >User Name is already Taken.</div>
               <email-input (emailBlur)="checkUniqueEmail()" [form]="form" [tabIndex]="2" ></email-input>
-              <div class="alert alert-danger" *ngIf="!uniqueEmail && email.touched" >Email is already Taken.</div>
-              <password-input [form]="form" [tabIndex]="3" ></password-input>
+              <div class="alert alert-danger" *ngIf="!uniqueEmail && email.touched && !processing" >
+                Email is already Taken.<br>
+                <a (mousedown)="this.accountService.router.navigateByUrl('/account/reset-form')" href="#" >I FORGOT MY PASSWORD</a>
+              </div>
+              <password-input [form]="form" [tabIndex]="4" ></password-input>
               <button type="submit" class="btn float-right" [ngClass]="{'btn-outline-primary': form.invalid, 'btn-primary': form.valid}" [disabled]="form.invalid || uniqueEmail === false || uniqueUser == false" >Create Account</button>
             </form>
             <div class="alert" [ngClass]="{'alert-success': accountCreated === true, 'alert-danger': accountCreated === false}" *ngIf="message">{{message}}</div>
@@ -129,7 +137,12 @@ export class AccountVueComponent extends MilieuVue {
       </div>
     <div class="col-md-3"></div></main>`
 })
-export class CreateAccountVueComponent extends AccountFormVue {}
+export class CreateAccountVueComponent extends AccountFormVue {
+
+  constructor(accountService: AccountService){
+    super(accountService);
+  }
+}
 
 /* PASSWORD RESET **************************************************************/
 
@@ -162,6 +175,8 @@ export class ResetPasswordCompoent {
   }
 }
 
+/* ACCOUNT RESET FORM **********************************************************/
+
 @Component({
   selector: 'account-reset-form',
   template:`
@@ -173,14 +188,14 @@ export class ResetPasswordCompoent {
             <div class="card">
             <div class="card-header">Reset Form</div>
               <div class="card-block">
-                <form  [formGroup]="resetForm" #formReset="ngForm" (ngSubmit)="resetPassword()" *ngIf="!mailsent && !submitted">
-                  <email-input [form]="resetForm" [tabIndex]="1" (emailBlur)="checkUniqueEmail()"></email-input>
-                  <button type="submit" class="btn mb-2" [ngClass]="{'btn-outline-primary': resetForm.invalid, 'btn-primary': resetForm.valid}" [disabled]="resetForm.invalid" tabindex="2" >RESET PASSWORD</button>
+                <form [formGroup]="form" (ngSubmit)="resetPassword()" *ngIf="!mailsent && !submitted">
+                  <email-input [form]="form" [tabIndex]="1" (emailBlur)="checkUniqueEmail()"></email-input>
+                  <button type="submit" class="btn mb-2" [ngClass]="{'btn-outline-primary': form.invalid, 'btn-primary': form.valid}" [disabled]="form.invalid" tabindex="2" >RESET PASSWORD</button>
                 </form>
                 <div class="alert alert-danger" *ngIf="uniqueEmail">Email Address not found.</div>
                 <div class="alert alert-success" *ngIf="submitted">Processing</div>
                 <div class="alert alert-success" *ngIf="mailsent">Reset Instructions have been to sent to your Email. <br>Valid for 1 Hour.</div>
-                <a routerLink="/" type="button" class="btn btn-primary close-modal" *ngIf="mailsent">OK</a>
+                <a routerLink="/" type="button" class="btn" [ngClass]="{'btn-outline-secondy': !mailsent, 'btn-primary': mailsent}" *ngIf="!submitted">{{mailsent ? 'OK' : 'CANCEL'}}</a>
               </div>
             </div>
           </div>
@@ -188,26 +203,16 @@ export class ResetPasswordCompoent {
       </content>
     </view-port>`
 })
-export class AccountResetFormComponent {
+export class AccountResetFormComponent extends AccountFormVue {
 
-  resetForm: MilieuFormGroup = new MilieuFormGroup({});
   submitted = false;
-
-  uniqueEmail:boolean = null;
   mailsent = null;
 
-  constructor( public accountService: AccountService ){}
-
-  checkUniqueEmail(){
-
-    this.accountService.uniqueEmail( this.resetForm.get('email').value ).then( data => {
-      this.uniqueEmail = data;
-    });
-  }
+  constructor( public accountService: AccountService ){ super( accountService ) }
 
   resetPassword(){
     this.submitted = true;
-    this.accountService.resetPassword(this.resetForm.get('email').value).then( mailsent =>{
+    this.accountService.resetPassword(this.form.get('email').value).then( mailsent =>{
       this.mailsent = mailsent;
       this.submitted = false;
     });
