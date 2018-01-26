@@ -1,10 +1,10 @@
-import { Config } from '../milieu/data-classes';
-import { Injectable} from '@angular/core';
-import { MilieuService } from '../milieu/milieu.service';
-import { Http } from '@angular/http';
 import { Location } from '@angular/common';
+import { Injectable} from '@angular/core';
+import { Http } from '@angular/http';
 import { ActivatedRoute, Router } from "@angular/router";
 
+import { Config } from '../milieu/data-classes';
+import { MilieuService } from '../milieu/milieu.service';
 
 'use strict';
 
@@ -15,10 +15,9 @@ export const ACCOUNT_CONFIG: Config = {
   itemsMode: false
 };
 
-
 export class Account {
 
-  _id?: string ;
+  _id?: string ; // DO NOT CHANGE - other code depends on no default value;
   username = '';
   email = '';
   password = '';
@@ -37,20 +36,10 @@ export class AccountService extends MilieuService {
     this.init();
 
     this.http.get('api/account').toPromise().then(result => {
-
       if(result.json().data){
-
-              this.username.value = result.json().data.username;
-              this.email.value = result.json().data.email;
+        this.username.value = result.json().data.username;
+        this.email.value = result.json().data.email;
       }
-
-    });
-  }
-
-  validResetId(id){
-    return this.http.post('api/valid-reset-id', JSON.stringify({'resetCode':id}), { headers: this.headers }).toPromise().then(response => {
-
-      return response.json().valid;
     });
   }
 
@@ -72,25 +61,18 @@ export class AccountService extends MilieuService {
     }).catch(this.handleError);
   }
 
-
-  updateUserName(username){
-    return this.http.post(`api/update-user-name`, JSON.stringify({'username':username}), { headers: this.headers }).toPromise().then(response => {
-      //console.log(response.json());
-      return response.json();
+  updateEmail(email){
+    return this.http.post(`api/update-email`, JSON.stringify({'email':email}), { headers: this.headers }).toPromise().then(response => {
     }).catch(this.handleError);
   }
 
-  updateEmail(email){
-    return this.http.post(`api/update-email`, JSON.stringify({'email':email}), { headers: this.headers }).toPromise().then(response => {
-      //console.log(response.json());
+  updateUserName(username){
+    return this.http.post(`api/update-user-name`, JSON.stringify({'username':username}), { headers: this.headers }).toPromise().then(response => {
       return response.json();
     }).catch(this.handleError);
   }
 
   updatePassword(password:string, token?:string){
-
-    console.log(token);
-
     if(token){
       return this.http.post(`api/reset-pw`, JSON.stringify({'password':password, 'resetToken': token}), { headers: this.headers }).toPromise().then(response => {
         return response.json();
@@ -100,6 +82,12 @@ export class AccountService extends MilieuService {
         return response.json();
       }).catch(this.handleError);
     }
+  }
+
+  validResetId(id){
+    return this.http.post('api/valid-reset-id', JSON.stringify({'resetCode':id}), { headers: this.headers }).toPromise().then(response => {
+      return response.json().valid;
+    });
   }
 }
 /* copyright 2017 AEO All Rights Reserved. */
