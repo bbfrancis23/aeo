@@ -1,76 +1,75 @@
-import { Component, EventEmitter, HostListener, Input, Output, OnInit  } from '@angular/core';
-import { MilieuFormGroup, MilieuInputComponent, MilieuVuePlus } from '../milieu/core';
+import { Component, EventEmitter, Input, Output  } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { MilieuService } from '../milieu/milieu.service';
+
 import { AccountService } from './data';
 
+import { MilieuFieldForm, MilieuFormGroup, MilieuVuePlus } from '../milieu/core';
 
 'use strict';
 
-export abstract class MilieuFieldForm{
-  message: string = null;
-  subbitted = false;
-  updated = false;
+/* ABSTRACT ************************************************************************************************************************************************************************************************/
 
-  @Input() showCancelButton = true;
-
-  @Output() cancel = new EventEmitter();
-  form = new MilieuFormGroup({});
-
-  constructor( public milieuService: MilieuService ){}
-
-}
+/* ACCOUNT FORM VUE ************************************************************/
 
 export abstract class AccountFormVue extends MilieuVuePlus {
+
   uniqueUser: boolean = null;
   uniqueEmail: boolean = null;
-  accountCreated = null;
+  accountCreated: boolean = null;
   submitted = false;
-  mailsent = null;
-
+  mailsent: boolean = null;
   message = "";
-  form = new MilieuFormGroup({});
   processing = false;
   loggedIn: boolean = null;
 
+  form = new MilieuFormGroup({});
+
   @Input() accountService: AccountService;
 
-  constructor(accountService:AccountService){super(accountService)}
+  constructor( accountService:AccountService ){ super( accountService ) }
 
-  get username() { return this.form.get('username'); }
-  get email(){ return this.form.get('email'); }
-
-  createAccount(){
-    this.accountService.createItem(this.form.value).then((data)=>{
-      this.accountCreated = data.created;
-      this.message = data.message;
-      window.location.reload();
-    });
-  }
+  get username() { return this.form.get('username') }
+  get email(){ return this.form.get('email') }
 
   checkUniqueUserName(){
+
     this.processing = true;
+
     this.accountService.uniqueUserName(this.username.value).then((data)=>{
+
       this.processing = false;
       this.uniqueUser = data;
     });
   }
 
   checkUniqueEmail(){
+
     if(this.email.value && this.email.valid){
 
-      console.log(this.email.valid);
-
       this.processing = true;
+
       this.accountService.uniqueEmail(this.email.value).then( unique => {
+
         this.processing = false;
         this.uniqueEmail = unique;
       });
     }
   }
 
+  createAccount(){
+
+    this.accountService.createItem(this.form.value).then((data)=>{
+
+      this.accountCreated = data.created;
+      this.message = data.message;
+      window.location.reload();
+    });
+  }
+
   logIn(){
+
     this.accountService.login(this.form.value).then((data)=>{
+
       this.message = data;
       this.loggedIn = data.login;
       this.message = data.message;
@@ -78,119 +77,18 @@ export abstract class AccountFormVue extends MilieuVuePlus {
   }
 
   resetPassword(){
+
     this.submitted = true;
+
     this.accountService.resetPassword(this.form.get('email').value).then( mailsent =>{
+
       this.mailsent = mailsent;
       this.submitted = false;
     });
   }
 }
 
-
-
-
-@Component ({
-  selector: 'username-input',
-  template: `
-    <div class="input-group" [formGroup]="form">
-      <input class="form-control" formControlName="username" placeholder="User Name"  (keypress)="form.focus='username'" tabindex="{{tabIndex}}" autofocus="{{autofocus}}" (blur)="usernameBlur.emit($event)"  required>
-      <button class="btn btn-outline-secondary material-icons" type="button" *ngIf="form.focus==='username'" title="Reset User Name" (click)=username.reset() >clear</button>
-    </div>
-    <div *ngIf="username.invalid && username.touched" class="alert alert-danger">
-      <aside *ngIf="errors.required">User Name is required.</aside>
-      <aside *ngIf="errors.minlength">User Name min {{errors.minlength.requiredLength}} characters.<br>You have {{errors.minlength.actualLength}}.</aside>
-      <aside *ngIf="errors.maxlength">User Name max {{errors.maxlength.requiredLength}} characters.<br> You have {{errors.maxlength.actualLength}}.</aside>
-      <div *ngIf="username.errors.pattern">User Name can only use Alpha Numberic characters and NO spaces.</div>
-    </div>
-    `
-})
-export class UserNameInputComponent extends MilieuInputComponent implements OnInit {
-
-  @Output() usernameBlur = new EventEmitter();
-
-  constructor(protected accountService:AccountService){ super(accountService)}
-
-  ngOnInit(){
-    this.form.addControl('username',  new FormControl('', [Validators.required, Validators.minLength(this.accountService.username.min), Validators.maxLength(this.accountService.username.max), Validators.pattern(this.accountService.username.pattern) ]));
-  
-
-  }
-
-  get username() { return this.form.get('username') }
-  get errors() { return this.username.errors }
-}
-
-
-@Component ({
-  selector: 'email-input',
-  template: `
-    <div class="input-group" [formGroup]="form">
-      <input class="form-control" formControlName="email" placeholder="Email"  (keypress)="form.focus='email'" tabindex="{{tabIndex}}" (blur)="emailBlur.emit($event)" required>
-      <button class="btn btn-outline-secondary material-icons" type="button" *ngIf="form.focus==='email'" title="Reset Email" (click)=email.reset() >clear</button>
-    </div>
-    <div *ngIf="email.invalid && email.touched" class="alert alert-danger">
-      <aside *ngIf="errors.required">Email is required.</aside>
-      <aside *ngIf="errors.minlength">Email min {{errors.minlength.requiredLength}} characters.<br>You have {{errors.minlength.actualLength}}.</aside>
-      <aside *ngIf="errors.maxlength">Email max {{errors.maxlength.requiredLength}} characters.<br> You have {{errors.maxlength.actualLength}}.</aside>
-      <aside *ngIf="errors.email">Must be valid Email.<br>e.g. - name@mail.com</aside>
-    </div>
-    `
-})
-export class EmailInputComponent extends MilieuInputComponent implements OnInit {
-
-  @Output() emailBlur = new EventEmitter();
-
-  constructor(protected accountService:AccountService){ super(accountService)}
-
-  ngOnInit(){
-    this.form.addControl('email',  new FormControl('', [Validators.required, Validators.minLength(this.accountService.email.min),Validators.maxLength(this.accountService.email.max),Validators.email]));
-  }
-
-  get email() { return this.form.get('email') }
-  get errors() { return this.email.errors }
-}
-
-
-@Component({
-  selector: 'password-input',
-  host:{
-    '(document:keypress)': 'handleKeyboardEvent($event)'
-  },
-  template:`
-    <div class="input-group" [formGroup]="form">
-      <input class="form-control" [type]="inputType" formControlName="password" placeholder="Password" (keypress)="this.form.focus='password'" autocorrect="off" autocomplete="off" tabindex="{{tabIndex}}" required>
-      <button class="btn btn-outline-secondary material-icons" type="button" *ngIf="focus==='password'" title="Show Password" (mousedown)="inputType ='text'" (mouseup)="inputType='password'">visibility</button>
-      <button class="btn btn-outline-secondary material-icons" type="button" *ngIf="focus==='password'" title="Clear Password" (click)="password.reset()">clear</button>
-    </div>
-    <div *ngIf="password.invalid && (password.touched)" class="alert alert-danger">
-      <aside *ngIf="errors.required">Password is required.</aside>
-      <aside *ngIf="errors.minlength">Password min {{errors.minlength.requiredLength}} characters.<br>You have {{errors.minlength.actualLength}}.</aside>
-      <aside *ngIf="errors.maxlength">Password max {{errors.maxlength.requiredLength}} characters.<br>You have {{errors.maxlength.actualLength}}.</aside>
-      <aside *ngIf="errors.pattern">Space characters are invalid for Passwords.</aside>
-    </div>
-    <div class="alert alert-warning" *ngIf="caps">CAPS IS ON</div>`
-})
-export class PasswordInputComponent extends MilieuInputComponent implements OnInit{
-
-  caps = false;
-  inputType = 'password';
-
-  constructor(protected accountService:AccountService){ super(accountService)}
-
-  handleKeyboardEvent(event: KeyboardEvent) {
-    if(this.focus==='password'){
-      this.caps = event.getModifierState( 'CapsLock' );
-    }
-  }
-
-  ngOnInit(){
-    this.form.addControl('password',  new FormControl('', [Validators.required, Validators.minLength(this.accountService.password.min), Validators.maxLength(this.accountService.password.max), Validators.pattern(this.accountService.password.pattern)]));
-  }
-
-  get password() { return this.form.get('password') }
-  get errors() { return this.password.errors }
-  get focus() { return this.form.focus }
-}
+/* COMPONENTS **********************************************************************************************************************************************************************************************/
 
 @Component({
   selector: 'username-form',

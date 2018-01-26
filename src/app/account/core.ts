@@ -55,7 +55,7 @@ export class AccountVueComponent extends MilieuVue {
     <div class="card-header">Reset Form</div>
       <div class="card-block">
         <form [formGroup]="form" (ngSubmit)="resetPassword()" *ngIf="!mailsent && !submitted">
-          <email-input [form]="form" [tabIndex]="1" [autofocus]="true" (emailBlur)="checkUniqueEmail()"></email-input>
+          <email-input [form]="form" [tabIndex]="1" [autofocus]="true" [required]="true" (emailBlur)="checkUniqueEmail()"></email-input>
           <button type="submit" class="btn mb-2" [ngClass]="{'btn-outline-primary': form.invalid, 'btn-primary': form.valid}" [disabled]="form.invalid" tabindex="2" >RESET PASSWORD</button>
         </form>
         <div class="alert alert-danger" *ngIf="uniqueEmail">Email Address not found.</div>
@@ -76,9 +76,9 @@ export class AccountResetVueComponent extends AccountFormVue { constructor( publ
     <div class="card-header" >Introduce Your Self</div>
       <div class="card-block" style="color: black" >
         <form (ngSubmit)="createAccount()" [formGroup]="form" *ngIf="!accountCreated">
-          <username-input (usernameBlur)="checkUniqueUserName()" [form]="form" [tabIndex]="1" [autofocus]="true"></username-input>
+          <username-input (usernameBlur)="checkUniqueUserName()" [form]="form" [tabIndex]="1" [autofocus]="true" [required]="true"></username-input>
           <div class="alert alert-danger" *ngIf="!uniqueUser && username.touched && !processing" >User Name is already Taken.</div>
-          <email-input (emailBlur)="checkUniqueEmail()" [form]="form" [tabIndex]="2" ></email-input>
+          <email-input (emailBlur)="checkUniqueEmail()" [form]="form" [tabIndex]="2" [required]="true"></email-input>
           <div class="alert alert-danger" *ngIf="!uniqueEmail && email.touched && !processing" >
             Email is already Taken.<br>
             <a (mousedown)="this.accountService.router.navigateByUrl('/account/reset-form')" href="#" >I FORGOT MY PASSWORD</a>
@@ -104,7 +104,7 @@ export class CreateAccountVueComponent extends AccountFormVue { constructor(acco
       <div *ngIf="accountService.authenticated">{{accountService.router.navigateByUrl('/account')}}</div>
       <div class="card-block">
         <form [formGroup]="form" *ngIf="!loggedIn && !accountService.authenticated" (ngSubmit)="logIn()">
-          <email-input [form]="form" [tabIndex]="1" [autofocus]="true" (emailBlur)="checkUniqueEmail()" ></email-input>
+          <email-input [form]="form" [tabIndex]="1" [autofocus]="true" [required]="true" (emailBlur)="checkUniqueEmail()" ></email-input>
           <password-input  [form]="form" [tabIndex]="2"></password-input>
           <button type="submit" class="btn float-right" [ngClass]="{'btn-outline-primary': form.invalid, 'btn-primary': form.valid}" [disabled]="form.invalid" tabindex="3" >LOG IN</button><br><br>
         </form>

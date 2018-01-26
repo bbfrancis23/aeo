@@ -8,6 +8,22 @@ import { Subject } from 'rxjs/Subject';
 
 'use strict';
 
+/* MILIEU FIELD FORM ***********************************************************/
+
+export abstract class MilieuFieldForm{
+  message: string = null;
+  subbitted = false;
+  updated = false;
+
+  @Input() showCancelButton = true;
+
+  @Output() cancel = new EventEmitter();
+  form = new MilieuFormGroup({});
+
+  constructor( public milieuService: MilieuService ){}
+}
+
+
 export abstract class MilieuVue {
   show = true;
   modalOnlyMode = false;
@@ -34,6 +50,7 @@ export abstract class MilieuInputComponent{
   @Input() form: MilieuFormGroup;
   @Input() tabIndex = 1;
   @Input() autofocus = false;
+  @Input() required = false;
 
   constructor(protected milieuService: MilieuService){}
 }

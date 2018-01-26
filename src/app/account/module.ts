@@ -8,7 +8,8 @@ import { RouterModule } from '@angular/router';
 
 import { AccountMilieuComponent, AccountResetVueComponent, LogInVueComponent, ResetPasswordVueCompoent, AccountVueComponent, } from './core';
 import { AccountServicesComponent} from './services.component';
-import { EmailFormComponent, EmailInputComponent,  UserNameFormComponent, UserNameInputComponent, PasswordInputComponent, UpdatePasswordForm } from './forms';
+import { EmailFormComponent,   UserNameFormComponent,  UpdatePasswordForm } from './forms';
+import { EmailInputComponent, UserNameInputComponent, PasswordInputComponent,} from './input-fields';
 
 @NgModule({
   imports: [ CommonModule, RouterModule, MilieuModule, ReactiveFormsModule, ],
