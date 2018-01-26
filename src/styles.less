@@ -32,6 +32,7 @@
 
 create-account-vue{ .input-group{ .stacked-input } }
 account-reset-form{ .input-group{ .stacked-input } }
+log-in-vue{ .input-group{ .stacked-input} }
 
 /////////////////////////////////////////////////////// old ///////////////////////////////////////////
 
@@ -135,6 +136,58 @@ reset-password{
 
 
 account-reset-form{
+  .view-port-container{
+
+    align-items: center;
+    color: #fff;
+    max-width:  960px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: auto;
+    text-align:  center;
+
+    .view-port-overlay{
+      background: #000;
+      z-index: @overlay-layer;
+      opacity: .75
+    }
+    .view-port-content{
+      z-index: @overlay-content-layer;
+    }
+
+    .card-block{
+      margin: auto;
+    }
+
+    form{
+      .input-group{
+        button{
+          border-radius: 0px;
+
+          &:focus{
+            box-shadow: none;
+          }
+
+          &:last-child{
+            border-radius: 0px 5px 5px 0px;
+          }
+        }
+
+      }
+    }
+
+    img{
+      filter: brightness(80%);
+      transition: filter 2s;
+      &:hover{
+        filter: brightness(200%);
+      }
+    }
+  }
+}
+
+
+log-in{
   .view-port-container{
 
     align-items: center;

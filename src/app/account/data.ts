@@ -89,6 +89,8 @@ export class AccountService extends MilieuService {
 
   updatePassword(password:string, token?:string){
 
+    console.log(token);
+
     if(token){
       return this.http.post(`api/reset-pw`, JSON.stringify({'password':password, 'resetToken': token}), { headers: this.headers }).toPromise().then(response => {
         return response.json();

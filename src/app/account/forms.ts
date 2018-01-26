@@ -1,5 +1,5 @@
 import { Component, EventEmitter, HostListener, Input, Output, OnInit  } from '@angular/core';
-import { MilieuFormGroup, MilieuInputComponent } from '../milieu/core';
+import { MilieuFormGroup, MilieuInputComponent, MilieuVuePlus } from '../milieu/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MilieuService } from '../milieu/milieu.service';
 import { AccountService } from './data';
@@ -20,6 +20,73 @@ export abstract class MilieuFieldForm{
   constructor( public milieuService: MilieuService ){}
 
 }
+
+export abstract class AccountFormVue extends MilieuVuePlus {
+  uniqueUser: boolean = null;
+  uniqueEmail: boolean = null;
+  accountCreated = null;
+  submitted = false;
+  mailsent = null;
+
+  message = "";
+  form = new MilieuFormGroup({});
+  processing = false;
+  loggedIn: boolean = null;
+
+  @Input() accountService: AccountService;
+
+  constructor(accountService:AccountService){super(accountService)}
+
+  get username() { return this.form.get('username'); }
+  get email(){ return this.form.get('email'); }
+
+  createAccount(){
+    this.accountService.createItem(this.form.value).then((data)=>{
+      this.accountCreated = data.created;
+      this.message = data.message;
+      window.location.reload();
+    });
+  }
+
+  checkUniqueUserName(){
+    this.processing = true;
+    this.accountService.uniqueUserName(this.username.value).then((data)=>{
+      this.processing = false;
+      this.uniqueUser = data;
+    });
+  }
+
+  checkUniqueEmail(){
+    if(this.email.value && this.email.valid){
+
+      console.log(this.email.valid);
+
+      this.processing = true;
+      this.accountService.uniqueEmail(this.email.value).then( unique => {
+        this.processing = false;
+        this.uniqueEmail = unique;
+      });
+    }
+  }
+
+  logIn(){
+    this.accountService.login(this.form.value).then((data)=>{
+      this.message = data;
+      this.loggedIn = data.login;
+      this.message = data.message;
+    });
+  }
+
+  resetPassword(){
+    this.submitted = true;
+    this.accountService.resetPassword(this.form.get('email').value).then( mailsent =>{
+      this.mailsent = mailsent;
+      this.submitted = false;
+    });
+  }
+}
+
+
 
 
 @Component ({
@@ -45,6 +112,8 @@ export class UserNameInputComponent extends MilieuInputComponent implements OnIn
 
   ngOnInit(){
     this.form.addControl('username',  new FormControl('', [Validators.required, Validators.minLength(this.accountService.username.min), Validators.maxLength(this.accountService.username.max), Validators.pattern(this.accountService.username.pattern) ]));
+  
+
   }
 
   get username() { return this.form.get('username') }

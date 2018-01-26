@@ -89,6 +89,9 @@ create-account-vue .input-group {
 account-reset-form .input-group {
   margin-bottom: 1em;
 }
+log-in-vue .input-group {
+  margin-bottom: 1em;
+}
 .input-group button.material-icons {
   border-radius: 0px;
   font-size: 1em;
@@ -185,6 +188,42 @@ account-reset-form .view-port-container img {
   transition: filter 2s;
 }
 account-reset-form .view-port-container img:hover {
+  filter: brightness(200%);
+}
+log-in .view-port-container {
+  align-items: center;
+  color: #fff;
+  max-width: 960px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin: auto;
+  text-align: center;
+}
+log-in .view-port-container .view-port-overlay {
+  background: #000;
+  z-index: 2;
+  opacity: 0.75;
+}
+log-in .view-port-container .view-port-content {
+  z-index: 3;
+}
+log-in .view-port-container .card-block {
+  margin: auto;
+}
+log-in .view-port-container form .input-group button {
+  border-radius: 0px;
+}
+log-in .view-port-container form .input-group button:focus {
+  box-shadow: none;
+}
+log-in .view-port-container form .input-group button:last-child {
+  border-radius: 0px 5px 5px 0px;
+}
+log-in .view-port-container img {
+  filter: brightness(80%);
+  transition: filter 2s;
+}
+log-in .view-port-container img:hover {
   filter: brightness(200%);
 }
 .card {

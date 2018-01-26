@@ -18,7 +18,7 @@ export abstract class MilieuVue {
 }
 
 export abstract class MilieuVuePlus {
-  show = true;
+  show = false;
   modalOnlyMode = false;
 
   constructor(milieuService:MilieuService){}
