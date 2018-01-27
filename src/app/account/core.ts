@@ -20,22 +20,22 @@ import { Milieu, MilieuFormGroup, MilieuVue, MilieuVuePlus } from '../milieu/cor
       <div class="card-block">
         <table>
           <tr>
-            <td><button class="btn btn-outline-primary material-icons" [ngClass]="{'active': showEditForm==='username'}" title="Update User Name" (mousedown)="showEditForm = showEditForm==='username' ? null : 'username'" >create</button></td>
+            <td><button class="btn btn-outline-secondary material-icons" [ngClass]="{'active': showEditForm==='username'}" title="Update User Name" (mousedown)="showEditForm = showEditForm==='username' ? null : 'username'" >create</button></td>
             <td class="field-name" >User Name:</td>
             <td class="field" *ngIf="showEditForm !=='username'">{{accountService.username.value}}</td>
             <td *ngIf="showEditForm==='username'"><username-form (cancel)="showEditForm=null"></username-form></td>
           </tr>
           <tr>
-            <td><button class="btn btn-outline-primary material-icons" [ngClass]="{'active': showEditForm==='email'}" title="Update Email" (mousedown)="showEditForm= showEditForm==='email'?null:'email'" >create</button></td>
+            <td><button class="btn btn-outline-secondary material-icons" [ngClass]="{'active': showEditForm==='email'}" title="Update Email" (mousedown)="showEditForm= showEditForm==='email'?null:'email'" >create</button></td>
             <td class="field-name">Email:</td>
             <td class="field" *ngIf="showEditForm !== 'email'">{{accountService.email.value}}</td>
             <td *ngIf="showEditForm==='email'"><email-form (cancel)="showEditForm=null" ></email-form></td>
           </tr>
           <tr>
-            <td><button class="btn btn-outline-primary material-icons" [ngClass]="{'active': showEditForm==='password'}" title="Update Password"  (mousedown)="showEditForm= showEditForm==='password'? null: 'password'" >create</button></td>
+            <td><button class="btn btn-outline-secondary material-icons" [ngClass]="{'active': showEditForm==='password'}" title="Update Password"  (mousedown)="showEditForm= showEditForm==='password'? null: 'password'" >create</button></td>
             <td class="field-name">Password:</td>
             <td class="field" *ngIf="editPassword!==password"></td>
-            <td *ngIf="showEditForm==='password'"><update-password-form (cancelUpdate)="showEditForm=null"></update-password-form></td>
+            <td *ngIf="showEditForm==='password'"><password-form (cancelUpdate)="showEditForm=null"></password-form></td>
           </tr>
         </table>
       </div>
@@ -132,14 +132,15 @@ export class LogInVueComponent extends AccountFormVue {
     <div *ngIf="accountService.authenticated">{{accountService.router.navigateByUrl('/account')}}</div>
     <div class="card-header">Reset Password</div>
       <div class="card-block">
-        <div class="alert alert-danger" *ngIf="!validToken">This link is Invalid or Expired.</div>
-        <update-password-form [showCancelButton]="false" *ngIf="validToken" [resetToken]="token" ></update-password-form>
+        <div class="alert alert-danger" *ngIf="!validToken && !processing">This link is Invalid or Expired.</div>
+        <password-form *ngIf="validToken" [resetToken]="token" ></password-form>
       </div>
     </div>`
 })
 export class ResetPasswordVueCompoent extends MilieuVuePlus {
 
   validToken = null;
+  processing = true;
   token = null;
 
   constructor(public route: ActivatedRoute, public accountService: AccountService){
@@ -149,6 +150,7 @@ export class ResetPasswordVueCompoent extends MilieuVuePlus {
         this.accountService.validResetId( params.id ).then( valid => {
           this.validToken = valid;
           this.token = params.id;
+          this.processing = false;
         }
     ) } )
   }

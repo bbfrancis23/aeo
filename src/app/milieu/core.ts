@@ -12,7 +12,7 @@ import { Subject } from 'rxjs/Subject';
 
 export abstract class MilieuFieldForm{
   message: string = null;
-  subbitted = false;
+  submitted = false;
   updated = false;
 
   @Input() showCancelButton = true;

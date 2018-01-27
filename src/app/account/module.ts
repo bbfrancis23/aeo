@@ -1,48 +1,33 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CreateAccountVueComponent } from './core';
-import { MilieuModule } from '../milieu/module';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { RouterModule } from '@angular/router';
 
-import { AccountMilieuComponent, AccountResetVueComponent, LogInVueComponent, ResetPasswordVueCompoent, AccountVueComponent, } from './core';
-import { AccountServicesComponent} from './services.component';
-import { EmailFormComponent,   UserNameFormComponent,  UpdatePasswordForm } from './forms';
+import { AccountMilieuComponent, AccountResetVueComponent, CreateAccountVueComponent, LogInVueComponent, ResetPasswordVueCompoent, AccountVueComponent, } from './core';
+import { EmailFormComponent,   UserNameFormComponent,  PasswordFormComponent } from './forms';
 import { EmailInputComponent, UserNameInputComponent, PasswordInputComponent,} from './input-fields';
+import { AccountServicesComponent} from './services.component';
+
+import { MilieuModule } from '../milieu/module';
+
 
 @NgModule({
   imports: [ CommonModule, RouterModule, MilieuModule, ReactiveFormsModule, ],
-  declarations: [
-    CreateAccountVueComponent,
-    AccountVueComponent,
-    AccountMilieuComponent,
-    EmailInputComponent,
-    PasswordInputComponent,
-    UpdatePasswordForm,
-    AccountServicesComponent,
-    ResetPasswordVueCompoent,
-    UserNameFormComponent,
-    EmailFormComponent,
-    UserNameInputComponent,
-    AccountResetVueComponent,
-    LogInVueComponent
-
+  declarations: [ AccountVueComponent, AccountResetVueComponent, AccountServicesComponent, AccountMilieuComponent,
+                  CreateAccountVueComponent,
+                  EmailFormComponent, EmailInputComponent,
+                  LogInVueComponent,
+                  PasswordInputComponent, PasswordFormComponent,
+                  ResetPasswordVueCompoent,
+                  UserNameFormComponent, UserNameInputComponent
   ],
-  exports: [
-    CreateAccountVueComponent,
-    AccountVueComponent,
-    AccountMilieuComponent,
-    EmailInputComponent,
-    PasswordInputComponent,
-    UpdatePasswordForm,
-    AccountServicesComponent,
-    ResetPasswordVueCompoent,
-    UserNameFormComponent,
-    EmailFormComponent,
-    UserNameInputComponent,
-    AccountResetVueComponent,
-    LogInVueComponent
+  exports:[ AccountVueComponent, AccountResetVueComponent, AccountServicesComponent, AccountMilieuComponent,
+                  CreateAccountVueComponent,
+                  EmailFormComponent, EmailInputComponent,
+                  LogInVueComponent,
+                  PasswordInputComponent, PasswordFormComponent,
+                  ResetPasswordVueCompoent,
+                  UserNameFormComponent, UserNameInputComponent
   ]
 })
 export class AccountModule { }

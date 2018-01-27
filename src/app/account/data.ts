@@ -63,6 +63,7 @@ export class AccountService extends MilieuService {
 
   updateEmail(email){
     return this.http.post(`api/update-email`, JSON.stringify({'email':email}), { headers: this.headers }).toPromise().then(response => {
+      return response.json();
     }).catch(this.handleError);
   }
 
