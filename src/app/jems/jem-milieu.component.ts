@@ -14,16 +14,17 @@ import { ManageJemComponent } from './core';
 @Component({
   selector: 'jem-milieu',
   template: `
+
+
+
+
     <div (click)="clickCheck($event)">
       <div class="sticky-top container-fluid">
         <div class="row" >
           <div class="col-6 headline" ><h1>{{jemService.pageTitle}}</h1></div>
           <div class="col-6" >
 
-            <!-- <div class="ml-2 float-right  btn-group">
-                <button class="btn material-icons"  title="Jem Filter View" (click)="accountServices.modalMode = true"  >filter_list</button>
-                <button class="btn material-icons"  title="Add Jem View">add</button>
-            </div> -->
+
 
             <div class="ml-2 float-right d-none d-md-block d-lg-block" *ngIf="jemService.authenticated === true">
               <button class="btn btn-outline-secondary material-icons" title="Dash Board" [ngClass]="{'active': jemService.dashBoard}"  (click)="toggleDashBoard()">dashboard</button>
@@ -87,6 +88,8 @@ export class JemMilieuComponent extends Milieu implements OnInit {
     jemService.routeConfig(route);
   }
 
+  //ngOnInit(){}
+
 
   ngOnInit() {
     if (!this.jemService.dashBoard) {
@@ -133,5 +136,7 @@ export class JemMilieuComponent extends Milieu implements OnInit {
       this.updateVue.modalChild.modalMode = true;
     }
   }
+
+  // */
 }
 /* Copyright AEO all rights reserved */

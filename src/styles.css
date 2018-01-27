@@ -1,3 +1,4 @@
+@import "~bootstrap/dist/css/bootstrap.css";
 app-content .view-port-container {
   align-items: center;
   color: #fff;
