@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MilieuVue } from '../milieu/core';
-import { MilieuService } from '../milieu/milieu.service';
+import { MilieuService } from '../milieu/data';
 
 'use strict';
 

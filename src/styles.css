@@ -55,7 +55,7 @@ app-footer footer img:hover {
   filter: grayscale(0%);
 }
 app-header .navbar.fixed-top {
-  z-index: 6;
+  z-index: 7;
   background: linear-gradient(8deg, black 10%, #008080);
 }
 app-header .navbar.fixed-top .navbar-brand {
@@ -109,7 +109,7 @@ account-services .input-group {
 account-services .card {
   position: fixed;
   right: 50px;
-  z-index: 7;
+  z-index: 8;
   width: 250px;
   box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
 }
@@ -400,14 +400,14 @@ modal-vue .modal-mode {
   height: 100%;
   display: block;
   position: fixed;
-  z-index: 6;
+  z-index: 7;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
 }
 modal-vue .modal-vue-content {
   margin: 5% auto;
   width: 70%;
-  z-index: 7;
+  z-index: 8;
   box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
 }
 #nav-search {
@@ -515,14 +515,14 @@ input.ng-untouched {
   height: 100%;
   display: block;
   position: fixed;
-  z-index: 6;
+  z-index: 7;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
 }
 #account-services-modal .modal-content {
   margin: 5% auto;
   width: 0px;
-  z-index: 7;
+  z-index: 8;
 }
 #filter-modal .modal-mode {
   left: 0;
@@ -531,14 +531,14 @@ input.ng-untouched {
   height: 100%;
   display: block;
   position: fixed;
-  z-index: 6;
+  z-index: 7;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
 }
 #filter-modal .modal-content {
   margin: 5% auto;
   width: 70%;
-  z-index: 7;
+  z-index: 8;
   box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
 }
 .loader {

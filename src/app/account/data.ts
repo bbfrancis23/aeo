@@ -3,8 +3,10 @@ import { Injectable} from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute, Router } from "@angular/router";
 
-import { Config } from '../milieu/data-classes';
-import { MilieuService } from '../milieu/milieu.service';
+import { Config } from '../milieu/data';
+import { MilieuService } from '../milieu/data';
+
+
 
 'use strict';
 

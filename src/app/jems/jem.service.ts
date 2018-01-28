@@ -3,7 +3,7 @@ import { Injectable} from '@angular/core';
 import { Http } from '@angular/http';
 import { ActivatedRoute } from "@angular/router";
 import { JEM_CONFIG } from './jem-config';
-import { MilieuService } from '../milieu/milieu.service';
+import { MilieuService } from '../milieu/data';
 
 @Injectable()
 export class JemService extends MilieuService{

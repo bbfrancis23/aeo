@@ -3,7 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 
 import { Milieu, FilterVueComponent, IntroVueComponent } from '../milieu/core';
 import { MilieuModalComponent} from '../milieu/modals';
-import { MilieuService } from '../milieu/milieu.service';
+import { MilieuService } from '../milieu/data';
 
 import { JemListVueComponent } from './core';
 import { JemService } from './jem.service';
@@ -39,9 +39,44 @@ import { ManageJemComponent } from './core';
           </div>
         </div>
       </div>
-      <div class="milieu-content " [ngClass]=" (isColumnVisible(0) && isColumnVisible(1) && isColumnVisible(2)) ? 'container-fluid' : 'container-classic' " >
+
+
+      <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar" ngClass="{}">
+
+          <div class="sidebar-sticky">
+
+
+              <sidebar-intro-vue [milieuService]="jemService"></sidebar-intro-vue>
+              <filter-vue  class="jem-filter-vue" [milieuService]="jemService"></filter-vue>
+
+          </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+
         <div class="row">
-          <div [ngClass]=" (isColumnVisible(0) && isColumnVisible(1) && isColumnVisible(2)) ? 'col-lg-2' : 'col-lg-3' ">
+          <div  [ngClass]=" isColumnVisible(2) ? 'col-lg-6' : 'col-lg-12'">
+            <jem-list-vue  (selectItemEvent)="selectJem($event)" [jemService]="jemService"></jem-list-vue>
+          </div>
+          <div  [ngClass]=" isColumnVisible(1) ? 'col-lg-6' : 'col-lg-12'">
+            <manage-jem [jemService]="jemService" [manageType]="'Add'"  #manageAdd></manage-jem>
+            <manage-jem [jemService]="jemService" [manageType]="'Update'" #manageUpdate></manage-jem>
+          </div>
+        </div>
+
+
+
+        </main>
+      </div>
+    </div>
+</div>
+
+      <!-- <div class="milieu-content container-fluid">
+        <div class="row">
+          <div [ngClass]=" (isColumnVisible(0) && isColumnVisible(1) && isColumnVisible(2)) ? 'col-lg-2' : 'col-lg-3' " style="position: sticky; overflow-y: scroll">
             <intro-vue id="jem-intro-vue" [milieuService]="jemService"></intro-vue>
             <filter-vue  class="jem-filter-vue" [milieuService]="jemService"></filter-vue>
           </div>
@@ -57,10 +92,37 @@ import { ManageJemComponent } from './core';
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </div> -->
     <milieu-modal id="filter-modal"><filter-vue  class="jem-filter-vue" [milieuService]="jemService"></filter-vue></milieu-modal>`,
+
   styles: [`
+
+    /*
+ * Sidebar
+ */
+
+.sidebar {
+  position: fixed;
+  top: 122px;
+  bottom: 0;
+  left: 0;
+  z-index: 6; /* Behind the navbar */
+  padding: 0;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.sidebar-sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 48px; /* Height of navbar */
+  height: calc(100vh - 122px);
+  padding-top: .5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+
+
 
     .container-classic{
       margin-right: auto;
@@ -88,7 +150,9 @@ export class JemMilieuComponent extends Milieu implements OnInit {
     jemService.routeConfig(route);
   }
 
-  //ngOnInit(){}
+
+
+
 
 
   ngOnInit() {
@@ -98,6 +162,7 @@ export class JemMilieuComponent extends Milieu implements OnInit {
     }
     this.columns = [ [this.introVue, this.filterVue], [this.listVue], [this.addVue,this.updateVue]];
   }
+
 
   toggleDashBoard() {
 

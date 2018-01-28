@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { Milieu } from '../milieu/core';
 import { FilterVueComponent } from '../milieu/core';
-import { MilieuService } from '../milieu/milieu.service';
+import { MilieuService } from '../milieu/data';
 import { Property } from './property';
 import { REAL_ESTATE_AGENT_CONFIG} from './real-estate.config';
 import { RealEstateAgentService } from './real-estate-agent.service';

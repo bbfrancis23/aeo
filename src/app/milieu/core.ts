@@ -2,8 +2,8 @@ import { fadeInOutAnimation, modalVueFadeInOut } from './animations';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from "@angular/router";
-import { MilieuService } from './milieu.service';
-import { MilieuModalComponent, ModalVueComponent} from './modals';
+import { MilieuService } from './data';
+import { ModalVueComponent} from './modals';
 import { Subject } from 'rxjs/Subject';
 
 'use strict';
@@ -27,7 +27,9 @@ export abstract class MilieuFieldForm{
 export abstract class MilieuVue {
   show = true;
   modalOnlyMode = false;
+  showVueControls = true;
 
+  constructor(milieuService:MilieuService);
   constructor(){}
 
   @ViewChild(ModalVueComponent) modalChild: ModalVueComponent;
@@ -37,7 +39,7 @@ export abstract class MilieuVuePlus {
   show = false;
   modalOnlyMode = false;
 
-  constructor(milieuService:MilieuService){}
+  constructor(milieuService?:MilieuService){}
 
   @ViewChild(ModalVueComponent) modalChild: ModalVueComponent;
 }
@@ -112,6 +114,25 @@ export class FilterVueComponent extends MilieuVue implements OnInit {
   animations: [ fadeInOutAnimation ]
 })
 export class IntroVueComponent extends MilieuVue {
+  @Input() milieuService: any;
+}
+
+@Component({
+  selector: 'sidebar-intro-vue',
+  template:
+    `<modal-vue>
+        <div class="card" [@fadeInOut]="'in'" *ngIf="show" >
+          <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modalChild.modalMode=true" *ngIf="!modalChild.modalMode && milieuService.dashBoard"></vue-controls>
+          <modal-controls *ngIf="modalChild.modalMode === true"></modal-controls>
+          <div class="card-block">
+            <h4>{{milieuService.config.title}}</h4>
+            <p>{{milieuService.config.intro}}</p>
+          </div>
+        </div>
+    </modal-vue>`,
+  animations: [ fadeInOutAnimation ]
+})
+export class SideBarIntroVueComponent extends MilieuVue {
   @Input() milieuService: any;
 }
 
