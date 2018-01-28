@@ -50,7 +50,6 @@ import { ManageJemComponent } from './core';
 
               <sidebar-intro-vue [milieuService]="jemService"></sidebar-intro-vue>
               <filter-vue  class="jem-filter-vue" [milieuService]="jemService"></filter-vue>
-
           </div>
         </nav>
 
@@ -116,7 +115,6 @@ import { ManageJemComponent } from './core';
   position: sticky;
   top: 48px; /* Height of navbar */
   height: calc(100vh - 122px);
-  padding-top: .5rem;
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }

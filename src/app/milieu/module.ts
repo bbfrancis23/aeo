@@ -5,12 +5,13 @@ import {  FilterVueComponent,
           IntroVueComponent,
           ItemControlsComponent, ItemSearchComponent,
           ModalControlsComponent,
-          SideBarIntroVueComponent,
           SizedItemsVueControlsComponent,
           ViewPortComponent,
           VueControlsComponent } from './core';
 
 import { MilieuModalComponent, ModalVueComponent } from './modals';
+
+import { SideBarIntroVueComponent } from './sidebar';
 
 @NgModule({
   imports: [ CommonModule, FormsModule, ReactiveFormsModule ],

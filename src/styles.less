@@ -23,17 +23,34 @@
   margin-bottom: 1em;
 }
 
+
+.sidebar-vue(){
+  .card{
+    font-family: @primary-font;
+    border-radius: 0px;
+    border: none;
+  }
+}
+
 // CLASSES
 
 .submit-check-button{
   padding-right: 25px; padding-left: 25px;
 }
 
+
 // TAGS
 
 create-account-vue{ .input-group{ .stacked-input } }
 account-reset-form{ .input-group{ .stacked-input } }
 log-in-vue{ .input-group{ .stacked-input} }
+
+sidebar-intro-vue{
+  .sidebar-vue;
+  h2{ color: @primary-color; font-weight: bolder; }
+  img{ width: 100% }
+  p{ color: black; font-family: @alt-font; }
+}
 
 /////////////////////////////////////////////////////// old ///////////////////////////////////////////
 
@@ -42,8 +59,6 @@ log-in-vue{ .input-group{ .stacked-input} }
 // CLASSES
 
 .input-group{
-
-
 
   button.material-icons{
     border-radius: 0px;

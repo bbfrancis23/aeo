@@ -27,7 +27,7 @@ export abstract class MilieuFieldForm{
 export abstract class MilieuVue {
   show = true;
   modalOnlyMode = false;
-  showVueControls = true;
+  showControls = true;
 
   constructor(milieuService:MilieuService);
   constructor(){}
@@ -117,24 +117,7 @@ export class IntroVueComponent extends MilieuVue {
   @Input() milieuService: any;
 }
 
-@Component({
-  selector: 'sidebar-intro-vue',
-  template:
-    `<modal-vue>
-        <div class="card" [@fadeInOut]="'in'" *ngIf="show" >
-          <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modalChild.modalMode=true" *ngIf="!modalChild.modalMode && milieuService.dashBoard"></vue-controls>
-          <modal-controls *ngIf="modalChild.modalMode === true"></modal-controls>
-          <div class="card-block">
-            <h4>{{milieuService.config.title}}</h4>
-            <p>{{milieuService.config.intro}}</p>
-          </div>
-        </div>
-    </modal-vue>`,
-  animations: [ fadeInOutAnimation ]
-})
-export class SideBarIntroVueComponent extends MilieuVue {
-  @Input() milieuService: any;
-}
+
 
 @Component({
   selector: 'item-controls',

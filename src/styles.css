@@ -93,6 +93,22 @@ account-reset-form .input-group {
 log-in-vue .input-group {
   margin-bottom: 1em;
 }
+sidebar-intro-vue .card {
+  font-family: "Montserrat", sans-serif;
+  border-radius: 0px;
+  border: none;
+}
+sidebar-intro-vue h2 {
+  color: #008080;
+  font-weight: bolder;
+}
+sidebar-intro-vue img {
+  width: 100%;
+}
+sidebar-intro-vue p {
+  color: black;
+  font-family: Helvetica;
+}
 .input-group button.material-icons {
   border-radius: 0px;
   font-size: 1em;
