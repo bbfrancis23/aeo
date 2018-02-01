@@ -52,21 +52,14 @@
   }
 }
 
-.aeo-sidebar(){
-  border: 1px solid gray;
-  position: -webkit-sticky;
-  position: sticky;
-  top: @navbar-height;
-  height: calc(100vh - @navbar-height);
-  overflow-x: hidden;
-  overflow-y: auto; 
-}
+
 
 // CLASSES
 
 .submit-check-button{
   padding-right: 25px; padding-left: 25px;
 }
+
 
 
 // TAGS
@@ -79,12 +72,45 @@ sidebar-intro-vue{
   .sidebar-vue;
 
   h2{
-    color: red;
+    color: @primary-color;
     font-weight: bolder;
     font-family: @primary-font;
   }
   img{ width: 100% }
   p{ color: black; font-family: @alt-font; }
+}
+
+
+
+milieu-sidebar{
+  .sidebar{
+    border: 1px solid gray;
+    position: -webkit-sticky;
+    position: sticky;
+    top: @navbar-height;
+    height: ~"calc(100vh - " @navbar-height ~")"; // escape string less bug
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .drawer{
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    display: block;
+    position: fixed;
+    z-index: @overlay-content-layer;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+  }
+
+  .modal-vue-content{
+    width: 300px;
+    position: relative;
+    top: @navbar-height;
+    height: ~"calc(100vh - " @navbar-height ~")"; // escape string less bug
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 }
 
 sidebar-filter-vue{

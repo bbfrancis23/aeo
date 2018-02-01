@@ -127,6 +127,34 @@ sidebar-intro-vue p {
   color: black;
   font-family: Helvetica;
 }
+milieu-sidebar .sidebar {
+  border: 1px solid gray;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 122px;
+  height: calc(100vh -  122px );
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+milieu-sidebar .drawer {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: fixed;
+  z-index: 3;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+milieu-sidebar .modal-vue-content {
+  width: 300px;
+  position: relative;
+  top: 122px;
+  height: calc(100vh -  122px );
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 sidebar-filter-vue .card {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border-radius: 0px;
