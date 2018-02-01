@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {  FilterVueComponent,
+import {  CollapseControlComponent,
+          FilterVueComponent,
           IntroVueComponent,
           ItemControlsComponent, ItemSearchComponent,
           ModalControlsComponent,
@@ -9,31 +10,35 @@ import {  FilterVueComponent,
           ViewPortComponent,
           VueControlsComponent } from './core';
 
-import { MilieuModalComponent, ModalVueComponent } from './modals';
+import { MilieuModalComponent, ModalDrawerComponent, ModalVueComponent } from './modals';
 
-import { SideBarIntroVueComponent } from './sidebar';
+import { MilieuSideBarComponent, SidebarFilterVueComponent, SideBarIntroVueComponent } from './sidebar';
 
 @NgModule({
   imports: [ CommonModule, FormsModule, ReactiveFormsModule ],
-  declarations: [ FilterVueComponent,
+  declarations: [ CollapseControlComponent,
+                  FilterVueComponent,
                   IntroVueComponent,
                   ItemControlsComponent, ItemSearchComponent,
-                  MilieuModalComponent,
-                  ModalControlsComponent, ModalVueComponent,
+                  MilieuModalComponent, MilieuSideBarComponent,
+                  ModalControlsComponent, ModalDrawerComponent, ModalVueComponent,
+                  SidebarFilterVueComponent,
                   SideBarIntroVueComponent,
                   SizedItemsVueControlsComponent,
                   ViewPortComponent,
                   VueControlsComponent
   ],
-  exports: [ FilterVueComponent,
-                  IntroVueComponent,
-                  ItemControlsComponent, ItemSearchComponent,
-                  MilieuModalComponent,
-                  ModalControlsComponent, ModalVueComponent,
-                  SideBarIntroVueComponent,
-                  SizedItemsVueControlsComponent,
-                  ViewPortComponent,
-                  VueControlsComponent
+  exports: [  CollapseControlComponent,
+              FilterVueComponent,
+              IntroVueComponent,
+              ItemControlsComponent, ItemSearchComponent,
+              MilieuModalComponent, MilieuSideBarComponent,
+              ModalControlsComponent, ModalDrawerComponent, ModalVueComponent,
+              SideBarIntroVueComponent,
+              SidebarFilterVueComponent,
+              SizedItemsVueControlsComponent,
+              ViewPortComponent,
+              VueControlsComponent
   ]
 })
 export class MilieuModule { }

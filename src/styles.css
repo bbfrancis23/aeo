@@ -80,6 +80,20 @@ app-header .navbar.fixed-top li.nav-item menu a.featured {
 app-header .navbar.fixed-top item-search {
   margin-right: 5px;
 }
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #777;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: black;
+}
 .submit-check-button {
   padding-right: 25px;
   padding-left: 25px;
@@ -94,13 +108,17 @@ log-in-vue .input-group {
   margin-bottom: 1em;
 }
 sidebar-intro-vue .card {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border-radius: 0px;
   border: none;
+}
+sidebar-intro-vue .card .card-header {
+  border-radius: 0px;
 }
 sidebar-intro-vue h2 {
   color: #008080;
   font-weight: bolder;
+  font-family: "Montserrat", sans-serif;
 }
 sidebar-intro-vue img {
   width: 100%;
@@ -108,6 +126,14 @@ sidebar-intro-vue img {
 sidebar-intro-vue p {
   color: black;
   font-family: Helvetica;
+}
+sidebar-filter-vue .card {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 0px;
+  border: none;
+}
+sidebar-filter-vue .card .card-header {
+  border-radius: 0px;
 }
 .input-group button.material-icons {
   border-radius: 0px;
@@ -369,6 +395,7 @@ jem-milieu .sticky-top h1 {
   }
 }
 jem-milieu .sticky-top .btn-group .btn {
+  font-size: 20px;
   background-color: rgba(0, 0, 0, 0);
   color: white;
   border: 1px solid white;
@@ -388,7 +415,8 @@ jem-milieu .sticky-top .btn-group .btn.active:hover {
 modal-controls,
 vue-controls,
 item-controls,
-sized-items-vue-controls {
+sized-items-vue-controls,
+collapse-control {
   position: absolute;
   top: 0px;
   right: 5px;
@@ -397,14 +425,23 @@ sized-items-vue-controls {
 modal-controls:hover,
 vue-controls:hover,
 item-controls:hover,
-sized-items-vue-controls:hover {
+sized-items-vue-controls:hover,
+collapse-control:hover {
   color: black;
 }
 modal-controls .material-icons,
 vue-controls .material-icons,
 item-controls .material-icons,
-sized-items-vue-controls .material-icons {
+sized-items-vue-controls .material-icons,
+collapse-control .material-icons {
   font-size: 1em;
+}
+collapse-control a {
+  color: white;
+}
+collapse-control a:hover {
+  color: black;
+  text-decoration: none;
 }
 modal-controls .material-icons {
   font-size: 1em;

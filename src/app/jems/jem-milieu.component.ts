@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 
 import { Milieu, FilterVueComponent, IntroVueComponent } from '../milieu/core';
 import { MilieuModalComponent} from '../milieu/modals';
 import { MilieuService } from '../milieu/data';
+import { MilieuSideBarComponent } from '../milieu/sidebar';
 
 import { JemListVueComponent } from './core';
 import { JemService } from './jem.service';
@@ -13,19 +14,21 @@ import { ManageJemComponent } from './core';
 
 @Component({
   selector: 'jem-milieu',
+  host:{
+    '(window:resize)': 'onResize($event)'
+  },
   template: `
-
-
-
-
-    <div (click)="clickCheck($event)">
+    <div (click)="clickCheck($event)" >
       <div class="sticky-top container-fluid">
         <div class="row" >
           <div class="col-6 headline" ><h1>{{jemService.pageTitle}}</h1></div>
           <div class="col-6" >
 
-
-
+            <div class="btn-group float-right d-md-block d-lg-block"  >
+              <!-- <button class="btn material-icons" (click)="sidebar.show = !sidebar.show" [ngClass]="{'active': sidebar.show}"  title="Display / Hide Left Sidebar">swap_horiz</button> -->
+              <button class="btn material-icons" (click)="leftSideBarToggle()" [ngClass]="{'active': sidebar.show}"  title="Display / Hide Left Sidebar">swap_horiz</button>
+            </div>
+            <!--
             <div class="ml-2 float-right d-none d-md-block d-lg-block" *ngIf="jemService.authenticated === true">
               <button class="btn btn-outline-secondary material-icons" title="Dash Board" [ngClass]="{'active': jemService.dashBoard}"  (click)="toggleDashBoard()">dashboard</button>
             </div>
@@ -35,7 +38,7 @@ import { ManageJemComponent } from './core';
               <button class="btn material-icons" (click)="toggleListVue();" [ngClass]="{'active': listVue.show}"  title="Jem List View">list</button>
               <button class="btn material-icons" (click)="addVue.show = !addVue.show" [ngClass]="{'active': addVue.show}"  title="Add Jem View">add</button>
               <button class="btn material-icons" (click)="updateVue.show = !updateVue.show" [ngClass]="{'active': updateVue.show}"  title="Edit Jem View">create</button>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -43,28 +46,24 @@ import { ManageJemComponent } from './core';
 
       <div class="container-fluid">
       <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar" ngClass="{}">
 
-          <div class="sidebar-sticky">
+        <milieu-sidebar class="col-lg-3 d-lg-block d-lg-block pl-0 left-sidebar" >
+          <sidebar-intro-vue  [milieuService]="jemService"></sidebar-intro-vue>
+          <sidebar-filter-vue  class="jem-filter-vue" [milieuService]="jemService"></sidebar-filter-vue>
+        </milieu-sidebar>
+
+        <main role="main" [ngClass]="isColumnVisible(0) ? 'col-lg-9' : 'col-lg-12'" >
 
 
-              <sidebar-intro-vue [milieuService]="jemService"></sidebar-intro-vue>
-              <filter-vue  class="jem-filter-vue" [milieuService]="jemService"></filter-vue>
+          <div class="row">
+            <div  [ngClass]=" isColumnVisible(2) ? 'col-lg-6' : 'col-lg-12'">
+              <jem-list-vue  (selectItemEvent)="selectJem($event)" [jemService]="jemService"></jem-list-vue>
+            </div>
+            <div  [ngClass]=" isColumnVisible(1) ? 'col-lg-6' : 'col-lg-12'">
+              <manage-jem [jemService]="jemService" [manageType]="'Add'"  #manageAdd></manage-jem>
+              <manage-jem [jemService]="jemService" [manageType]="'Update'" #manageUpdate></manage-jem>
+            </div>
           </div>
-        </nav>
-
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-
-
-        <div class="row">
-          <div  [ngClass]=" isColumnVisible(2) ? 'col-lg-6' : 'col-lg-12'">
-            <jem-list-vue  (selectItemEvent)="selectJem($event)" [jemService]="jemService"></jem-list-vue>
-          </div>
-          <div  [ngClass]=" isColumnVisible(1) ? 'col-lg-6' : 'col-lg-12'">
-            <manage-jem [jemService]="jemService" [manageType]="'Add'"  #manageAdd></manage-jem>
-            <manage-jem [jemService]="jemService" [manageType]="'Update'" #manageUpdate></manage-jem>
-          </div>
-        </div>
 
 
 
@@ -92,7 +91,7 @@ import { ManageJemComponent } from './core';
           </div>
         </div>
       </div> -->
-    <milieu-modal id="filter-modal"><filter-vue  class="jem-filter-vue" [milieuService]="jemService"></filter-vue></milieu-modal>`,
+    <!-- <milieu-modal id="filter-modal"><filter-vue  class="jem-filter-vue" [milieuService]="jemService"></filter-vue></milieu-modal>-->`,
 
   styles: [`
 
@@ -100,24 +99,7 @@ import { ManageJemComponent } from './core';
  * Sidebar
  */
 
-.sidebar {
-  position: fixed;
-  top: 122px;
-  bottom: 0;
-  left: 0;
-  z-index: 6; /* Behind the navbar */
-  padding: 0;
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-}
 
-.sidebar-sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 48px; /* Height of navbar */
-  height: calc(100vh - 122px);
-  overflow-x: hidden;
-  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-}
 
 
 
@@ -135,6 +117,10 @@ import { ManageJemComponent } from './core';
 })
 export class JemMilieuComponent extends Milieu implements OnInit {
 
+
+
+  @ViewChild(MilieuSideBarComponent) sidebar :MilieuSideBarComponent;
+
   @ViewChild(JemListVueComponent) listVue;
   @ViewChild('manageAdd') addVue: ManageJemComponent;
   @ViewChild('manageUpdate') updateVue: ManageJemComponent;
@@ -143,6 +129,8 @@ export class JemMilieuComponent extends Milieu implements OnInit {
 
   @ViewChild(MilieuModalComponent) accountServices: MilieuModalComponent;
 
+  viewPortSize = 'lg';
+
   constructor(protected route: ActivatedRoute, protected jemService: JemService) {
     super(route, jemService);
     jemService.routeConfig(route);
@@ -150,17 +138,38 @@ export class JemMilieuComponent extends Milieu implements OnInit {
 
 
 
+  //OnInit(){}
 
-
+  clicky(){
+    console.log(this.sidebar)
+  }
 
   ngOnInit() {
     if (!this.jemService.dashBoard) {
       this.addVue.show = false;
       this.updateVue.show = false;
     }
-    this.columns = [ [this.introVue, this.filterVue], [this.listVue], [this.addVue,this.updateVue]];
+    this.columns = [ [this.sidebar], [this.listVue], [this.addVue,this.updateVue]];
+
+    if(this.viewPortSize === 'md'){
+      //this.sidebar.modalMode = true;
+      //this.sidebar.show = false;
+    }
   }
 
+
+  leftSideBarToggle(){
+
+    if(this.viewPortSize === 'md'){
+      //this.sidebar.modalMode = ! this.sidebar.modalMode;
+    }else{
+      this.sidebar.show = !this.sidebar.show;
+    }
+  }
+
+  onResize($e){
+    // this gives a ref to window object;
+  }
 
   toggleDashBoard() {
 

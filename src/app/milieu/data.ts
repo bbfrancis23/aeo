@@ -50,6 +50,7 @@ export class MilieuService {
   requireAuth = false;
   tabletMode = false;
 
+  readonly media = { small: 576, med: 768, lg: 992, xl: 1200 }
   //filterMode = false;
 
 

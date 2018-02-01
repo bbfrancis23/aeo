@@ -270,6 +270,15 @@ export class VueControlsComponent {
 }
 
 @Component({
+  selector: 'collapse-control',
+  template: `<a class="material-icons" data-toggle="collapse" [href]="dataTarget" (click)="collapse = collapse==='down' ? 'up' : 'down'" >arrow_drop_{{collapse}}</a>`
+})
+export class CollapseControlComponent extends VueControlsComponent{
+  @Input() dataTarget: string = '';
+  collapse = 'down';
+}
+
+@Component({
   selector: 'modal-controls',
   template: `<div><a class="material-icons" ><div class="close-modal">clear</div></a></div>`
 })

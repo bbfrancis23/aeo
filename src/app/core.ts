@@ -2,15 +2,20 @@ import { Component, ViewChild } from '@angular/core';
 import { AccountService }       from './account/data';
 import { JemService }           from './jems/jem.service';
 import { MilieuModalComponent } from './milieu/modals';
+import { JemMilieuComponent } from './jems/jem-milieu.component';
 
 @Component({
   selector: 'app-root',
   template: `
     <app-header></app-header>
-    <router-outlet></router-outlet>
-    <app-footer></app-footer>`
+    <router-outlet (activate)='onActivate($event)'></router-outlet>
+    <app-footer *ngIf="showFooter"></app-footer>`
 })
-export class AppComponent {}
+export class AppComponent {
+  showFooter = true;
+
+  onActivate($event){ if($event instanceof JemMilieuComponent) this.showFooter = false }
+}
 
 @Component({
   selector: 'app-header',
@@ -117,7 +122,7 @@ export class AppContentComponent{}
 @Component({
   selector: 'app-footer',
   template: `
-    <footer class="fluid-container">
+    <footer class="fluid-container" *ngIf="show">
       <div class="row">
         <div class="col-lg-12">
           <a href="https://angular.io" target="_blank"><img src="assets/img/angular.png" title="Angular" ></a>
@@ -134,7 +139,9 @@ export class AppContentComponent{}
       </div>
     </footer>`
 })
-export class AppFooterComponent{}
+export class AppFooterComponent{
+  show=true;
+}
 
 
 /* copyright AEO all right reserved */

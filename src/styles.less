@@ -17,6 +17,22 @@
 @modals-layer: 7;
 @modals-content-layer: 8;
 
+@navbar-height: 122px;
+
+::-webkit-scrollbar { width: 5px }
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #777;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover { background: black }
+
 // ABSTRACT
 
 .stacked-input(){
@@ -26,10 +42,24 @@
 
 .sidebar-vue(){
   .card{
-    font-family: @primary-font;
+    font-family: @regular-font;
     border-radius: 0px;
     border: none;
+
+    .card-header{
+      border-radius: 0px;
+    }
   }
+}
+
+.aeo-sidebar(){
+  border: 1px solid gray;
+  position: -webkit-sticky;
+  position: sticky;
+  top: @navbar-height;
+  height: calc(100vh - @navbar-height);
+  overflow-x: hidden;
+  overflow-y: auto; 
 }
 
 // CLASSES
@@ -47,9 +77,18 @@ log-in-vue{ .input-group{ .stacked-input} }
 
 sidebar-intro-vue{
   .sidebar-vue;
-  h2{ color: @primary-color; font-weight: bolder; }
+
+  h2{
+    color: red;
+    font-weight: bolder;
+    font-family: @primary-font;
+  }
   img{ width: 100% }
   p{ color: black; font-family: @alt-font; }
+}
+
+sidebar-filter-vue{
+  .sidebar-vue;
 }
 
 /////////////////////////////////////////////////////// old ///////////////////////////////////////////
@@ -431,6 +470,7 @@ jem-milieu{
 
     }
     .btn-group .btn{
+      font-size: 20px;
       background-color: rgba(0,0,0, .0);
       color: white;
       border: 1px solid white;
@@ -450,13 +490,24 @@ jem-milieu{
   }
 }
 
-modal-controls, vue-controls, item-controls, sized-items-vue-controls{
+modal-controls, vue-controls, item-controls, sized-items-vue-controls, collapse-control{
   .control;
 
   .material-icons{ font-size: 1em }
 }
 
+collapse-control{
+  a{
+    color:white;
+  }
+  a:hover{
+    color: black;
+    text-decoration: none;
+  }
+}
+
 modal-controls { .material-icons{ font-size: 1em } }
+
 
 modal-vue{
   .modal-mode{
@@ -474,6 +525,11 @@ modal-vue{
     z-index: @modals-content-layer;
     box-shadow: 10px 10px 1px 0 rgba(0,0,0,0.3)
   }
+}
+
+milieu-sidebar{
+
+
 }
 
 // IDS //
