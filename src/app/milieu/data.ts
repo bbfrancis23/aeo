@@ -81,7 +81,7 @@ export class MilieuService {
   set dashBoard(b: boolean) {
     if(this.dashBoardPermission === 'admin' && this.admin || !(this.dashBoardPermission === 'admin'))
     this._dashBoard = b;
-    this.updateUrl();
+    this.updateUrl();//console.log('set dashboard')
   }
   //create(item: any): Promise<any> {
   login(logInFields){
@@ -110,7 +110,7 @@ export class MilieuService {
 
     this.http.get('api/session').toPromise().then(result => {
 
-      console.log(result);
+      //console.log(result);
 
       if(result.json().message === 'Admin'){
         this.admin = true;
@@ -282,7 +282,7 @@ export class MilieuService {
 
   filter(col = "title", value = ''){
 
-    //console.log('filter called');
+    //console.log(this.config);
 
     let itemsFiltered: {}[];
     this.currentItems.subscribe(items => {
@@ -294,15 +294,26 @@ export class MilieuService {
       this.config.fields.forEach(field => {
         let filtered = [], filters: string[] = [];
 
-        field.values.forEach(value => { if (value.filtered) filters.push(value.name) });
+        field.values.forEach( value => {
+                                if (value.filtered) {
+                                  filters.push(value.name);
+
+                                  //console.log("filter pushing", value.name);
+                                }
+                              });
 
         if (filters.length > 0) {
           filters.forEach(filter => {
             itemsFiltered.forEach(item => {
               if (item[field.name] === filter) {
-                let regExp = new RegExp(value, "i")
+                let regExp = new RegExp(value, "i");
+
+                //console.log(regExp, col);
+
                 if(item[col].search(regExp) > -1){
                   filtered.push(item);
+
+                  //console.log(item);
                 }
               }
             });
@@ -327,6 +338,7 @@ export class MilieuService {
 
   private updateUrl(): void {
 
+    console.log()
 
     let url = this.config.directory, qs: string = '', fieldPaths: string[] = [], queryStrings: string[] = [], selectedFilters: string[] = [];
 
@@ -336,17 +348,34 @@ export class MilieuService {
     }
 
     this.config.fields.forEach(field => {
+
+
+      //console.log(field);
+
       let filters = [];
-      field.values.forEach(value => { if (value.filtered) filters.push(value.name) });
+      field.values.forEach( value => {
+                                        //console.log(value);
+                                        if (value.filtered) {
+                                          filters.push(value.name);
+                                          //console.log('pushing', value.name);
+                                        }
+                                      });
 
       if (filters.length === 1) {
         fieldPaths.push(`${this.urlify(field.name)}/${this.urlify(filters[0])}`);
         selectedFilters.push(filters[0]);
 
       } else if (filters.length > 1) {
+
+        //console.log('creating query string');
         queryStrings.push(`${this.urlify(field.name)}=${this.urlify(filters.join(','))}`);
       }
     });
+
+
+    //console.log(this.config.fields);
+    //console.log('query Strings', queryStrings);
+
 
     this.location.replaceState(`${url}/${fieldPaths.join('/')}`, `${queryStrings.join('&')}`);
     this.pageTitle = selectedFilters.length > 0 ? selectedFilters.join(' ') : this.config.title;
@@ -394,6 +423,8 @@ export class MilieuService {
 
     route.params.subscribe(params => {
 
+
+      let c = 0;
       this.config.fields.forEach(field => {
 
         field.values.forEach(data=>{
@@ -407,9 +438,22 @@ export class MilieuService {
           let param = this.unUrlify(params[field.name]);
           field.values[field.values.findIndex(value => value.name.toLowerCase() === param)].filtered = true;
         }
-        this.filter();
-        //console.log(field);
-      });
+
+        c++;
+
+        //console.log(c);
+
+        if(c === 2){
+          //this.filter();
+        }
+
+      },
+      err =>{
+        console.log(err)
+      }
+        );
+
+
     });
 
     route.queryParams.subscribe(params => {

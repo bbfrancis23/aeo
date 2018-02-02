@@ -131,14 +131,15 @@ export class JemMilieuComponent extends Milieu implements OnInit {
 
   viewPortSize = 'lg';
 
-  constructor(protected route: ActivatedRoute, protected jemService: JemService) {
+  constructor(public route: ActivatedRoute, protected jemService: JemService) {
     super(route, jemService);
-    jemService.routeConfig(route);
+
+    //console.log('you called constructor');
   }
 
 
 
-  //OnInit(){}
+
 
   clicky(){
     console.log(this.sidebar)
@@ -155,6 +156,9 @@ export class JemMilieuComponent extends Milieu implements OnInit {
       //this.sidebar.modalMode = true;
       //this.sidebar.show = false;
     }
+
+    this.jemService.routeConfig(this.route);
+    this.jemService.refresh();
   }
 
 
