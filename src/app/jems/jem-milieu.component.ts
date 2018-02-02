@@ -25,8 +25,8 @@ import { ManageJemComponent } from './core';
           <div class="col-6" >
 
             <div class="btn-group float-right d-md-block d-lg-block"  >
-              <!-- <button class="btn material-icons" (click)="sidebar.show = !sidebar.show" [ngClass]="{'active': sidebar.show}"  title="Display / Hide Left Sidebar">swap_horiz</button> -->
-              <button class="btn material-icons" (click)="leftSideBarToggle()" [ngClass]="{'active': sidebar.show}"  title="Display / Hide Left Sidebar">swap_horiz</button>
+              <!-- <button class="btn material-icons" (click)="leftSidebar.show = !leftSidebar.show" [ngClass]="{'active': leftSidebar.show}"  title="Display / Hide Left Sidebar">swap_horiz</button> -->
+              <button class="btn material-icons" (click)="leftSideBarToggle()" [ngClass]="{'active': leftSidebar.show}"  title="Display / Hide Left Sidebar">swap_horiz</button>
             </div>
             <!--
             <div class="ml-2 float-right d-none d-md-block d-lg-block" *ngIf="jemService.authenticated === true">
@@ -47,22 +47,21 @@ import { ManageJemComponent } from './core';
       <div class="container-fluid">
       <div class="row">
 
-        <milieu-sidebar class="col-lg-3 d-lg-block d-lg-block pl-0 left-sidebar" >
+        <milieu-sidebar class="col-lg-2 d-lg-block d-lg-block pl-0 left-sidebar" #leftSideBar [hasModal]="true" >
           <sidebar-intro-vue  [milieuService]="jemService"></sidebar-intro-vue>
           <sidebar-filter-vue  class="jem-filter-vue" [milieuService]="jemService"></sidebar-filter-vue>
         </milieu-sidebar>
 
-        <main role="main" [ngClass]="isColumnVisible(0) ? 'col-lg-9' : 'col-lg-12'" >
+        <main role="main" [ngClass]="isColumnVisible(0) ? 'col-lg-10' : 'col-lg-12'" >
 
 
           <div class="row">
-            <div  [ngClass]=" isColumnVisible(2) ? 'col-lg-6' : 'col-lg-12'">
+            <div class="col-lg-10" >
               <jem-list-vue  (selectItemEvent)="selectJem($event)" [jemService]="jemService"></jem-list-vue>
             </div>
-            <div  [ngClass]=" isColumnVisible(1) ? 'col-lg-6' : 'col-lg-12'">
-              <manage-jem [jemService]="jemService" [manageType]="'Add'"  #manageAdd></manage-jem>
-              <manage-jem [jemService]="jemService" [manageType]="'Update'" #manageUpdate></manage-jem>
-            </div>
+            <milieu-sidebar class="col-lg-2 d-none d-lg-block d-lg-block pl-0 right-sidebar" #rightSideBar>
+              <jem-table-of-contents [jemService]="jemService"></jem-table-of-contents>
+            </milieu-sidebar>
           </div>
 
 
@@ -119,7 +118,8 @@ export class JemMilieuComponent extends Milieu implements OnInit {
 
 
 
-  @ViewChild(MilieuSideBarComponent) sidebar :MilieuSideBarComponent;
+  @ViewChild("leftSideBar") leftSidebar :MilieuSideBarComponent;
+  @ViewChild("rightSideBar") rightSidebar :MilieuSideBarComponent;
 
   @ViewChild(JemListVueComponent) listVue;
   @ViewChild('manageAdd') addVue: ManageJemComponent;
@@ -141,16 +141,14 @@ export class JemMilieuComponent extends Milieu implements OnInit {
 
 
 
-  clicky(){
-    console.log(this.sidebar)
-  }
+
 
   ngOnInit() {
     if (!this.jemService.dashBoard) {
-      this.addVue.show = false;
-      this.updateVue.show = false;
+      //this.addVue.show = false;
+      //this.updateVue.show = false;
     }
-    this.columns = [ [this.sidebar], [this.listVue], [this.addVue,this.updateVue]];
+    this.columns = [ [this.leftSidebar], [this.listVue], [this.rightSidebar]];
 
     if(this.viewPortSize === 'md'){
       //this.sidebar.modalMode = true;
@@ -167,7 +165,7 @@ export class JemMilieuComponent extends Milieu implements OnInit {
     if(this.viewPortSize === 'md'){
       //this.sidebar.modalMode = ! this.sidebar.modalMode;
     }else{
-      this.sidebar.show = !this.sidebar.show;
+      this.leftSidebar.show = !this.leftSidebar.show;
     }
   }
 
@@ -180,10 +178,10 @@ export class JemMilieuComponent extends Milieu implements OnInit {
     this.jemService.dashBoard = !this.jemService.dashBoard;
 
     if (this.jemService.dashBoard) {
-      this.addVue.show = true;
+      //this.addVue.show = true;
     } else {
-      this.updateVue.show = false;
-      this.addVue.show = false;
+      //this.updateVue.show = false;
+      //this.addVue.show = false;
     }
 
   }
@@ -207,10 +205,10 @@ export class JemMilieuComponent extends Milieu implements OnInit {
   }
 
   clickCheck(e){
-    if(e.target.className.search('update') > -1){
-      this.updateVue.show = true;
-      this.updateVue.modalChild.modalMode = true;
-    }
+    //if(e.target.className.search('update') > -1){
+    //  this.updateVue.show = true;
+    //  this.updateVue.modalChild.modalMode = true;
+    //}
   }
 
   // */

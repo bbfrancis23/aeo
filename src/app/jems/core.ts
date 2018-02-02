@@ -49,6 +49,18 @@ export class JemListVueComponent extends ListVue implements OnInit {
 }
 
 @Component({
+  selector: 'jem-table-of-contents',
+  template:`Table of Contents<br>
+  <ul>
+    <li *ngFor="let jem of items; trackBy: trackByJem">{{jem.title}}</li>
+  </ul>`
+})
+export class JemTableOfContents extends JemListVueComponent{
+
+}
+
+
+@Component({
   selector: 'manage-jem',
   template:`
   <modal-vue>

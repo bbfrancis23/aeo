@@ -8,9 +8,9 @@ import { MilieuService} from './data';
 @Component({
   selector: 'milieu-sidebar',
   template: `
-  <div [ngClass]="{'sidebar': win.innerWidth >= largeViewPort}"   (click)="sidebarClick($event)" *ngIf="show">
-    <div [ngClass]="{'drawer': win.innerWidth < largeViewPort }">
-      <div [ngClass]="{'modal-vue-content': win.innerWidth < largeViewPort}">
+  <div [ngClass]="{'sidebar': win.innerWidth >= largeViewPort}"   (click)="sidebarClick($event)" *ngIf="show || !hasModal">
+    <div [ngClass]="{'drawer': win.innerWidth < largeViewPort && hasModal }">
+      <div [ngClass]="{'modal-vue-content': win.innerWidth < largeViewPort && hasModal}">
         <ng-content></ng-content>
       </div>
     </div>
@@ -20,10 +20,10 @@ export class MilieuSideBarComponent extends MilieuVue {
 
   win = window;
   largeViewPort = this.milieuService.media.lg;
+  @Input() hasModal = null;
+  show = (window.innerWidth < this.largeViewPort) ? false : true;
 
-  show = (window.innerWidth >= this.largeViewPort) ? true : false;
-
-  constructor(public milieuService: MilieuService){ super(milieuService);}
+  constructor(public milieuService: MilieuService){ super(milieuService);  }
 
   sidebarClick(e) { if(e.target.className.search(/modal-mode/) > -1  || e.target.className.search(/close-modal/) > -1) this.show = false }
 }
