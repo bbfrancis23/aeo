@@ -333,6 +333,9 @@ export class MilieuService {
 
     });
     this.changeFilteredItems(itemsFiltered);
+
+
+    //console.log('filter called update URL');
     this.updateUrl();
   }
 
@@ -376,8 +379,17 @@ export class MilieuService {
     //console.log(this.config.fields);
     //console.log('query Strings', queryStrings);
 
+    //console.log('replaceState', `${url}/${fieldPaths.join('/')}`, `${queryStrings.join('&')}`);
 
-    this.location.replaceState(`${url}/${fieldPaths.join('/')}`, `${queryStrings.join('&')}`);
+    //console.log('your vars', fieldPaths.length, queryStrings.length);
+
+    if(fieldPaths.length > 0){
+      this.location.replaceState(`${url}/${fieldPaths.join('/')}`, `${queryStrings.join('&')}`);
+    }else{
+      this.location.replaceState(`${url}${fieldPaths.join('/')}`, `${queryStrings.join('&')}`);
+    }
+
+
     this.pageTitle = selectedFilters.length > 0 ? selectedFilters.join(' ') : this.config.title;
 
 
@@ -410,18 +422,24 @@ export class MilieuService {
   urlify(string: string): string {
     string = string || '';
 
+    string = string.replace(/^\s+/, '');
+    string = string.replace(/\s+$/, '');
     string = string.replace(/[^A-Za-z0-9\s\,\-]/g, '');
-    string.trim();
     string = string.replace(/\s+/g, "-");
+    string = string.replace(/\-+/g, '-');
     string = string.toLowerCase();
 
     return string;
   }
 
 
+
   routeConfig(route) {
 
     route.params.subscribe(params => {
+
+
+
 
 
       let c = 0;
@@ -443,9 +461,9 @@ export class MilieuService {
 
         //console.log(c);
 
-        if(c === 2){
-          //this.filter();
-        }
+        //if(c === 2){
+
+        //}
 
       },
       err =>{
@@ -453,10 +471,12 @@ export class MilieuService {
       }
         );
 
-
+      //this.filter();
     });
 
     route.queryParams.subscribe(params => {
+
+
 
       if (params['dash-board'] ) {
         this.dashBoard = true;
@@ -471,7 +491,10 @@ export class MilieuService {
           });
         }
       });
+
+      //this.filter();
     });
+
 
   }
 }

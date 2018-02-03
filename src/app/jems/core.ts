@@ -12,7 +12,7 @@ import { fadeInOutAnimation, flyInOut } from '../milieu/animations';
   template: `
     <modal-vue>
       <div [@fadeInOut]="'in'" *ngIf="show"  >
-        <div class="card">
+        <div class="card" >
         <div class="card-header">
           Jems List
         </div>
@@ -25,8 +25,8 @@ import { fadeInOutAnimation, flyInOut } from '../milieu/animations';
           (modalVueEvent)="modalChild.modalMode=true;"
           (toggleItemSizeEvent)="showBig = !showBig" >
         </sized-items-vue-controls>
-        <div class="tile">
-          <jem *ngFor="let jem of items; trackBy: trackByJem" [jem]="jem" [jemService]="jemService" [showBig]="showBig" ></jem>
+        <div >
+          <jem  *ngFor="let jem of items; trackBy: trackByJem" [jem]="jem" [jemService]="jemService" [showBig]="showBig"  ></jem>
         </div>
       </div>
     </modal-vue>`,
@@ -50,12 +50,24 @@ export class JemListVueComponent extends ListVue implements OnInit {
 
 @Component({
   selector: 'jem-table-of-contents',
-  template:`Table of Contents<br>
-  <ul>
-    <li *ngFor="let jem of items; trackBy: trackByJem">{{jem.title}}</li>
-  </ul>`
+  template:`
+  <div class="container-fluid">
+    <div id="snippits" class="list-group">
+      <br>
+      <a  class="list-group-item list-group-item-action" *ngFor="let jem of items; trackBy: trackByJem" href="#{{jemService.urlify(jem.title)}}"  (click)="clicky(jem);">{{jem.title}}</a>
+    </div>
+  </div>`
 })
 export class JemTableOfContents extends JemListVueComponent{
+
+  clicky(jem){
+
+    document.querySelector('#' + this.jemService.urlify(jem.title)).scrollIntoView();
+
+    //this.jemService.router.navigateByUrl(this.jemService.location.path()+'#'+this.jemService.urlify(jem.title));
+    //console.log(this.jemService.location.path()); //href="{{jemService.location.path()}}#{{jemService.urlify(jem.title)}}"
+    return false;
+  }
 
 }
 
@@ -184,6 +196,7 @@ export class ManageJemComponent extends MilieuVue implements OnInit {
 @Component({
   selector: 'jem',
   template: `
+  <a class="scroll-to-control" id="{{jemService.urlify(jem.title)}}"></a>
     <div  class="card mb-3"
         [ngClass]="{  'border-success': jem.type === 'Best Practices',
                       'border-danger': jem.type === 'Mistakes',
@@ -192,6 +205,7 @@ export class ManageJemComponent extends MilieuVue implements OnInit {
     <item-controls [item]="jem" *ngIf="jemService.dashBoard" [milieuService]="jemService"></item-controls>
     <div class="card-body">
       <h4 class="card-title">{{jem.title}}</h4>
+
       <h5>{{jem.tech}}</h5>
       <h5>
         <span class="badge"

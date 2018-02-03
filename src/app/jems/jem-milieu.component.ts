@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 
 import { Milieu, FilterVueComponent, IntroVueComponent } from '../milieu/core';
@@ -56,10 +56,10 @@ import { ManageJemComponent } from './core';
 
 
           <div class="row">
-            <div class="col-lg-10" >
-              <jem-list-vue  (selectItemEvent)="selectJem($event)" [jemService]="jemService"></jem-list-vue>
+            <div class="col-lg-9" >
+              <jem-list-vue (selectItemEvent)="selectJem($event)" [jemService]="jemService"></jem-list-vue>
             </div>
-            <milieu-sidebar class="col-lg-2 d-none d-lg-block d-lg-block pl-0 right-sidebar" #rightSideBar>
+            <milieu-sidebar class="col-lg-3 d-none d-lg-block d-lg-block pl-0 right-sidebar" #rightSideBar>
               <jem-table-of-contents [jemService]="jemService"></jem-table-of-contents>
             </milieu-sidebar>
           </div>
@@ -117,6 +117,7 @@ import { ManageJemComponent } from './core';
 export class JemMilieuComponent extends Milieu implements OnInit {
 
 
+  private fragment: string;
 
   @ViewChild("leftSideBar") leftSidebar :MilieuSideBarComponent;
   @ViewChild("rightSideBar") rightSidebar :MilieuSideBarComponent;
@@ -133,8 +134,6 @@ export class JemMilieuComponent extends Milieu implements OnInit {
 
   constructor(public route: ActivatedRoute, protected jemService: JemService) {
     super(route, jemService);
-
-    //console.log('you called constructor');
   }
 
 
@@ -156,9 +155,25 @@ export class JemMilieuComponent extends Milieu implements OnInit {
     }
 
     this.jemService.routeConfig(this.route);
+
     this.jemService.refresh();
+
+
+    this.route.fragment.subscribe(fragment => {
+      this.fragment = fragment;
+    });
   }
 
+  ngAfterViewInit(){
+
+    console.log(this.fragment);
+
+    try {
+      //document.querySelector('#' + this.fragment).scrollIntoView();
+
+      //console.log(document);
+    } catch (e) { console.log(e)}
+  }
 
   leftSideBarToggle(){
 

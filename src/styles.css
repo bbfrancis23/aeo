@@ -55,7 +55,7 @@ app-footer footer img:hover {
   filter: grayscale(0%);
 }
 app-header .navbar.fixed-top {
-  z-index: 7;
+  z-index: 6;
   background: linear-gradient(8deg, black 10%, #008080);
 }
 app-header .navbar.fixed-top .navbar-brand {
@@ -83,20 +83,20 @@ app-header .navbar.fixed-top item-search {
 ::-webkit-scrollbar {
   width: 5px;
 }
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px #777;
-  border-radius: 10px;
-}
 ::-webkit-scrollbar-thumb {
-  background: #666;
-  border-radius: 10px;
+  background: #666666;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: black;
 }
+.scroll-to-control {
+  display: block;
+  position: relative;
+  top: calc(-127px);
+  visibility: hidden;
+}
 .submit-check-button {
-  padding-right: 25px;
-  padding-left: 25px;
+  padding: 0px 25px;
 }
 create-account-vue .input-group {
   margin-bottom: 1em;
@@ -127,7 +127,12 @@ sidebar-intro-vue p {
   color: black;
   font-family: Helvetica;
 }
-milieu-sidebar .sidebar {
+milieu-sidebar.col-lg-2,
+milieu-sidebar.col-lg-3 {
+  padding-right: 0px;
+}
+milieu-sidebar.col-lg-2 .sidebar,
+milieu-sidebar.col-lg-3 .sidebar {
   border: 1px solid gray;
   position: -webkit-sticky;
   position: sticky;
@@ -136,7 +141,8 @@ milieu-sidebar .sidebar {
   overflow-x: hidden;
   overflow-y: auto;
 }
-milieu-sidebar .drawer {
+milieu-sidebar.col-lg-2 .drawer,
+milieu-sidebar.col-lg-3 .drawer {
   left: 0;
   top: 0;
   width: 100%;
@@ -147,7 +153,8 @@ milieu-sidebar .drawer {
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
 }
-milieu-sidebar .modal-vue-content {
+milieu-sidebar.col-lg-2 .modal-vue-content,
+milieu-sidebar.col-lg-3 .modal-vue-content {
   width: 300px;
   position: relative;
   top: 122px;
@@ -162,6 +169,21 @@ sidebar-filter-vue .card {
 }
 sidebar-filter-vue .card .card-header {
   border-radius: 0px;
+}
+jem-table-of-contents {
+  font-size: 12px;
+}
+.list-group-item {
+  padding-top: 0px;
+  padding-bottom: 5px;
+  padding-right: 0px;
+  line-height: 22px;
+  font-weight: bolder;
+  border: 0px;
+}
+.list-group-item.active {
+  background-color: #cdffff;
+  color: black;
 }
 .input-group button.material-icons {
   border-radius: 0px;
@@ -179,7 +201,7 @@ account-services .input-group {
 account-services .card {
   position: fixed;
   right: 50px;
-  z-index: 8;
+  z-index: 7;
   width: 250px;
   box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
 }
@@ -481,14 +503,14 @@ modal-vue .modal-mode {
   height: 100%;
   display: block;
   position: fixed;
-  z-index: 7;
+  z-index: 6;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
 }
 modal-vue .modal-vue-content {
   margin: 5% auto;
   width: 70%;
-  z-index: 8;
+  z-index: 7;
   box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
 }
 #nav-search {
@@ -532,6 +554,11 @@ alert-jem .card {
 }
 alert-jem .card .alert {
   margin-top: 1em;
+}
+.grot {
+  position: relative;
+  height: calc(100vh -  225px );
+  overflow-y: scroll;
 }
 jem-list-vue .card {
   margin-top: 1em;
@@ -596,14 +623,14 @@ input.ng-untouched {
   height: 100%;
   display: block;
   position: fixed;
-  z-index: 7;
+  z-index: 6;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
 }
 #account-services-modal .modal-content {
   margin: 5% auto;
   width: 0px;
-  z-index: 8;
+  z-index: 7;
 }
 #filter-modal .modal-mode {
   left: 0;
@@ -612,14 +639,14 @@ input.ng-untouched {
   height: 100%;
   display: block;
   position: fixed;
-  z-index: 7;
+  z-index: 6;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
 }
 #filter-modal .modal-content {
   margin: 5% auto;
   width: 70%;
-  z-index: 8;
+  z-index: 7;
   box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
 }
 .loader {

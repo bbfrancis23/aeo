@@ -14,23 +14,13 @@
 @overlay-content-layer: 3;
 @sticky-layer: 4;
 @dropdown-layer: 5;
-@modals-layer: 7;
-@modals-content-layer: 8;
+@modals-layer: 6;
+@modals-content-layer: 7;
 
 @navbar-height: 122px;
 
 ::-webkit-scrollbar { width: 5px }
-
-::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px #777;
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #666;
-    border-radius: 10px;
-}
-
+::-webkit-scrollbar-thumb { background: #666 }
 ::-webkit-scrollbar-thumb:hover { background: black }
 
 // ABSTRACT
@@ -38,7 +28,6 @@
 .stacked-input(){
   margin-bottom: 1em;
 }
-
 
 .sidebar-vue(){
   .card{
@@ -52,15 +41,16 @@
   }
 }
 
-
-
 // CLASSES
 
-.submit-check-button{
-  padding-right: 25px; padding-left: 25px;
+.scroll-to-control{
+  display: block;
+  position: relative;
+  top: calc(-@navbar-height + -5);
+  visibility: hidden;
 }
 
-
+.submit-check-button{ padding: 0px 25px }
 
 // TAGS
 
@@ -82,7 +72,10 @@ sidebar-intro-vue{
 
 
 
-milieu-sidebar{
+milieu-sidebar.col-lg-2, milieu-sidebar.col-lg-3{
+
+  padding-right: 0px;
+
   .sidebar{
     border: 1px solid gray;
     position: -webkit-sticky;
@@ -115,6 +108,31 @@ milieu-sidebar{
 
 sidebar-filter-vue{
   .sidebar-vue;
+}
+
+jem-table-of-contents{
+  font-size: 12px;
+
+
+
+
+}
+
+.list-group-item{
+  //padding: 0px;
+  padding-top: 0px;
+  padding-bottom: 5px;
+  padding-right: 0px;
+  line-height: 22px;
+  font-weight: bolder;
+  border: 0px;
+  //border-left: 1px solid black;
+}
+
+.list-group-item.active{
+  .item-select;
+
+
 }
 
 /////////////////////////////////////////////////////// old ///////////////////////////////////////////
@@ -619,7 +637,17 @@ milieu-sidebar{
 
 alert-jem{ .jem-card }
 
+.grot{
+
+  position: relative;
+  height: ~"calc(100vh - " 225px ~")"; // escape string less bug
+  overflow-y: scroll;
+
+}
+
 jem-list-vue{
+
+
   .jem-card;
 
   .card-header{ .jem-card-active-header; }
