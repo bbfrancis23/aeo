@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Jem } from './jem';
 import { JemService } from './jem.service';
-import { ListVue, MilieuVue } from '../milieu/core';
+import { ListVueComponent, MilieuVue } from '../milieu/core';
 import { fadeInOutAnimation, flyInOut } from '../milieu/animations';
 
 'use strict';
@@ -20,31 +20,23 @@ import { fadeInOutAnimation, flyInOut } from '../milieu/animations';
         <modal-controls *ngIf="modalChild.modalMode === true"></modal-controls>
         <div class="alert alert-warning" *ngIf="items?.length === 0">No Jems. Please try a Different Filter</div>
         <sized-items-vue-controls
-          *ngIf="modalChild.modalMode === false && jemService.dashBoard"
+          *ngIf="modalChild.modalMode === false && milieuService.dashBoard"
           (hideVueEvent)="show=false"
           (modalVueEvent)="modalChild.modalMode=true;"
           (toggleItemSizeEvent)="showBig = !showBig" >
         </sized-items-vue-controls>
         <div >
-          <jem  *ngFor="let jem of items; trackBy: trackByJem" [jem]="jem" [jemService]="jemService" [showBig]="showBig"  ></jem>
+          <jem  *ngFor="let jem of items; trackBy: trackByJem" [jem]="jem" [jemService]="milieuService" [showBig]="showBig"  ></jem>
         </div>
       </div>
     </modal-vue>`,
       animations: [ fadeInOutAnimation, flyInOut ]
 })
-export class JemListVueComponent extends ListVue implements OnInit {
+export class JemListVueComponent extends ListVueComponent {
 
-  @Input() jemService: JemService;
 
-  ngOnInit() {
-    this.jemService.currentFilteredItems.subscribe(filteredItems => {
-      this.items = filteredItems;
-    })
-  }
 
-  trackByJem(index:number, jem: Jem){
-    return jem._id;
-  }
+
 
 }
 
@@ -54,7 +46,7 @@ export class JemListVueComponent extends ListVue implements OnInit {
   <div class="container-fluid">
     <div id="snippits" class="list-group">
       <br>
-      <a  class="list-group-item list-group-item-action" *ngFor="let jem of items; trackBy: trackByJem" href="#{{jemService.urlify(jem.title)}}"  (click)="clicky(jem);">{{jem.title}}</a>
+      <a  class="list-group-item list-group-item-action" *ngFor="let jem of items; trackBy: trackByJem" href="#{{milieuService.urlify(jem.title)}}"  (click)="clicky(jem);" style="margin-left: 5px; text-indent: -10px;" >{{jem.title}}</a>
     </div>
   </div>`
 })
@@ -62,7 +54,7 @@ export class JemTableOfContents extends JemListVueComponent{
 
   clicky(jem){
 
-    document.querySelector('#' + this.jemService.urlify(jem.title)).scrollIntoView();
+    document.querySelector('#' + this.milieuService.urlify(jem.title)).scrollIntoView();
 
     //this.jemService.router.navigateByUrl(this.jemService.location.path()+'#'+this.jemService.urlify(jem.title));
     //console.log(this.jemService.location.path()); //href="{{jemService.location.path()}}#{{jemService.urlify(jem.title)}}"

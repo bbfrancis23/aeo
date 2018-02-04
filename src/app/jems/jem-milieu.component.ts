@@ -57,10 +57,10 @@ import { ManageJemComponent } from './core';
 
           <div class="row">
             <div class="col-lg-9" >
-              <jem-list-vue (selectItemEvent)="selectJem($event)" [jemService]="jemService"></jem-list-vue>
+              <jem-list-vue (selectItemEvent)="selectJem($event)" [milieuService]="jemService"></jem-list-vue>
             </div>
             <milieu-sidebar class="col-lg-3 d-none d-lg-block d-lg-block pl-0 right-sidebar" #rightSideBar>
-              <jem-table-of-contents [jemService]="jemService"></jem-table-of-contents>
+              <jem-table-of-contents [milieuService]="jemService"></jem-table-of-contents>
             </milieu-sidebar>
           </div>
 
@@ -93,16 +93,6 @@ import { ManageJemComponent } from './core';
     <!-- <milieu-modal id="filter-modal"><filter-vue  class="jem-filter-vue" [milieuService]="jemService"></filter-vue></milieu-modal>-->`,
 
   styles: [`
-
-    /*
- * Sidebar
- */
-
-
-
-
-
-
     .container-classic{
       margin-right: auto;
       margin-left: auto;

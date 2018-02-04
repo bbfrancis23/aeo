@@ -1,4 +1,4 @@
-import { fadeInOutAnimation, modalVueFadeInOut } from './animations';
+import { fadeInOutAnimation, modalVueFadeInOut, flyInOut } from './animations';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from "@angular/router";
@@ -124,8 +124,6 @@ export class IntroVueComponent extends MilieuVue {
   showCollapseControl = false;
 }
 
-
-
 @Component({
   selector: 'item-controls',
   template: `
@@ -192,9 +190,29 @@ export class ItemSearchComponent implements OnInit{
   }
 }
 
-export abstract class ListVue extends MilieuVue {
+
+@Component({
+  selector: 'list-vue',
+  template: `
+  <ng-content></ng-content>
+    `,
+      animations: [ fadeInOutAnimation, flyInOut ]
+})
+export class ListVueComponent extends MilieuVue {
   showBig = true;
   items: {};
+
+  @Input() milieuService: any;
+
+  ngOnInit() {
+    this.milieuService.currentFilteredItems.subscribe(filteredItems => {
+      this.items = filteredItems;
+    })
+  }
+
+  trackByItem(index:number, item){
+    return item._id;
+  }
 }
 
 export abstract class Milieu {
