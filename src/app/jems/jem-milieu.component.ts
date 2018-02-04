@@ -49,7 +49,7 @@ import { ManageJemComponent } from './core';
 
         <milieu-sidebar class="col-lg-2 d-lg-block d-lg-block pl-0 left-sidebar" #leftSideBar [hasModal]="true" >
           <intro-vue  [milieuService]="jemService" [sidebarMode]="true" ></intro-vue>
-          <sidebar-filter-vue  class="jem-filter-vue" [milieuService]="jemService"></sidebar-filter-vue>
+          <filter-vue  class="jem-filter-vue" [milieuService]="jemService"></filter-vue>
         </milieu-sidebar>
 
         <main role="main" [ngClass]="isColumnVisible(0) ? 'col-lg-10' : 'col-lg-12'" >

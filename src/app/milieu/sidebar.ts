@@ -78,8 +78,4 @@ export class SideBarIntroVueComponent extends IntroVueComponent {
 export class SidebarFilterVueComponent extends FilterVueComponent {
   showCollapseControl = false;
 
-  clicky(){
-    console.log('you clicky me');
-  }
-
 }

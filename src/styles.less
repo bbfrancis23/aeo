@@ -33,6 +33,17 @@
 
 // CLASSES
 
+.list-group-item{
+  padding-top: 0px;
+  padding-bottom: 5px;
+  padding-right: 0px;
+  line-height: 22px;
+  font-weight: bolder;
+  border: 0px;
+}
+
+.list-group-item.active{ .item-select }
+
 .scroll-to-control{
   display: block;
   position: relative;
@@ -56,12 +67,10 @@
 
 // TAGS
 
-create-account-vue{ .input-group{ .stacked-input } }
 account-reset-form{ .input-group{ .stacked-input } }
-log-in-vue{ .input-group{ .stacked-input} }
+create-account-vue{ .input-group{ .stacked-input } }
 
 intro-vue{
-
   .sidebar-vue;
 
   h2{
@@ -73,7 +82,9 @@ intro-vue{
   p{ color: black; font-family: @alt-font; }
 }
 
+jem-table-of-contents{ font-size: 16px }
 
+log-in-vue{ .input-group{ .stacked-input} }
 
 milieu-sidebar.col-lg-2, milieu-sidebar.col-lg-3{
 
@@ -109,34 +120,9 @@ milieu-sidebar.col-lg-2, milieu-sidebar.col-lg-3{
   }
 }
 
-sidebar-filter-vue{
-  .sidebar-vue;
-}
-
-jem-table-of-contents{
-  font-size: 12px;
+filter-vue{ .sidebar-vue }
 
 
-
-
-}
-
-.list-group-item{
-  //padding: 0px;
-  padding-top: 0px;
-  padding-bottom: 5px;
-  padding-right: 0px;
-  line-height: 22px;
-  font-weight: bolder;
-  border: 0px;
-  //border-left: 1px solid black;
-}
-
-.list-group-item.active{
-  .item-select;
-
-
-}
 
 /////////////////////////////////////////////////////// old ///////////////////////////////////////////
 
@@ -558,6 +544,8 @@ collapse-control{
     text-decoration: none;
   }
 }
+
+
 
 modal-controls { .material-icons{ font-size: 1em } }
 

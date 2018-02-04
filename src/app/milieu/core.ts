@@ -63,12 +63,14 @@ export abstract class MilieuInputComponent{
   template:`
     <modal-vue>
       <div class="card"  [@fadeInOut]="'in'" *ngIf="show" >
-        <div class="card-header">Filters</div>
+        <div class="card-header" (mouseenter)="showCollapseControl=true" (mouseleave)="showCollapseControl=false">
+          Filters
+          <collapse-control [dataTarget]="'#filter'" [show]="showCollapseControl"></collapse-control>
+        </div>
         <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modalChild.modalMode=true" *ngIf="!modalChild.modalMode && milieuService.dashBoard"></vue-controls>
         <modal-controls *ngIf="modalChild.modalMode || milieuService.tabletMode === true"></modal-controls>
-        <div class="card-block" >
+        <div class="collapse show card-block" id="filter">
           <div class="form-group">
-            <label for="title" class="sr-only">Title Search</label>
             <input type="text" class="form-control " id="title" placeholder="Title Search" #searchBox id="title-search-box" (keyup)="search(searchBox.value)">
           </div>
           <div *ngFor="let field of milieuService.config.fields">
@@ -88,9 +90,7 @@ export class FilterVueComponent extends MilieuVue implements OnInit {
   private searchTerms = new Subject<string>();
   searchTerm: string;
 
-  ngOnInit(){
-    this.searchTerms.subscribe((term)=> this.searchTerm = term);
-  }
+  ngOnInit(){ this.searchTerms.subscribe((term)=> this.searchTerm = term) }
 
   search(term: string):void{
     this.searchTerms.next(term);
@@ -103,11 +103,14 @@ export class FilterVueComponent extends MilieuVue implements OnInit {
   template:
     `<modal-vue>
       <div [ngClass]="{'sidebar-vue': sidebarMode}">
-        <div class="card sidebar-vue" [@fadeInOut]="'in'" *ngIf="show" >
-          <img [src]="milieuService.config.img" alt="{{milieuService.config.title}}">
+        <div class="card" [@fadeInOut]="'in'" *ngIf="show" >
+          <div (mouseenter)="showCollapseControl=true" (mouseleave)="showCollapseControl=false">
+            <img [src]="milieuService.config.img" alt="{{milieuService.config.title}}" >
+            <collapse-control class="image-collapse-control" [dataTarget]="'#milieu-intro'" [show]="showCollapseControl"></collapse-control>
+          </div>
           <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modalChild.modalMode=true" *ngIf="!modalChild.modalMode && milieuService.dashBoard"></vue-controls>
           <modal-controls *ngIf="modalChild.modalMode === true"></modal-controls>
-          <div class="card-block">
+          <div class="collapse show card-block" id="milieu-intro">
             <h4>{{milieuService.config.title}}</h4>
             <p>{{milieuService.config.intro}}</p>
           </div>
@@ -118,6 +121,7 @@ export class FilterVueComponent extends MilieuVue implements OnInit {
 })
 export class IntroVueComponent extends MilieuVue {
   @Input() milieuService: any;
+  showCollapseControl = false;
 }
 
 

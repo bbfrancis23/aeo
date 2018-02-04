@@ -89,6 +89,18 @@ app-header .navbar.fixed-top item-search {
 ::-webkit-scrollbar-thumb:hover {
   background: black;
 }
+.list-group-item {
+  padding-top: 0px;
+  padding-bottom: 5px;
+  padding-right: 0px;
+  line-height: 22px;
+  font-weight: bolder;
+  border: 0px;
+}
+.list-group-item.active {
+  background-color: #cdffff;
+  color: black;
+}
 .scroll-to-control {
   display: block;
   position: relative;
@@ -106,13 +118,10 @@ app-header .navbar.fixed-top item-search {
 .submit-check-button {
   padding: 0px 25px;
 }
-create-account-vue .input-group {
-  margin-bottom: 1em;
-}
 account-reset-form .input-group {
   margin-bottom: 1em;
 }
-log-in-vue .input-group {
+create-account-vue .input-group {
   margin-bottom: 1em;
 }
 intro-vue .card {
@@ -134,6 +143,12 @@ intro-vue img {
 intro-vue p {
   color: black;
   font-family: Helvetica;
+}
+jem-table-of-contents {
+  font-size: 16px;
+}
+log-in-vue .input-group {
+  margin-bottom: 1em;
 }
 milieu-sidebar.col-lg-2,
 milieu-sidebar.col-lg-3 {
@@ -170,28 +185,13 @@ milieu-sidebar.col-lg-3 .modal-vue-content {
   overflow-x: hidden;
   overflow-y: auto;
 }
-sidebar-filter-vue .card {
+filter-vue .card {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border-radius: 0px;
   border: none;
 }
-sidebar-filter-vue .card .card-header {
+filter-vue .card .card-header {
   border-radius: 0px;
-}
-jem-table-of-contents {
-  font-size: 12px;
-}
-.list-group-item {
-  padding-top: 0px;
-  padding-bottom: 5px;
-  padding-right: 0px;
-  line-height: 22px;
-  font-weight: bolder;
-  border: 0px;
-}
-.list-group-item.active {
-  background-color: #cdffff;
-  color: black;
 }
 .input-group button.material-icons {
   border-radius: 0px;
