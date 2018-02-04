@@ -48,6 +48,7 @@ export class JemListVueComponent extends ListVueComponent {
       <br>
       <a  class="list-group-item list-group-item-action" *ngFor="let jem of items; trackBy: trackByJem" href="#{{milieuService.urlify(jem.title)}}"  (click)="clicky(jem);" style="margin-left: 5px; text-indent: -10px;" >{{jem.title}}</a>
     </div>
+    <hr>
   </div>`
 })
 export class JemTableOfContents extends JemListVueComponent{
