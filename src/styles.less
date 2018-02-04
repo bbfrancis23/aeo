@@ -29,7 +29,18 @@
   margin-bottom: 1em;
 }
 
-.sidebar-vue(){
+
+
+// CLASSES
+
+.scroll-to-control{
+  display: block;
+  position: relative;
+  top: calc(-@navbar-height + -5);
+  visibility: hidden;
+}
+
+.sidebar-vue{
   .card{
     font-family: @regular-font;
     border-radius: 0px;
@@ -41,15 +52,6 @@
   }
 }
 
-// CLASSES
-
-.scroll-to-control{
-  display: block;
-  position: relative;
-  top: calc(-@navbar-height + -5);
-  visibility: hidden;
-}
-
 .submit-check-button{ padding: 0px 25px }
 
 // TAGS
@@ -58,7 +60,8 @@ create-account-vue{ .input-group{ .stacked-input } }
 account-reset-form{ .input-group{ .stacked-input } }
 log-in-vue{ .input-group{ .stacked-input} }
 
-sidebar-intro-vue{
+intro-vue{
+
   .sidebar-vue;
 
   h2{
@@ -534,13 +537,19 @@ jem-milieu{
   }
 }
 
-modal-controls, vue-controls, item-controls, sized-items-vue-controls, collapse-control{
+modal-controls, vue-controls, item-controls, sized-items-vue-controls {
   .control;
 
   .material-icons{ font-size: 1em }
 }
 
+
+
 collapse-control{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
   a{
     color:white;
   }

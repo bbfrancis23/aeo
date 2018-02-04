@@ -28,6 +28,7 @@ export abstract class MilieuVue {
   show = true;
   modalOnlyMode = false;
   showControls = true;
+  @Input() sidebarMode = false;
 
   constructor(milieuService:MilieuService);
   constructor(){}
@@ -101,8 +102,9 @@ export class FilterVueComponent extends MilieuVue implements OnInit {
   selector: 'intro-vue',
   template:
     `<modal-vue>
-        <div class="card" [@fadeInOut]="'in'" *ngIf="show" >
-          <img class="card-img-top" [src]="milieuService.config.img" alt="{{milieuService.config.title}}">
+      <div [ngClass]="{'sidebar-vue': sidebarMode}">
+        <div class="card sidebar-vue" [@fadeInOut]="'in'" *ngIf="show" >
+          <img [src]="milieuService.config.img" alt="{{milieuService.config.title}}">
           <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modalChild.modalMode=true" *ngIf="!modalChild.modalMode && milieuService.dashBoard"></vue-controls>
           <modal-controls *ngIf="modalChild.modalMode === true"></modal-controls>
           <div class="card-block">
@@ -110,6 +112,7 @@ export class FilterVueComponent extends MilieuVue implements OnInit {
             <p>{{milieuService.config.intro}}</p>
           </div>
         </div>
+      </div>
     </modal-vue>`,
   animations: [ fadeInOutAnimation ]
 })
@@ -259,23 +262,21 @@ export class ViewPortComponent{ }
 })
 export class VueControlsComponent {
 
-  _show = true;
+  @Input() show = true;
 
   @Output() hideVueEvent = new EventEmitter();
   @Output() modalVueEvent = new EventEmitter();
 
-  get show(){
-    return this._show;
-  }
+
 }
 
 @Component({
   selector: 'collapse-control',
-  template: `<a class="material-icons" data-toggle="collapse" [href]="dataTarget" (click)="collapse = collapse==='down' ? 'up' : 'down'" >arrow_drop_{{collapse}}</a>`
+  template: `<a class="material-icons" data-toggle="collapse" [href]="dataTarget" (click)="collapse = collapse==='down' ? 'up' : 'down'" *ngIf="show">keyboard_arrow_{{collapse}}</a>`
 })
 export class CollapseControlComponent extends VueControlsComponent{
   @Input() dataTarget: string = '';
-  collapse = 'down';
+  collapse = 'up';
 }
 
 @Component({

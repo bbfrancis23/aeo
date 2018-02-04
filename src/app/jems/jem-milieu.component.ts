@@ -48,7 +48,7 @@ import { ManageJemComponent } from './core';
       <div class="row">
 
         <milieu-sidebar class="col-lg-2 d-lg-block d-lg-block pl-0 left-sidebar" #leftSideBar [hasModal]="true" >
-          <sidebar-intro-vue  [milieuService]="jemService"></sidebar-intro-vue>
+          <intro-vue  [milieuService]="jemService" [sidebarMode]="true" ></intro-vue>
           <sidebar-filter-vue  class="jem-filter-vue" [milieuService]="jemService"></sidebar-filter-vue>
         </milieu-sidebar>
 

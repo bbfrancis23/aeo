@@ -52,8 +52,11 @@ export class SideBarIntroVueComponent extends IntroVueComponent {
   template:`
     <modal-vue>
       <div class="card"  [@fadeInOut]="'in'" *ngIf="show" >
-        <div class="card-header">Filters</div>
-        <collapse-control [dataTarget]="'#filter'"></collapse-control>
+        <div class="card-header" (mouseenter)="showCollapseControl=true" (mouseleave)="showCollapseControl=false" >
+        Filters
+          <collapse-control [dataTarget]="'#filter'" [show]="showCollapseControl"></collapse-control>
+        </div>
+
 
         <div class="collapse show card-block" id="filter">
           <div class="form-group">
@@ -73,6 +76,10 @@ export class SideBarIntroVueComponent extends IntroVueComponent {
   animations: [ fadeInOutAnimation]
 })
 export class SidebarFilterVueComponent extends FilterVueComponent {
+  showCollapseControl = false;
 
+  clicky(){
+    console.log('you clicky me');
+  }
 
 }

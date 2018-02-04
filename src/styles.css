@@ -95,6 +95,14 @@ app-header .navbar.fixed-top item-search {
   top: calc(-127px);
   visibility: hidden;
 }
+.sidebar-vue .card {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 0px;
+  border: none;
+}
+.sidebar-vue .card .card-header {
+  border-radius: 0px;
+}
 .submit-check-button {
   padding: 0px 25px;
 }
@@ -107,23 +115,23 @@ account-reset-form .input-group {
 log-in-vue .input-group {
   margin-bottom: 1em;
 }
-sidebar-intro-vue .card {
+intro-vue .card {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border-radius: 0px;
   border: none;
 }
-sidebar-intro-vue .card .card-header {
+intro-vue .card .card-header {
   border-radius: 0px;
 }
-sidebar-intro-vue h2 {
+intro-vue h2 {
   color: #008080;
   font-weight: bolder;
   font-family: "Montserrat", sans-serif;
 }
-sidebar-intro-vue img {
+intro-vue img {
   width: 100%;
 }
-sidebar-intro-vue p {
+intro-vue p {
   color: black;
   font-family: Helvetica;
 }
@@ -465,8 +473,7 @@ jem-milieu .sticky-top .btn-group .btn.active:hover {
 modal-controls,
 vue-controls,
 item-controls,
-sized-items-vue-controls,
-collapse-control {
+sized-items-vue-controls {
   position: absolute;
   top: 0px;
   right: 5px;
@@ -475,16 +482,19 @@ collapse-control {
 modal-controls:hover,
 vue-controls:hover,
 item-controls:hover,
-sized-items-vue-controls:hover,
-collapse-control:hover {
+sized-items-vue-controls:hover {
   color: black;
 }
 modal-controls .material-icons,
 vue-controls .material-icons,
 item-controls .material-icons,
-sized-items-vue-controls .material-icons,
-collapse-control .material-icons {
+sized-items-vue-controls .material-icons {
   font-size: 1em;
+}
+collapse-control {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 collapse-control a {
   color: white;
