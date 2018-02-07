@@ -9,7 +9,7 @@ import { JemMilieuComponent } from './jems/jem-milieu.component';
   template: `
     <app-header></app-header>
     <router-outlet (activate)='onActivate($event)'></router-outlet>
-    <app-footer *ngIf="showFooter"></app-footer>`
+    <app-footer ></app-footer>`
 })
 export class AppComponent {
   showFooter = true;

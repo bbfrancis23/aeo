@@ -13,14 +13,12 @@ import { fadeInOutAnimation, flyInOut } from '../milieu/animations';
     <modal-vue>
       <div [@fadeInOut]="'in'" *ngIf="show"  >
         <div class="card" >
-        <div class="card-header">
-          Jems List
-        </div>
+        <div class="card-header">Jems List</div>
         </div>
         <modal-controls *ngIf="modalChild.modalMode === true"></modal-controls>
         <div class="alert alert-warning" *ngIf="items?.length === 0">No Jems. Please try a Different Filter</div>
         <sized-items-vue-controls
-          *ngIf="modalChild.modalMode === false && milieuService.dashBoard"
+          *ngIf="modalChild.modalMode === false"
           (hideVueEvent)="show=false"
           (modalVueEvent)="modalChild.modalMode=true;"
           (toggleItemSizeEvent)="showBig = !showBig" >
@@ -30,7 +28,7 @@ import { fadeInOutAnimation, flyInOut } from '../milieu/animations';
         </div>
       </div>
     </modal-vue>`,
-      animations: [ fadeInOutAnimation, flyInOut ]
+  animations: [ fadeInOutAnimation, flyInOut ]
 })
 export class JemListVueComponent extends ListVueComponent {
 
@@ -68,7 +66,7 @@ export class JemTableOfContents extends JemListVueComponent{
 @Component({
   selector: 'manage-jem',
   template:`
-  <modal-vue>
+  <modal-vue [modalOnly]="true">
     <div class="card" [@fadeInOut]="'in'" *ngIf="show">
       <div class="card-header">{{manageType}} Jem</div>
       <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modalChild.modalMode=true" *ngIf="!modalChild.modalMode && jemService.dashBoard" ></vue-controls>
@@ -130,6 +128,7 @@ export class ManageJemComponent extends MilieuVue implements OnInit {
   @Input() jemService: JemService;
   @Input() manageType = '';
 
+  show = true;
   message = null;
   submitted = false;
   jemForm: FormGroup;
@@ -195,7 +194,7 @@ export class ManageJemComponent extends MilieuVue implements OnInit {
                       'border-danger': jem.type === 'Mistakes',
                       'border-info': jem.type === 'How to',
                       'border-dark': jem.type === 'Style Guide'}" *ngIf="showBig">
-    <item-controls [item]="jem" *ngIf="jemService.dashBoard" [milieuService]="jemService"></item-controls>
+    <item-controls [item]="jem" [milieuService]="jemService"></item-controls>
     <div class="card-body">
       <h4 class="card-title">{{jem.title}}</h4>
 

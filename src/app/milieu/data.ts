@@ -49,6 +49,8 @@ export class MilieuService {
   user = false;
   requireAuth = false;
   tabletMode = false;
+  collectionMode = false;
+  collectionName: string = null;
 
   readonly media = { small: 576, med: 768, lg: 992, xl: 1200 }
   //filterMode = false;
@@ -229,6 +231,23 @@ export class MilieuService {
       .post(url, something, { headers: this.headers })
       .toPromise()
       .then((res) => {
+        return res.json();
+      })
+      .catch(this.handleError);
+  }
+
+  addFavorite(id: string)  {
+
+    const url = `${this.api}/${this.config.name}/add-favorite/${id}`;
+    return this.http
+      .post(url, { headers: this.headers })
+      .toPromise()
+      .then((res) => {
+
+
+
+        console.log(res.json());
+
         return res.json();
       })
       .catch(this.handleError);

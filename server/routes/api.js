@@ -33,7 +33,11 @@ const Account = {
 // Connect
 // TODO: add user name and password
 const connection = ( closure ) => {
-  return MongoClient.connect( 'mongodb://localhost:27017/aeo', ( err, db ) => {
+
+  //console.log(app.settings.views);
+  let mongoPath = app.settings.views === 'C:\\Users\\Brian PC\\Desktop\\aeo\\views' ? 'mongodb://localhost:27017/aeo' : 'mongodb://aeo:aeom1789Nero@localhost:27017/aeo?authSource=admin';
+
+  return MongoClient.connect( mongoPath, ( err, db ) => {
     if ( err ) return console.log( err );
     closure( db );
   } );
@@ -57,7 +61,10 @@ const sendError = ( err, res ) => {
 
 // authenticate
 const auth = (req,res) => {
-  if(req.get('host') === 'localhost:3000'){
+
+  let host = app.settings.views === 'C:\\Users\\Brian PC\\Desktop\\aeo\\views' ? 'localhost:3000' :  'aeo-tech.com';
+
+  if(req.get('host') === host ){
     return true;
   }else{
     res.sendStatus(403);
@@ -232,6 +239,38 @@ app.delete( '/jems/:id', ( req, res ) => {
     });
   }
 });
+
+app.post( '/jems/add-favorite/:id', (request, response) =>{
+
+  if(auth(request,response)){
+    connection( (db) =>{
+
+      db.collection('accounts').findOne({ token: sanitize( request.cookies.token ) }, {fields:{username: 1, email: 1}}, (err, doc) => {
+        if(err){
+          sendError(err, response);
+          db.close();
+        }else{
+
+          db.collection('accounts').update({email: sanitize(doc.email) }, {$push: { codeFavorites: sanitize( request.params.id ) }}, (err,doc)=>{
+            if(err){
+              sendEroor(err, response);
+              db.close();
+            }else{
+              response.json({success: true, message: 'Favorite Added'});
+              db.close();
+            }
+          });
+          //response.json({data: doc, message: 'Account Infromation'});
+
+
+
+        }
+      });
+
+    });
+  }
+
+} );
 
 
 checkFields = function(protoType, item){

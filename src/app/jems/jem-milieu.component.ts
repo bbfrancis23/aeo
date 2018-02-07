@@ -25,8 +25,9 @@ import { ManageJemComponent } from './core';
           <div class="col-6" >
 
             <div class="btn-group float-right d-md-block d-lg-block"  >
-              <!-- <button class="btn material-icons" (click)="leftSidebar.show = !leftSidebar.show" [ngClass]="{'active': leftSidebar.show}"  title="Display / Hide Left Sidebar">swap_horiz</button> -->
               <button class="btn material-icons" (click)="leftSideBarToggle()" [ngClass]="{'active': leftSidebar.show}"  title="Display / Hide Left Sidebar">swap_horiz</button>
+              <button class="btn material-icons" (click)="addVue.modalChild.modalMode=true" [ngClass]="{'active': addVue.modalChild.modalMode}"  title="Add Jem View">add</button>
+
             </div>
             <!--
             <div class="ml-2 float-right d-none d-md-block d-lg-block" *ngIf="jemService.authenticated === true">
@@ -49,7 +50,7 @@ import { ManageJemComponent } from './core';
 
         <milieu-sidebar class="col-lg-2 d-lg-block d-lg-block pl-0 left-sidebar" #leftSideBar [hasModal]="true" >
           <intro-vue  [milieuService]="jemService" [sidebarMode]="true" ></intro-vue>
-          <filter-vue  class="jem-filter-vue" [milieuService]="jemService"></filter-vue>        
+          <filter-vue  class="jem-filter-vue" [milieuService]="jemService"></filter-vue>
         </milieu-sidebar>
 
         <main role="main" [ngClass]="isColumnVisible(0) ? 'col-lg-10' : 'col-lg-12'" >
@@ -71,6 +72,9 @@ import { ManageJemComponent } from './core';
       </div>
     </div>
 </div>
+
+<manage-jem [jemService]="jemService" [manageType]="'Add'" #manageAdd></manage-jem>
+<manage-jem [jemService]="jemService" [manageType]="'Update'" #manageUpdate></manage-jem>
 
       <!-- <div class="milieu-content container-fluid">
         <div class="row">
@@ -211,10 +215,12 @@ export class JemMilieuComponent extends Milieu implements OnInit {
   }
 
   clickCheck(e){
-    //if(e.target.className.search('update') > -1){
+
+    //console.log(e);
+    if(e.target.className.search('update') > -1){
     //  this.updateVue.show = true;
-    //  this.updateVue.modalChild.modalMode = true;
-    //}
+      this.updateVue.modalChild.modalMode = true;
+    }
   }
 
   // */

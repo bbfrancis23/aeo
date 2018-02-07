@@ -6,6 +6,8 @@ import { MilieuService } from './data';
 import { ModalVueComponent} from './modals';
 import { Subject } from 'rxjs/Subject';
 
+import { AccountService } from '../account/data';
+
 'use strict';
 
 /* MILIEU FIELD FORM ***********************************************************/
@@ -25,8 +27,8 @@ export abstract class MilieuFieldForm{
 
 
 export abstract class MilieuVue {
-  show = true;
-  modalOnlyMode = false;
+  @Input() show = true;
+  @Input() modalOnlyMode = false;
   showControls = true;
   @Input() sidebarMode = false;
 
@@ -130,16 +132,25 @@ export class IntroVueComponent extends MilieuVue {
     <div class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown"></a>
         <div class="dropdown-menu dropdown-menu-right" >
-          <a class="dropdown-item" (click)="milieuService.delete(item._id)" ><div class="material-icons">delete_forever</div>Delete</a>
-          <a class="dropdown-item update" (click)="milieuService.changeSelectedItem(this.item)"><div class="material-icons">create</div> Update</a>
-          <!-- <a class="dropdown-item" ><div class="material-icons">favorite</div> Favorite</a> -->
+          <a class="dropdown-item" (click)="milieuService.delete(item._id)" *ngIf="milieuService.admin"><div class="material-icons">delete_forever</div>Delete</a>
+          <a class="dropdown-item update" (click)="milieuService.changeSelectedItem(this.item)" *ngIf="milieuService.admin"><div class="material-icons">create</div> Update</a>
+          <a class="dropdown-item" (click)="favoriteClick();"><div class="material-icons">favorite</div> Favorite</a>
         </div>
     </div>`
 })
 export class ItemControlsComponent {
 
-  @Input() item: Object = {};
-  @Input() milieuService: {};
+  @Input() item: any;
+  @Input() milieuService: any;
+
+  constructor(private accountService: AccountService){
+
+  }
+
+  favoriteClick(){
+    this.milieuService.addFavorite(this.item._id);
+    //console.log(this.item._id);
+  }
 }
 
 @Component({
@@ -313,7 +324,7 @@ export class ModalControlsComponent extends VueControlsComponent{}
     <div class="dropdown" >
       <a class="dropdown-toggle" data-toggle="dropdown"></a>
       <div class="dropdown-menu dropdown-menu-right" >
-        <a class="dropdown-item" (click)="hideVueEvent.emit()"><div class="material-icons">remove_circle</div> Hide</a>
+        <!-- <a class="dropdown-item" (click)="hideVueEvent.emit()"><div class="material-icons">remove_circle</div> Hide</a> -->
         <a class="dropdown-item" (click)="modalVueEvent.emit()"  ><div class="material-icons">open_in_browser</div> Modal</a>
         <a class="dropdown-item" (click)="toggleItemSizeEvent.emit()"><div class="material-icons">swap_vert</div>Toggle Size</a>
       </div>
