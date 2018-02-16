@@ -8,13 +8,12 @@ import { JemMilieuComponent } from './jems/jem-milieu.component';
   selector: 'app-root',
   template: `
     <app-header></app-header>
-    <router-outlet (activate)='onActivate($event)'></router-outlet>
+    <router-outlet ></router-outlet>
     <app-footer ></app-footer>`
 })
 export class AppComponent {
-  showFooter = true;
 
-  onActivate($event){ if($event instanceof JemMilieuComponent) this.showFooter = false }
+  
 }
 
 @Component({

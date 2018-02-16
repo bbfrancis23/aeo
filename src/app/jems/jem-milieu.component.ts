@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 
 import { Milieu, FilterVueComponent, IntroVueComponent } from '../milieu/core';
@@ -9,6 +9,8 @@ import { MilieuSideBarComponent } from '../milieu/sidebar';
 import { JemListVueComponent } from './core';
 import { JemService } from './jem.service';
 import { ManageJemComponent } from './core';
+
+import { AccountService } from '../account/data';
 
 'use strict';
 
@@ -26,7 +28,7 @@ import { ManageJemComponent } from './core';
 
             <div class="btn-group float-right d-md-block d-lg-block"  >
               <button class="btn material-icons" (click)="leftSideBarToggle()" [ngClass]="{'active': leftSidebar.show}"  title="Display / Hide Left Sidebar">swap_horiz</button>
-              <button class="btn material-icons" (click)="addVue.modalChild.modalMode=true" [ngClass]="{'active': addVue.modalChild.modalMode}"  title="Add Jem View">add</button>
+              <button class="btn material-icons" (click)="addVue.modalChild.modalMode=true" [ngClass]="{'active': addVue.modalChild.modalMode}"  title="Add Jem View" *ngIf="accountService.admin">add</button>
 
             </div>
             <!--
@@ -125,9 +127,11 @@ export class JemMilieuComponent extends Milieu implements OnInit {
 
   @ViewChild(MilieuModalComponent) accountServices: MilieuModalComponent;
 
+  //@Input() accountService: AccountService;
+
   viewPortSize = 'lg';
 
-  constructor(public route: ActivatedRoute, protected jemService: JemService) {
+  constructor(public route: ActivatedRoute, protected jemService: JemService, public accountService: AccountService) {
     super(route, jemService);
   }
 
@@ -160,8 +164,6 @@ export class JemMilieuComponent extends Milieu implements OnInit {
   }
 
   ngAfterViewInit(){
-
-    console.log(this.fragment);
 
     try {
       //document.querySelector('#' + this.fragment).scrollIntoView();

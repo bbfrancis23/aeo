@@ -1,36 +1,28 @@
-import { ActivatedRoute } from "@angular/router";
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
-import { Location } from '@angular/common';
-
+import { Location }         from '@angular/common';
+import { Injectable }       from '@angular/core';
+import { Headers, Http }    from '@angular/http';
+import { ActivatedRoute }   from "@angular/router";
+import { BehaviorSubject }  from 'rxjs/BehaviorSubject';
 
 'use strict';
 
 // FieldRaw converts to Field to make config files easier to understand for the user.
 
-export class Config {
-  title: string ;
-  name: string ;
-  directory: string ; // Web Master will provide this.
-  intro ?:  string;
-  img ?: string;       // Web Master will provide this.
-  itemsMode ?: boolean;
-  requireAuth ?: boolean;
+export class Config { title: string ;
+                      name: string ;
+                      directory: string ;
+                      intro ?:  string;
+                      img ?: string;
+                      itemsMode ?: boolean;
+                      requireAuth ?: boolean;
 
-  fieldsRaw?: FieldRaw[]; // Only fill this in.
-  fields?: Field[];
+                      fieldsRaw?: FieldRaw[];
+                      fields?: Field[]; // leave this blank
 }
 
-export class Field {
-  name: string ;
-  values =  [{ name: '', filtered: false }];
-}
+export class Field { name: string; values =  [{ name: '', filtered: false }] }
 
-export class FieldRaw {
-  name: string;
-  values: string[];
-}
+export class FieldRaw { name: string; values: string[] }
 
 
 @Injectable()
@@ -354,13 +346,12 @@ export class MilieuService {
     this.changeFilteredItems(itemsFiltered);
 
 
-    //console.log('filter called update URL');
+    console.log('filter called updateURL');
     this.updateUrl();
   }
 
   private updateUrl(): void {
 
-    console.log()
 
     let url = this.config.directory, qs: string = '', fieldPaths: string[] = [], queryStrings: string[] = [], selectedFilters: string[] = [];
 
@@ -490,7 +481,7 @@ export class MilieuService {
       }
         );
 
-      //this.filter();
+      this.filter();
     });
 
     route.queryParams.subscribe(params => {

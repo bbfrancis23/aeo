@@ -36,6 +36,8 @@ export abstract class MilieuVue {
   constructor(){}
 
   @ViewChild(ModalVueComponent) modalChild: ModalVueComponent;
+
+
 }
 
 export abstract class MilieuVuePlus {
@@ -57,7 +59,8 @@ export abstract class MilieuInputComponent{
   @Input() autofocus = false;
   @Input() required = false;
 
-  constructor(protected milieuService: MilieuService){}
+  constructor(protected milieuService: MilieuService){ }
+
 }
 
 @Component({
@@ -97,6 +100,8 @@ export class FilterVueComponent extends MilieuVue implements OnInit {
   search(term: string):void{
     this.searchTerms.next(term);
     this.milieuService.filter('title',term);
+
+
   }
 }
 
@@ -230,7 +235,13 @@ export abstract class Milieu {
 
   columns: any[];
 
-  constructor(protected readonly route: ActivatedRoute, public milieuService: MilieuService) { }
+
+  //constructor(protected readonly route: ActivatedRoute, public milieuService: MilieuService);
+  //constructor(){}
+
+  constructor(route: ActivatedRoute, milieuService: MilieuService, accountService: AccountService);
+  constructor(route: ActivatedRoute, milieuService: MilieuService);
+  constructor(){}
 
   isColumnVisible(index) {
     let result = this.columns[index].find(vue => vue.show === true);

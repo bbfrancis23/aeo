@@ -1,6 +1,4 @@
-import { CommonModule }                     from '@angular/common';
 import { NgModule }                         from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule }                       from '@angular/http';
 import { BrowserModule }                    from '@angular/platform-browser';
 import { BrowserAnimationsModule }          from '@angular/platform-browser/animations';
@@ -14,24 +12,19 @@ import { MilieuModule }  from './milieu/module';
 import { AppComponent, AppHeaderComponent, AppFooterComponent, AppContentComponent } from './core';
 
 import { AccountService } from './account/data';
+import { AppService } from './data';
 import { JemService }     from './jems/jem.service';
 
 @NgModule({
-  imports: [
-    AccountModule,
-    AppRoutingModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    CommonModule,
-    FormsModule,
-    JemsModule,
-    HttpModule,
-    MilieuModule,
-    ReactiveFormsModule
-  ],
+  imports: [ AccountModule,
+             AppRoutingModule,
+             BrowserModule,
+             BrowserAnimationsModule,
+             JemsModule,
+             HttpModule,
+             MilieuModule ],
   declarations: [ AppFooterComponent, AppHeaderComponent, AppComponent, AppContentComponent ],
-  exports:[ ],
-  providers: [ JemService, AccountService ],
+  providers: [ AccountService, AppService, JemService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
