@@ -8,7 +8,7 @@ import { MilieuService } from '../milieu/data';
 @Injectable()
 export class JemService extends MilieuService{
 
-  constructor(public route: ActivatedRoute, protected readonly http: Http,  public readonly location: Location, public router: Router) {
+  constructor(public route: ActivatedRoute, public readonly http: Http,  public readonly location: Location, public router: Router) {
     super(route,http,location);
     this.config = JEM_CONFIG;
     this.init();

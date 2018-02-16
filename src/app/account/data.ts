@@ -28,7 +28,7 @@ export class AccountService extends MilieuService {
   username = { min: 4, max: 16, pattern: /^[\w]+$/, value: ''};
   password = { min: 4, max: 16, pattern: /^[^\s]+$/};
 
-  constructor(public route: ActivatedRoute, protected readonly http: Http, public readonly location: Location, public router: Router) {
+  constructor(public route: ActivatedRoute, public readonly http: Http, public readonly location: Location, public router: Router) {
     super(route,http,location);
     this.config = ACCOUNT_CONFIG;
     this.init();

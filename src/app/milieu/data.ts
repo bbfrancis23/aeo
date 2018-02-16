@@ -8,17 +8,18 @@ import { BehaviorSubject }  from 'rxjs/BehaviorSubject';
 
 // FieldRaw converts to Field to make config files easier to understand for the user.
 
-export class Config { title: string ;
-                      name: string ;
-                      directory: string ;
-                      intro ?:  string;
-                      img ?: string;
-                      itemsMode ?: boolean;
+export class Config { title     : string;
+                      name      : string;
+                      directory : string;
+
+                      intro ?: string;
+                      img   ?: string;
+
+                      itemsMode   ?: boolean;
                       requireAuth ?: boolean;
 
                       fieldsRaw?: FieldRaw[];
-                      fields?: Field[]; // leave this blank
-}
+                      fields?:    Field[];    }
 
 export class Field { name: string; values =  [{ name: '', filtered: false }] }
 
@@ -32,14 +33,13 @@ export class MilieuService {
   protected readonly headers = new Headers({ 'Content-Type': 'application/json' });
 
   api                 = 'api';
-  _dashBoard          = false;
-  dashBoardPermission = 'admin';
   pageTitle           = '';
   itemsMode           = true;
+
   authenticated       = false;
   admin               = false;
-  user                = false;
-  requireAuth         = false;
+  user                = false; 
+
   collectionMode      = false;
   collectionName      = '';
 
@@ -55,16 +55,8 @@ export class MilieuService {
   changeFilteredItems(filteredItems: {}[]) { this.filteredItemsSource.next(filteredItems);}
   changeSelectedItem(selectedItem: {}) { this.selectedItemSource.next(selectedItem) }
 
-  constructor(protected readonly route: ActivatedRoute, protected readonly http: Http, protected readonly location: Location) { }
+  constructor(public readonly route: ActivatedRoute, public  readonly http: Http, public readonly location: Location) { }
 
-  get dashBoard() { return this._dashBoard; }
-
-  set dashBoard(b: boolean) {
-    if(this.dashBoardPermission === 'admin' && this.admin || !(this.dashBoardPermission === 'admin'))
-    this._dashBoard = b;
-    this.updateUrl();//console.log('set dashboard')
-  }
-  //create(item: any): Promise<any> {
   login(logInFields){
 
     return this.http.post(`api/login`, logInFields, { headers: this.headers }).toPromise().then(response => {
@@ -87,11 +79,7 @@ export class MilieuService {
   // todo see if there is a way of getting rid of observable => Promise => observable;
   refresh() {
 
-    //console.log('refresh called');
-
     this.http.get('api/session').toPromise().then(result => {
-
-      //console.log(result);
 
       if(result.json().message === 'Admin'){
         this.admin = true;
@@ -136,9 +124,7 @@ export class MilieuService {
       this.itemsMode = false;
     }
 
-    if(this.config.requireAuth === true){
-      this.requireAuth = true;
-    }
+
 
     this.http.get('api/session').toPromise().then(result => {
 
@@ -343,9 +329,7 @@ export class MilieuService {
     let url = this.config.directory, qs: string = '', fieldPaths: string[] = [], queryStrings: string[] = [], selectedFilters: string[] = [];
 
 
-    if (this.dashBoard) {
-      queryStrings.push(`dash-board=true`);
-    }
+
 
     this.config.fields.forEach(field => {
 
@@ -475,9 +459,7 @@ export class MilieuService {
 
 
 
-      if (params['dash-board'] ) {
-        this.dashBoard = true;
-      }
+
 
       this.config.fields.forEach(field => {
         if (params[field.name]) {

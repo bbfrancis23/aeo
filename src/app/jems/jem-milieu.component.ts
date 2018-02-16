@@ -131,7 +131,7 @@ export class JemMilieuComponent extends Milieu implements OnInit {
 
   viewPortSize = 'lg';
 
-  constructor(public route: ActivatedRoute, protected jemService: JemService, public accountService: AccountService) {
+  constructor(public route: ActivatedRoute, public jemService: JemService, public accountService: AccountService) {
     super(route, jemService);
   }
 
@@ -142,10 +142,7 @@ export class JemMilieuComponent extends Milieu implements OnInit {
 
 
   ngOnInit() {
-    if (!this.jemService.dashBoard) {
-      //this.addVue.show = false;
-      //this.updateVue.show = false;
-    }
+
     this.columns = [ [this.leftSidebar], [this.listVue], [this.rightSidebar]];
 
     if(this.viewPortSize === 'md'){
@@ -185,18 +182,7 @@ export class JemMilieuComponent extends Milieu implements OnInit {
     // this gives a ref to window object;
   }
 
-  toggleDashBoard() {
 
-    this.jemService.dashBoard = !this.jemService.dashBoard;
-
-    if (this.jemService.dashBoard) {
-      //this.addVue.show = true;
-    } else {
-      //this.updateVue.show = false;
-      //this.addVue.show = false;
-    }
-
-  }
 
   toggleFilterVue(): void {
       if (this.filterVue.show === true) {
