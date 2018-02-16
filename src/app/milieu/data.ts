@@ -29,24 +29,19 @@ export class FieldRaw { name: string; values: string[] }
 export class MilieuService {
 
   config: Config;
-
   protected readonly headers = new Headers({ 'Content-Type': 'application/json' });
-  api = 'api';
-  _dashBoard = false;
+
+  api                 = 'api';
+  _dashBoard          = false;
   dashBoardPermission = 'admin';
-  pageTitle = '';
-  itemsMode = true;
-  authenticated = null;
-  admin = false;
-  user = false;
-  requireAuth = false;
-  tabletMode = false;
-  collectionMode = false;
-  collectionName: string = null;
-
-  readonly media = { small: 576, med: 768, lg: 992, xl: 1200 }
-  //filterMode = false;
-
+  pageTitle           = '';
+  itemsMode           = true;
+  authenticated       = false;
+  admin               = false;
+  user                = false;
+  requireAuth         = false;
+  collectionMode      = false;
+  collectionName      = '';
 
   private readonly itemsSource = new BehaviorSubject<{}[]>([]);
   private readonly filteredItemsSource = new BehaviorSubject<{}[]>([]);
@@ -60,15 +55,7 @@ export class MilieuService {
   changeFilteredItems(filteredItems: {}[]) { this.filteredItemsSource.next(filteredItems);}
   changeSelectedItem(selectedItem: {}) { this.selectedItemSource.next(selectedItem) }
 
-  //private readonly itemSource = new BehaviorSubject<{}[]>([]);
-  //readonly currentItem = this.itemSource.asObservable();
-
-  constructor(public route: ActivatedRoute, protected readonly http: Http, public readonly location: Location) {
-
-    if(window.innerWidth < 1000){
-      this.tabletMode = true;
-    }
-  }
+  constructor(protected readonly route: ActivatedRoute, protected readonly http: Http, protected readonly location: Location) { }
 
   get dashBoard() { return this._dashBoard; }
 

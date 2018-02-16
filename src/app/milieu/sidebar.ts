@@ -4,6 +4,7 @@ import { fadeInOutAnimation } from './animations';
 import { IntroVueComponent, FilterVueComponent, MilieuVue } from './core';
 import { ModalDrawerComponent } from './modals';
 import { MilieuService} from './data';
+import { AppService } from '../data';
 
 @Component({
   selector: 'milieu-sidebar',
@@ -19,11 +20,11 @@ import { MilieuService} from './data';
 export class MilieuSideBarComponent extends MilieuVue {
 
   win = window;
-  largeViewPort = this.milieuService.media.lg;
+  largeViewPort = this.appService.media.lg;
   @Input() hasModal = null;
   show = (window.innerWidth < this.largeViewPort) ? false : true;
 
-  constructor(public milieuService: MilieuService){ super(milieuService);  }
+  constructor(public milieuService: MilieuService, public appService: AppService){ super(milieuService);  }
 
   sidebarClick(e) { if(e.target.className.search(/modal-mode/) > -1  || e.target.className.search(/close-modal/) > -1) this.show = false }
 }

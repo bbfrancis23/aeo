@@ -6,10 +6,6 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Config } from '../milieu/data';
 import { MilieuService } from '../milieu/data';
 
-
-
-'use strict';
-
 export const ACCOUNT_CONFIG: Config = {
   title: 'User Account',
   name: 'accounts',
@@ -46,13 +42,13 @@ export class AccountService extends MilieuService {
   }
 
   resetPassword(email){
-    return this.http.post('api/reset-password', JSON.stringify({'email':email}), { headers: this.headers }).toPromise().then(response => {
+    return this.http.post('api/reset-password', JSON.stringify({'email':email})).toPromise().then(response => {
       return response.json().mailsent;
     });
   }
 
   uniqueUserName(username){
-    return this.http.post(`api/unique-user-name`, JSON.stringify({'username':username}), { headers: this.headers }).toPromise().then(response => {
+    return this.http.post(`api/unique-user-name`, JSON.stringify({'username':username})).toPromise().then(response => {
       return response.json().unique;
     }).catch(this.handleError);
   }
@@ -64,31 +60,31 @@ export class AccountService extends MilieuService {
   }
 
   updateEmail(email){
-    return this.http.post(`api/update-email`, JSON.stringify({'email':email}), { headers: this.headers }).toPromise().then(response => {
+    return this.http.post(`api/update-email`, JSON.stringify({'email':email})).toPromise().then(response => {
       return response.json();
     }).catch(this.handleError);
   }
 
   updateUserName(username){
-    return this.http.post(`api/update-user-name`, JSON.stringify({'username':username}), { headers: this.headers }).toPromise().then(response => {
+    return this.http.post(`api/update-user-name`, JSON.stringify({'username':username})).toPromise().then(response => {
       return response.json();
     }).catch(this.handleError);
   }
 
   updatePassword(password:string, token?:string){
     if(token){
-      return this.http.post(`api/reset-pw`, JSON.stringify({'password':password, 'resetToken': token}), { headers: this.headers }).toPromise().then(response => {
+      return this.http.post(`api/reset-pw`, JSON.stringify({'password':password, 'resetToken': token})).toPromise().then(response => {
         return response.json();
       }).catch(this.handleError);
     }else{
-      return this.http.post(`api/update-password`, JSON.stringify({'password':password}), { headers: this.headers }).toPromise().then(response => {
+      return this.http.post(`api/update-password`, JSON.stringify({'password':password})).toPromise().then(response => {
         return response.json();
       }).catch(this.handleError);
     }
   }
 
   validResetId(id){
-    return this.http.post('api/valid-reset-id', JSON.stringify({'resetCode':id}), { headers: this.headers }).toPromise().then(response => {
+    return this.http.post('api/valid-reset-id', JSON.stringify({'resetCode':id})).toPromise().then(response => {
       return response.json().valid;
     });
   }
