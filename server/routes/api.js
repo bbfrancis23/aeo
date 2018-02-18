@@ -240,7 +240,7 @@ app.delete( '/jems/:id', ( req, res ) => {
   }
 });
 
-app.post( '/jems/add-favorite/:id', (request, response) =>{
+app.get( '/jems/add-favorite/:id', (request, response) =>{
 
   if(auth(request,response)){
     connection( (db) =>{
@@ -480,7 +480,7 @@ app.post( '/jems', ( req, res ) => {
 
 
   connection( ( db ) => {
-    let jem = req.body.jem || {};
+    let jem = req.body.item || {};
 
     if ( jem._id ) {
       let id = jem._id;

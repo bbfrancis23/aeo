@@ -9,6 +9,7 @@ export const JEM_CONFIG: Config = {
   intro: "Short-cut keys, Best Practices, How to and Mistakes. Code Jems,  it's all here",
   img: "assets/img/code-jems.jpg",
   directory: 'code-jems',
+  itemsMode: true,
 
   fieldsRaw: [
     { name: 'tech', values: ['Angular', 'CSS', 'Express', 'Git', 'HTML', 'JavaScript', 'Less', 'MongoDB', 'NodeJS', 'TypeScript'] },

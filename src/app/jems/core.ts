@@ -161,8 +161,8 @@ export class ManageJemComponent extends MilieuVue implements OnInit {
 
   onSubmit(){
     this.submitted = true;
-    this.jemService.create(this.model).then((data)=>{
-      this.jemService.refresh();
+    this.jemService.createItem(this.model).then((data)=>{
+      this.jemService.populate();
       this.message = "The Database was updated";
       this.submitted = false;
       setTimeout( () =>{

@@ -152,7 +152,7 @@ export class JemMilieuComponent extends Milieu implements OnInit {
 
     this.jemService.routeConfig(this.route);
 
-    this.jemService.refresh();
+    this.jemService.populate();
 
 
     this.route.fragment.subscribe(fragment => {

@@ -1,29 +1,36 @@
-import { Location }         from '@angular/common';
-import { Injectable }       from '@angular/core';
-import { Headers, Http }    from '@angular/http';
-import { ActivatedRoute }   from "@angular/router";
-import { BehaviorSubject }  from 'rxjs/BehaviorSubject';
+import { Location } from '@angular/common';
+import { Injectable } from '@angular/core';
+import { Headers, Http } from '@angular/http';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 'use strict';
 
 // FieldRaw converts to Field to make config files easier to understand for the user.
 
-export class Config { title     : string;
-                      name      : string;
-                      directory : string;
+export class Config {
+  title: string;
+  name: string;
+  directory: string;
 
-                      intro ?: string;
-                      img   ?: string;
+  intro?: string;
+  img?: string;
 
-                      itemsMode   ?: boolean;
-                      requireAuth ?: boolean;
+  itemsMode: boolean;
+  requireAuth?: boolean;
 
-                      fieldsRaw?: FieldRaw[];
-                      fields?:    Field[];    }
+  fieldsRaw?: FieldRaw[];
+  fields?: Field[];
+}
 
-export class Field { name: string; values =  [{ name: '', filtered: false }] }
+export class Field {
+  name: string;
+  values = [{ name: '', filtered: false }];
+}
 
-export class FieldRaw { name: string; values: string[] }
+export class FieldRaw {
+  name: string;
+  values: string[];
+}
 
 
 @Injectable()
@@ -32,16 +39,11 @@ export class MilieuService {
   config: Config;
   protected readonly headers = new Headers({ 'Content-Type': 'application/json' });
 
-  api                 = 'api';
-  pageTitle           = '';
-  itemsMode           = true;
+  api = 'api';
+  pageTitle = '';
 
-  authenticated       = false;
-  admin               = false;
-  user                = false; 
-
-  collectionMode      = false;
-  collectionName      = '';
+  collectionMode = false;
+  collectionName = '';
 
   private readonly itemsSource = new BehaviorSubject<{}[]>([]);
   private readonly filteredItemsSource = new BehaviorSubject<{}[]>([]);
@@ -51,342 +53,151 @@ export class MilieuService {
   readonly currentFilteredItems = this.filteredItemsSource.asObservable();
   readonly currentSelectedItem = this.selectedItemSource.asObservable();
 
-  changeItems(items: {}[]) { this.itemsSource.next(items) }
-  changeFilteredItems(filteredItems: {}[]) { this.filteredItemsSource.next(filteredItems);}
-  changeSelectedItem(selectedItem: {}) { this.selectedItemSource.next(selectedItem) }
+  private changeItems(items: {}[]) { this.itemsSource.next(items) }
+  private changeFilteredItems(filteredItems: {}[]) { this.filteredItemsSource.next(filteredItems); }
+  private changeSelectedItem(selectedItem: {}) { this.selectedItemSource.next(selectedItem) }
 
-  constructor(public readonly route: ActivatedRoute, public  readonly http: Http, public readonly location: Location) { }
-
-  login(logInFields){
-
-    return this.http.post(`api/login`, logInFields, { headers: this.headers }).toPromise().then(response => {
-
-
-      //console.log(response.json().message);
-      if(response.json().login){
-
-        setTimeout(()=>{
-          window.location.reload();
-        },3000);
-      }
-
-      return response.json();
-    }).catch(this.handleError);
-
-
-  }
-
-  // todo see if there is a way of getting rid of observable => Promise => observable;
-  refresh() {
-
-    this.http.get('api/session').toPromise().then(result => {
-
-      if(result.json().message === 'Admin'){
-        this.admin = true;
-
-        this.authenticated = true;
-      }else if (result.json().message === 'User'){
-        this.user = true;
-        this.authenticated = true;
-
-      }else{
-        this.authenticated = false;
-      }
-    });
-
-    if (this.itemsMode === true) {
-      let items = this.http.get(`api/${this.config.name}`).toPromise().then(response => response.json().data);
-      items.then(items => {
-        this.changeItems(items);
-        this.changeFilteredItems(items);
-        this.currentItems.subscribe(items => {
-          this.changeSelectedItem(items[0]);
-        });
-        this.filter();
-
-      });
-
-
-    }
-
-  }
-
-  logOut(){
-    this.http.get('api/logout').toPromise().then(response => {
-      //console.log(response);
-      window.location.reload();
-    });
-  }
+  constructor(readonly http: Http, readonly location: Location) { }
 
   init() {
+    const config = this.config, rawFields = config.fieldsRaw;
 
-    if(this.config.itemsMode === false){
-      this.itemsMode = false;
+    if (rawFields) {
+
+      rawFields.forEach(rawField => {
+        let newField: Field = { name: rawField.name, values: [] };
+        rawField.values.forEach(value => newField.values.push({ name: value, filtered: false }));
+        config.fields.push(newField);
+      });
+      delete config.fieldsRaw;
     }
+    this.pageTitle = config.title;
+  }
 
+  populate() {
 
+    if (this.config.itemsMode) {
 
-    this.http.get('api/session').toPromise().then(result => {
-
-      if(result.json().message === 'Admin'){
-        this.admin = true;
-
-        this.authenticated = true;
-      }else if (result.json().message === 'User'){
-        this.user = true;
-        this.authenticated = true;
-
-      }else{
-        this.authenticated = false;
-      }
-
-    });
-
-
-
-    if (this.itemsMode === true) {
       let items = this.http.get(`api/${this.config.name}`).toPromise().then(response => response.json().data);
+
       items.then(items => {
         this.changeItems(items);
         this.changeFilteredItems(items);
-        this.currentItems.subscribe(items => {
-          this.changeSelectedItem(items[0]);
+        this.currentItems.subscribe(items => this.changeSelectedItem(items[0]));
+        this.filter();
+      });
+    }
+  }
+
+  createItem(item: any): Promise<any> {
+    return this.http.post(`${this.api}/${this.config.name}`, JSON.stringify({ 'item': item }), { headers: this.headers })
+      .toPromise()
+      .then(res => res.json())
+      .catch(this.handleError);
+  }
+
+  addFavorite(id: string): Promise<any> {
+    return this.http.get(`${this.api}/${this.config.name}/add-favorite/${id}`)
+      .toPromise()
+      .then(res => res.json())
+      .catch(this.handleError);
+  }
+
+  delete(id: string): Promise<any> {
+    return this.http.delete(`api/${this.config.name}/${id}`).toPromise().then(res => { this.populate(); return res.json() }).catch(this.handleError);
+  }
+
+  filter(col = "title", value = '') {
+    let itemsFiltered: {}[];
+
+    this.currentItems.subscribe(items => {
+      itemsFiltered = items;
+
+      this.config.fields.forEach(field => {
+        let filtered = [], filters: string[] = [];
+
+        field.values.forEach(value => {
+
+          if (value.filtered) {
+            filters.push(value.name)
+          }
         });
 
-      });
-
-
-    }
-    // takes fieldsRaw ['Git', 'JavaScript', 'HTML'] and converts them to [name: 'Git', filtered: false ]
-    // this saves typing / time on config file creation.
-
-    if(this.config.fieldsRaw){
-      this.config.fieldsRaw.forEach(fieldRaw => {
-        let newField: Field = { name: fieldRaw.name, values: [] };
-        fieldRaw.values.forEach(value => newField.values.push({ name: value, filtered: false }));
-        this.config.fields.push(newField);
-      });
-      delete this.config.fieldsRaw;
-    }
-
-
-
-    this.pageTitle = this.config.title;
-
-  }
-
-  // todo: overhaul on this after doing the server side //
-  create(item: any): Promise<any> {
-    const url = `${this.api}/${this.config.name}`;
-    let something = JSON.stringify({ 'jem' : item }); // this need to change to data
-    //console.log(something);
-    return this.http
-      .post(url, something, { headers: this.headers })
-      .toPromise()
-      .then((res) => {
-        return item;
-      })
-      .catch(this.handleError);
-  }
-
-  createItem(item: any){
-    const url = `${this.api}/${this.config.name}`;
-    let something = JSON.stringify({ 'item' : item });
-    return this.http
-      .post(url, something, { headers: this.headers })
-      .toPromise()
-      .then((res) => {
-        return res.json();
-      })
-      .catch(this.handleError);
-  }
-
-  addFavorite(id: string)  {
-
-    const url = `${this.api}/${this.config.name}/add-favorite/${id}`;
-    return this.http
-      .post(url, { headers: this.headers })
-      .toPromise()
-      .then((res) => {
-
-
-
-        console.log(res.json());
-
-        return res.json();
-      })
-      .catch(this.handleError);
-  }
-
-  // todo over hault on this after doing the server side //
-  delete(id: string): string {
-
-    let url = `api/${this.config.name}/${id}`
-
-    this.http.delete(url).toPromise().then((response) => {
-    });
-
-    this.refresh();
-
-    return 'success';
-  }
-
-  /*
-  filter() {
-
-    let itemsFiltered: any[];
-    this.currentItems.subscribe(items => {
-      itemsFiltered = items;
-
-      this.config.fields.forEach(field => {
-        let filtered = [], filters: string[] = [];
-
-        field.values.forEach(value => { if (value.filtered) filters.push(value.name) });
-
         if (filters.length > 0) {
+
           filters.forEach(filter => {
+
             itemsFiltered.forEach(item => {
-              if (item[field.name] === filter){
-                filtered.push(item);
-              }
-            });
-          });
-          itemsFiltered = filtered;
-        }
-      });
 
-    });
-
-    this.changeFilteredItems(itemsFiltered);
-
-    this.updateUrl();
-  }
-  */ //
-
-
-  filter(col = "title", value = ''){
-
-    //console.log(this.config);
-
-    let itemsFiltered: {}[];
-    this.currentItems.subscribe(items => {
-
-      //console.log(items);
-
-      itemsFiltered = items;
-
-      this.config.fields.forEach(field => {
-        let filtered = [], filters: string[] = [];
-
-        field.values.forEach( value => {
-                                if (value.filtered) {
-                                  filters.push(value.name);
-
-                                  //console.log("filter pushing", value.name);
-                                }
-                              });
-
-        if (filters.length > 0) {
-          filters.forEach(filter => {
-            itemsFiltered.forEach(item => {
               if (item[field.name] === filter) {
                 let regExp = new RegExp(value, "i");
 
-                //console.log(regExp, col);
-
-                if(item[col].search(regExp) > -1){
+                if (item[col].search(regExp) > -1) {
                   filtered.push(item);
-
-                  //console.log(item);
                 }
               }
             });
           });
-          itemsFiltered = filtered;
-        }else{
-          itemsFiltered.forEach(item => {
 
-            let regExp = new RegExp(value, "i")
-            if(item[col].search(regExp) > -1){
-              filtered.push(item);
+          itemsFiltered = filtered;
+        } else {
+
+          itemsFiltered.forEach(item => {
+            let regExp = new RegExp(value, "i");
+            if (item[col].search(regExp) > -1) {
+              filtered.push(item)
             }
           });
+
           itemsFiltered = filtered;
         }
       });
-
     });
+
     this.changeFilteredItems(itemsFiltered);
-
-
-    console.log('filter called updateURL');
     this.updateUrl();
   }
 
   private updateUrl(): void {
 
+    const config = this.config,
+      url = config.directory;
 
-    let url = this.config.directory, qs: string = '', fieldPaths: string[] = [], queryStrings: string[] = [], selectedFilters: string[] = [];
+    let qs: string = '',
+      fieldPaths: string[] = [],
+      queryStrings: string[] = [],
+      selectedFilters: string[] = [];
 
-
-
-
-    this.config.fields.forEach(field => {
-
-
-      //console.log(field);
-
+    config.fields.forEach(field => {
       let filters = [];
-      field.values.forEach( value => {
-                                        //console.log(value);
-                                        if (value.filtered) {
-                                          filters.push(value.name);
-                                          //console.log('pushing', value.name);
-                                        }
-                                      });
+
+      field.values.forEach(value => {
+        if (value.filtered) {
+          filters.push(value.name);
+        }
+      });
 
       if (filters.length === 1) {
         fieldPaths.push(`${this.urlify(field.name)}/${this.urlify(filters[0])}`);
         selectedFilters.push(filters[0]);
-
       } else if (filters.length > 1) {
-
-        //console.log('creating query string');
         queryStrings.push(`${this.urlify(field.name)}=${this.urlify(filters.join(','))}`);
       }
     });
 
-
-    //console.log(this.config.fields);
-    //console.log('query Strings', queryStrings);
-
-    //console.log('replaceState', `${url}/${fieldPaths.join('/')}`, `${queryStrings.join('&')}`);
-
-    //console.log('your vars', fieldPaths.length, queryStrings.length);
-
-    if(fieldPaths.length > 0){
+    if (fieldPaths.length > 0) {
       this.location.replaceState(`${url}/${fieldPaths.join('/')}`, `${queryStrings.join('&')}`);
-    }else{
+    } else {
       this.location.replaceState(`${url}${fieldPaths.join('/')}`, `${queryStrings.join('&')}`);
     }
-
-
-    this.pageTitle = selectedFilters.length > 0 ? selectedFilters.join(' ') : this.config.title;
-
-
+    this.pageTitle = selectedFilters.length > 0 ? selectedFilters.join(' ') : config.title;
   }
 
-  searchItems(term: string){
-    return ['your mom', 'my mom', 'our mom'];
-  }
 
-  // over hault this after backend
   protected handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
+    console.error('An error occurred', error);
     return Promise.reject(error.message || error);
   }
-
-
 
   unUrlify(string: string) {
     string = string || '';
@@ -413,53 +224,33 @@ export class MilieuService {
     return string;
   }
 
-
-
   routeConfig(route) {
+
+    let processingQuery = true;
 
     route.params.subscribe(params => {
 
-
-
-
-
-      let c = 0;
       this.config.fields.forEach(field => {
 
-        field.values.forEach(data=>{
+        field.values.forEach(data => {
           data.filtered = false;
         })
 
         if (params[field.name]) {
-
-
-
           let param = this.unUrlify(params[field.name]);
+
           field.values[field.values.findIndex(value => value.name.toLowerCase() === param)].filtered = true;
         }
-
-        c++;
-
-        //console.log(c);
-
-        //if(c === 2){
-
-        //}
-
       },
-      err =>{
-        console.log(err)
-      }
-        );
+        err => {
+          console.log(err)
+        },
 
-      this.filter();
+      );
+      if (!processingQuery) this.filter();
     });
 
     route.queryParams.subscribe(params => {
-
-
-
-
 
       this.config.fields.forEach(field => {
         if (params[field.name]) {
@@ -471,10 +262,8 @@ export class MilieuService {
         }
       });
 
-      //this.filter();
+      processingQuery = false;
     });
-
-
   }
 }
 
