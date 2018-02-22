@@ -4,7 +4,9 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { AccountService } from './data';
 import { AccountFormVue } from './forms';
 
-import { Milieu, MilieuFormGroup, MilieuVue } from '../milieu/core';
+import { Milieu, MilieuFormGroup } from '../milieu/core';
+
+import { MilieuVue } from '../milieu/vue';
 
 'use strict';
 

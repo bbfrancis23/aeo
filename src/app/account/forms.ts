@@ -3,7 +3,9 @@ import { FormControl, Validators } from '@angular/forms';
 
 import { AccountService } from './data';
 
-import { MilieuFieldForm, MilieuFormGroup, MilieuVue } from '../milieu/core';
+import { MilieuFieldForm, MilieuFormGroup } from '../milieu/core';
+
+import { MilieuVue } from '../milieu/vue';
 
 'use strict';
 

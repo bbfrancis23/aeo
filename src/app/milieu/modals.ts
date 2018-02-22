@@ -13,16 +13,17 @@ import { fadeInOutAnimation, modalVueFadeInOut } from './animations';
       <div class="modal-content" ><ng-content></ng-content></div>
     </div>
   `,
-    animations: [ fadeInOutAnimation]
+  animations: [fadeInOutAnimation]
 })
 export class MilieuModalComponent {
   modalMode = false;
+  @Input() modalOnly = false;
 
 
   modalClick(e) {
     //console.log(e);
 
-    if(e.target.className.search(/modal-mode/) > -1  || e.target.className.search(/close-modal/) > -1){
+    if (e.target.className.search(/modal-mode/) > -1 || e.target.className.search(/close-modal/) > -1) {
       this.modalMode = false;
 
 
@@ -37,10 +38,9 @@ export class MilieuModalComponent {
     <div [ngClass]="{'modal-mode': modalMode}"  (click)="modalClick($event)" [@modalVueFadeInOut]="modalMode" >
       <div [ngClass]="{'modal-vue-content': modalMode}"><ng-content></ng-content></div>
     </div></div>`,
-    animations: [ modalVueFadeInOut ]
+  animations: [modalVueFadeInOut]
 })
-export class ModalVueComponent extends MilieuModalComponent{
-  @Input() modalOnly = false;
+export class ModalVueComponent extends MilieuModalComponent {
 }
 
 @Component({
@@ -49,8 +49,8 @@ export class ModalVueComponent extends MilieuModalComponent{
     <div [ngClass]="{'modal-mode': modalMode}"  (click)="modalClick($event)" [@fadeInOut]="'in'" >
       <div [ngClass]="{'modal-vue-content': modalMode}"><ng-content></ng-content></div>
     </div>`,
-    animations: [ fadeInOutAnimation ]
+  animations: [fadeInOutAnimation]
 })
-export class ModalDrawerComponent extends MilieuModalComponent{
+export class ModalDrawerComponent extends MilieuModalComponent {
 
 }

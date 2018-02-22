@@ -10,6 +10,8 @@ import { ModalVueComponent } from './modals';
 import { AccountService } from '../account/data';
 import { AppService } from '../data';
 
+import { MilieuVue } from './vue';
+
 'use strict';
 
 @Component({
@@ -68,31 +70,6 @@ export abstract class MilieuFieldForm {
 
   constructor(public milieuService: MilieuService) { }
 }
-
-export abstract class MilieuVue {
-
-  @ViewChild(ModalVueComponent) modalChild: ModalVueComponent;
-  @ViewChild(CollapseControlComponent) collapseControl: CollapseControlComponent;
-
-  @Input() show = true;
-  @Input() modalOnlyMode = false;
-  @Input() showControls = false;
-  @Input() sidebarMode = false;
-  @Input() showCollapseControl = false;
-  @Input() collapseMode = false;
-
-
-  constructor(milieuService?: MilieuService)
-  constructor()
-  { }
-
-
-
-  get modalMode() {
-    return this.modalChild.modalMode;
-  }
-}
-
 
 export class MilieuFormGroup extends FormGroup {
   focus: string = null;

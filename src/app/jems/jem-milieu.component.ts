@@ -27,7 +27,7 @@ import { AccountService } from '../account/data';
 
             <div class="btn-group float-right d-md-block d-lg-block"  >
               <button class="btn material-icons" (click)="leftSideBarToggle()" [ngClass]="{'active': leftSidebar.show}"  title="Display / Hide Left Sidebar">swap_horiz</button>
-              <button class="btn material-icons" (click)="addVue.modalChild.modalMode=true" [ngClass]="{'active': addVue.modalChild.modalMode}"  title="Add Jem View" *ngIf="accountService.admin">add</button>
+              <button class="btn material-icons" (click)="addVue.modal.modalMode=true" [ngClass]="{'active': addVue.modal.modalMode}"  title="Add Jem View" *ngIf="accountService.admin">add</button>
 
             </div>
             <!--
@@ -206,7 +206,7 @@ export class JemMilieuComponent extends Milieu implements OnInit {
     //console.log(e);
     if (e.target.className.search('update') > -1) {
       //  this.updateVue.show = true;
-      this.updateVue.modalChild.modalMode = true;
+      //this.updateVue.modal.modalMode = true;
     }
   }
 

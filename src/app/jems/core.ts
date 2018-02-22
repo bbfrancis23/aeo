@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnInit} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Jem } from './jem';
 import { JemService } from './jem.service';
-import { ListVueComponent, MilieuVue } from '../milieu/core';
+import { ListVueComponent } from '../milieu/core';
+import { MilieuVue } from '../milieu/vue';
 import { fadeInOutAnimation, flyInOut } from '../milieu/animations';
 
 'use strict';
@@ -10,17 +11,17 @@ import { fadeInOutAnimation, flyInOut } from '../milieu/animations';
 @Component({
   selector: 'jem-list-vue',
   template: `
-    <modal-vue>
+    <modal-vue #m>
       <div [@fadeInOut]="'in'" *ngIf="show"  >
         <div class="card" >
         <div class="card-header">Jems List</div>
         </div>
-        <modal-controls *ngIf="modalChild.modalMode === true"></modal-controls>
+        <modal-controls *ngIf="m.modalMode === true"></modal-controls>
         <div class="alert alert-warning" *ngIf="items?.length === 0">No Jems. Please try a Different Filter</div>
         <sized-items-vue-controls
-          *ngIf="modalChild.modalMode === false"
+          *ngIf="m.modalMode === false"
           (hideVueEvent)="show=false"
-          (modalVueEvent)="modalChild.modalMode=true;"
+          (modalVueEvent)="m.modalMode=true;"
           (toggleItemSizeEvent)="showBig = !showBig" >
         </sized-items-vue-controls>
         <div >
@@ -28,7 +29,7 @@ import { fadeInOutAnimation, flyInOut } from '../milieu/animations';
         </div>
       </div>
     </modal-vue>`,
-  animations: [ fadeInOutAnimation, flyInOut ]
+  animations: [fadeInOutAnimation, flyInOut]
 })
 export class JemListVueComponent extends ListVueComponent {
 
@@ -40,7 +41,7 @@ export class JemListVueComponent extends ListVueComponent {
 
 @Component({
   selector: 'jem-table-of-contents',
-  template:`
+  template: `
   <div class="container-fluid">
     <div id="snippits" class="list-group">
       <br>
@@ -49,9 +50,9 @@ export class JemListVueComponent extends ListVueComponent {
     <hr>
   </div>`
 })
-export class JemTableOfContents extends JemListVueComponent{
+export class JemTableOfContents extends JemListVueComponent {
 
-  clicky(jem){
+  clicky(jem) {
 
     document.querySelector('#' + this.milieuService.urlify(jem.title)).scrollIntoView();
 
@@ -65,12 +66,12 @@ export class JemTableOfContents extends JemListVueComponent{
 
 @Component({
   selector: 'manage-jem',
-  template:`
-  <modal-vue [modalOnly]="true">
+  template: `
+  <modal-vue [modalOnly]="true" #modal>
     <div class="card" [@fadeInOut]="'in'" *ngIf="show">
       <div class="card-header">{{manageType}} Jem</div>
-      <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modalChild.modalMode=true" *ngIf="!modalChild.modalMode && jemService.dashBoard" ></vue-controls>
-      <modal-controls *ngIf="modalChild.modalMode === true"></modal-controls>
+      <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modal.modalMode=true" *ngIf="!modal.modalMode && jemService.dashBoard" ></vue-controls>
+      <modal-controls *ngIf="modal.modalMode === true"></modal-controls>
       <div class="card-block p-3" >
         <form  (ngSubmit)="onSubmit();" [formGroup]="jemForm" #formJem="ngForm" *ngIf="!submitted && !message">
           <div class="form-group">
@@ -122,7 +123,7 @@ export class JemTableOfContents extends JemListVueComponent{
       </div>
     </div>
   </modal-vue>`,
-  animations: [ fadeInOutAnimation ]
+  animations: [fadeInOutAnimation]
 })
 export class ManageJemComponent extends MilieuVue implements OnInit {
   @Input() jemService: JemService;
@@ -133,46 +134,46 @@ export class ManageJemComponent extends MilieuVue implements OnInit {
   submitted = false;
   jemForm: FormGroup;
   model: any = new Jem();
-  readonly TITLE = {maxLength: 64};
-  readonly DESC = {maxLength: 1024 };
-  readonly CODE = {maxLength: 16384};
+  readonly TITLE = { maxLength: 64 };
+  readonly DESC = { maxLength: 1024 };
+  readonly CODE = { maxLength: 16384 };
 
-  ngOnInit(){
+  ngOnInit() {
 
     this.jemForm = new FormGroup({
-      'title' : new FormControl('',[Validators.required, Validators.maxLength(this.TITLE.maxLength)]),
-      'tech' : new FormControl('Angular'),
-      'type' : new FormControl('Best Practices'),
-      'desc' : new FormControl('',[Validators.required, Validators.maxLength(this.DESC.maxLength)]),
-      'code' : new FormControl('',[Validators.maxLength(this.CODE.maxLength)])
+      'title': new FormControl('', [Validators.required, Validators.maxLength(this.TITLE.maxLength)]),
+      'tech': new FormControl('Angular'),
+      'type': new FormControl('Best Practices'),
+      'desc': new FormControl('', [Validators.required, Validators.maxLength(this.DESC.maxLength)]),
+      'code': new FormControl('', [Validators.maxLength(this.CODE.maxLength)])
     });
 
 
-    if(this.manageType === 'Add'){
+    if (this.manageType === 'Add') {
       this.model.tech = this.jemService.config.fields[0].values[0].name;
       this.model.type = this.jemService.config.fields[1].values[0].name;
 
 
-    }else{
+    } else {
       this.jemService.currentSelectedItem.subscribe(selectedItem => { this.model = selectedItem; });
     }
 
   }
 
-  onSubmit(){
+  onSubmit() {
     this.submitted = true;
-    this.jemService.createItem(this.model).then((data)=>{
+    this.jemService.createItem(this.model).then((data) => {
       this.jemService.populate();
       this.message = "The Database was updated";
       this.submitted = false;
-      setTimeout( () =>{
-        if(this.manageType === 'Add'){ this.resetForm(); }
+      setTimeout(() => {
+        if (this.manageType === 'Add') { this.resetForm(); }
         this.message = null;
       }, 3000);
     });
   }
 
-  resetForm(){
+  resetForm() {
     this.model.tech = this.jemService.config.fields[0].values[0].name;
     this.model.type = this.jemService.config.fields[1].values[0].name;
     this.model.title = null;
@@ -235,17 +236,17 @@ export class JemComponent {
   @Input() jem: Jem;
   @Input() jemService: JemService;
 
-  copy(){
+  copy() {
     let txt = document.createElement("textarea");
     txt.value = this.jem.code;
-    txt.setAttribute('style',"poition: fixed; left: 0; top: 0; opacity: 0");
+    txt.setAttribute('style', "poition: fixed; left: 0; top: 0; opacity: 0");
     document.body.appendChild(txt);
     txt.select();
     document.execCommand('copy');
     document.body.removeChild(txt);
 
     this.contentCopied = true;
-    setTimeout( () =>{
+    setTimeout(() => {
       this.contentCopied = false;
     }, 3000);
   }
