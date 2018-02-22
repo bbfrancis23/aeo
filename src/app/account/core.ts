@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { AccountService } from './data';
 import { AccountFormVue } from './forms';
 
-import { Milieu, MilieuFormGroup, MilieuVue, MilieuVuePlus } from '../milieu/core';
+import { Milieu, MilieuFormGroup, MilieuVue } from '../milieu/core';
 
 'use strict';
 
@@ -50,7 +50,7 @@ export class AccountVueComponent extends MilieuVue {
 
 @Component({
   selector: 'account-reset-form',
-  template:`
+  template: `
     <div class="card" *ngIf="show">
     <div class="card-header">Reset Form</div>
       <div class="card-block">
@@ -65,7 +65,7 @@ export class AccountVueComponent extends MilieuVue {
       </div>
     </div>`
 })
-export class AccountResetVueComponent extends AccountFormVue { constructor( public accountService: AccountService ){ super( accountService ) } }
+export class AccountResetVueComponent extends AccountFormVue { constructor(public accountService: AccountService) { super(accountService) } }
 
 /* CREATE ACCOUNT VUE **********************************************************/
 
@@ -92,7 +92,7 @@ export class AccountResetVueComponent extends AccountFormVue { constructor( publ
       </div>
     </div>`
 })
-export class CreateAccountVueComponent extends AccountFormVue { constructor(accountService: AccountService){ super(accountService) } }
+export class CreateAccountVueComponent extends AccountFormVue { constructor(accountService: AccountService) { super(accountService) } }
 
 /* LOGIN VUE *******************************************************************/
 
@@ -118,8 +118,8 @@ export class CreateAccountVueComponent extends AccountFormVue { constructor(acco
 })
 export class LogInVueComponent extends AccountFormVue {
   constructor(
-    public accountService: AccountService ){
-      super( accountService );
+    public accountService: AccountService) {
+    super(accountService);
   }
 }
 
@@ -137,22 +137,22 @@ export class LogInVueComponent extends AccountFormVue {
       </div>
     </div>`
 })
-export class ResetPasswordVueCompoent extends MilieuVuePlus {
+export class ResetPasswordVueCompoent extends MilieuVue {
 
   validToken = null;
   processing = true;
   token = null;
 
-  constructor(public route: ActivatedRoute, public accountService: AccountService){
+  constructor(public route: ActivatedRoute, public accountService: AccountService) {
     super(accountService);
-    this.route.params.subscribe( params =>
-      {
-        this.accountService.validResetId( params.id ).then( valid => {
-          this.validToken = valid;
-          this.token = params.id;
-          this.processing = false;
-        }
-    ) } )
+    this.route.params.subscribe(params => {
+      this.accountService.validResetId(params.id).then(valid => {
+        this.validToken = valid;
+        this.token = params.id;
+        this.processing = false;
+      }
+      )
+    })
   }
 }
 
@@ -178,7 +178,7 @@ export class ResetPasswordVueCompoent extends MilieuVuePlus {
     </content>
   </view-port>`
 })
-export class AccountMilieuComponent extends Milieu implements OnInit{
+export class AccountMilieuComponent extends Milieu implements OnInit {
 
   params = false;
 
@@ -186,15 +186,15 @@ export class AccountMilieuComponent extends Milieu implements OnInit{
   @ViewChild(AccountResetVueComponent) accountResetVue;
   @ViewChild(ResetPasswordVueCompoent) resetPasswordVue;
 
-  constructor(protected route: ActivatedRoute, public accountService: AccountService) { super( route, accountService) }
+  constructor(protected route: ActivatedRoute, public accountService: AccountService) { super(route, accountService) }
 
-  ngOnInit(){
+  ngOnInit() {
     this.route.params.subscribe(
       params => {
-        if(params.action || params.id) this.params = true;
+        if (params.action || params.id) this.params = true;
         this.logInVue.show = params.action === 'log-in' ? 'true' : false;
         this.accountResetVue.show = params.action === 'reset-form' ? 'true' : false;
         this.resetPasswordVue.show = params.id ? 'true' : false;
-    });
+      });
   }
 }

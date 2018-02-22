@@ -1,18 +1,62 @@
-import { fadeInOutAnimation, modalVueFadeInOut, flyInOut } from './animations';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from "@angular/router";
-import { MilieuService } from './data';
-import { ModalVueComponent} from './modals';
 import { Subject } from 'rxjs/Subject';
 
+import { fadeInOutAnimation, modalVueFadeInOut, flyInOut } from './animations';
+import { MilieuService } from './data';
+import { ModalVueComponent } from './modals';
+
 import { AccountService } from '../account/data';
+import { AppService } from '../data';
 
 'use strict';
 
-/* MILIEU FIELD FORM ***********************************************************/
+@Component({
+  selector: 'vue-controls',
+  template: `
+    <div classs="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown"></a>
+      <div class="dropdown-menu dropdown-menu-right" >
+        <a class="dropdown-item" (click)="hideVueEvent.emit()"><div class="material-icons">remove_circle</div> Hide</a>
+        <a class="dropdown-item" (click)="modalVueEvent.emit()"><div class="material-icons">open_in_browser</div> Modal</a>
+      </div>
+    </div>`
+})
+export class VueControlsComponent {
 
-export abstract class MilieuFieldForm{
+  @Input() show = true;
+
+  @Output() hideVueEvent = new EventEmitter();
+  @Output() modalVueEvent = new EventEmitter();
+
+
+}
+
+@Component({
+  selector: 'collapse-control',
+  template: `<a class="material-icons" data-toggle="collapse" [href]="dataTarget" (click)="collapse = collapse==='down' ? 'up' : 'down'" *ngIf="show">keyboard_arrow_{{collapse}}</a>`
+})
+export class CollapseControlComponent extends VueControlsComponent {
+  @Input() dataTarget: string = '';
+  collapse = 'up';
+}
+
+export abstract class Milieu {
+
+  columns: any[];
+
+  constructor(route: ActivatedRoute, milieuService: MilieuService, accountService: AccountService);
+  constructor(route: ActivatedRoute, milieuService: MilieuService);
+  constructor() { }
+
+  isColumnVisible(index) {
+    let result = this.columns[index].find(vue => vue.show);
+    return result ? result : false;
+  }
+}
+
+export abstract class MilieuFieldForm {
   message: string = null;
   submitted = false;
   updated = false;
@@ -22,64 +66,63 @@ export abstract class MilieuFieldForm{
   @Output() cancel = new EventEmitter();
   form = new MilieuFormGroup({});
 
-  constructor( public milieuService: MilieuService ){}
+  constructor(public milieuService: MilieuService) { }
 }
-
 
 export abstract class MilieuVue {
+
+  @ViewChild(ModalVueComponent) modalChild: ModalVueComponent;
+  @ViewChild(CollapseControlComponent) collapseControl: CollapseControlComponent;
+
   @Input() show = true;
   @Input() modalOnlyMode = false;
-  showControls = true;
+  @Input() showControls = false;
   @Input() sidebarMode = false;
-
-  constructor(milieuService:MilieuService);
-  constructor(){}
-
-  @ViewChild(ModalVueComponent) modalChild: ModalVueComponent;
+  @Input() showCollapseControl = false;
+  @Input() collapseMode = false;
 
 
+  constructor(milieuService?: MilieuService)
+  constructor()
+  { }
+
+
+
+  get modalMode() {
+    return this.modalChild.modalMode;
+  }
 }
 
-export abstract class MilieuVuePlus {
-  show = false;
-  modalOnlyMode = false;
 
-  constructor(milieuService?:MilieuService){}
-
-  @ViewChild(ModalVueComponent) modalChild: ModalVueComponent;
-}
-
-export class MilieuFormGroup extends FormGroup{
+export class MilieuFormGroup extends FormGroup {
   focus: string = null;
 }
 
-export abstract class MilieuInputComponent{
+export abstract class MilieuInputComponent {
   @Input() form: MilieuFormGroup;
   @Input() tabIndex = 1;
   @Input() autofocus = false;
   @Input() required = false;
 
-  constructor(protected milieuService: MilieuService){ }
-
+  constructor(protected milieuService: MilieuService) { }
 }
 
 @Component({
   selector: 'filter-vue',
-  template:`
+  template: `
     <modal-vue>
       <div class="card"  [@fadeInOut]="'in'" *ngIf="show" >
-        <div class="card-header" (mouseenter)="showCollapseControl=true" (mouseleave)="showCollapseControl=false">
+        <div class="card-header" (mouseenter)="showCollapseControl=true" (mouseleave)="showCollapseControl = (appService.touch) ? true : false">
           Filters
           <collapse-control [dataTarget]="'#filter'" [show]="showCollapseControl"></collapse-control>
         </div>
-        <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modalChild.modalMode=true" *ngIf="!modalChild.modalMode && milieuService.dashBoard"></vue-controls>
-        <modal-controls *ngIf="modalChild.modalMode || milieuService.tabletMode === true"></modal-controls>
+        <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modalMode=true" *ngIf="!modalMode && !sidebarMode"></vue-controls>
+        <modal-controls *ngIf="modalMode || milieuService.tabletMode"></modal-controls>
         <div class="collapse show card-block" id="filter">
           <div class="form-group">
             <input type="text" class="form-control " id="title" placeholder="Title Search" #searchBox id="title-search-box" (keyup)="search(searchBox.value)">
           </div>
           <div *ngFor="let field of milieuService.config.fields">
-            {{milieuService.modalMode}}
             <hr>
             <b><p>{{field.name}}:</p></b>
             <div type="checkbox" *ngFor="let value of field.values" ><input type="checkbox" [(ngModel)]="value.filtered"  (change)="milieuService.filter('title',searchTerm)"> {{value.name}}</div>
@@ -87,48 +130,59 @@ export abstract class MilieuInputComponent{
         </div>
       </div>
     </modal-vue>`,
-  animations: [ fadeInOutAnimation]
+  animations: [fadeInOutAnimation]
 })
-export class FilterVueComponent extends MilieuVue implements OnInit {
+export class FilterVueComponent extends MilieuVue implements OnDestroy, OnInit {
 
   @Input() milieuService: any;
   private searchTerms = new Subject<string>();
   searchTerm: string;
+  //showCollapseControl;
 
-  ngOnInit(){ this.searchTerms.subscribe((term)=> this.searchTerm = term) }
+  constructor(public appService: AppService) {
+    super();
+    //this.showCollapseControl = this.appService.touch ? true : false
+  }
 
-  search(term: string):void{
+  ngOnInit() {
+    this.searchTerms.subscribe((term) => this.searchTerm = term)
+  }
+
+  search(term: string): void {
     this.searchTerms.next(term);
-    this.milieuService.filter('title',term);
+    this.milieuService.filter('title', term);
+  }
 
-
+  ngOnDestroy() {
+    this.searchTerms.unsubscribe();
   }
 }
 
 @Component({
   selector: 'intro-vue',
   template:
-    `<modal-vue>
+  `<modal-vue>
       <div [ngClass]="{'sidebar-vue': sidebarMode}">
         <div class="card" [@fadeInOut]="'in'" *ngIf="show" >
           <div (mouseenter)="showCollapseControl=true" (mouseleave)="showCollapseControl=false">
-            <img [src]="milieuService.config.img" alt="{{milieuService.config.title}}" >
+            <img [src]="milieuService.intro.img" alt="{{milieuService.config.title}}" >
             <collapse-control class="image-collapse-control" [dataTarget]="'#milieu-intro'" [show]="showCollapseControl"></collapse-control>
           </div>
-          <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modalChild.modalMode=true" *ngIf="!modalChild.modalMode && milieuService.dashBoard"></vue-controls>
-          <modal-controls *ngIf="modalChild.modalMode === true"></modal-controls>
+          <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modalMode=true" *ngIf="!modalMode && !sidebarMode"></vue-controls>
+          <modal-controls *ngIf="modalMode"></modal-controls>
           <div class="collapse show card-block" id="milieu-intro">
-            <h4>{{milieuService.config.title}}</h4>
-            <p>{{milieuService.config.intro}}</p>
+            <h2>{{milieuService.intro.title}}</h2>
+            <div [innerHtml]="milieuService.intro.text"></div>
           </div>
         </div>
       </div>
     </modal-vue>`,
-  animations: [ fadeInOutAnimation ]
+  animations: [fadeInOutAnimation]
 })
 export class IntroVueComponent extends MilieuVue {
   @Input() milieuService: any;
   showCollapseControl = false;
+
 }
 
 @Component({
@@ -137,9 +191,9 @@ export class IntroVueComponent extends MilieuVue {
     <div class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown"></a>
         <div class="dropdown-menu dropdown-menu-right" >
-          <a class="dropdown-item" (click)="milieuService.delete(item._id)" *ngIf="milieuService.admin"><div class="material-icons">delete_forever</div>Delete</a>
-          <a class="dropdown-item update" (click)="milieuService.changeSelectedItem(this.item)" *ngIf="milieuService.admin"><div class="material-icons">create</div> Update</a>
-          <a class="dropdown-item" (click)="favoriteClick();"><div class="material-icons">favorite</div> Favorite</a>
+          <a class="dropdown-item" (click)="milieuService.delete(item._id)" *ngIf="admin"><div class="material-icons">delete_forever</div>Delete</a>
+          <a class="dropdown-item update" (click)="milieuService.changeSelectedItem(item)" *ngIf="admin"><div class="material-icons">create</div> Update</a>
+          <a class="dropdown-item" (click)="milieuService.addFavorite(this.item._id)"><div class="material-icons">favorite</div> Favorite</a>
         </div>
     </div>`
 })
@@ -148,57 +202,58 @@ export class ItemControlsComponent {
   @Input() item: any;
   @Input() milieuService: any;
 
-  constructor(private accountService: AccountService){
+  constructor(private accountService: AccountService) { }
 
-  }
-
-  favoriteClick(){
-    this.milieuService.addFavorite(this.item._id);
-    //console.log(this.item._id);
+  get admin() {
+    return this.accountService.admin
   }
 }
 
 @Component({
   selector: 'item-search',
   template: `
-    <input #searchBox (keyup)="search(searchBox.value)" class="form-control" type="text" placeholder="Search" aria-label="Search">
+    <input #searchBox (keyup)="search(searchBox.value)" class="form-control" type="text" placeholder="Search">
       <div class='search-result' *ngIf="searchResults.length > 0">
-        <a *ngFor="let result of searchResults" class="dropdown-item" href="/{{result.link}}">{{result.title}}</a>
+        <a *ngFor="let result of searchResults" class="dropdown-item" routerLink="/{{result.link}}" (click)="searchBox.value=result.title; search('')" >{{result.title}}</a>
       </div>`
 })
-export class ItemSearchComponent implements OnInit{
+export class ItemSearchComponent implements OnInit {
   searchResults = [];
   keyWords = [];
 
   @Input() milieuService: any;
 
-  ngOnInit(){
+  ngOnInit() {
+    const urlify = this.milieuService.urlify,
+      directory = this.milieuService.config.directory,
+      fields = this.milieuService.config.fields;
+
     let count = 0;
-    this.milieuService.config.fields.forEach((field)=>{
+
+    fields.forEach((field) => {
       count++;
-      field['values'].forEach((value)=>{
-        let directory = this.milieuService.urlify(value['name'])
-        this.keyWords.push({link: `${this.milieuService.config.directory}/${field['name']}/${this.milieuService.urlify(value['name'])}`, title: value['name']});
+      field['values'].forEach((value) => {
+        this.keyWords.push({ link: `${directory}/${field['name']}/${urlify(value['name'])}`, title: value['name'] });
 
-        if(count < this.milieuService.config.fields.length) {
-          let subField = (this.milieuService.config.fields[count]);
+        if (count < fields.length) {
+          let subField = (fields[count]);
 
-          subField['values'].forEach((subValue)=>{
-            this.keyWords.push({link: `${this.milieuService.config.directory}/${field['name']}/${this.milieuService.urlify(value['name'])}/${subField['name']}/${this.milieuService.urlify(subValue['name'])}`, title: `${value['name']} ${subValue['name']}`} );
+          subField['values'].forEach((subValue) => {
+            this.keyWords.push({ link: `${directory}/${field['name']}/${urlify(value['name'])}/${subField['name']}/${urlify(subValue['name'])}`, title: `${value['name']} ${subValue['name']}` });
           });
         }
       });
     });
-
-    //console.log(this.searchResults);
   }
 
-  search(string: ''){
+  search(string: '') {
+
     this.searchResults = [];
-    if(string.length > 0){
-      this.keyWords.forEach((word)=>{
-        let regEx = new RegExp(string,'i')
-        if(word['title'].match(regEx)){
+
+    if (string.length > 0) {
+      this.keyWords.forEach((word) => {
+        let regEx = new RegExp(string, 'i')
+        if (word['title'].match(regEx)) {
           this.searchResults.push(word);
         }
       });
@@ -209,12 +264,10 @@ export class ItemSearchComponent implements OnInit{
 
 @Component({
   selector: 'list-vue',
-  template: `
-  <ng-content></ng-content>
-    `,
-      animations: [ fadeInOutAnimation, flyInOut ]
+  template: ` <ng-content></ng-content> `,
+  animations: [fadeInOutAnimation, flyInOut]
 })
-export class ListVueComponent extends MilieuVue {
+export class ListVueComponent extends MilieuVue implements OnDestroy {
   showBig = true;
   items: {};
 
@@ -226,28 +279,16 @@ export class ListVueComponent extends MilieuVue {
     })
   }
 
-  trackByItem(index:number, item){
+  trackByItem(index: number, item) {
     return item._id;
   }
-}
 
-export abstract class Milieu {
-
-  columns: any[];
-
-
-  //constructor(protected readonly route: ActivatedRoute, public milieuService: MilieuService);
-  //constructor(){}
-
-  constructor(route: ActivatedRoute, milieuService: MilieuService, accountService: AccountService);
-  constructor(route: ActivatedRoute, milieuService: MilieuService);
-  constructor(){}
-
-  isColumnVisible(index) {
-    let result = this.columns[index].find(vue => vue.show === true);
-    return result ? result : false;
+  ngOnDestroy() {
+    //this.milieuService.currentFilteredItems.unsubscribe();
   }
 }
+
+
 
 @Component({
   selector: 'view-port',
@@ -288,46 +329,20 @@ export abstract class Milieu {
       }
     `]
 })
-export class ViewPortComponent{ }
+export class ViewPortComponent { }
 
 
 //***** VUE CONTROLS & EXTENDS *****/
 
-@Component({
-  selector: 'vue-controls',
-  template: `
-    <div classs="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown"></a>
-      <div class="dropdown-menu dropdown-menu-right" >
-        <a class="dropdown-item" (click)="hideVueEvent.emit()"><div class="material-icons">remove_circle</div> Hide</a>
-        <a class="dropdown-item" (click)="modalVueEvent.emit()"><div class="material-icons">open_in_browser</div> Modal</a>
-      </div>
-    </div>`
-})
-export class VueControlsComponent {
-
-  @Input() show = true;
-
-  @Output() hideVueEvent = new EventEmitter();
-  @Output() modalVueEvent = new EventEmitter();
 
 
-}
 
-@Component({
-  selector: 'collapse-control',
-  template: `<a class="material-icons" data-toggle="collapse" [href]="dataTarget" (click)="collapse = collapse==='down' ? 'up' : 'down'" *ngIf="show">keyboard_arrow_{{collapse}}</a>`
-})
-export class CollapseControlComponent extends VueControlsComponent{
-  @Input() dataTarget: string = '';
-  collapse = 'up';
-}
 
 @Component({
   selector: 'modal-controls',
   template: `<div><a class="material-icons" ><div class="close-modal">clear</div></a></div>`
 })
-export class ModalControlsComponent extends VueControlsComponent{}
+export class ModalControlsComponent extends VueControlsComponent { }
 
 @Component({
   selector: 'sized-items-vue-controls',
@@ -344,5 +359,29 @@ export class ModalControlsComponent extends VueControlsComponent{}
 export class SizedItemsVueControlsComponent extends VueControlsComponent {
 
   @Output() toggleItemSizeEvent = new EventEmitter();
+}
+
+@Component({
+  selector: 'milieu-sidebar',
+  template: `
+  <div [ngClass]="{'sidebar': win.innerWidth >= largeViewPort}"   (click)="sidebarClick($event)" *ngIf="show || !hasModal">
+    <div [@fadeInOut]="'in'"[ngClass]="{'drawer': win.innerWidth < largeViewPort && hasModal }">
+      <div [ngClass]="{'modal-vue-content': win.innerWidth < largeViewPort && hasModal}">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>`,
+  animations: [fadeInOutAnimation, flyInOut]
+})
+export class MilieuSideBarComponent extends MilieuVue {
+
+  win = window;
+  largeViewPort = this.appService.media.lg;
+  @Input() hasModal = null;
+  show = (window.innerWidth < this.largeViewPort) ? false : true;
+
+  constructor(public milieuService: MilieuService, public appService: AppService) { super(milieuService); }
+
+  sidebarClick(e) { if (e.target.className.search(/modal-mode/) > -1 || e.target.className.search(/close-modal/) > -1) this.show = false }
 }
 /* Copyright AEO all rights reserved */

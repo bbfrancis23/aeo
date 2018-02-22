@@ -1,10 +1,9 @@
 import { AfterViewInit, Component, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 
-import { Milieu, FilterVueComponent, IntroVueComponent } from '../milieu/core';
-import { MilieuModalComponent} from '../milieu/modals';
+import { Milieu, MilieuSideBarComponent, FilterVueComponent, IntroVueComponent } from '../milieu/core';
+import { MilieuModalComponent } from '../milieu/modals';
 import { MilieuService } from '../milieu/data';
-import { MilieuSideBarComponent } from '../milieu/sidebar';
 
 import { JemListVueComponent } from './core';
 import { JemService } from './jem.service';
@@ -16,7 +15,7 @@ import { AccountService } from '../account/data';
 
 @Component({
   selector: 'jem-milieu',
-  host:{
+  host: {
     '(window:resize)': 'onResize($event)'
   },
   template: `
@@ -51,8 +50,8 @@ import { AccountService } from '../account/data';
       <div class="row">
 
         <milieu-sidebar class="col-lg-2 d-lg-block d-lg-block pl-0 left-sidebar" #leftSideBar [hasModal]="true" >
-          <intro-vue  [milieuService]="jemService" [sidebarMode]="true" ></intro-vue>
-          <filter-vue  class="jem-filter-vue" [milieuService]="jemService"></filter-vue>
+          <intro-vue class="dark" [milieuService]="jemService" [sidebarMode]="true" ></intro-vue>
+          <filter-vue  class="jem-filter-vue" [sidebarMode]="true" [milieuService]="jemService"></filter-vue>
         </milieu-sidebar>
 
         <main role="main" [ngClass]="isColumnVisible(0) ? 'col-lg-10' : 'col-lg-12'" >
@@ -116,8 +115,8 @@ export class JemMilieuComponent extends Milieu implements OnInit {
 
   private fragment: string;
 
-  @ViewChild("leftSideBar") leftSidebar :MilieuSideBarComponent;
-  @ViewChild("rightSideBar") rightSidebar :MilieuSideBarComponent;
+  @ViewChild("leftSideBar") leftSidebar: MilieuSideBarComponent;
+  @ViewChild("rightSideBar") rightSidebar: MilieuSideBarComponent;
 
   @ViewChild(JemListVueComponent) listVue;
   @ViewChild('manageAdd') addVue: ManageJemComponent;
@@ -143,9 +142,9 @@ export class JemMilieuComponent extends Milieu implements OnInit {
 
   ngOnInit() {
 
-    this.columns = [ [this.leftSidebar], [this.listVue], [this.rightSidebar]];
+    this.columns = [[this.leftSidebar], [this.listVue], [this.rightSidebar]];
 
-    if(this.viewPortSize === 'md'){
+    if (this.viewPortSize === 'md') {
       //this.sidebar.modalMode = true;
       //this.sidebar.show = false;
     }
@@ -160,37 +159,37 @@ export class JemMilieuComponent extends Milieu implements OnInit {
     });
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
 
     try {
       //document.querySelector('#' + this.fragment).scrollIntoView();
 
       //console.log(document);
-    } catch (e) { console.log(e)}
+    } catch (e) { }
   }
 
-  leftSideBarToggle(){
+  leftSideBarToggle() {
 
-    if(this.viewPortSize === 'md'){
+    if (this.viewPortSize === 'md') {
       //this.sidebar.modalMode = ! this.sidebar.modalMode;
-    }else{
+    } else {
       this.leftSidebar.show = !this.leftSidebar.show;
     }
   }
 
-  onResize($e){
+  onResize($e) {
     // this gives a ref to window object;
   }
 
 
 
   toggleFilterVue(): void {
-      if (this.filterVue.show === true) {
-        this.filterVue.show = false
-      } else {
-        this.filterVue.show = true;
-        this.listVue.show = true;
-      }
+    if (this.filterVue.show === true) {
+      this.filterVue.show = false
+    } else {
+      this.filterVue.show = true;
+      this.listVue.show = true;
+    }
   }
 
   toggleListVue(): void {
@@ -202,11 +201,11 @@ export class JemMilieuComponent extends Milieu implements OnInit {
     }
   }
 
-  clickCheck(e){
+  clickCheck(e) {
 
     //console.log(e);
-    if(e.target.className.search('update') > -1){
-    //  this.updateVue.show = true;
+    if (e.target.className.search('update') > -1) {
+      //  this.updateVue.show = true;
       this.updateVue.modalChild.modalMode = true;
     }
   }

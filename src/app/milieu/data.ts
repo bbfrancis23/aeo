@@ -20,6 +20,7 @@ export class Config {
 
   fieldsRaw?: FieldRaw[];
   fields?: Field[];
+  fieldsDetail?: {};
 }
 
 export class Field {
@@ -41,6 +42,8 @@ export class MilieuService {
 
   api = 'api';
   pageTitle = '';
+
+  intro = { title: '', img: '', text: '' }
 
   collectionMode = false;
   collectionName = '';
@@ -72,6 +75,9 @@ export class MilieuService {
       delete config.fieldsRaw;
     }
     this.pageTitle = config.title;
+    this.intro.title = config.title;
+    this.intro.text = config.intro;
+    this.intro.img = config.img;
   }
 
   populate() {
@@ -119,17 +125,26 @@ export class MilieuService {
         field.values.forEach(value => {
 
           if (value.filtered) {
-            filters.push(value.name)
+            filters.push(value.name);
           }
         });
 
+
+
+
         if (filters.length > 0) {
+
+
+
 
           filters.forEach(filter => {
 
             itemsFiltered.forEach(item => {
 
               if (item[field.name] === filter) {
+
+
+
                 let regExp = new RegExp(value, "i");
 
                 if (item[col].search(regExp) > -1) {
@@ -144,9 +159,14 @@ export class MilieuService {
 
           itemsFiltered.forEach(item => {
             let regExp = new RegExp(value, "i");
-            if (item[col].search(regExp) > -1) {
-              filtered.push(item)
+
+            if (item[col]) {
+              if (item[col].search(regExp) > -1) {
+                filtered.push(item)
+              }
             }
+
+
           });
 
           itemsFiltered = filtered;
@@ -166,7 +186,9 @@ export class MilieuService {
     let qs: string = '',
       fieldPaths: string[] = [],
       queryStrings: string[] = [],
-      selectedFilters: string[] = [];
+      selectedFilters: string[] = [],
+      validImage = false,
+      validText = false;
 
     config.fields.forEach(field => {
       let filters = [];
@@ -174,6 +196,21 @@ export class MilieuService {
       field.values.forEach(value => {
         if (value.filtered) {
           filters.push(value.name);
+
+          if (this.config.fieldsDetail[value.name].img) {
+            this.intro.img = this.config.fieldsDetail[value.name].img;
+            validImage = true;
+          }
+
+          if (this.config.fieldsDetail[value.name].text) {
+            if (validText) {
+              this.intro.text += `<h3>${value.name}</h3><p>${this.config.fieldsDetail[value.name].text}</p>`;
+            } else {
+              this.intro.text = `<h3>${value.name}</h3><p>${this.config.fieldsDetail[value.name].text}</p>`;
+            }
+
+            validText = true;
+          }
         }
       });
 
@@ -191,6 +228,14 @@ export class MilieuService {
       this.location.replaceState(`${url}${fieldPaths.join('/')}`, `${queryStrings.join('&')}`);
     }
     this.pageTitle = selectedFilters.length > 0 ? selectedFilters.join(' ') : config.title;
+
+    if (!validImage) {
+      this.intro.img = this.config.img;
+    }
+
+    if (!validText) {
+      this.intro.text = `<p>${this.config.intro}</p>`;
+    }
   }
 
 
@@ -238,7 +283,6 @@ export class MilieuService {
 
         if (params[field.name]) {
           let param = this.unUrlify(params[field.name]);
-
           field.values[field.values.findIndex(value => value.name.toLowerCase() === param)].filtered = true;
         }
       },

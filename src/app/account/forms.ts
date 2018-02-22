@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, Output  } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 import { AccountService } from './data';
 
-import { MilieuFieldForm, MilieuFormGroup, MilieuVuePlus } from '../milieu/core';
+import { MilieuFieldForm, MilieuFormGroup, MilieuVue } from '../milieu/core';
 
 'use strict';
 
@@ -11,7 +11,7 @@ import { MilieuFieldForm, MilieuFormGroup, MilieuVuePlus } from '../milieu/core'
 
 /* ACCOUNT FORM VUE ************************************************************/
 
-export abstract class AccountFormVue extends MilieuVuePlus {
+export abstract class AccountFormVue extends MilieuVue {
 
   uniqueUser: boolean = null;
   uniqueEmail: boolean = null;
@@ -26,29 +26,29 @@ export abstract class AccountFormVue extends MilieuVuePlus {
 
   @Input() accountService: AccountService;
 
-  constructor( accountService:AccountService ){ super( accountService ) }
+  constructor(accountService: AccountService) { super(accountService) }
 
   get username() { return this.form.get('username') }
-  get email(){ return this.form.get('email') }
+  get email() { return this.form.get('email') }
 
-  checkUniqueUserName(){
+  checkUniqueUserName() {
 
     this.processing = true;
 
-    this.accountService.uniqueUserName(this.username.value).then((data)=>{
+    this.accountService.uniqueUserName(this.username.value).then((data) => {
 
       this.processing = false;
       this.uniqueUser = data;
     });
   }
 
-  checkUniqueEmail(){
+  checkUniqueEmail() {
 
-    if(this.email.value && this.email.valid){
+    if (this.email.value && this.email.valid) {
 
       this.processing = true;
 
-      this.accountService.uniqueEmail(this.email.value).then( unique => {
+      this.accountService.uniqueEmail(this.email.value).then(unique => {
 
         this.processing = false;
         this.uniqueEmail = unique;
@@ -56,9 +56,9 @@ export abstract class AccountFormVue extends MilieuVuePlus {
     }
   }
 
-  createAccount(){
+  createAccount() {
 
-    this.accountService.createItem(this.form.value).then((data)=>{
+    this.accountService.createItem(this.form.value).then((data) => {
 
       this.accountCreated = data.created;
       this.message = data.message;
@@ -66,9 +66,9 @@ export abstract class AccountFormVue extends MilieuVuePlus {
     });
   }
 
-  logIn(){
+  logIn() {
 
-    this.accountService.login(this.form.value).then((data)=>{
+    this.accountService.login(this.form.value).then((data) => {
 
       this.message = data;
       this.loggedIn = data.login;
@@ -76,11 +76,11 @@ export abstract class AccountFormVue extends MilieuVuePlus {
     });
   }
 
-  resetPassword(){
+  resetPassword() {
 
     this.submitted = true;
 
-    this.accountService.resetPassword(this.form.get('email').value).then( mailsent =>{
+    this.accountService.resetPassword(this.form.get('email').value).then(mailsent => {
 
       this.mailsent = mailsent;
       this.submitted = false;
@@ -124,38 +124,38 @@ export class EmailFormComponent extends MilieuFieldForm {
   get minLengthError() { return this.errors.minlength }
   get maxLengthError() { return this.errors.maxlength }
 
-  constructor( public accountService: AccountService){
+  constructor(public accountService: AccountService) {
     super(accountService);
     let em = this.accountService.email;
-    this.form.addControl('email', new FormControl( '', [ Validators.required, Validators.minLength( em.min ), Validators.maxLength( em.max ), Validators.email]));
+    this.form.addControl('email', new FormControl('', [Validators.required, Validators.minLength(em.min), Validators.maxLength(em.max), Validators.email]));
   }
 
-  checkUniqueEmail(){
-    return this.accountService.uniqueEmail(this.email.value).then( data => {
+  checkUniqueEmail() {
+    return this.accountService.uniqueEmail(this.email.value).then(data => {
       this.uniqueEmail = data;
       return data;
     });
   }
 
-  submit(){
-    this.checkUniqueEmail().then(data =>{
+  submit() {
+    this.checkUniqueEmail().then(data => {
 
-      if(data){
+      if (data) {
 
         this.accountService.updateEmail(this.email.value).then(
-          updateData =>{
+          updateData => {
 
-            if(updateData.update){
+            if (updateData.update) {
 
               this.message = updateData.message;
               this.updated = updateData.update;
 
-              setTimeout( () => { window.location.reload() },3000);
+              setTimeout(() => { window.location.reload() }, 3000);
             }
           }
         );
       }
-    }).catch( err =>{ console.log(err) } );
+    }).catch(err => { console.log(err) });
   }
 
 }
@@ -166,7 +166,7 @@ export class EmailFormComponent extends MilieuFieldForm {
 
   selector: 'password-form',
 
-  host:{ '( document:keypress )': 'handleKeyboardEvent( $event )' },
+  host: { '( document:keypress )': 'handleKeyboardEvent( $event )' },
 
   template: `
     <form [formGroup]="form" (ngSubmit)="submit()" *ngIf="!submitted">
@@ -208,22 +208,22 @@ export class PasswordFormComponent extends MilieuFieldForm {
 
   get password() { return this.form.get('password') }
   get errors() { return this.password.errors }
-  focus= this.form.focus;
+  focus = this.form.focus;
   get valid() { return this.form.valid }
   get minLengthError() { return this.errors.minlength }
   get maxLengthError() { return this.errors.maxlength }
 
-  constructor( public accountService: AccountService ){
+  constructor(public accountService: AccountService) {
     super(accountService);
     let pw = this.accountService.password;
-    this.form.addControl( 'password',new FormControl( '', [ Validators.required, Validators.minLength( pw.min ), Validators.maxLength( pw.max ), Validators.pattern( pw.pattern ) ] ) );
+    this.form.addControl('password', new FormControl('', [Validators.required, Validators.minLength(pw.min), Validators.maxLength(pw.max), Validators.pattern(pw.pattern)]));
   }
 
-  handleKeyboardEvent(event: KeyboardEvent) { if( this.focus==='password' ) this.caps = event.getModifierState( 'CapsLock' ) }
+  handleKeyboardEvent(event: KeyboardEvent) { if (this.focus === 'password') this.caps = event.getModifierState('CapsLock') }
 
-  submit(){
+  submit() {
     this.submitted = true;
-    this.accountService.updatePassword(this.password.value, this.resetToken).then(response =>{
+    this.accountService.updatePassword(this.password.value, this.resetToken).then(response => {
 
       this.message = response.message;
       this.updated = response.update;
@@ -268,34 +268,34 @@ export class UserNameFormComponent extends MilieuFieldForm {
   get minLengthError() { return this.errors.minlength }
   get maxLengthError() { return this.errors.maxlength }
   get username() { return this.form.get('username') }
-  get errors() { return this.username.errors}
-  get valid() { return this.form.valid}
+  get errors() { return this.username.errors }
+  get valid() { return this.form.valid }
 
-  constructor( public accountService: AccountService){
+  constructor(public accountService: AccountService) {
     super(accountService);
     let user = this.accountService.username;
-    this.form.addControl( 'username',new FormControl( '', [ Validators.required, Validators.minLength( user.min ), Validators.maxLength( user.max ), Validators.pattern( user.pattern ) ] ) );
+    this.form.addControl('username', new FormControl('', [Validators.required, Validators.minLength(user.min), Validators.maxLength(user.max), Validators.pattern(user.pattern)]));
   }
 
-  uniqueUserName(){
-    return this.accountService.uniqueUserName(this.username.value).then((data)=>{
+  uniqueUserName() {
+    return this.accountService.uniqueUserName(this.username.value).then((data) => {
       this.uniqueUser = data;
       return data;
     });
   }
 
-  submit(){
-    this.uniqueUserName().then(data =>{
-      this.accountService.updateUserName(this.username.value).then( updateData =>{
-        if(updateData.update){
+  submit() {
+    this.uniqueUserName().then(data => {
+      this.accountService.updateUserName(this.username.value).then(updateData => {
+        if (updateData.update) {
           this.message = updateData.message;
           this.updated = updateData.update;
-          setTimeout(()=>{
+          setTimeout(() => {
             window.location.reload();
-          },3000);
+          }, 3000);
         }
       });
-    }).catch( err =>{
+    }).catch(err => {
       console.log(err);
     });
   }
