@@ -239,12 +239,8 @@ export class ItemSearchComponent implements OnInit {
 }
 
 
-@Component({
-  selector: 'list-vue',
-  template: ` <ng-content></ng-content> `,
-  animations: [fadeInOutAnimation, flyInOut]
-})
-export class ListVueComponent extends MilieuVue implements OnDestroy {
+
+export class ListVue extends MilieuVue {
   showBig = true;
   items: {};
 
@@ -258,10 +254,6 @@ export class ListVueComponent extends MilieuVue implements OnDestroy {
 
   trackByItem(index: number, item) {
     return item._id;
-  }
-
-  ngOnDestroy() {
-    //this.milieuService.currentFilteredItems.unsubscribe();
   }
 }
 

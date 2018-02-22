@@ -1,0 +1,34 @@
+import { Component } from '@angular/core';
+
+import { fadeInOutAnimation, flyInOut } from '../milieu/animations';
+import { ListVue } from '../milieu/list-vue';
+import { JemService } from './jem.service';
+
+@Component({
+  selector: 'jem-list-vue',
+  template: `
+    <modal-vue >
+      <div [@fadeInOut]="'in'" *ngIf="show"  >
+        <div class="card" >
+        <div class="card-header">Jems List</div>
+        </div>
+        <modal-controls *ngIf="modalMode === true"></modal-controls>
+        <div class="alert alert-warning" *ngIf="items?.length === 0">No Jems. Please try a Different Filter</div>
+        <sized-items-vue-controls
+          *ngIf="modalMode === false"
+          (hideVueEvent)="show=false"
+          (modalVueEvent)="modalMode=true;"
+          (toggleItemSizeEvent)="quickView = !quickView" >
+        </sized-items-vue-controls>
+        <div >
+          <jem  *ngFor="let jem of items; trackBy: trackByItem" [jem]="jem" [jemService]="milieuService" [quickView]="quickView"  ></jem>
+        </div>
+      </div>
+    </modal-vue>`,
+  animations: [fadeInOutAnimation, flyInOut]
+})
+export class JemListVueComponent extends ListVue {
+  constructor(milieuService: JemService) {
+    super(milieuService);
+  }
+}

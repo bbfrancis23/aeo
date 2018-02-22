@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { AccountService }       from './account/data';
-import { JemService }           from './jems/jem.service';
-import { MilieuModalComponent } from './milieu/modals';
+import { AccountService } from './account/data';
+import { JemService } from './jems/jem.service';
+import { MilieuModalComponent } from './milieu/modal';
 import { JemMilieuComponent } from './jems/jem-milieu.component';
 
 @Component({
@@ -13,7 +13,7 @@ import { JemMilieuComponent } from './jems/jem-milieu.component';
 })
 export class AppComponent {
 
-  
+
 }
 
 @Component({
@@ -91,7 +91,7 @@ export class AppComponent {
 })
 export class AppHeaderComponent {
   @ViewChild(MilieuModalComponent) accountServices: MilieuModalComponent;
-  constructor(private jemService: JemService, private accountService: AccountService ){
+  constructor(private jemService: JemService, private accountService: AccountService) {
     //console.log(jemService, accountService);
   }
 }
@@ -115,7 +115,7 @@ export class AppHeaderComponent {
       </content>
     </view-port>`,
 })
-export class AppContentComponent{}
+export class AppContentComponent { }
 
 
 @Component({
@@ -138,8 +138,8 @@ export class AppContentComponent{}
       </div>
     </footer>`
 })
-export class AppFooterComponent{
-  show=true;
+export class AppFooterComponent {
+  show = true;
 }
 
 

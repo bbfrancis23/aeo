@@ -2,42 +2,14 @@ import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Jem } from './jem';
 import { JemService } from './jem.service';
-import { ListVueComponent } from '../milieu/core';
+import { ListVue } from '../milieu/list-vue';
 import { MilieuVue } from '../milieu/vue';
 import { fadeInOutAnimation, flyInOut } from '../milieu/animations';
 
+import { JemListVueComponent } from './list-vue';
 'use strict';
 
-@Component({
-  selector: 'jem-list-vue',
-  template: `
-    <modal-vue #m>
-      <div [@fadeInOut]="'in'" *ngIf="show"  >
-        <div class="card" >
-        <div class="card-header">Jems List</div>
-        </div>
-        <modal-controls *ngIf="m.modalMode === true"></modal-controls>
-        <div class="alert alert-warning" *ngIf="items?.length === 0">No Jems. Please try a Different Filter</div>
-        <sized-items-vue-controls
-          *ngIf="m.modalMode === false"
-          (hideVueEvent)="show=false"
-          (modalVueEvent)="m.modalMode=true;"
-          (toggleItemSizeEvent)="showBig = !showBig" >
-        </sized-items-vue-controls>
-        <div >
-          <jem  *ngFor="let jem of items; trackBy: trackByJem" [jem]="jem" [jemService]="milieuService" [showBig]="showBig"  ></jem>
-        </div>
-      </div>
-    </modal-vue>`,
-  animations: [fadeInOutAnimation, flyInOut]
-})
-export class JemListVueComponent extends ListVueComponent {
 
-
-
-
-
-}
 
 @Component({
   selector: 'jem-table-of-contents',
@@ -51,6 +23,8 @@ export class JemListVueComponent extends ListVueComponent {
   </div>`
 })
 export class JemTableOfContents extends JemListVueComponent {
+
+  constructor(milieuService: JemService) { super(milieuService) }
 
   clicky(jem) {
 
@@ -194,7 +168,7 @@ export class ManageJemComponent extends MilieuVue implements OnInit {
         [ngClass]="{  'border-success': jem.type === 'Best Practices',
                       'border-danger': jem.type === 'Mistakes',
                       'border-info': jem.type === 'How to',
-                      'border-dark': jem.type === 'Style Guide'}" *ngIf="showBig">
+                      'border-dark': jem.type === 'Style Guide'}" *ngIf="!quickView">
     <item-controls [item]="jem" [milieuService]="jemService"></item-controls>
     <div class="card-body">
       <h4 class="card-title">{{jem.title}}</h4>
@@ -222,7 +196,7 @@ export class ManageJemComponent extends MilieuVue implements OnInit {
       'bg-success': jem.type === 'Best Practices',
       'bg-danger': jem.type === 'Mistakes',
       'bg-info': jem.type === 'How to',
-      'bg-dark': jem.type === 'Style Guide'}" style="margin-bottom: 5px" *ngIf="!showBig">
+      'bg-dark': jem.type === 'Style Guide'}" style="margin-bottom: 5px" *ngIf="quickView">
     <item-controls [item]="jem" *ngIf="jemService.dashBoard" ></item-controls>
       <p><b>{{jem.title}}: </b> {{jem.description}}</p>
       <pre >{{jem.code}}</pre>
@@ -230,7 +204,7 @@ export class ManageJemComponent extends MilieuVue implements OnInit {
 })
 export class JemComponent {
 
-  @Input() showBig: boolean = true;
+  @Input() quickView: boolean = false;
   contentCopied = false;
 
   @Input() jem: Jem;

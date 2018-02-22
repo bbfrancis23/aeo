@@ -2,10 +2,10 @@ import { AfterViewInit, Component, HostListener, Input, OnInit, ViewChild } from
 import { ActivatedRoute } from "@angular/router";
 
 import { Milieu, MilieuSideBarComponent, FilterVueComponent, IntroVueComponent } from '../milieu/core';
-import { MilieuModalComponent } from '../milieu/modals';
+import { MilieuModalComponent } from '../milieu/modal';
 import { MilieuService } from '../milieu/data';
 
-import { JemListVueComponent } from './core';
+import { JemListVueComponent } from './list-vue';
 import { JemService } from './jem.service';
 import { ManageJemComponent } from './core';
 
@@ -59,10 +59,10 @@ import { AccountService } from '../account/data';
 
           <div class="row">
             <div class="col-lg-9" >
-              <jem-list-vue (selectItemEvent)="selectJem($event)" [milieuService]="jemService"></jem-list-vue>
+              <jem-list-vue (selectItemEvent)="selectJem($event)" ></jem-list-vue>
             </div>
             <milieu-sidebar class="col-lg-3 d-none d-lg-block d-lg-block pl-0 right-sidebar" #rightSideBar>
-              <jem-table-of-contents [milieuService]="jemService"></jem-table-of-contents>
+              <jem-table-of-contents></jem-table-of-contents>
 
             </milieu-sidebar>
           </div>

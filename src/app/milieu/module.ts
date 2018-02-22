@@ -8,7 +8,6 @@ import {
   FilterVueComponent,
   IntroVueComponent,
   ItemControlsComponent, ItemSearchComponent,
-  ListVueComponent,
   MilieuSideBarComponent,
   ModalControlsComponent,
   SizedItemsVueControlsComponent,
@@ -16,8 +15,8 @@ import {
   VueControlsComponent
 } from './core';
 
-import { MilieuModalComponent, ModalDrawerComponent, ModalVueComponent } from './modals';
-
+import { ModalDrawerComponent, ModalVueComponent } from './modals';
+import { MilieuModalComponent } from './modal';
 
 
 @NgModule({
@@ -26,7 +25,6 @@ import { MilieuModalComponent, ModalDrawerComponent, ModalVueComponent } from '.
     FilterVueComponent,
     IntroVueComponent,
     ItemControlsComponent, ItemSearchComponent,
-    ListVueComponent,
     MilieuModalComponent, MilieuSideBarComponent,
     ModalControlsComponent, ModalDrawerComponent, ModalVueComponent,
     SizedItemsVueControlsComponent,
@@ -37,7 +35,6 @@ import { MilieuModalComponent, ModalDrawerComponent, ModalVueComponent } from '.
     FilterVueComponent,
     IntroVueComponent,
     ItemControlsComponent, ItemSearchComponent,
-    ListVueComponent,
     MilieuModalComponent, MilieuSideBarComponent,
     ModalControlsComponent, ModalDrawerComponent, ModalVueComponent,
     SizedItemsVueControlsComponent,

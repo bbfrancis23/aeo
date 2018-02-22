@@ -2,34 +2,13 @@ import { Component, Input } from '@angular/core';
 
 import { fadeInOutAnimation, modalVueFadeInOut } from './animations';
 
+import { MilieuModalComponent } from './modal';
+
 
 'use strict';
 
 
-@Component({
-  selector: 'milieu-modal',
-  template: `
-    <div *ngIf="modalMode === true" [ngClass]="{'modal-mode': modalMode === true}"   (click)="modalClick($event)" [@fadeInOut]="'in'">
-      <div class="modal-content" ><ng-content></ng-content></div>
-    </div>
-  `,
-  animations: [fadeInOutAnimation]
-})
-export class MilieuModalComponent {
-  modalMode = false;
-  @Input() modalOnly = false;
 
-
-  modalClick(e) {
-    //console.log(e);
-
-    if (e.target.className.search(/modal-mode/) > -1 || e.target.className.search(/close-modal/) > -1) {
-      this.modalMode = false;
-
-
-    }
-  }
-}
 
 @Component({
   selector: 'modal-vue',
