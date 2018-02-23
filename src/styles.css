@@ -92,6 +92,11 @@ app-header .navbar.fixed-top item-search {
 ::-webkit-scrollbar-track {
   border: 1px solid grey;
 }
+/* MILIEU */
+.material-icons {
+  display: inline-flex;
+  vertical-align: middle;
+}
 modal-vue .modal-mode {
   display: block;
   left: 0;
@@ -108,6 +113,18 @@ modal-vue .modal-vue-content {
   width: 70%;
   z-index: 7;
   box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
+}
+vue-control {
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  color: white;
+}
+vue-control:hover {
+  color: black;
+}
+vue-control .material-icons {
+  font-size: 1em;
 }
 .list-group-item {
   line-height: 20px;
@@ -363,10 +380,6 @@ log-in .view-port-container img:hover {
 .card .alert {
   margin-top: 1em;
 }
-.material-icons {
-  display: inline-flex;
-  vertical-align: middle;
-}
 .sticky-top {
   z-index: 4;
 }
@@ -491,24 +504,24 @@ jem-milieu .sticky-top .btn-group .btn.active:hover {
   opacity: 0.9;
 }
 modal-controls,
-vue-controls,
+vue-control,
 item-controls,
-sized-items-vue-controls {
+sized-items-vue-control {
   position: absolute;
   top: 0px;
   right: 5px;
   color: white;
 }
 modal-controls:hover,
-vue-controls:hover,
+vue-control:hover,
 item-controls:hover,
-sized-items-vue-controls:hover {
+sized-items-vue-control:hover {
   color: black;
 }
 modal-controls .material-icons,
-vue-controls .material-icons,
+vue-control .material-icons,
 item-controls .material-icons,
-sized-items-vue-controls .material-icons {
+sized-items-vue-control .material-icons {
   font-size: 1em;
 }
 intro-vue.dark collapse-control {

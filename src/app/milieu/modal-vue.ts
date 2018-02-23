@@ -26,10 +26,11 @@ import { modalVueFadeInOut } from './animations';
 @Component({
   selector: 'modal-vue',
   template: `
-    <div *ngIf="!modalOnly || (modalOnly && modalMode === true)">
-    <div [ngClass]="{'modal-mode': modalMode}"  (click)="modalClick($event)" [@modalVueFadeInOut]="modalMode" >
-      <div [ngClass]="{'modal-vue-content': modalMode}"><ng-content></ng-content></div>
-    </div></div>`,
+    <div *ngIf="!modalOnly || (modalOnly && modalMode)">
+      <div [ngClass]="{'modal-mode': modalMode}" [@modalVueFadeInOut]="modalMode" (click)="modalClick($event)">
+        <div [ngClass]="{'modal-vue-content': modalMode}"><ng-content></ng-content></div>
+      </div>
+    </div>`,
   animations: [modalVueFadeInOut]
 })
 export class ModalVueComponent {

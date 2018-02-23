@@ -26,8 +26,27 @@
 ::-webkit-scrollbar-thumb:hover { background: black }
 ::-webkit-scrollbar-track { border: @regular-border }
 
+/* MILIEU */
+
+.control-position(){
+  position: absolute;
+  top: 0px;
+  right: 5px;
+}
+
+.control(){
+  .control-position;
+  color: white;
+  &:hover{ color: black }
+}
+
+.material-icons{
+  display: inline-flex;
+  vertical-align: middle;
+}
+
 modal-vue{
-  .modal-mode{    
+  .modal-mode{
     display: block;
     left: 0; top: 0;
     width: 100%; height: 100%;
@@ -44,9 +63,11 @@ modal-vue{
   }
 }
 
+vue-control{
+  .control;
 
-
-
+  .material-icons{ font-size: 1em }
+}
 
 
 
@@ -389,10 +410,7 @@ log-in{
   .alert{ margin-top: 1em }
 }
 
-.material-icons{
-  display: inline-flex;
-  vertical-align: middle;
-}
+
 
 .sticky-top{
   z-index: @sticky-layer;
@@ -489,17 +507,7 @@ account-vue{
 
 // ABSTRACT //
 
-.control-position(){
-  position: absolute;
-  top: 0px;
-  right: 5px;
-}
 
-.control(){
-  .control-position;
-  color: white;
-  &:hover{ color: black }
-}
 
 // TAGS //
 
@@ -558,7 +566,7 @@ jem-milieu{
   }
 }
 
-modal-controls, vue-controls, item-controls, sized-items-vue-controls {
+modal-controls, vue-control, item-controls, sized-items-vue-control {
   .control;
 
   .material-icons{ font-size: 1em }

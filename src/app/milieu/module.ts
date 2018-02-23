@@ -12,12 +12,12 @@ import {
   ModalControlsComponent,
   SizedItemsVueControlsComponent,
   ViewPortComponent,
-  VueControlsComponent
 } from './core';
 
 import { ModalDrawerComponent } from './modals';
 import { MilieuModalComponent } from './modal';
 import { ModalVueComponent } from './modal-vue';
+import { VueControlComponent } from './vue-control';
 
 
 @NgModule({
@@ -30,7 +30,7 @@ import { ModalVueComponent } from './modal-vue';
     ModalControlsComponent, ModalDrawerComponent, ModalVueComponent,
     SizedItemsVueControlsComponent,
     ViewPortComponent,
-    VueControlsComponent
+    VueControlComponent
   ],
   exports: [CollapseControlComponent,
     FilterVueComponent,
@@ -40,7 +40,7 @@ import { ModalVueComponent } from './modal-vue';
     ModalControlsComponent, ModalDrawerComponent, ModalVueComponent,
     SizedItemsVueControlsComponent,
     ViewPortComponent,
-    VueControlsComponent
+    VueControlComponent
   ]
 })
 export class MilieuModule { }

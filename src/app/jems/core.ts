@@ -44,7 +44,7 @@ export class JemTableOfContents extends JemListVueComponent {
   <modal-vue [modalOnly]="true" #modal>
     <div class="card" [@fadeInOut]="'in'" *ngIf="show">
       <div class="card-header">{{manageType}} Jem</div>
-      <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modal.modalMode=true" *ngIf="!modal.modalMode && jemService.dashBoard" ></vue-controls>
+      <vue-control (hideVueEvent)="show=false" (modalVueEvent)="modal.modalMode=true" *ngIf="!modal.modalMode && jemService.dashBoard" ></vue-control>
       <modal-controls *ngIf="modal.modalMode === true"></modal-controls>
       <div class="card-block p-3" >
         <form  (ngSubmit)="onSubmit();" [formGroup]="jemForm" #formJem="ngForm" *ngIf="!submitted && !message">

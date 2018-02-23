@@ -5,41 +5,20 @@ import { Subject } from 'rxjs/Subject';
 
 import { fadeInOutAnimation, modalVueFadeInOut, flyInOut } from './animations';
 import { MilieuService } from './data';
-import { ModalVueComponent } from './modals';
+import { ModalVueComponent } from './modal-vue';
 
 import { AccountService } from '../account/data';
 import { AppService } from '../data';
 
 import { MilieuVue } from './vue';
+import { VueControlComponent } from './vue-control';
 
-'use strict';
-
-@Component({
-  selector: 'vue-controls',
-  template: `
-    <div classs="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown"></a>
-      <div class="dropdown-menu dropdown-menu-right" >
-        <a class="dropdown-item" (click)="hideVueEvent.emit()"><div class="material-icons">remove_circle</div> Hide</a>
-        <a class="dropdown-item" (click)="modalVueEvent.emit()"><div class="material-icons">open_in_browser</div> Modal</a>
-      </div>
-    </div>`
-})
-export class VueControlsComponent {
-
-  @Input() show = true;
-
-  @Output() hideVueEvent = new EventEmitter();
-  @Output() modalVueEvent = new EventEmitter();
-
-
-}
 
 @Component({
   selector: 'collapse-control',
   template: `<a class="material-icons" data-toggle="collapse" [href]="dataTarget" (click)="collapse = collapse==='down' ? 'up' : 'down'" *ngIf="show">keyboard_arrow_{{collapse}}</a>`
 })
-export class CollapseControlComponent extends VueControlsComponent {
+export class CollapseControlComponent extends VueControlComponent {
   @Input() dataTarget: string = '';
   collapse = 'up';
 }
@@ -93,7 +72,7 @@ export abstract class MilieuInputComponent {
           Filters
           <collapse-control [dataTarget]="'#filter'" [show]="showCollapseControl"></collapse-control>
         </div>
-        <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modalMode=true" *ngIf="!modalMode && !sidebarMode"></vue-controls>
+        <vue-control (hideVueEvent)="show=false" (modalVueEvent)="modalMode=true" *ngIf="!modalMode && !sidebarMode"></vue-control>
         <modal-controls *ngIf="modalMode || milieuService.tabletMode"></modal-controls>
         <div class="collapse show card-block" id="filter">
           <div class="form-group">
@@ -145,7 +124,7 @@ export class FilterVueComponent extends MilieuVue implements OnDestroy, OnInit {
             <img [src]="milieuService.intro.img" alt="{{milieuService.config.title}}" >
             <collapse-control class="image-collapse-control" [dataTarget]="'#milieu-intro'" [show]="showCollapseControl"></collapse-control>
           </div>
-          <vue-controls (hideVueEvent)="show=false" (modalVueEvent)="modalMode=true" *ngIf="!modalMode && !sidebarMode"></vue-controls>
+          <vue-control (hideVueEvent)="show=false" (modalVueEvent)="modalMode=true" *ngIf="!modalMode && !sidebarMode"></vue-control>
           <modal-controls *ngIf="modalMode"></modal-controls>
           <div class="collapse show card-block" id="milieu-intro">
             <h2>{{milieuService.intro.title}}</h2>
@@ -311,21 +290,21 @@ export class ViewPortComponent { }
   selector: 'modal-controls',
   template: `<div><a class="material-icons" ><div class="close-modal">clear</div></a></div>`
 })
-export class ModalControlsComponent extends VueControlsComponent { }
+export class ModalControlsComponent extends VueControlComponent { }
 
 @Component({
-  selector: 'sized-items-vue-controls',
+  selector: 'sized-items-vue-control',
   template: `
     <div class="dropdown" >
       <a class="dropdown-toggle" data-toggle="dropdown"></a>
       <div class="dropdown-menu dropdown-menu-right" >
-        <!-- <a class="dropdown-item" (click)="hideVueEvent.emit()"><div class="material-icons">remove_circle</div> Hide</a> -->
-        <a class="dropdown-item" (click)="modalVueEvent.emit()"  ><div class="material-icons">open_in_browser</div> Modal</a>
+        <!-- <a class="dropdown-item" (click)="hideVue.emit()"><div class="material-icons">remove_circle</div> Hide</a> -->
+        <a class="dropdown-item" (click)="modalVue.emit()"  ><div class="material-icons">open_in_browser</div> Modal</a>
         <a class="dropdown-item" (click)="toggleItemSizeEvent.emit()"><div class="material-icons">swap_vert</div>Toggle Size</a>
       </div>
     </div>`
 })
-export class SizedItemsVueControlsComponent extends VueControlsComponent {
+export class SizedItemsVueControlsComponent extends VueControlComponent {
 
   @Output() toggleItemSizeEvent = new EventEmitter();
 }

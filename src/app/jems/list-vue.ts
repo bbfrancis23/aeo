@@ -14,12 +14,15 @@ import { JemService } from './jem.service';
         </div>
         <modal-controls *ngIf="modalMode === true"></modal-controls>
         <div class="alert alert-warning" *ngIf="items?.length === 0">No Jems. Please try a Different Filter</div>
-        <sized-items-vue-controls
+        <vue-control
           *ngIf="modalMode === false"
-          (hideVueEvent)="show=false"
-          (modalVueEvent)="modalMode=true;"
-          (toggleItemSizeEvent)="quickView = !quickView" >
-        </sized-items-vue-controls>
+          [showHideCtrl]="false"
+          [showQuickViewCtrl]="showQuickViewCtrl"
+          [showDetailViewCtrl]="showDetailViewCtrl"
+          (hideVue)="show=false"
+          (modalVue)="modalMode=true;"
+          (quickView)="quickView = true; showQuickViewCtrl=false; showDetailViewCtrl=true" >
+        </vue-control>
         <div >
           <jem  *ngFor="let jem of items; trackBy: trackByItem" [jem]="jem" [jemService]="milieuService" [quickView]="quickView"  ></jem>
         </div>
@@ -28,6 +31,10 @@ import { JemService } from './jem.service';
   animations: [fadeInOutAnimation, flyInOut]
 })
 export class JemListVueComponent extends ListVue {
+
+  showQuickViewCtrl = true;
+  showDetailViewCtrl = false;
+
   constructor(milieuService: JemService) {
     super(milieuService);
   }

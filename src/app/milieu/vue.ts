@@ -36,6 +36,8 @@ export abstract class MilieuVue {
 
   @ViewChild(ModalVueComponent) modal?: ModalVueComponent;
 
+
+
   @Input() show = true;
   @Input() sidebarMode = false;
 
