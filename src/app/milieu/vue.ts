@@ -1,6 +1,6 @@
 import { Input, ViewChild } from '@angular/core';
 
-import { ModalVueComponent } from './modals';
+import { ModalVueComponent } from './modal-vue';
 import { MilieuService } from './data';
 
 'use stict';
@@ -29,7 +29,7 @@ import { MilieuService } from './data';
     Definitions:
       Milieu: Item Application Environment. Examples: Account, Code Jems, Real Estate.
       Modal: Interactive Overlay Element.
-      Vue: An Interface to a Milieu. Examples: A User Profile would be an AccountVue to an Account Milieu. A log In Form would be LogInVue to an AccountMilieu.
+      Vue: An Interface to a Milieu. Examples: A User Profile would be an AccountVue to an Account Milieu. A log In Form would be LogInVue to an Account Milieu.
 */
 
 export abstract class MilieuVue {

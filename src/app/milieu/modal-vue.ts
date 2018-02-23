@@ -1,15 +1,10 @@
 import { Component, Input } from '@angular/core';
-
-import { fadeInOutAnimation } from './animations';
-
-'use strict';
+import { modalVueFadeInOut } from './animations';
 
 /*
   Brian Francis
 
-  DEPRECIATED use MilieuVue instead
-
-  Summary: Modal for Milieu that isn't part of a Vue. Example: A log-in that can be viewed from any where in the App.
+  Summary: Modal for Milieu Vues. Simply wrap this around a view and make modalMode true.
   Description:
     modalMode: Boolean that defined if component is in modalMode.
 
@@ -24,19 +19,21 @@ import { fadeInOutAnimation } from './animations';
 
     Definitions:
       Milieu: Item Application Environment. Examples: Account, Code Jems, Real Estate.
+      Modal: Interactive Overlay Element.
       Vue: An Interface to a Milieu. Examples: A User Profile would be an AccountVue to an Account Milieu. A log In Form would be LogInVue to an AccountMilieu.
 */
 
 @Component({
-  selector: 'milieu-modal',
+  selector: 'modal-vue',
   template: `
-    <div *ngIf="modalMode" [ngClass]="{'modal-mode': modalMode}"   (click)="modalClick($event)" [@fadeInOut]="'in'">
-      <div class="modal-content" ><ng-content></ng-content></div>
-    </div>
-  `,
-  animations: [fadeInOutAnimation]
+    <div *ngIf="!modalOnly || (modalOnly && modalMode === true)">
+    <div [ngClass]="{'modal-mode': modalMode}"  (click)="modalClick($event)" [@modalVueFadeInOut]="modalMode" >
+      <div [ngClass]="{'modal-vue-content': modalMode}"><ng-content></ng-content></div>
+    </div></div>`,
+  animations: [modalVueFadeInOut]
 })
-export class MilieuModalComponent {
+export class ModalVueComponent {
+
   modalMode = false;
   @Input() modalOnly = false;
 

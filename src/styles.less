@@ -26,6 +26,38 @@
 ::-webkit-scrollbar-thumb:hover { background: black }
 ::-webkit-scrollbar-track { border: @regular-border }
 
+modal-vue{
+  .modal-mode{    
+    display: block;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    position: fixed;
+    z-index: @modals-layer;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+  }
+  .modal-vue-content{
+    margin: auto;
+    width: 70%;
+    z-index: @modals-content-layer;
+    box-shadow: 10px 10px 1px 0 rgba(0,0,0,0.3)
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+
 // ABSTRACT
 
 .aeo-sidebar(){
@@ -571,23 +603,7 @@ collapse-control{
 modal-controls { .material-icons{ font-size: 1em } }
 
 
-modal-vue{
-  .modal-mode{
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    display: block;
-    position: fixed;
-    z-index: @modals-layer;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.5);
-  }
-  .modal-vue-content{
-    margin: 5% auto;
-    width: 70%;
-    z-index: @modals-content-layer;
-    box-shadow: 10px 10px 1px 0 rgba(0,0,0,0.3)
-  }
-}
+
 
 milieu-sidebar{
 

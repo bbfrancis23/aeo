@@ -15,8 +15,9 @@ import {
   VueControlsComponent
 } from './core';
 
-import { ModalDrawerComponent, ModalVueComponent } from './modals';
+import { ModalDrawerComponent } from './modals';
 import { MilieuModalComponent } from './modal';
+import { ModalVueComponent } from './modal-vue';
 
 
 @NgModule({

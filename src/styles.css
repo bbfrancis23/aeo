@@ -92,6 +92,23 @@ app-header .navbar.fixed-top item-search {
 ::-webkit-scrollbar-track {
   border: 1px solid grey;
 }
+modal-vue .modal-mode {
+  display: block;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 6;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+modal-vue .modal-vue-content {
+  margin: auto;
+  width: 70%;
+  z-index: 7;
+  box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
+}
 .list-group-item {
   line-height: 20px;
   font-weight: bolder;
@@ -520,23 +537,6 @@ collapse-control a:hover {
 }
 modal-controls .material-icons {
   font-size: 1em;
-}
-modal-vue .modal-mode {
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  position: fixed;
-  z-index: 6;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-modal-vue .modal-vue-content {
-  margin: 5% auto;
-  width: 70%;
-  z-index: 7;
-  box-shadow: 10px 10px 1px 0 rgba(0, 0, 0, 0.3);
 }
 #nav-search {
   width: 250px;
