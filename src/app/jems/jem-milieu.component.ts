@@ -5,7 +5,7 @@ import { Milieu, MilieuSideBarComponent, FilterVueComponent, IntroVueComponent }
 import { MilieuModalComponent } from '../milieu/modal';
 import { MilieuService } from '../milieu/data';
 
-import { JemListVueComponent } from './list-vue';
+import { JemListVueComponent } from './list-vue.component';
 import { JemService } from './jem.service';
 import { ManageJemComponent } from './core';
 

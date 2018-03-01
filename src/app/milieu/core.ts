@@ -5,13 +5,13 @@ import { Subject } from 'rxjs/Subject';
 
 import { fadeInOutAnimation, modalVueFadeInOut, flyInOut } from './animations';
 import { MilieuService } from './data';
-import { ModalVueComponent } from './modal-vue';
+import { ModalVueComponent } from './modal-vue.component';
 
 import { AccountService } from '../account/data';
 import { AppService } from '../data';
 
 import { MilieuVue } from './vue';
-import { VueControlComponent } from './vue-control';
+import { VueControlComponent } from './vue-control.component';
 
 
 @Component({

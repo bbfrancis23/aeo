@@ -1,6 +1,6 @@
 import { Input, ViewChild } from '@angular/core';
 
-import { ModalVueComponent } from './modal-vue';
+import { ModalVueComponent } from './modal-vue.component';
 import { MilieuService } from './data';
 
 'use stict';

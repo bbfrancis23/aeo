@@ -48,6 +48,8 @@ export class MilieuService {
   collectionMode = false;
   collectionName = '';
 
+  favoritesMode = false;
+
   private readonly itemsSource = new BehaviorSubject<{}[]>([]);
   private readonly filteredItemsSource = new BehaviorSubject<{}[]>([]);
   private readonly selectedItemSource = new BehaviorSubject<{}>({});

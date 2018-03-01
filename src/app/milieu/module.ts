@@ -16,9 +16,8 @@ import {
 
 import { ModalDrawerComponent } from './modals';
 import { MilieuModalComponent } from './modal';
-import { ModalVueComponent } from './modal-vue';
-import { VueControlComponent } from './vue-control';
-
+import { ModalVueComponent } from './modal-vue.component';
+import { VueControlComponent } from './vue-control.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
