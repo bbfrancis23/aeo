@@ -393,25 +393,21 @@ app.delete( '/jems/:id', ( req, res ) => {
 app.get( '/jems/favorites', ( request, res ) => {
   if ( auth( request, res ) ) {
     connection( ( db ) => {
-      db.collection( 'accounts' ).findOne( {
-        token: sanitize( request.cookies.token )
-      }, {
-        fields: {
-          codeFavorites: 1
-        }
-      }, ( err, doc ) => {
 
-        if ( err ) {
-          sendError( err, res );
-          db.close();
-        } else {
-          db.collection( 'jems' ).find( {
-            '_id': {
+
+      if( request.cookies.token ){
+
+      db.collection( 'accounts' ).findOne( { token: sanitize( request.cookies.token ) }, { fields: { codeFavorites: 1 }},
+        ( err, doc ) => {
+          if ( err ) { sendError( err, res ); db.close(); }
+          else {
+            db.collection( 'jems' ).find( {
+              '_id': {
               '$in': doc.codeFavorites
-            }
-          } ).sort( {
-            title: 1
-          } ).toArray().then( ( jems ) => {
+              }
+            } ).sort( {
+              title: 1
+            } ).toArray().then( ( jems ) => {
 
             db.close();
 
@@ -426,7 +422,14 @@ app.get( '/jems/favorites', ( request, res ) => {
           } );
         }
       } );
+
+
+    }
+
     } );
+
+
+
   }
 } );
 

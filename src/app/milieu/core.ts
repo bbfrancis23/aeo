@@ -117,7 +117,7 @@ export class FilterVueComponent extends MilieuVue implements OnDestroy, OnInit {
 @Component({
   selector: 'intro-vue',
   template:
-  `<modal-vue>
+    `<modal-vue>
       <div [ngClass]="{'sidebar-vue': sidebarMode}">
         <div class="card" [@fadeInOut]="'in'" *ngIf="show" >
           <div (mouseenter)="showCollapseControl=true" (mouseleave)="showCollapseControl=false">
@@ -149,7 +149,7 @@ export class IntroVueComponent extends MilieuVue {
         <div class="dropdown-menu dropdown-menu-right" >
           <a class="dropdown-item" (click)="milieuService.delete(item._id)" *ngIf="admin"><div class="material-icons">delete_forever</div>Delete</a>
           <a class="dropdown-item update" (click)="milieuService.changeSelectedItem(item)" *ngIf="admin"><div class="material-icons">create</div> Update</a>
-          <a class="dropdown-item" (click)="milieuService.addFavorite(this.item._id)"><div class="material-icons">favorite</div> Favorite</a>
+          <a class="dropdown-item" (click)="milieuService.addFavorite(this.item._id)" *ngIf="accountService.authenticated"><div class="material-icons">favorite</div> Favorite</a>
         </div>
     </div>`
 })

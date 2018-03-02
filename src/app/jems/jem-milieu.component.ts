@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, HostListener, Input, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 import { Milieu, MilieuSideBarComponent, FilterVueComponent, IntroVueComponent } from '../milieu/core';
 import { MilieuModalComponent } from '../milieu/modal';
@@ -28,7 +28,7 @@ import { AccountService } from '../account/data';
             <div class="btn-group float-right d-md-block d-lg-block"  >
               <button class="btn material-icons" (click)="leftSideBarToggle()" [ngClass]="{'active': leftSidebar.show}"  title="Display / Hide Left Sidebar">swap_horiz</button>
               <button class="btn material-icons" (click)="addVue.modal.modalMode=true" [ngClass]="{'active': addVue.modal.modalMode}"  title="Add Jem View" *ngIf="accountService.admin">add</button>
-              <button class="btn material-icons" (click)="jemService.favoritesMode=!jemService.favoritesMode; jemService.populate()" [class.active]="jemService.favoritesMode" title="Favorites">favorite</button>  
+              <button class="btn material-icons" (click)="toggleFavoires()" [class.active]="jemService.favoritesMode" title="Favorites" *ngIf="accountService.authenticated">favorite</button>
             </div>
             <!--
             <div class="ml-2 float-right d-none d-md-block d-lg-block" *ngIf="jemService.authenticated === true">
@@ -87,7 +87,7 @@ import { AccountService } from '../account/data';
           <div [ngClass]="isColumnVisible(0) ? (   (isColumnVisible(0) && isColumnVisible(1) && isColumnVisible(2)) ? 'col-lg-10' : 'col-lg-9' ) : 'col-lg-12'">
             <div class="row">
               <div  [ngClass]=" isColumnVisible(2) ? 'col-lg-6' : 'col-lg-12'">
-                <jem-list-vue  (selectItemEvent)="selectJem($event)" [jemService]="jemService"></jem-list-vue>
+                <jem-list-vue  (selectItemEvent)="selectJem($event)" [jemService]="jemService" ></jem-list-vue>
               </div>
               <div  [ngClass]=" isColumnVisible(1) ? 'col-lg-6' : 'col-lg-12'">
                 <manage-jem [jemService]="jemService" [manageType]="'Add'"  #manageAdd></manage-jem>
@@ -140,7 +140,6 @@ export class JemMilieuComponent extends Milieu implements OnInit {
 
 
 
-
   ngOnInit() {
 
     this.columns = [[this.leftSidebar], [this.listVue], [this.rightSidebar]];
@@ -182,7 +181,17 @@ export class JemMilieuComponent extends Milieu implements OnInit {
     // this gives a ref to window object;
   }
 
-
+  toggleFavoires() {
+    if (this.jemService.favoritesMode) {
+      this.jemService.favoritesMode = false;
+      this.jemService.clearFilters();
+      this.jemService.populate();
+    } else {
+      this.jemService.favoritesMode = true;
+      this.jemService.clearFilters();
+      this.jemService.populate();
+    }
+  }
 
   toggleFilterVue(): void {
     if (this.filterVue.show === true) {

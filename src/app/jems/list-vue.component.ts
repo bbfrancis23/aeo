@@ -21,7 +21,8 @@ import { JemService } from './jem.service';
           [showDetailViewCtrl]="showDetailViewCtrl"
           (hideVue)="show=false"
           (modalVue)="modalMode=true;"
-          (quickView)="quickView = true; showQuickViewCtrl=false; showDetailViewCtrl=true" >
+          (quickView)="quickView = true; showQuickViewCtrl=false; showDetailViewCtrl=true"
+          (detailView)="quickView = false; showQuickViewCtrl=true; showDetailViewCtrl=false" >
         </vue-control>
         <div >
           <jem  *ngFor="let jem of items; trackBy: trackByItem" [jem]="jem" [jemService]="milieuService" [quickView]="quickView"  ></jem>

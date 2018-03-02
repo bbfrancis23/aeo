@@ -12,5 +12,14 @@ export class JemService extends MilieuService {
     super(http, location);
     this.config = JEM_CONFIG;
     this.init();
+
+
+    this.router.events
+      .subscribe((event) => {
+
+        this.favoritesMode = false;
+        // example: NavigationStart, RoutesRecognized, NavigationEnd
+        //console.log(event);
+      });
   }
 }

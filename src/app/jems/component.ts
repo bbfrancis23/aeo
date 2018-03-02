@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Jem } from './jem';
 import { JemService } from './jem.service';
+import { AccountService } from '../account/data';
 
 @Component({
   selector: 'jem',
@@ -12,7 +13,7 @@ import { JemService } from './jem.service';
                       'border-danger': jem.type === 'Mistakes',
                       'border-dark': jem.type === 'Reference',
                       'border-light': jem.type === 'Style Guide'}" *ngIf="!quickView">
-    <item-controls [item]="jem" [milieuService]="jemService"></item-controls>
+    <item-controls [item]="jem" [milieuService]="jemService" *ngIf="accountService.authenticated" ></item-controls>
     <div class="card-body">
       <h4 class="card-title">{{jem.title}}</h4>
 
@@ -40,7 +41,7 @@ import { JemService } from './jem.service';
       'bg-danger': jem.type === 'Mistakes',
       'bg-info': jem.type === 'How to',
       'bg-dark': jem.type === 'Style Guide'}" style="margin-bottom: 5px" *ngIf="quickView">
-    <item-controls [item]="jem" *ngIf="jemService.dashBoard" ></item-controls>
+    <item-controls [item]="jem" *ngIf="accountService.authenticated" ></item-controls>
       <p><b>{{jem.title}}: </b> {{jem.description}}</p>
       <pre >{{jem.code}}</pre>
   </div>`
@@ -52,6 +53,8 @@ export class JemComponent {
 
   @Input() jem: Jem;
   @Input() jemService: JemService;
+
+  constructor(public accountService: AccountService) { }
 
   copy() {
     let txt = document.createElement("textarea");

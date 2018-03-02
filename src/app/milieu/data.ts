@@ -65,6 +65,9 @@ export class MilieuService {
   constructor(readonly http: Http, readonly location: Location) { }
 
   init() {
+
+
+
     const config = this.config, rawFields = config.fieldsRaw;
 
     if (rawFields) {
@@ -96,8 +99,6 @@ export class MilieuService {
       });
     } else if (this.config.itemsMode && this.favoritesMode) {
 
-      console.log("You found me");
-
       let items = this.http.get(`api/${this.config.name}/favorites`).toPromise().then(response => response.json().data);
 
 
@@ -107,7 +108,6 @@ export class MilieuService {
         this.currentItems.subscribe(items => this.changeSelectedItem(items[0]));
         this.filter();
       });
-      // */
 
 
 
@@ -130,6 +130,15 @@ export class MilieuService {
 
   delete(id: string): Promise<any> {
     return this.http.delete(`api/${this.config.name}/${id}`).toPromise().then(res => { this.populate(); return res.json() }).catch(this.handleError);
+  }
+
+  clearFilters() {
+    this.config.fields.forEach(field => {
+      field.values.forEach(value => {
+        value.filtered = false;
+      })
+    });
+
   }
 
   filter(col = "title", value = '') {
@@ -199,6 +208,8 @@ export class MilieuService {
 
   private updateUrl(): void {
 
+
+
     const config = this.config,
       url = config.directory;
 
@@ -208,6 +219,10 @@ export class MilieuService {
       selectedFilters: string[] = [],
       validImage = false,
       validText = false;
+
+    if (this.favoritesMode) {
+      queryStrings.push('favorites=true');
+    }
 
     config.fields.forEach(field => {
       let filters = [];
@@ -314,6 +329,12 @@ export class MilieuService {
     });
 
     route.queryParams.subscribe(params => {
+
+      //console.log(params);
+
+      if (params.favorites) {
+        this.favoritesMode = true;
+      }
 
       this.config.fields.forEach(field => {
         if (params[field.name]) {
