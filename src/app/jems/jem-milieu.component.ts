@@ -28,7 +28,7 @@ import { AccountService } from '../account/data';
             <div class="btn-group float-right d-md-block d-lg-block"  >
               <button class="btn material-icons" (click)="leftSideBarToggle()" [ngClass]="{'active': leftSidebar.show}"  title="Display / Hide Left Sidebar">swap_horiz</button>
               <button class="btn material-icons" (click)="addVue.modal.modalMode=true" [ngClass]="{'active': addVue.modal.modalMode}"  title="Add Jem View" *ngIf="accountService.admin">add</button>
-
+              <button class="btn material-icons" (click)="jemService.favoritesMode=!jemService.favoritesMode; jemService.populate()" [class.active]="jemService.favoritesMode" title="Favorites">favorite</button>  
             </div>
             <!--
             <div class="ml-2 float-right d-none d-md-block d-lg-block" *ngIf="jemService.authenticated === true">
@@ -40,6 +40,7 @@ import { AccountService } from '../account/data';
               <button class="btn material-icons" (click)="toggleListVue();" [ngClass]="{'active': listVue.show}"  title="Jem List View">list</button>
               <button class="btn material-icons" (click)="addVue.show = !addVue.show" [ngClass]="{'active': addVue.show}"  title="Add Jem View">add</button>
               <button class="btn material-icons" (click)="updateVue.show = !updateVue.show" [ngClass]="{'active': updateVue.show}"  title="Edit Jem View">create</button>
+
             </div> -->
           </div>
         </div>

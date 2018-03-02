@@ -84,7 +84,7 @@ export class MilieuService {
 
   populate() {
 
-    if (this.config.itemsMode) {
+    if (this.config.itemsMode && !this.favoritesMode) {
 
       let items = this.http.get(`api/${this.config.name}`).toPromise().then(response => response.json().data);
 
@@ -94,6 +94,23 @@ export class MilieuService {
         this.currentItems.subscribe(items => this.changeSelectedItem(items[0]));
         this.filter();
       });
+    } else if (this.config.itemsMode && this.favoritesMode) {
+
+      console.log("You found me");
+
+      let items = this.http.get(`api/${this.config.name}/favorites`).toPromise().then(response => response.json().data);
+
+
+      items.then(items => {
+        this.changeItems(items);
+        this.changeFilteredItems(items);
+        this.currentItems.subscribe(items => this.changeSelectedItem(items[0]));
+        this.filter();
+      });
+      // */
+
+
+
     }
   }
 
