@@ -16,7 +16,7 @@ import { AppComponent, AppHeaderComponent, AppFooterComponent, AppContentCompone
 import { AccountService } from './account/data';
 import { AppService } from './data';
 import { JemService } from './jems/jem.service';
-import { BrianFrancisModule } from './aeo/brian-francis/brian-francis.module';
+import { AeoModule } from './aeo/aeo.module';
 
 @NgModule({
   imports: [AccountModule,
@@ -27,7 +27,7 @@ import { BrianFrancisModule } from './aeo/brian-francis/brian-francis.module';
     HttpModule,
     MilieuModule,
     RouterModule,
-    BrianFrancisModule],
+    AeoModule],
   declarations: [AppFooterComponent, AppHeaderComponent, AppComponent, AppContentComponent],
   providers: [AccountService, AppService, JemService],
   bootstrap: [AppComponent]
