@@ -1,18 +1,32 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { AccountService } from './account/data';
 import { JemService } from './jems/jem.service';
 import { MilieuModalComponent } from './milieu/modal';
 import { JemMilieuComponent } from './jems/jem-milieu.component';
 
+import { Router } from "@angular/router";
+
 @Component({
   selector: 'app-root',
   template: `
-    <app-header></app-header>
+    <app-header *ngIf="show" ></app-header>
     <router-outlet ></router-outlet>
-    <app-footer ></app-footer>`
+    <app-footer *ngIf="show" ></app-footer>`
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
+  show = true;
+
+  constructor(public router: Router) {
+
+    if (window.location.pathname === '/brian-francis') {
+      this.show = false;
+    }
+  }
+
+  ngOnInit() {
+
+  }
 
 }
 

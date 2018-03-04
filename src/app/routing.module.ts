@@ -5,6 +5,7 @@ import { AccountMilieuComponent } from './account/core';
 import { AppContentComponent } from './core';
 import { JemMilieuComponent } from './jems/jem-milieu.component';
 
+import { BrianFrancisMilieuComponent } from './aeo/brian-francis/brian-francis-milieu/brian-francis-milieu.component';
 
 const routes: Routes = [
   { path: 'account', component: AccountMilieuComponent },
@@ -16,7 +17,9 @@ const routes: Routes = [
   { path: 'code-jems/tech/:tech', component: JemMilieuComponent },
   { path: 'code-jems/type/:type', component: JemMilieuComponent },
   { path: 'code-jems/tech/:tech/type/:type', component: JemMilieuComponent },
-  { path: '', component: AppContentComponent }
+  { path: '', component: AppContentComponent },
+
+  { path: 'brian-francis', component: BrianFrancisMilieuComponent }
 ];
 
 @NgModule({
