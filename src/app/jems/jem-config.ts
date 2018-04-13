@@ -12,7 +12,7 @@ export const JEM_CONFIG: Config = {
   itemsMode: true,
 
   fieldsRaw: [
-    { name: 'tech', values: ['Angular', 'CSS', 'Express', 'Git', 'HTML', 'JavaScript', 'Less', 'MongoDB', 'NodeJS', 'TypeScript'] },
+    { name: 'tech', values: ['Angular', 'CSS', 'Express', 'Git', 'HTML', 'JavaScript', 'Less', 'MongoDB', 'NodeJS', 'PM2', 'TypeScript', 'SCP'] },
     { name: 'type', values: ['Best Practices', 'How to', 'Mistakes', 'Reference', 'Style Guide'] }
   ],
   fields: [],
@@ -27,6 +27,8 @@ export const JEM_CONFIG: Config = {
     "Less": { img: "assets/img/less-med.png", text: "Less is Style Sheet language that compiles to CSS. Adds variables, nesting, mixins, operators and functions to CSS." },
     "MongoDB": { img: "assets/img/mongodb-med.png", text: "Mongo DB is a NoSQL database, that uses Javascript and JSON." },
     "NodeJS": { img: "assets/img/nodejs-med.png", text: "NodeJS is a JavaScript server side enviroment." },
+    "PM2": { img: "assets/img/pm2-med.png", text: "Advanced, Production Process Manager for Node.js" },
+    "SCP": { text: "Secure Copy allows files to be  copied to, from or between differnt hosts." },
     "TypeScript": { img: "assets/img/typescript-med.png", text: "TypeScript is a superset of JavaScript it adds optional static typing." },
     "Best Practices": { text: "Coding techniques and methodolgies that have proven reliable." },
     "How to": { text: "Example code that shows you how to do something." },
